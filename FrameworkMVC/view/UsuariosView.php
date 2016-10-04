@@ -25,7 +25,7 @@
 			
 			    /* Ubicación de la imagen */
 		 
-		  background-image: url(view/images/fondo.jpg);
+		  background-image: url(view/images/);
 		
 		  /* Nos aseguramos que la imagen de fondo este centrada vertical y
 		    horizontalmente en todo momento */
