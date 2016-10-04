@@ -22,11 +22,15 @@
     </div>
 
     <div class="item">
-      <img src="view/images/banner/1.jpg" alt="Chania">
+      <img src="view/images/banner/2.jpg" alt="Chania">
     </div>
 
   <div class="item">
       <img src="view/images/banner/1.jpg" alt="Chania">
+    </div>
+    
+      <div class="item">
+      <img src="view/images/banner/2.jpg" alt="Chania">
     </div>
      
     
