@@ -245,6 +245,7 @@ public function index(){
 		    $_usuario_usuario     = $_POST["usuario_usuarios"];
 		    $_cedula_usuarios    = $_POST["cedula_usuarios"];
 		    $_id_ciudad          = $_POST["id_ciudad"];
+		    $_id_entidad         = $_POST["id_entidad"];
 	
 		    
 		    if ($_FILES['imagen_usuarios']['tmp_name']!="")
@@ -270,7 +271,7 @@ public function index(){
 	
 			$funcion = "ins_usuarios";
 			
-			$parametros = " '$_nombre_usuario' ,'$_clave_usuario' , '$_telefono_usuario', '$_celular_usuario', '$_correo_usuario' , '$_id_rol', '$_id_estado' , '$_usuario_usuario', '$_cedula_usuarios', '$_id_ciudad', '$imagen_usuarios'";
+			$parametros = " '$_nombre_usuario' ,'$_clave_usuario' , '$_telefono_usuario', '$_celular_usuario', '$_correo_usuario' , '$_id_rol', '$_id_estado' , '$_usuario_usuario', '$_cedula_usuarios', '$_id_ciudad', '$imagen_usuarios','$_id_entidad'";
 			$usuarios->setFuncion($funcion);
 	
 			$usuarios->setParametros($parametros);
