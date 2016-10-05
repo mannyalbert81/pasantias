@@ -59,15 +59,13 @@ $(document).ready(function(){
 <div class="container"  style=" -webkit-box-shadow: 0px 2px 2px 2px rgba(0,0,0,0.49);-moz-box-shadow: 0px 2px 2px 4px rgba(0,0,0,0.49); box-shadow: 0px 2px 2px 4px rgba(0,0,0,0.49);">
   
   
-  <div class="row modulo_head">
+  <div class="row" style=" background-color:#D8D8D8;">
   
   <div style=" margin-top: 10px; "   class="col-xs-6 col-md-8"  >
   <img src="view/images/logo.png" class="img-responsive" alt="Responsive image" width="350" height="350">
   </div>
   
- 	 
-  <!-- aqui va la class pull-right.... -->
-  
+ 
   
   <div  style="margin-top: 20px;" class="col-xs-6 col-md-4">
  		<div class="">

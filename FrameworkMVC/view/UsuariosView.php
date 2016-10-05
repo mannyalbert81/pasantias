@@ -488,17 +488,10 @@
       
       </div>
       </div>
-   
-   
-   
-			 <br>
-			 <div class="col-lg-12 col-md-6"> 
-			 <?php include("view/modulos/Contactos.php"); ?>
-			 </div>
-			 <br>
-			 <br>
-			 <br>
-			 <br>
+        <br>
+         <br>
+          <br>
+           
 			 
 			 		 
 			 <footer class="col-lg-12">

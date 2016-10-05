@@ -4,7 +4,7 @@
 <html lang="es">
      <head>
          <meta charset="utf-8"/>
-        <title>Entidades - Contabilidad 2016</title>
+        <title>Plan de Cuentas - Contabilidad 2016</title>
         
           <link rel="stylesheet" href="view/css/bootstrap.css">
           <script src="view/js/jquery.js"></script>
@@ -21,13 +21,13 @@
   
  	    <div class="container">
   		<div class="row" style="background-color: #FAFAFA;">
-        <form id="form-entidades" action="<?php echo $helper->url("Entidades","InsertaEntidades"); ?>" method="post" enctype="multipart/form-data" class="col-lg-6">
+        <form id="form-entidades" action="<?php echo $helper->url("PlanCuentas","InsertaPlanCuentas"); ?>" method="post" enctype="multipart/form-data" class="col-lg-6">
             <br>
             
             <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
 	       
 	        <div class="well">
-	        <h4 style="color:#ec971f;">Registrar Entidades</h4>
+	        <h4 style="color:#ec971f;">Registrar Plan de Cuentas</h4>
             <hr/>
 	        <div class="row">
 		    <div class="col-xs-6 col-md-6">
@@ -82,7 +82,7 @@
 		     <?php } } else {?>
 		    
 		    <div class="well">
-		    <h4 style="color:#ec971f;">Registrar Entidades</h4>
+		    <h4 style="color:#ec971f;">Registrar Plan de Cuentas</h4>
             <hr/>
 		    <div class="row">
 		    <div class="col-xs-6 col-md-6">
@@ -148,10 +148,10 @@
        
        
             
-            <form action="<?php echo $helper->url("Entidades","index"); ?>" method="post" enctype="multipart/form-data"  class="col-lg-6">
+            <form action="<?php echo $helper->url("PlanCuentas","index"); ?>" method="post" enctype="multipart/form-data"  class="col-lg-6">
      		<br>
      		<div class="well">  
-            <h4 style="color:#ec971f;">Entidades Registradas</h4>
+            <h4 style="color:#ec971f;">Plan de Cuentas Registrados</h4>
             
             <div class="row">
 		    <div class="col-xs-4 col-md-4 col-lg-4">
@@ -257,13 +257,13 @@
 		                <td style="font-size:80%;"> <?php echo $res->ciudad_entidades; ?>     </td>
 		                <td>
 			           		<div class="right">
-			                    <a href="<?php echo $helper->url("Entidades","index"); ?>&id_entidades=<?php echo $res->id_entidades; ?>" class="btn btn-warning" onClick="notificacion()" style="font-size:65%;">Editar</a>
+			                    <a href="<?php echo $helper->url("PlanCuentas","index"); ?>&id_entidades=<?php echo $res->id_entidades; ?>" class="btn btn-warning" onClick="notificacion()" style="font-size:65%;">Editar</a>
 			                </div>
 			            
 			            </td>
 			            <td>   
 			               	<div class="right">
-			                    <a href="<?php echo $helper->url("Entidades","borrarId"); ?>&id_entidades=<?php echo $res->id_entidades; ?>" class="btn btn-danger" onClick="Borrar()" style="font-size:65%;">Borrar</a>
+			                    <a href="<?php echo $helper->url("PlanCuentas","borrarId"); ?>&id_entidades=<?php echo $res->id_entidades; ?>" class="btn btn-danger" onClick="Borrar()" style="font-size:65%;">Borrar</a>
 			                </div>
 			            </td>
 	   		</tr>

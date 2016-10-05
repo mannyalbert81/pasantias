@@ -70,6 +70,9 @@ $controladores=$_SESSION['controladores'];
 			<li style="<?php echo getcontrolador("CentroCostos",$controladores) ?>">
 			<a href="index.php?controller=CentroCostos&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Centro Costos</span> </a>
 			</li>
+			<li style="<?php echo getcontrolador("PlanCuentas",$controladores) ?>">
+			<a href="index.php?controller=PlanCuentas&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Plan de Cuentas</span> </a>
+			</li>
 			
 </ul>
 </li>
