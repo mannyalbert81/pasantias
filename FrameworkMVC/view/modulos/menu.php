@@ -20,6 +20,7 @@ $controladores=$_SESSION['controladores'];
  	
  	return $display;
  }
+
 ?>
 
 
@@ -42,7 +43,8 @@ $controladores=$_SESSION['controladores'];
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="dropdown">
+        <li class="dropdown"  style="<?php echo getcontrolador("MenuAdministracion",$controladores) ?>">
+        
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog" ><?php echo " Administración" ;?> </span> <span class="caret"></span></a>
           <ul class="dropdown-menu">
           
@@ -59,85 +61,191 @@ $controladores=$_SESSION['controladores'];
 			<li style="<?php echo getcontrolador("Controladores",$controladores) ?>">
 			<a href="index.php?controller=Controladores&action=index"><span class="glyphicon glyphicon-inbox" aria-hidden="true"> Controladores</span> </a>
 			</li>
-			
-</ul>
-</li>
-
-    <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-refresh" ><?php echo " Mantenimiento" ;?> </span> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-          
-          <li style="<?php echo getcontrolador("Ciudad",$controladores) ?>">
-			<a href="index.php?controller=Ciudad&action=index"><span class="glyphicon glyphicon-object-align-vertical" aria-hidden="true"> Ciudades</span> </a>
-			</li> 
-			
-		   <li style="<?php echo getcontrolador("Entidades",$controladores) ?>">
-            <a href="index.php?controller=Entidades&action=index"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"> Entidades</span> </a>
-			</li> 
-			
-          <li style="<?php echo getcontrolador("TipoPersona",$controladores) ?>">
-            <a href="index.php?controller=TipoPersona&action=index"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"> Tipo de Personas</span> </a>
+			<li style="<?php echo getcontrolador("Repositorio",$controladores) ?>">
+			<a href="index.php?controller=Repositorio&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Gestion Repositorios</span> </a>
 			</li>
-		
-		   <li style="<?php echo getcontrolador("TipoIdentificaci�n",$controladores) ?>">
-            <a href="index.php?controller=TipoIdentificaci�n&action=index"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"> Tipo de Identificaci�n</span> </a>
-			</li> 
-		     	
+			
+			
 </ul>
 </li>
 
-        <li class="dropdown">
+        <li class="dropdown" style="<?php echo getcontrolador("MenuProcesos",$controladores) ?>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-refresh" ><?php echo " Procesos" ;?> </span> <span class="caret"></span></a>
           <ul class="dropdown-menu">
           
-            <li style="<?php echo getcontrolador("Clientes",$controladores) ?>">
-            <a href="index.php?controller=Clientes&action=ImportacionClientes"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"> Importar Clientes</span> </a>
-			</li>
-          
-            <li style="<?php echo getcontrolador("Clientes",$controladores) ?>">
-            <a href="index.php?controller=Clientes&action=index"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"> Clientes</span> </a>
-			</li>
-          	
-          	<li style="<?php echo getcontrolador("RegistrarLlamadas",$controladores) ?>">
-            <a href="index.php?controller=RegistrarLlamadas&action=index"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"> Registrar Llamadas</span> </a>
-			</li>
+          	<li style="<?php echo getcontrolador("AsignacionSecretarios",$controladores) ?>">
+          	<a href="index.php?controller=AsignacionSecretarios&action=index"><span class="glyphicon glyphicon-copy" aria-hidden="true"> Asignacion Secretarios</span> </a>
+            </li>
+			<li style="<?php echo getcontrolador("FirmasDigitales",$controladores) ?>">
+			<a href="index.php?controller=FirmasDigitales&action=index"><span class="glyphicon glyphicon-pencil" aria-hidden="true"> Firmas Digitales</span> </a>
+            </li>
+            <li style="<?php echo getcontrolador("Certificados",$controladores) ?>">
+            <a href="index.php?controller=CertificadosElectronicos&action=index"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"> Registrar Certificado Electronico</span> </a>
+            </li>
+            <li style="<?php echo getcontrolador("FirmasDigitales",$controladores) ?>">
+            <a href="index.php?controller=FirmasDigitales&action=firmarDocumento"><span class="glyphicon glyphicon-adjust" aria-hidden="true"> Firmar Documento</span> </a>
+            </li>
+            <li style="<?php echo getcontrolador("AsignacionTituloCredito",$controladores) ?>">
+            <a href="index.php?controller=AsignacionTituloCredito&action=index"><span class="glyphicon glyphicon-adjust" aria-hidden="true"> Asignar Titulo Credito</span> </a>
+            </li>
+            <li style="<?php echo getcontrolador("ReasignarTitulo",$controladores) ?>">
+            <a href="index.php?controller=ReasignarTitulo&action=index"><span class="glyphicon glyphicon-edit" aria-hidden="true"> Reasignar Titulo Credito</span> </a>
+            </li>
+            <li style="<?php echo getcontrolador("UsuariosAnteriores",$controladores) ?>">
+        	<a href="index.php?controller=UsuariosAnteriores&action=index"><span class="glyphicon glyphicon-user" aria-hidden="true"> Usuarios Antiguos</span> </a>
+		    </li>
+			
 </ul>
 </li>
         
 
-         <li class="dropdown">
+         <li class="dropdown" style="<?php echo getcontrolador("MenuConsultas",$controladores) ?>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-refresh" ><?php echo " Consultas" ;?> </span> <span class="caret"></span></a>
           <ul class="dropdown-menu">
           
           <li style="<?php echo getcontrolador("Trazas",$controladores) ?>">
           <a href="index.php?controller=Trazas&action=index"><span class="glyphicon glyphicon-save-file" aria-hidden="true"> Auditoria del Sistema</span> </a>
           </li>
-           <li style="<?php echo getcontrolador("Clientes",$controladores) ?>">
-          <a href="index.php?controller=Clientes&action=consulta_clientes"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"> Clientes</span> </a>
+          <li style="<?php echo getcontrolador("Citaciones",$controladores) ?>">
+          <a href="index.php?controller=Citaciones&action=consulta"><span class="glyphicon glyphicon-link" aria-hidden="true"> Citaciones</span> </a>
           </li>
-           <li style="<?php echo getcontrolador("RegistrarLlamadas",$controladores) ?>">
-          <a href="index.php?controller=RegistrarLlamadas&action=consulta_registra_llamadas"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"> Registro Llamadas</span> </a>
+          <li style="<?php echo getcontrolador("Oficios",$controladores) ?>">
+          <a href="index.php?controller=Oficios&action=consulta"><span class="glyphicon glyphicon-copy" aria-hidden="true"> Oficios</span> </a>
           </li>
+          <li style="<?php echo getcontrolador("FirmarOficios",$controladores) ?>">
+          <a href="index.php?controller=FirmarOficios&action=consulta_oficios_secretarios_firmados"><span class="glyphicon glyphicon-copy" aria-hidden="true"> Oficios</span> </a>
+          </li>
+          
+          <li style="<?php echo getcontrolador("JuicioImpulsor",$controladores) ?>">
+          <a href="index.php?controller=Juicio&action=consulta"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"> Juicios</span> </a>
+          </li>
+          <li style="<?php echo getcontrolador("JuicioSecretario",$controladores) ?>">
+          <a href="index.php?controller=Juicio&action=consulta_secretario"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"> Juicios</span> </a>
+          </li>
+          
+          <li style="<?php echo getcontrolador("Clientes",$controladores) ?>">
+          <a href="index.php?controller=Clientes&action=consulta"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"> Clientes</span> </a>
+          </li>
+          <li style="<?php echo getcontrolador("ClientesSecretarios",$controladores) ?>">
+          <a href="index.php?controller=Clientes&action=consulta_secretario"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"> Clientes</span> </a>
+          </li>
+          
+          <li style="<?php echo getcontrolador("ConsultaDocumentosImpulsores",$controladores) ?>">
+          <a href="index.php?controller=ConsultaDocumentosImpulsores&action=consulta_impulsores_firmados"><span class=" glyphicon glyphicon-console" aria-hidden="true"> Providencias</span> </a>
+          </li>
+          <li style="<?php echo getcontrolador("ConsultaDocumentosSecretarios",$controladores) ?>">
+          <a href="index.php?controller=ConsultaDocumentosSecretarios&action=consulta_secretarios_firmados"><span class=" glyphicon glyphicon-console" aria-hidden="true"> Providencias</span> </a>
+          </li>
+          <li style="<?php echo getcontrolador("ConsultaAvocoImpulsores",$controladores) ?>">
+          <a href="index.php?controller=ConsultaAvocoImpulsores&action=consulta_impulsores_avoco_firmados"><span class=" glyphicon glyphicon-console" aria-hidden="true"> Avoco Conocimiento</span> </a>
+          </li>
+          <li style="<?php echo getcontrolador("ConsultaAvocoSecretarios",$controladores) ?>">
+          <a href="index.php?controller=ConsultaAvocoSecretarios&action=consulta_secretarios_avoco_firmados"><span class=" glyphicon glyphicon-console" aria-hidden="true"> Avoco Conocimiento</span> </a>
+          </li>	
+          <li style="<?php echo getcontrolador("ConsultaCordinador",$controladores) ?>">
+          <a href="index.php?controller=ConsultaCordinador&action=consulta_cordinador"><span class=" glyphicon glyphicon-console" aria-hidden="true"> Documentos Generales</span> </a>
+          </li>
+         
+         
 </ul>
 </li>
 
-
-<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-refresh" ><?php echo " Reportes" ;?> </span> <span class="caret"></span></a>
+          <li class="dropdown" style="<?php echo getcontrolador("MenuJuicios",$controladores) ?>">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-refresh" ><?php echo " Juicios" ;?> </span> <span class="caret"></span></a>
           <ul class="dropdown-menu">
           
-            <li><a href="/FrameworkMVC/view/ireports/ContClientesReport.php"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false"> <span class="glyphicon glyphicon-home" aria-hidden="true"> Clientes</span> </a>
-            </li>
-            <li><a href="/FrameworkMVC/view/ireports/ContUsuariosReport.php"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false"> <span class="glyphicon glyphicon-file" aria-hidden="true"> Usuarios</span> </a>
-            </li>  
-            <li><a href="/FrameworkMVC/view/ireports/ContTrazasReport.php"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"> Auditoria del Sistema</span> </a>
-            </li>
-           
+          <li style="<?php echo getcontrolador("JuicioMixto",$controladores) ?>">
+          <a href="index.php?controller=Juicio&action=consulta_seguimiento_juicio"><span class="glyphicon glyphicon-sort" aria-hidden="true"> Seguimiento Juicio</span> </a>
+          </li>
+          <li style="<?php echo getcontrolador("AutoPagos",$controladores) ?>">
+          <a href="index.php?controller=AutoPagos&action=index"><span class="glyphicon glyphicon-filter" aria-hidden="true"> Generar Auto Pago</span> </a>
+          </li>
+          <li style="<?php echo getcontrolador("AprobacionAutoPago",$controladores) ?>">
+          <a href="index.php?controller=AprobacionAutoPago&action=index"><span class="glyphicon glyphicon-tasks" aria-hidden="true"> Aprobacion Auto Pagos</span> </a>
+          </li>
+    	  <li style="<?php echo getcontrolador("ImpresionAutoPago",$controladores) ?>">
+    	  <a href="index.php?controller=ImpresionAutoPago&action=index"><span class=" glyphicon glyphicon-triangle-bottom" aria-hidden="true"> Impresion Auto Pagos</span> </a>
+          </li>
+          <li style="<?php echo getcontrolador("EtapasJuicios",$controladores) ?>">
+    	  <a href="index.php?controller=EtapasJuicios&action=consulta_juicios"><span class=" glyphicon glyphicon-triangle-bottom" aria-hidden="true"> Actualizar Juicios</span> </a>
+          </li>
+          <li style="<?php echo getcontrolador("FichaJuicio",$controladores) ?>">
+          <a href="index.php?controller=FichaJuicio&action=index"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"> Ficha Juicio</span> </a>
+          </li>
 </ul>
 </li>
+
+<li class="dropdown" style="<?php echo getcontrolador("MenuOficios",$controladores) ?>">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-refresh" ><?php echo " Oficios" ;?> </span> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          
+          <li style="<?php echo getcontrolador("Oficios",$controladores) ?>">
+          <a href="index.php?controller=Oficios&action=index"><span class="glyphicon glyphicon-leaf" aria-hidden="true"> Generar Oficios</span> </a>
+          </li>
+          
+
 </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+</li>
+
+
+<li class="dropdown" style="<?php echo getcontrolador("MenuCitaciones",$controladores) ?>">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-refresh" ><?php echo " Citaciones" ;?> </span> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          
+          <li style="<?php echo getcontrolador("Citaciones",$controladores) ?>">
+          <a href="index.php?controller=Citaciones&action=index"><span class=" glyphicon glyphicon-usd" aria-hidden="true"> Generar Citaciones</span> </a>
+          </li>
+          
+</ul>
+</li>
+      
+      
+<li class="dropdown" style="<?php echo getcontrolador("MenuDocumentos",$controladores) ?>">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-refresh" ><?php echo " Documentos" ;?> </span> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          <li style="<?php echo getcontrolador("Documentos",$controladores) ?>">
+          <a href="index.php?controller=Documentos&action=index"><span class=" glyphicon glyphicon-console" aria-hidden="true"> Emisón de Providencias</span> </a>
+          </li>   
+          <li style="<?php echo getcontrolador("Avoco",$controladores) ?>">
+          <a href="index.php?controller=AvocoConocimiento&action=index"><span class=" glyphicon glyphicon-console" aria-hidden="true"> Avoco Conocimiento</span> </a>           
+          </li>
+          
+         
+         
+</ul>
+</li>
+
+
+<li class="dropdown" style="<?php echo getcontrolador("MenuFirmar",$controladores) ?>">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-refresh" ><?php echo " Firmar Electronicamente" ;?> </span> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+         
+          <li style="<?php echo getcontrolador("FirmarOficios",$controladores) ?>">
+          <a href="index.php?controller=FirmarOficios&action=consulta_oficios_secretarios"><span class="glyphicon glyphicon-leaf" aria-hidden="true"> Oficios</span> </a>
+          </li>
+          <li style="<?php echo getcontrolador("ConsultaDocumentosImpulsores",$controladores) ?>">
+          <a href="index.php?controller=ConsultaDocumentosImpulsores&action=consulta_impulsores"><span class=" glyphicon glyphicon-console" aria-hidden="true"> Providencias</span> </a>
+          </li>
+          <li style="<?php echo getcontrolador("ConsultaDocumentosSecretarios",$controladores) ?>">
+          <a href="index.php?controller=ConsultaDocumentosSecretarios&action=consulta_secretarios"><span class=" glyphicon glyphicon-console" aria-hidden="true"> Providencias</span> </a>           
+          </li>
+          
+          <li style="<?php echo getcontrolador("ConsultaAvocoImpulsores",$controladores) ?>">
+          <a href="index.php?controller=ConsultaAvocoImpulsores&action=consulta_impulsores_avoco"><span class=" glyphicon glyphicon-console" aria-hidden="true"> Avoco Conocimiento</span> </a>
+          </li>
+          <li style="<?php echo getcontrolador("ConsultaAvocoSecretarios",$controladores) ?>">
+          <a href="index.php?controller=ConsultaAvocoSecretarios&action=consulta_secretarios_avoco"><span class=" glyphicon glyphicon-console" aria-hidden="true"> Avoco Conocimiento</span> </a>           
+          </li>
+          <li style="<?php echo getcontrolador("Citaciones",$controladores) ?>">
+          <a href="index.php?controller=Citaciones&action=consulta_firmar"><span class="glyphicon glyphicon-link" aria-hidden="true"> Citaciones</span> </a>
+          </li>
+</ul>
+</li>
+
+
+</ul>
+    </div>
+  </div>
 </nav>
 </div>
 </div>
