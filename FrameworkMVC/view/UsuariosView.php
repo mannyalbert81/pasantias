@@ -233,7 +233,7 @@
                                   <select name="id_entidad" id="id_entidad"  class="form-control" >
                                   <option value="" selected="selected">--Seleccione--</option>
 									<?php foreach($resultEntidad as $res) {?>
-										<option value="<?php echo $res->id_entidades; ?>" <?php if ($res->id_entidades == 0 )  echo  ' selected="selected" '  ;  ?> ><?php echo $res->nombre_entidades; ?> </option>
+										<option value="<?php echo $res->id_entidades; ?>" <?php if ($res->id_entidades == $resEdit->id_entidades )  echo  ' selected="selected" '  ;  ?> ><?php echo $res->nombre_entidades; ?> </option>
 							        <?php } ?>
 								   </select> 
                                   <span class="help-block"></span>

@@ -57,9 +57,9 @@ public function index(){
 				
 			if (!empty($resultPer))
 			{
-			     	$columnas = " usuarios.id_usuarios,  usuarios.nombre_usuarios, usuarios.usuario_usuarios ,  usuarios.telefono_usuarios, usuarios.celular_usuarios, usuarios.correo_usuarios, rol.nombre_rol, estado.nombre_estado, rol.id_rol, estado.id_estado, usuarios.cedula_usuarios, ciudad.id_ciudad, ciudad.nombre_ciudad";
-					$tablas   = "public.rol,  public.usuarios, public.estado, public.ciudad";
-					$where    = "rol.id_rol = usuarios.id_rol AND estado.id_estado = usuarios.id_estado AND ciudad.id_ciudad = usuarios.id_ciudad";
+			     	$columnas = " usuarios.id_usuarios,  usuarios.nombre_usuarios, usuarios.usuario_usuarios ,  usuarios.telefono_usuarios, usuarios.celular_usuarios, usuarios.correo_usuarios, rol.nombre_rol, estado.nombre_estado, rol.id_rol, estado.id_estado, usuarios.cedula_usuarios, ciudad.id_ciudad, ciudad.nombre_ciudad, entidades.id_entidades, entidades.nombre_entidades";
+					$tablas   = "public.rol,  public.usuarios, public.estado, public.ciudad, public.entidades";
+					$where    = "rol.id_rol = usuarios.id_rol AND estado.id_estado = usuarios.id_estado AND ciudad.id_ciudad = usuarios.id_ciudad AND entidades.id_entidades = usuarios.id_entidades";
 					$id       = "usuarios.nombre_usuarios"; 
 			
 					
@@ -116,9 +116,9 @@ public function index(){
 					
 					
 					
-					$columnas = " usuarios.id_usuarios,  usuarios.nombre_usuarios, usuarios.usuario_usuarios ,  usuarios.telefono_usuarios, usuarios.celular_usuarios, usuarios.correo_usuarios, rol.nombre_rol, estado.nombre_estado, rol.id_rol, estado.id_estado, usuarios.cedula_usuarios, ciudad.id_ciudad, ciudad.nombre_ciudad";
-					$tablas   = "public.rol,  public.usuarios, public.estado, public.ciudad";
-					$where    = "rol.id_rol = usuarios.id_rol AND estado.id_estado = usuarios.id_estado AND ciudad.id_ciudad = usuarios.id_ciudad";
+					$columnas = " usuarios.id_usuarios,  usuarios.nombre_usuarios, usuarios.usuario_usuarios ,  usuarios.telefono_usuarios, usuarios.celular_usuarios, usuarios.correo_usuarios, rol.nombre_rol, estado.nombre_estado, rol.id_rol, estado.id_estado, usuarios.cedula_usuarios, ciudad.id_ciudad, ciudad.nombre_ciudad, entidades.id_entidades, entidades.nombre_entidades";
+					$tablas   = "public.rol,  public.usuarios, public.estado, public.ciudad, public.entidades";
+					$where    = "rol.id_rol = usuarios.id_rol AND estado.id_estado = usuarios.id_estado AND ciudad.id_ciudad = usuarios.id_ciudad AND entidades.id_entidades = usuarios.id_entidades";
 					$id       = "usuarios.nombre_usuarios";
 					
 
@@ -284,7 +284,7 @@ public function index(){
 		    else
 		    {
 		    
-		    	$colval = " nombre_usuarios = '$_nombre_usuario',  clave_usuarios = '$_clave_usuario', telefono_usuarios = '$_telefono_usuario', celular_usuarios = '$_celular_usuario', correo_usuarios = '$_correo_usuario', id_rol = '$_id_rol', id_estado = '$_id_estado', usuario_usuarios = '$_usuario_usuario', id_ciudad = '$_id_ciudad'  ";
+		    	$colval = " nombre_usuarios = '$_nombre_usuario',  clave_usuarios = '$_clave_usuario', telefono_usuarios = '$_telefono_usuario', celular_usuarios = '$_celular_usuario', correo_usuarios = '$_correo_usuario', id_rol = '$_id_rol', id_estado = '$_id_estado', usuario_usuarios = '$_usuario_usuario', id_ciudad = '$_id_ciudad' , id_entidades = '$_id_entidad'  ";
 		    	$tabla = "usuarios";
 		    	$where = "cedula_usuarios = '$_cedula_usuarios'    ";
 		    
