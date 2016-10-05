@@ -84,6 +84,7 @@
 		    <div class="well">
 		    <h4 style="color:#ec971f;">Registrar Plan de Cuentas</h4>
             <hr/>
+            
 		    <div class="row">
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
