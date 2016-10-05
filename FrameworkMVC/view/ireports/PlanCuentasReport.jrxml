@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-10-05T12:33:32 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b37127e0-1cb7-4afa-9adb-12206ab0f671">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="ZW50aWRhZGVzIEFTICwxMDksMTAwLDNjZDczNDVkLWQzOTItNDk1Ni05MWRhLWE4OWUzNGU4MmJj&#xA;YjtwbGFuX2N1ZW50YXMgQVMgLDM1Niw2MCwyOTU3MzU4Zi03N2E0LTRkZGItYWQ1Zi0wNTU5NGRk&#xA;NjE0ZDE7bW9uZWRhcyBBUyAsNjY5LDEzMCxjNDJiNDlhMC04MjcxLTRmZDMtOTY3OS04Y2MxNGM2&#xA;NzhhNTc7"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
+	<queryString>
+		<![CDATA[SELECT entidades.nombre_entidades,
+	plan_cuentas.codigo_plan_cuentas,
+	plan_cuentas.nombre_plan_cuentas,
+	plan_cuentas.n_plan_cuentas,
+	plan_cuentas.t_plan_cuentas,
+	plan_cuentas.id_centro_costos,
+	plan_cuentas.nivel_plan_cuentas,
+	plan_cuentas.creado,
+	plan_cuentas.modificado,
+	monedas.nombre_monedas
+FROM plan_cuentas
+	INNER JOIN entidades ON 
+	 plan_cuentas.id_entidades = entidades.id_entidades 
+	INNER JOIN monedas ON 
+	 plan_cuentas.id_modenas = monedas.id_monedas]]>
+	</queryString>
+	<field name="nombre_entidades" class="java.lang.String"/>
+	<field name="codigo_plan_cuentas" class="java.lang.String"/>
+	<field name="nombre_plan_cuentas" class="java.lang.String"/>
+	<field name="n_plan_cuentas" class="java.lang.String"/>
+	<field name="t_plan_cuentas" class="java.lang.String"/>
+	<field name="id_centro_costos" class="java.lang.Integer"/>
+	<field name="nivel_plan_cuentas" class="java.lang.Integer"/>
+	<field name="creado" class="java.sql.Timestamp"/>
+	<field name="modificado" class="java.sql.Timestamp"/>
+	<field name="nombre_monedas" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="68" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="60" forecolor="#000000" backcolor="#0033FF" uuid="a728c0bd-945b-4699-9fc7-a936edd948c4"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="42" width="555" height="16" forecolor="#FFFFFF" uuid="6826efaa-6b5a-4492-9e5c-53e1fd595b07"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[PLAN CUENTAS]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="440" y="4" width="115" height="15" forecolor="#FFFFFF" uuid="cef45fc6-a68b-42aa-ac6c-7b8fb27dfeba"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="12" width="555" height="30" forecolor="#FFFFFF" uuid="4cafa8d5-b834-4c12-a207-9121ed4df1b0"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_entidades}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="4" width="50" height="10" forecolor="#FFFFFF" uuid="f00f3b95-ce64-4f84-9d76-8ec788a80544"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="170" height="60" uuid="bc1af74e-b781-4275-a4c1-ff133acda533"/>
+				<imageExpression><![CDATA["FrameworkMVC/view/images/logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
