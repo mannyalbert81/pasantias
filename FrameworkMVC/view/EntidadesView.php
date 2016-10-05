@@ -10,11 +10,8 @@
           <script src="view/js/jquery.js"></script>
 		  <script src="view/js/bootstrapValidator.min.js"></script>
 		  <script src="view/js/ValidarEntidades.js"></script>
-		
-  
-        
-    </head>
-    <body>
+	</head>
+    <body class="cuerpo">
     
        
        <?php include("view/modulos/menu.php"); ?>
@@ -135,9 +132,9 @@
 		     <?php } ?>
 		     
 		    <div class="row">
-		    <div class="col-xs-12 col-md-12" style="text-align: center;">
+		    <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;">
 		    <div class="form-group">
-                                  <button type="submit" id="Guardar" name="Guardar" class="btn btn-success btn-block">Guardar</button>
+                                  <button type="submit" id="Guardar" name="Guardar" class="btn btn-success">Guardar</button>
            
             </div>
 		    </div>
@@ -257,13 +254,13 @@
 		                <td style="font-size:80%;"> <?php echo $res->ciudad_entidades; ?>     </td>
 		                <td>
 			           		<div class="right">
-			                    <a href="<?php echo $helper->url("Entidades","index"); ?>&id_entidades=<?php echo $res->id_entidades; ?>" class="btn btn-warning" onClick="notificacion()" style="font-size:65%;">Editar</a>
+			                    <a href="<?php echo $helper->url("Entidades","index"); ?>&id_entidades=<?php echo $res->id_entidades; ?>" class="btn btn-warning" style="font-size:65%;">Editar</a>
 			                </div>
 			            
 			            </td>
 			            <td>   
 			               	<div class="right">
-			                    <a href="<?php echo $helper->url("Entidades","borrarId"); ?>&id_entidades=<?php echo $res->id_entidades; ?>" class="btn btn-danger" onClick="Borrar()" style="font-size:65%;">Borrar</a>
+			                    <a href="<?php echo $helper->url("Entidades","borrarId"); ?>&id_entidades=<?php echo $res->id_entidades; ?>" class="btn btn-danger" style="font-size:65%;">Borrar</a>
 			                </div>
 			            </td>
 	   		</tr>

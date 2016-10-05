@@ -10,10 +10,13 @@ class CentroCostosController extends ControladorBase{
 
 	public function index(){
 	
-		//Creamos el objeto usuario
+		//tomamos id usuario
      	$entidades=new EntidadesModel();
-					//Conseguimos todos los usuarios
-		$resultSet=$entidades->getAll("id_entidades");
+     	$centro_costos= new CentroCostosModel();
+     	
+		
+		$resultEntidad=array();
+		
 				
 		$resultEdit = "";
 
@@ -23,7 +26,26 @@ class CentroCostosController extends ControladorBase{
 	
 		if (isset(  $_SESSION['usuario_usuarios']) )
 		{
-			//Notificaciones
+			$id_usuarios=$_SESSION['id_usuarios'];			
+			
+			$columas_c_c="
+	     	centro_costos.id_centro_costos,
+			centro_costos.nombre_centro_costos,
+	     	centro_costos.codigo_centro_costos,
+	     	centro_costos.nivel_centro_costos,
+			entidades.id_entidades,
+			entidades.nombre_entidades";
+			$tablas_c_c="
+	     	public.centro_costos,
+	     	public.entidades,
+	     	public.usuarios";
+			$where_c_c="
+			entidades.id_entidades = centro_costos.id_entidades AND
+			entidades.id_entidades = usuarios.id_entidades
+			AND usuarios.id_usuarios='$id_usuarios'";
+			
+			//obtener tabla de centro de costos
+			$resultSet=$centro_costos->getCondiciones($columas_c_c, $tablas_c_c, $where_c_c, "centro_costos.id_centro_costos");
 			
 			$nombre_controladores = "CentroCostos";
 			$id_rol= $_SESSION['id_rol'];
@@ -31,6 +53,10 @@ class CentroCostosController extends ControladorBase{
 			
 			if (!empty($resultPer))
 			{
+				
+				$resultEntidad=$entidades->getCondiciones("entidades.id_entidades,entidades.nombre_entidades","public.usuarios,public.entidades",
+															"usuarios.id_entidades=entidades.id_entidades AND usuarios.id_usuarios='$id_usuarios'",
+															"entidades.id_entidades");
 				if (isset ($_GET["id_entidades"])   )
 				{
 
@@ -41,11 +67,12 @@ class CentroCostosController extends ControladorBase{
 					if (!empty($resultPer))
 					{
 					
-						$_id_entidades = $_GET["id_entidades"];
-						$columnas = " id_entidades, ruc_entidades, nombre_entidades, telefono_entidades, direccion_entidades, ciudad_entidades ";
-						$tablas   = "entidades";
-						$where    = "id_entidades = '$_id_entidades' "; 
-						$id       = "ruc_entidades";
+						$_id_centro_costos = $_GET["id_centro_costos"];
+						
+						$columnas = " centro_costos.id_centro_costos,centro_costos.codigo_centro_costos, centro_costos.nivel_centro_costos, entidades.id_entidades, entidades.nombre_entidades";
+						$tablas   = " public.centro_costos, public.entidades";
+						$where    = " entidades.id_entidades = centro_costos.id_entidades AND centro_costos.id_centro_costos = '$_id_centro_costos' "; 
+						$id       = "centro_costos.id_centro_costos";
 							
 						$resultEdit = $entidades->getCondiciones($columnas ,$tablas ,$where, $id);
 						
@@ -72,7 +99,7 @@ class CentroCostosController extends ControladorBase{
 		
 				
 				$this->view("CentroCostos",array(
-						"resultSet"=>$resultSet, "resultEdit" =>$resultEdit
+						"resultSet"=>$resultSet, "resultEdit" =>$resultEdit ,"resultEntidad"=>$resultEntidad
 			
 				));
 		
@@ -104,45 +131,43 @@ class CentroCostosController extends ControladorBase{
 	public function InsertaCentroCostos(){
 			
 		session_start();
-		$entidades=new EntidadesModel();
-		
+		$centro_costos= new CentroCostosModel();
 
 		$nombre_controladores = "CentroCostos";
 		$id_rol= $_SESSION['id_rol'];
-		$resultPer = $entidades->getPermisosEditar("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
+		$resultPer = $centro_costos->getPermisosEditar("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 						
 		if (!empty($resultPer))
 		{
-		
-		
-		
 			$resultado = null;
-			$entidades=new EntidadesModel();
-		
+			
 			//_nombre_categorias character varying, _path_categorias character varying
-			if (isset ($_POST["ruc_entidades"])   )
+			if (isset ($_POST["id_entidad"])   )
 				
 			{
 				
-				$_ruc_entidades = $_POST["ruc_entidades"];
-				$_nombre_entidades = $_POST["nombre_entidades"];
-				$_telefono_entidades = $_POST["telefono_entidades"];
-				$_direccion_entidades = $_POST["direccion_entidades"];
-				$_ciudad_entidades = $_POST["ciudad_entidades"];
+				$_id_entidades_centro_costos = $_POST["id_entidad"];
+				$_nombre_centro_costos = $_POST["nombre_centro_costos"];
+				$_codigo_centro_costos = $_POST["codigo_centro_costos"];
+				$_nivel_centro_costos = $_POST["nivel_centro_costos"];
 				
-				$funcion = "ins_entidades";
-				$parametros = "'$_ruc_entidades', '$_nombre_entidades', '$_telefono_entidades', '$_direccion_entidades', '$_ciudad_entidades'";
+				$funcion = "ins_centro_costos";
+				
+				//parametros
+								
+				$parametros = "'$_codigo_centro_costos', '$_nombre_centro_costos', '$_id_entidades_centro_costos',
+								'$_nivel_centro_costos'";
 					
-				$entidades->setFuncion($funcion);
+				$centro_costos->setFuncion($funcion);
 		
-				$entidades->setParametros($parametros);
+				$centro_costos->setParametros($parametros);
+				
+				$resultado=$centro_costos->Insert();
 		
-		
-				$resultado=$entidades->Insert();
-		
-				//$this->view("Error",array(
-				//"resultado"=>"entro"
-				//));
+				/*$this->view("Error",array(
+				"resultado"=>print_r($resultado)
+				));
+				die();*/
 				
 				$traza=new TrazasModel();
 				$_nombre_controlador = "CentroCostos";
@@ -151,6 +176,7 @@ class CentroCostosController extends ControladorBase{
 				$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
 				
 			}
+			
 			$this->redirect("CentroCostos", "index");
 
 		}
@@ -171,25 +197,24 @@ class CentroCostosController extends ControladorBase{
 
 		session_start();
 		$permisos_rol=new PermisosRolesModel();
-		$nombre_controladores = "Roles";
+		$nombre_controladores = "CentroCostos";
 		$id_rol= $_SESSION['id_rol'];
 		$resultPer = $permisos_rol->getPermisosEditar("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 			
 		if (!empty($resultPer))
 		{
-			if(isset($_GET["id_entidades"]))
+			if(isset($_GET["id_centro_costos"]))
 			{
-				$id_entidades=(int)$_GET["id_entidades"];
+				$id_centro_costos=(int)$_GET["id_centro_costos"];
 		
-				$entidades=new EntidadesModel();
+				$centro_costos=new CentroCostosModel();
 				
-				$entidades->deleteBy(" id_entidades",$id_entidades);
-				
+				$centro_costos->deleteBy(" id_centro_costos",$id_centro_costos);
 				
 				$traza=new TrazasModel();
 				$_nombre_controlador = "CentroCostos";
 				$_accion_trazas  = "Borrar";
-				$_parametros_trazas = $id_entidades;
+				$_parametros_trazas = $id_centro_costos;
 				$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
 				
 				
