@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-10-05T12:33:32 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b37127e0-1cb7-4afa-9adb-12206ab0f671">
-	<property name="com.jaspersoft.studio.data.sql.tables" value="ZW50aWRhZGVzIEFTICwxMDksMTAwLDNjZDczNDVkLWQzOTItNDk1Ni05MWRhLWE4OWUzNGU4MmJj&#xA;YjtwbGFuX2N1ZW50YXMgQVMgLDM1Niw2MCwyOTU3MzU4Zi03N2E0LTRkZGItYWQ1Zi0wNTU5NGRk&#xA;NjE0ZDE7bW9uZWRhcyBBUyAsNjY5LDEzMCxjNDJiNDlhMC04MjcxLTRmZDMtOTY3OS04Y2MxNGM2&#xA;NzhhNTc7"/>
+<!-- 2016-10-05T17:25:49 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
 	<queryString>
 		<![CDATA[SELECT entidades.nombre_entidades,
@@ -34,35 +34,37 @@ FROM plan_cuentas
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<pageHeader>
-		<band height="68" splitType="Stretch">
-			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
-			<rectangle>
-				<reportElement x="0" y="0" width="555" height="60" forecolor="#000000" backcolor="#0033FF" uuid="a728c0bd-945b-4699-9fc7-a936edd948c4"/>
+	<title>
+		<band height="60" splitType="Stretch">
+			<rectangle radius="7">
+				<reportElement x="0" y="0" width="555" height="60" forecolor="#000000" backcolor="#FFFFFF" uuid="d33056da-a91a-42ec-b4d4-1f05300e3205"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="42" width="555" height="16" forecolor="#FFFFFF" uuid="6826efaa-6b5a-4492-9e5c-53e1fd595b07"/>
+				<reportElement x="0" y="42" width="555" height="16" forecolor="#000000" uuid="b4a653e6-c625-44c6-a92f-a7480ef6ed34"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="13" isBold="true" isItalic="false"/>
+					<font fontName="Arial" size="11" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[PLAN CUENTAS]]></text>
 			</staticText>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="440" y="4" width="115" height="15" forecolor="#FFFFFF" uuid="cef45fc6-a68b-42aa-ac6c-7b8fb27dfeba"/>
+				<reportElement x="448" y="4" width="102" height="15" forecolor="#000000" uuid="2b26260a-33ff-463b-9818-b6e60ae530e1"/>
 				<textElement>
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="12" width="555" height="30" forecolor="#FFFFFF" uuid="4cafa8d5-b834-4c12-a207-9121ed4df1b0"/>
+				<reportElement x="0" y="12" width="555" height="30" forecolor="#000000" uuid="2e1395c1-7f5c-4c28-b4ce-5927e46bd9af"/>
 				<textElement textAlignment="Center">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre_entidades}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="390" y="4" width="50" height="10" forecolor="#FFFFFF" uuid="f00f3b95-ce64-4f84-9d76-8ec788a80544"/>
+				<reportElement x="390" y="4" width="50" height="10" forecolor="#000000" uuid="ae8866e3-bc30-48c6-8887-a43391aef58b"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" size="8" isBold="true"/>
@@ -70,16 +72,119 @@ FROM plan_cuentas
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<image>
-				<reportElement x="0" y="0" width="170" height="60" uuid="bc1af74e-b781-4275-a4c1-ff133acda533"/>
-				<imageExpression><![CDATA["FrameworkMVC/view/images/logo.png"]]></imageExpression>
+				<reportElement x="10" y="4" width="160" height="46" uuid="0af34674-2907-46f3-8204-c316f36832c5"/>
+				<imageExpression><![CDATA["C:/Users/Steven/git/contabilidad/FrameworkMVC/view/ireports/PhpJasperLibrary/class/tcpdf/images/logo.jpg"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="393" y="17" width="50" height="10" forecolor="#000000" uuid="18f7b33a-2ef2-4333-beed-7fb938250740"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pagina:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="450" y="19" width="20" height="20" forecolor="#000000" uuid="141e5375-4b51-4958-8440-3b6b381247b9"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="490" y="19" width="40" height="20" forecolor="#000000" uuid="a057dad0-f6ae-4d73-b239-376828ed9b43"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="470" y="18" width="20" height="20" forecolor="#000000" uuid="eeaaa97c-84af-43eb-9c98-6e66ef2c791b"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<rectangle radius="7">
+				<reportElement x="0" y="6" width="555" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="e2521e34-8167-4e4a-b74e-f78d927c8ff1"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="34" y="11" width="50" height="20" uuid="72f2c1c4-4222-4031-b94b-2234be402bab"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="11" width="50" height="20" uuid="def428e7-1226-4045-995c-64b0cd4a0ab3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CUENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="401" y="10" width="50" height="20" uuid="bbf908d6-3d5d-4f1e-93b4-a40b4695aefc"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[MONEDA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="10" width="57" height="20" uuid="d6e506fd-583b-45a2-8b67-14805349f507"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TIPO]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="21" splitType="Stretch"/>
+		<band height="7" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="483" y="0" width="50" height="20" uuid="43840d7e-eb6c-4598-b015-a44d89dc4c16"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="50" height="20" uuid="cd8fd502-40e6-4641-9bb8-5ffcbb55db18"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_monedas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="0" width="246" height="20" uuid="a484816b-1113-4bed-b5fd-660fe2ea8909"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="0" width="50" height="20" uuid="ac011139-68c9-4c71-830f-7c438c371222"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="-5" width="21" height="20" uuid="85ac57ca-9bcc-4ab5-a756-1d51ecae19e7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
