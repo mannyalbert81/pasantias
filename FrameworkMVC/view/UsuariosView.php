@@ -340,14 +340,14 @@
             <h4 style="color:#ec971f;">Usuarios Registrados</h4>
             
             <div class="row">
-		    <div class="col-xs-2 col-md-4 col-lg-4">
+		    <div class="col-xs-4 col-md-4 col-lg-4">
 		    <div class="form-group">
                                   
                                   <input type="text" class="form-control" id="contenido" name="contenido" value="">
                                   
             </div>
 		    </div>
-		    <div class="col-xs-2 col-md-4 col-lg-4">
+		    <div class="col-xs-4 col-md-4 col-lg-4">
 		    <div class="form-group">
                                   
                                   <select name="criterio" id="criterio"  class="form-control">
