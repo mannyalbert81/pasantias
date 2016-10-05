@@ -13,7 +13,7 @@
   <script src="view/js/bootstrap.min.js"></script>
   <script src="view/js/bootstrapValidator.min.js"></script>
   <script src="view/js/noty.js"></script>
-  <script src="view/js/app.js"></script>
+  <script src="view/js/ValidarLogin.js"></script>
   
   <style>
 			body {
