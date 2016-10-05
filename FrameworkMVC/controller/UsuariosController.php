@@ -348,7 +348,8 @@ public function index(){
     
     
     
-    public function Loguear(){
+    public function Loguear()
+    {
     	if (isset ($_POST["usuarios"]) && ($_POST["clave"] ) )
     	
     	{

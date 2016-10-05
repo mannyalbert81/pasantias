@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8"/>
-        <title>Maycol - 2016</title>
+        <title>Contabilidad - 2016</title>
    
         
          <style>
