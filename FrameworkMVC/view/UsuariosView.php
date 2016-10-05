@@ -192,7 +192,7 @@
     </head>
     <body>
     
-      <?php include("view/modulos/menu.php"); ?>
+      <?php include("view/modulos/menu_nuevo.php"); ?>
     
   	  <div class="container">
   
