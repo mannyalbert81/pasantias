@@ -15,42 +15,7 @@
           <script src="view/js/jquery.js"></script>
 		  <script src="view/js/bootstrapValidator.min.js"></script>
 		  <script src="view/js/ValidarUsuarios.js"></script>
-		  
-
-         
-         
-	<style>
-			body {
-			
-			    /* Ubicación de la imagen */
-		 
-		  background-image: url(view/images/);
 		
-		  /* Nos aseguramos que la imagen de fondo este centrada vertical y
-		    horizontalmente en todo momento */
-		  background-position: center center;
-		
-		  /* La imagen de fondo no se repite */
-		  background-repeat: no-repeat;
-		
-		  /* La imagen de fondo está fija en el viewport, de modo que no se mueva cuando
-		     la altura del contenido supere la altura de la imagen. */
-		  background-attachment: fixed;
-		
-		  /* La imagen de fondo se reescala cuando se cambia el ancho de ventana
-		     del navegador */
-		  background-size: cover;
-		
-		  /* Fijamos un color de fondo para que se muestre mientras se está
-		    cargando la imagen de fondo o si hay problemas para cargarla  */
-		  background-color: #464646;
-			}
-			</style>
-	
-	
-	
-	
-	
 			
     </head>
     <body>
@@ -357,19 +322,15 @@
 		   
                	
 		     <?php } ?>
-		     <div class="row" style="text-align: center;">
-			 <div class="col-lg-12 col-md-6 col-xs-3" style="text-align: center;">
-		     <div class="col-lg-4">
-			 </div>
-			 <div class="col-lg-4">
-			 <button type="submit" id="Guardar" name="Guardar" class="btn btn-success btn-block" >Guardar</button>
-			 </div>
-			 <div class="col-lg-4">
-			 </div>
-			 </div>
-			 </div>     
-             <hr>
-		     </form>
+		     
+		    <div class="row">
+		    <div class="col-xs-12 col-md-12" style="text-align: center;">
+		    <div class="form-group">
+                                  <button type="submit" id="Guardar" name="Guardar" class="btn btn-success btn-block">Guardar</button>
+            </div>
+		    </div>
+		    </div>
+		    </form>
        
          
        
