@@ -64,7 +64,9 @@ $controladores=$_SESSION['controladores'];
 			<li style="<?php echo getcontrolador("Repositorio",$controladores) ?>">
 			<a href="index.php?controller=Repositorio&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Gestion Repositorios</span> </a>
 			</li>
-			
+			<li style="<?php echo getcontrolador("Entidades",$controladores) ?>">
+			<a href="index.php?controller=Entidades&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Entidades</span> </a>
+			</li>
 			
 </ul>
 </li>

@@ -24,8 +24,7 @@ class EntidadesController extends ControladorBase{
 		if (isset(  $_SESSION['usuario_usuarios']) )
 		{
 			//Notificaciones
-			$entidades->MostrarNotificaciones($_SESSION['id_usuarios']);
-
+			
 			$nombre_controladores = "Entidades";
 			$id_rol= $_SESSION['id_rol'];
 			$resultPer = $entidades->getPermisosVer("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );

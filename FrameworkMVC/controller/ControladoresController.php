@@ -26,8 +26,6 @@ class ControladoresController extends ControladorBase{
 		if (isset(  $_SESSION['usuario_usuarios']) )
 		{
 			$controladores = new ControladoresModel();
-			//NOTIFICACIONES
-			$controladores->MostrarNotificaciones($_SESSION['id_usuarios']);
 			
 			$nombre_controladores = "Controladores";
 			$id_rol= $_SESSION['id_rol'];
