@@ -32,7 +32,9 @@ class CentroCostosController extends ControladorBase{
 	     	centro_costos.id_centro_costos,
 			centro_costos.nombre_centro_costos,
 	     	centro_costos.codigo_centro_costos,
-	     	centro_costos.nivel_centro_costos";
+	     	centro_costos.nivel_centro_costos,
+			entidades.id_entidades,
+			entidades.nombre_entidades";
 			$tablas_c_c="
 	     	public.centro_costos,
 	     	public.entidades,
@@ -67,7 +69,7 @@ class CentroCostosController extends ControladorBase{
 					
 						$_id_centro_costos = $_GET["id_centro_costos"];
 						
-						$columnas = " centro_costos.id_centro_costos,centro_costos.codigo_centro_costos, centro_costos.nivel_centro_costos";
+						$columnas = " centro_costos.id_centro_costos,centro_costos.codigo_centro_costos, centro_costos.nivel_centro_costos, entidades.id_entidades, entidades.nombre_entidades";
 						$tablas   = " public.centro_costos, public.entidades";
 						$where    = " entidades.id_entidades = centro_costos.id_entidades AND centro_costos.id_centro_costos = '$_id_centro_costos' "; 
 						$id       = "centro_costos.id_centro_costos";
@@ -140,7 +142,7 @@ class CentroCostosController extends ControladorBase{
 			$resultado = null;
 			
 			//_nombre_categorias character varying, _path_categorias character varying
-			if (isset ($_POST["Guardar"])   )
+			if (isset ($_POST["id_entidad"])   )
 				
 			{
 				

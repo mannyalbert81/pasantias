@@ -14,13 +14,13 @@
   <script src="view/js/bootstrapValidator.min.js"></script>
   <script src="view/js/noty.js"></script>
   <script src="view/js/ValidarLogin.js"></script>
-  
-  <style>
+	
+   <style>
 			body {
 			
 			    /* Ubicación de la imagen */
 		 
-		  background-image: url(view/images/);
+		  background-image: url(view/images/fondo_contabilidad.jpg);
 		
 		  /* Nos aseguramos que la imagen de fondo este centrada vertical y
 		    horizontalmente en todo momento */
@@ -39,17 +39,13 @@
 		
 		  /* Fijamos un color de fondo para que se muestre mientras se está
 		    cargando la imagen de fondo o si hay problemas para cargarla  */
-		 
+		  
 			}
-			</style>
-
-
-
-
+			</style>	
 		
 </head >
 
-<body class="modulo_background">
+<body>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
        
    

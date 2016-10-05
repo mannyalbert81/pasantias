@@ -17,7 +17,7 @@
 	    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		
-		<link rel="stylesheet" href="view/css/estilos.css">
+		<link rel="stylesheet" href="view/css/bootstrap.css">
 		<link rel="stylesheet" href="http://jqueryvalidation.org/files/demo/site-demos.css">
         <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
         <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
@@ -59,7 +59,7 @@ $(document).ready(function(){
 <div class="container"  style=" -webkit-box-shadow: 0px 2px 2px 2px rgba(0,0,0,0.49);-moz-box-shadow: 0px 2px 2px 4px rgba(0,0,0,0.49); box-shadow: 0px 2px 2px 4px rgba(0,0,0,0.49);">
   
   
-  <div class="row" style=" background-color:#D8D8D8;">
+  <div class="row head" >
   
   <div style=" margin-top: 10px; "   class="col-xs-6 col-md-8"  >
   <img src="view/images/logo.png" class="img-responsive" alt="Responsive image" width="350" height="350">
