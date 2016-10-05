@@ -46,6 +46,8 @@ public function index(){
 			$ciudad = new CiudadModel();
 			$resultCiu = $ciudad->getAll("nombre_ciudad");
 			
+			$entidad = new EntidadesModel();
+			$resultEntidad = $entidad->getAll('nombre_entidades');
 	
 			$usuarios = new UsuariosModel();
 

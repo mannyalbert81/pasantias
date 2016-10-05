@@ -217,6 +217,18 @@
                                   <span class="help-block"></span>
             </div>
 		    </div>
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group">
+                                  <label for="id_entidad" class="control-label">Entidad</label>
+                                  <select name="id_entidad" id="id_entidad"  class="form-control" >
+                                  <option value="" selected="selected">--Seleccione--</option>
+									<?php foreach($resultRol as $resRol) {?>
+										<option value="<?php echo $resRol->id_rol; ?>" <?php if ($resRol->id_rol == $resEdit->id_rol )  echo  ' selected="selected" '  ;  ?> ><?php echo $resRol->nombre_rol; ?> </option>
+							        <?php } ?>
+								   </select> 
+                                  <span class="help-block"></span>
+            </div>
+            </div>
 			</div>
             
             <div class="row">
