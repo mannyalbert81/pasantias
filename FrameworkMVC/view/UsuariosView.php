@@ -15,8 +15,6 @@
           <script src="view/js/jquery.js"></script>
 		  <script src="view/js/bootstrapValidator.min.js"></script>
 		  
-		  
-		 
 
          
          
@@ -78,6 +76,17 @@
 	            				 
 	                        }
 	                },
+	                
+
+	                id_entidad: {
+	                    validators: {
+	                    	notEmpty: {
+	                            message: 'Este campo es requerido.'
+	                    }
+	                        
+	                    }
+	                },
+	                
 	                nombre_usuarios: {
 	                        validators: {
 	                                notEmpty: {
@@ -217,13 +226,14 @@
                                   <span class="help-block"></span>
             </div>
 		    </div>
+		    
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
                                   <label for="id_entidad" class="control-label">Entidad</label>
                                   <select name="id_entidad" id="id_entidad"  class="form-control" >
                                   <option value="" selected="selected">--Seleccione--</option>
-									<?php foreach($resultRol as $resRol) {?>
-										<option value="<?php echo $resRol->id_rol; ?>" <?php if ($resRol->id_rol == $resEdit->id_rol )  echo  ' selected="selected" '  ;  ?> ><?php echo $resRol->nombre_rol; ?> </option>
+									<?php foreach($resultEntidad as $res) {?>
+										<option value="<?php echo $res->id_entidades; ?>" <?php if ($res->id_entidades == 0 )  echo  ' selected="selected" '  ;  ?> ><?php echo $res->nombre_entidades; ?> </option>
 							        <?php } ?>
 								   </select> 
                                   <span class="help-block"></span>
@@ -359,6 +369,19 @@
                                   <span class="help-block"></span>
             </div>
 		    </div>
+		    
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group">
+                                  <label for="id_entidad" class="control-label">Entidad</label>
+                                  <select name="id_entidad" id="id_entidad"  class="form-control" >
+                                  <option value="" selected="selected">--Seleccione--</option>
+									<?php foreach($resultEntidad as $res) {?>
+										<option value="<?php echo $res->id_entidades; ?>" <?php if ($res->id_entidades == 0 )  echo  ' selected="selected" '  ;  ?> ><?php echo $res->nombre_entidades; ?> </option>
+							        <?php } ?>
+								   </select> 
+                                  <span class="help-block"></span>
+            </div>
+            </div>
 			</div>
 		       
 		    <div class="row">
