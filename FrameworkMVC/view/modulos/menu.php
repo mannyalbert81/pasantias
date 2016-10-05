@@ -67,6 +67,9 @@ $controladores=$_SESSION['controladores'];
 			<li style="<?php echo getcontrolador("Entidades",$controladores) ?>">
 			<a href="index.php?controller=Entidades&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Entidades</span> </a>
 			</li>
+			<li style="<?php echo getcontrolador("CentroCostos",$controladores) ?>">
+			<a href="index.php?controller=CentroCostos&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Centro Costos</span> </a>
+			</li>
 			
 </ul>
 </li>
