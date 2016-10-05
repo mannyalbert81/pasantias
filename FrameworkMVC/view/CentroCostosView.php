@@ -200,7 +200,7 @@
   
   
       <form action="<?php echo $helper->url("CentroCostos","InsertaCentroCostos"); ?>" method="post" class="col-lg-6">
-            <h4 style="color:#ec971f;">Insertar Entidades</h4>
+            <h4 style="color:#ec971f;">Insertar Centro Costos</h4>
             <hr/>
             	
 		   		
@@ -210,74 +210,90 @@
 	            	
 	        <div class="row">
 		    <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Ruc Entidades </p>
-			  	<input type="text" name="ruc_entidades" id="ruc_entidades" value="<?php echo $resEdit->ruc_entidades; ?>" class="form-control" readonly/>
-			  <div id="mensaje_ruc" class="errores"></div>
+			  	
+		    	<div class="form-group">
+                      <label for="id_entidad" class="control-label">Entidad</label>
+                      <select name="id_entidad" id="id_entidad"  class="form-control" >
+                             <option value="" selected="selected">--Seleccione--</option>
+							 <?php foreach($resultEntidad as $res) {?>
+							 <option value="<?php echo $res->id_entidades; ?>" <?php if ($res->id_entidades == $resEdit->id_entidades )  echo  ' selected="selected" '  ;  ?> ><?php echo $res->nombre_entidades; ?> </option>
+							 <?php } ?>
+					 </select> 
+					 <div id="mensaje_ruc" class="errores"></div>
+			  	</div>
+                      
+            </div>
+            
+             <div class="col-xs-6 col-md-6">
+				  <div class="form-group">
+				  	<p  class="formulario-subtitulo" >Nombre</p>
+				  	<input type="text" name="nombre_centro_costos" id="nombre_centro_costos" value="" class="form-control"/> 
+				    <div id="mensaje_nombres" class="errores"></div>
+				  </div>
+			  </div>
+			  
+            </div>
+		   <div class="row">
+		     <div class="col-xs-6 col-md-6">
+				  <div class="form-group">
+				  	<p  class="formulario-subtitulo" >Codigo</p>
+				  	<input type="text" name="codigo_centro_costos" id="codigo_centro_costos" value="" class="form-control"/> 
+				    <div id="mensaje_nombres" class="errores"></div>
+				  </div>
 			  </div>
 			  <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Nombre Entidades</p>
-			  	<input type="text" name="nombre_entidades" id="nombre_entidades" value="<?php echo $resEdit->nombre_entidades; ?>" class="form-control"/> 
-			  <div id="mensaje_nombres" class="errores"></div>
+				  <div class="form-group">
+				  	<p  class="formulario-subtitulo" >Nivel</p>
+				  	<input type="text" name="nivel_centro_costos" id="nivel_centro_costos" value="" class="form-control"/> 
+				    <div id="mensaje_nombres" class="errores"></div>
+				  </div>
 			  </div>
 		    </div>
-		    <div class="row">
-		    <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Telefono Entidades </p>
-			  	<input type="text" name="telefono_entidades" id="telefono_entidades" value="<?php echo $resEdit->telefono_entidades; ?>" class="form-control"/>
-			  <div id="mensaje_telefono" class="errores"></div>
-			  </div>
-			  <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Direccion Entidades</p>
-			  	<input type="text" name="direccion_entidades" id="direccion_entidades" value="<?php echo $resEdit->direccion_entidades; ?>" class="form-control"/> 
-			  <div id="mensaje_direccion" class="errores"></div>
-			  </div>
-		    </div>
-		      <div class="row">
-		      <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Ciudad Entidades</p>
-			  	<input type="text" name="ciudad_entidades" id="ciudad_entidades" value="<?php echo $resEdit->ciudad_entidades; ?>" class="form-control"/> 
-			  <div id="mensaje_ciudad" class="errores"></div>
-			  </div>
-		  	  </div>
 			
 	     	<hr>
 	            	  
             
 		     <?php } } else {?>
 		    
-		             <div class="row">
+		    <div class="row">
 		    <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Ruc Entidades </p>
-			  	<input type="text" name="ruc_entidades" id="ruc_entidades" value="" class="form-control"/>
-			  <div id="mensaje_ruc" class="errores"></div>
+			  	<div class="form-group">
+                      <p  class="formulario-subtitulo" >Entidad</p>
+                      <select name="id_entidad" id="id_entidad"  class="form-control" >
+                              <?php foreach($resultEntidad as $res) {?>
+							 <option value="<?php echo $res->id_entidades; ?>" ><?php echo $res->nombre_entidades; ?> </option>
+							 <?php } ?>
+					 </select> 
+					 <div id="mensaje_ruc" class="errores"></div>
+			  	</div>
+			  </div>
+			  
+			  <div class="col-xs-6 col-md-6">
+				  <div class="form-group">
+				  	<p  class="formulario-subtitulo" >Nombre</p>
+				  	<input type="text" name="nombre_centro_costos" id="nombre_centro_costos" value="" class="form-control"/> 
+				    <div id="mensaje_nombres" class="errores"></div>
+				  </div>
+			  </div>
+			 
+		    </div>
+		    <div class="row">
+		     <div class="col-xs-6 col-md-6">
+				  <div class="form-group">
+				  	<p  class="formulario-subtitulo" >Codigo</p>
+				  	<input type="text" name="codigo_centro_costos" id="codigo_centro_costos" value="" class="form-control"/> 
+				    <div id="mensaje_nombres" class="errores"></div>
+				  </div>
 			  </div>
 			  <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Nombre Entidades</p>
-			  	<input type="text" name="nombre_entidades" id="nombre_entidades" value="" class="form-control"/> 
-			  <div id="mensaje_nombres" class="errores"></div>
+				  <div class="form-group">
+				  	<p  class="formulario-subtitulo" >Nivel</p>
+				  	<input type="text" name="nivel_centro_costos" id="nivel_centro_costos" value="" class="form-control"/> 
+				    <div id="mensaje_nombres" class="errores"></div>
+				  </div>
 			  </div>
 		    </div>
-		        <div class="row">
-		    <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Telefono Entidades </p>
-			  	<input type="text" name="telefono_entidades" id="telefono_entidades" value="" class="form-control"/>
-			  <div id="mensaje_telefono" class="errores"></div>
-			  </div>
-			  <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Direccion Entidades</p>
-			  	<input type="text" name="direccion_entidades" id="direccion_entidades" value="" class="form-control"/> 
-			  <div id="mensaje_direccion" class="errores"></div>
-			  </div>
-		    </div>
-		      <div class="row">
-		 
-		      <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Ciudad Entidades</p>
-			  	<input type="text" name="ciudad_entidades" id="ciudad_entidades" value="" class="form-control"/> 
-			  <div id="mensaje_ciudad" class="errores"></div>
-			  </div>
-		  	
-			  </div>
+		     
 			<hr>
 		     <?php } ?>
 		       <div class="row">
@@ -296,30 +312,26 @@
         <table class="table table-hover">
 	         <tr>
 	    		<th style="color:#456789;font-size:80%;">Id</th>
-	    		<th style="color:#456789;font-size:80%;">Ruc</th>
 	    		<th style="color:#456789;font-size:80%;">Nombre</th>
-	    		<th style="color:#456789;font-size:80%;">Telefono</th>
-	    		<th style="color:#456789;font-size:80%;">Direccion</th>
-	    		<th style="color:#456789;font-size:80%;">Ciudad</th>
+	    		<th style="color:#456789;font-size:80%;">Codigo</th>
+	    		<th style="color:#456789;font-size:80%;">Nivel</th>
 	  		</tr>
             
 	            <?php foreach($resultSet as $res) {?>
 	        		<tr>
-	                   <td style="color:#000000;font-size:80%;"> <?php echo $res->id_entidades; ?>  </td>
-		               <td style="color:#000000;font-size:80%;" > <?php echo $res->ruc_entidades; ?>     </td> 
-		                 <td style="color:#000000;font-size:80%;"> <?php echo $res->nombre_entidades; ?>     </td>
-		                 <td style="color:#000000;font-size:80%;"> <?php echo $res->telefono_entidades; ?>     </td>  
-		                 <td style="color:#000000;font-size:80%;"> <?php echo $res->direccion_entidades; ?>     </td> 
-		               <td style="color:#000000;font-size:80%;"> <?php echo $res->ciudad_entidades; ?>     </td>
+	                   <td style="color:#000000;font-size:80%;"> <?php echo $res->id_centro_costos; ?>  </td>
+	                   <td style="color:#000000;font-size:80%;"> <?php echo $res->nombre_centro_costos; ?>     </td>
+		               <td style="color:#000000;font-size:80%;" > <?php echo $res->codigo_centro_costos; ?>     </td> 
+		               <td style="color:#000000;font-size:80%;"> <?php echo $res->nivel_centro_costos; ?>     </td>
 		               <td>
 			           		<div class="right">
-			                    <a href="<?php echo $helper->url("CentroCostos","index"); ?>&id_entidades=<?php echo $res->id_entidades; ?>" class="btn btn-warning" onClick="notificacion()" style="font-size:65%;">Editar</a>
+			                    <a href="<?php echo $helper->url("CentroCostos","index"); ?>&id_centro_costos=<?php echo $res->id_centro_costos; ?>" class="btn btn-warning" onClick="notificacion()" style="font-size:65%;">Editar</a>
 			                </div>
 			            
 			             </td>
 			             <td>   
 			                	<div class="right">
-			                    <a href="<?php echo $helper->url("CentroCostos","borrarId"); ?>&id_entidades=<?php echo $res->id_entidades; ?>" class="btn btn-danger" onClick="Borrar()" style="font-size:65%;">Borrar</a>
+			                    <a href="<?php echo $helper->url("CentroCostos","borrarId"); ?>&id_centro_costos=<?php echo $res->id_centro_costos; ?>" class="btn btn-danger" onClick="Borrar()" style="font-size:65%;">Borrar</a>
 			                </div>
 			                <hr/>
 		               </td>
