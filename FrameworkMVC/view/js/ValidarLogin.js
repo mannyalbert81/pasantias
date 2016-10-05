@@ -10,7 +10,9 @@ $(document).ready(function() {
                         validators: {
                                 notEmpty: {
                                         message: 'Este campo es requerido.'
+                                        	
                                 }
+                                
                         }
                 },
                 clave: {
@@ -22,12 +24,6 @@ $(document).ready(function() {
                 }
                 
         }
-        //Cuando el formulario se lleno correctamente y se envia, se ejecuta esta funcion
-    
+              
     });
 });
-
-function nota(op,msg,time){
-    if(time == undefined)time = 5000;
-    var n = noty({text:msg,maxVisible: 1,type:op,killer:true,timeout:time,layout: 'top'});
-}

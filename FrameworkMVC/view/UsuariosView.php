@@ -182,8 +182,8 @@
             <hr/>
             <div class="row">
 		    <div class="col-xs-6 col-md-6">
-		    <div class="form-group">
-                                  <label for="cedula_usuarios" class="control-label">Cedula</label>
+		    <div class="form-group ">
+		                          <label for="cedula_usuarios" class="control-label">Cedula</label>
                                   <input type="text" class="form-control" id="cedula_usuarios" name="cedula_usuarios" value=""  placeholder="Cedula">
                                   <span class="help-block"></span>
             </div>
