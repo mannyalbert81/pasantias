@@ -74,9 +74,6 @@ $controladores=$_SESSION['controladores'];
 			<a href="index.php?controller=PlanCuentas&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Plan de Cuentas</span> </a>
 			</li>
 			<li style="<?php echo getcontrolador("TipoComprobantes",$controladores) ?>">
-			<a href="index.php?controller=TipoComprobantes&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Plan de Cuentas</span> </a>
-			</li>
-			<li style="<?php echo getcontrolador("TipoComprobantes",$controladores) ?>">
 			<a href="index.php?controller=TipoComprobantes&action=index"> <span class=" glyphicon glyphicon-asterisk" aria-hidden="true"> Tipo de Comprobantes</span> </a>
 			</li>
 </ul>

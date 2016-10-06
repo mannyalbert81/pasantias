@@ -26,7 +26,7 @@ class TipoComprobantesController extends ControladorBase{
 		{
 			$tipo_comprobantes= new TipoComprobantesModel();
 			
-			$tipo_comprobantes->MostrarNotificaciones($_SESSION['id_usuarios']);
+		
 			
 			
 			$permisos_rol = new PermisosRolesModel();
@@ -126,8 +126,6 @@ class TipoComprobantesController extends ControladorBase{
 			if (isset ($_POST["nombre_tipo_comprobantes"]) )
 				
 			{
-				
-				
 				
 				$_nombre_tipo_comprobantes = $_POST["nombre_tipo_comprobantes"];
 				

@@ -1,4 +1,6 @@
-
+ <?php include("view/modulos/modal.php"); ?>
+ <?php include("view/modulos/head.php"); ?>
+      
    <!DOCTYPE HTML>
 <html lang="es">
 
@@ -6,230 +8,198 @@
       
         <meta charset="utf-8"/>
         <title>Tipo de Comprobantes - Contabilidad 2016</title>
-        
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		  			   
-          <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-	      <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-		  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-		
-		<link rel="stylesheet" href="http://jqueryvalidation.org/files/demo/site-demos.css">
-        <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
-        <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
- 		
- 		<script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
-		
-		<script>
-		    webshims.setOptions('forms-ext', {types: 'date'});
-			webshims.polyfill('forms forms-ext');
-		</script>
-		
-        		
-          <!-- AQUI NOTIFICAIONES -->
-		<script type="text/javascript" src="view/css/lib/alertify.js"></script>
-		<link rel="stylesheet" href="view/css/themes/alertify.core.css" />
-		<link rel="stylesheet" href="view/css/themes/alertify.default.css" />
-		
-		
-		
-		<script>
+        <link rel="stylesheet" href="view/css/bootstrap.css">
+          <script src="view/js/jquery.js"></script>
+		  <script src="view/js/bootstrapValidator.min.js"></script>
+		  <script src="view/js/ValidarTipoComprobantes.js"></script>  
 
-		function Ok(){
-				alertify.success("Has Pulsado en Guardar"); 
-				return false;
-			}
-			
-			function Borrar(){
-				alertify.success("Has Pulsado en Borrar"); 
-				return false; 
-			}
-
-			function notificacion(){
-				alertify.success("Has Pulsado en Editar"); 
-				return false; 
-			}
-		</script>
-		
-		
-		
-		<!-- TERMINA NOTIFICAIONES -->  
-         
-        
-       <style>
-            input{
-                margin-top:5px;
-                margin-bottom:5px;
-            }
-            .right{
-                float:right;
-            }
-                
-            
-        </style>
-         
-         <script >
-		$(document).ready(function(){
-
-		    // cada vez que se cambia el valor del combo
-		    $("#Guardar").click(function() 
-			{
-		   
-		    	var nombre_tipo_comprobantes = $("#nombre_tipo_comprobantes").val();
-		    
-		   				
-		    	if (nombre_tipo_comprobantes == "")
-		    	{
-			    	
-		    		$("#mensaje_nombres").text("Introduzca un tipo de comprobantes ");
-		    		$("#mensaje_nombres").fadeIn("slow"); //Muestra mensaje de error
-		            return false;
-			    }
-		    	else 
-		    	{
-		    		$("#mensaje_nombres").fadeOut("slow"); //Muestra mensaje de error
-		            
-				}
-		    	
-		    	
-
-			
-		    					    
-
-			}); 
-
-
-		 
-				
-				$( "#nombre_tipo_comprobantes" ).focus(function() {
-					$("#mensaje_nombres").fadeOut("slow");
-    			});
-				
-			
-		
-				
-		
-		      
-				    
-		}); 
-
-	</script>
 
     </head>
-    <body style="background-color: #d9e3e4;">
+    <body class="cuerpo">
     
-       <?php include("view/modulos/modal.php"); ?>
-       <?php include("view/modulos/head.php"); ?>
        <?php include("view/modulos/menu.php"); ?>
-       
-       
-       
-       <?php
-       
-       
-       
-		   
-		?>
+     
  
   
   <div class="container">
   
-  <div class="row" style="background-color: #ffffff;">
+  <div class="row" style="background-color: #FAFAFA";>
   
        <!-- empieza el form --> 
        
-      <form action="<?php echo $helper->url("TipoComprobantes","index"); ?>" method="post" enctype="multipart/form-data"  class="col-lg-6">
+      <form id="form-tipo-comprobantes" action="<?php echo $helper->url("TipoComprobantes","InsertaTipoComprobantes"); ?>" method="post" enctype="multipart/form-data"  class="col-lg-6">
             
-         
-        	    <h4 style="color:#ec971f;">Insertar Tipos de Comprobantes</h4>
-            	<hr/>
+         <br>
+        	   
             	
 		   		
             
           <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
             
-            
-            
-        
-			   
-			   <div class="row">
-		       <div class="col-xs-12 col-md-12">
-			  	<p  class="formulario-subtitulo" >Nombres tipos de Comprobantes</p>
-			  	<input type="text"  name="nombre_tipo_comprobantes" id="nombre_tipo_comprobantes" value="<?php echo $resEdit->nombre_tipo_comprobantes; ?>" class="form-control"/> 
-			  	<input type="hidden"  name="id_tipo_comprobantes"  value="<?php echo $resEdit->id_tipo_comprobantes; ?>" class="form-control"/> 
-			    <div id="mensaje_nombres" class="errores"></div>
-			  </div>
-			   </div>
+            <div class="well">
+            <h4 style="color:#ec971f;">Insertar Tipos de Comprobantes</h4>
+            <hr/>
+            <div class="row">
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group">
+                                  <label for="nombre_tipo_comprobantes" class="control-label">Nombre</label>
+                                  <input type="text" class="form-control" id="nombre_tipo_comprobantes" name="nombre_tipo_comprobantes" value="<?php echo $resEdit->nombre_tipo_comprobantes; ?>"  placeholder="Nombre de Comprobante">
+                                  <span class="help-block"></span>
+            </div>
+		    </div>
+            </div>
+            </div>
 		    
 		     <?php } } else {?>
-		    
-			   <div class="row">
-		       <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Nombres tipos de Comprobantes</p>
-			  	<input type="text"  name="nombre_tipo_comprobantes" id="nombre_tipo_comprobantes" value="" class="form-control"/> 
-			    <div id="mensaje_nombres" class="errores"></div>
-			  </div>
-			 </div>
-
-		    <hr>
-		    
-		   
-               	
+		     
+		    <div class="well">
+		    <h4 style="color:#ec971f;">Insertar Tipos de Comprobantes</h4>
+            <hr/>
+            <div class="row">
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group">
+                                  <label for="nombre_tipo_comprobantes" class="control-label">Nombre</label>
+                                  <input type="text" class="form-control" id="nombre_tipo_comprobantes" name="nombre_tipo_comprobantes" value=""  placeholder="Nombre de Comprobante">
+                                  <span class="help-block"></span>
+            </div>
+		    </div>
+            </div>
+            </div>
+              	
 		     <?php } ?>
 		     
+		    <div class="row">
+			<div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;" > 
+            <div class="form-group">
+            					  <button type="submit" id="Guardar" name="Guardar" class="btn btn-success">Guardar</button>
+            </div>
+            </div>
+            </div>
 		     
-		       <div class="row">
-			  <div class="col-xs-12 col-md-6" style="text-align: center;" >
-			  	<input type="submit" id="Guardar" name="Guardar" value="Guardar" onClick="Ok()" class="btn btn-success"/>
-				  </div>
-		</div>     
-               
-		
-		 <hr>
-          
        </form>
           
-        <div class="col-lg-6">
-            <h4 style="color:#ec971f;">Lista de Tipos de Comprobantes</h4>
-            <hr/>
-        </div>
-        <section class="col-lg-6 usuario" style="height:400px;overflow-y:scroll;">
-        <table class="table table-hover ">
-	         <tr >
-	    		<th style="color:#456789;font-size:80%;"><b>Id</b></th>
-	    		<th style="color:#456789;font-size:80%;">Nombre</th>
-	    		
-	    		<th></th>
-	    		<th></th>
-	  		</tr>
+          
+          
+          
+         <form action="<?php echo $helper->url("TipoComprobantes","index"); ?>" method="post" enctype="multipart/form-data"  class="col-lg-6">
+     		<br>
+     		<div class="well">  
+            <h4 style="color:#ec971f;">Tipo de Comprobantes Registrados</h4>
             
-	            <?php if (!empty($resultSet)) {  foreach($resultSet as $res) {?>
-	        		<tr>
-	                   <td style="color:#000000;font-size:80%;"> <?php echo $res->id_tipo_comprobantes; ?></td>
-		               <td style="color:#000000;font-size:80%;"> <?php echo $res->nombre_tipo_comprobantes; ?>     </td> 
-		              
-		           	   <td>
+            <div class="row">
+		    <div class="col-xs-4 col-md-4 col-lg-4">
+		    
+		    </div>
+		  
+		    </div>  
+             
+       
+       <div class="datagrid"> 
+       <section style="height:380px; overflow-y:scroll;">
+       <table class="table table-hover ">
+       
+       <thead>
+           <tr>
+                    <th style="font-size:100%;">Id</th>
+		    		<th style="font-size:100%;">Nombre</th>
+		    		<th></th>
+		    		<th></th>
+		    		
+	  		</tr>
+	   </thead>
+       <tfoot>
+       		<tr>
+					<td colspan="10">
+						<div id="paging">
+							<ul>
+								<li>
+									<a href="#">
+						<span>Previous</span>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="active">
+						<span>1</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+						<span>2</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+						<span>3</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+						<span>4</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+						<span>5</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+						<span>Next</span>
+									</a>
+								</li>
+								</ul>
+						</div>
+					
+			</tr>
+       				
+       </tfoot>
+       
+                <?php if (!empty($resultSet)) {  foreach($resultSet as $res) {?>
+	        	 
+               
+	   <tbody>
+	   		<tr>
+	   		           <td style="font-size:80%;"> <?php echo $res->id_tipo_comprobantes; ?></td>
+		               <td style="font-size:80%;"> <?php echo $res->nombre_tipo_comprobantes; ?>     </td> 
+		               
+		               <td>
 			           		<div class="right">
-			                    <a href="<?php echo $helper->url("TipoComprobantes","index"); ?>&id_tipo_comprobantes=<?php echo $res->id_tipo_comprobantes; ?>" class="btn btn-warning" onClick="notificacion()" style="font-size:65%;">Editar</a>
+			                    <a href="<?php echo $helper->url("TipoComprobantes","index"); ?>&id_tipo_comprobantes=<?php echo $res->id_tipo_comprobantes; ?>" class="btn btn-warning" style="font-size:65%;">Editar</a>
 			                </div>
 			            
-			             </td>
-			             <td>   
-			                	<div class="right">
-			                    <a href="<?php echo $helper->url("TipoComprobantes","borrarId"); ?>&id_tipo_comprobantes=<?php echo $res->id_tipo_comprobantes; ?>" class="btn btn-danger" onClick="Borrar()"style="font-size:65%;">Borrar</a>
+			           </td>
+			           <td>   
+			               	<div class="right">
+			                    <a href="<?php echo $helper->url("TipoComprobantes","borrarId"); ?>&id_tipo_comprobantes=<?php echo $res->id_tipo_comprobantes; ?>" class="btn btn-danger" style="font-size:65%;">Borrar</a>
 			                </div>
-			                <hr/>
-		               </td>
-		    		</tr>
-		        <?php } } ?>
-            
+			           </td>
+	   		</tr>
+	   
+	   </tbody>	
+	        		
+		        <?php } }else{ ?>
+            <tr>
+            <td></td>
+            <td></td>
+	                   <td colspan="5" style="color:#ec971f;font-size:8;"> <?php echo '<span id="snResult">No existen resultados</span>' ?></td>
+	        <td></td>
+		               
+		    </tr>
             <?php 
-            
+		}
             //echo "<script type='text/javascript'> alert('Hola')  ;</script>";
             
             ?>
             
        	</table>     
-      </section>
+		</section>
+        </div>
+        </div>
+        </form> 
+          
+          
+          
+       
       </div>
       </div>
    </body>  
