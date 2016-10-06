@@ -12,10 +12,14 @@ class PlanCuentasController extends ControladorBase{
 	
 		//Creamos el objeto usuario
      	$entidades=new EntidadesModel();
+     	$monedas = new MonedasModel();
 					//Conseguimos todos los usuarios
 		$resultSet=$entidades->getAll("id_entidades");
 				
 		$resultEdit = "";
+		
+		//arrays
+		$resultMoneda=array();
 
 		
 		session_start();
@@ -31,6 +35,8 @@ class PlanCuentasController extends ControladorBase{
 			
 			if (!empty($resultPer))
 			{
+				$resultMoneda = $monedas->getAll("nombre_monedas");
+				
 				if (isset ($_GET["id_entidades"])   )
 				{
                    if (!empty($resultPer))
@@ -67,7 +73,7 @@ class PlanCuentasController extends ControladorBase{
 		
 				
 				$this->view("PlanCuentas",array(
-						"resultSet"=>$resultSet, "resultEdit" =>$resultEdit
+						"resultSet"=>$resultSet, "resultEdit" =>$resultEdit,"resultMoneda"=>$resultMoneda
 			
 				));
 		
@@ -205,6 +211,10 @@ class PlanCuentasController extends ControladorBase{
 	}
 	
 	
+	public function AgregarGrupo()
+	{
+		
+	}
 	
 	
 	
