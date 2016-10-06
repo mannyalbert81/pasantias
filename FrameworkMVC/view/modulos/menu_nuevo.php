@@ -57,7 +57,7 @@ $controladores=$_SESSION['controladores'];
             <li class="home"><a href=""><span>Home</span></a></li>
             <li class="about dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>Administración</span></a>
-<ul class="dropdown-menu">
+			<ul class="dropdown-menu">
             <li style="<?php echo getcontrolador("Usuarios",$controladores) ?>">
         	<a href="index.php?controller=Usuarios&action=index"><span class="glyphicon glyphicon-user" aria-hidden="true"> Usuarios</span> </a>
 		    </li>
@@ -70,6 +70,10 @@ $controladores=$_SESSION['controladores'];
 			<li style="<?php echo getcontrolador("Controladores",$controladores) ?>">
 			<a href="index.php?controller=Controladores&action=index"><span class="glyphicon glyphicon-inbox" aria-hidden="true"> Controladores</span> </a>
 			</li>
+			<li style="<?php echo getcontrolador("TipoComprobantes",$controladores) ?>">
+			<a href="index.php?controller=TipoComprobantes&action=index"> <span class=" glyphicon glyphicon-asterisk" aria-hidden="true"> Tipo de Comprobantes</span> </a>
+			</li>
+			
 			
 </ul>
             </li>

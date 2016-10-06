@@ -1,10 +1,11 @@
-<!DOCTYPE HTML>
+
+   <!DOCTYPE HTML>
 <html lang="es">
 
       <head>
       
         <meta charset="utf-8"/>
-        <title>Controladores - CallCenter 2016</title>
+        <title>Tipo de Comprobantes - Contabilidad 2016</title>
         
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		  			   
@@ -23,7 +24,8 @@
 			webshims.polyfill('forms forms-ext');
 		</script>
 		
-           <!-- AQUI NOTIFICAIONES -->
+        		
+          <!-- AQUI NOTIFICAIONES -->
 		<script type="text/javascript" src="view/css/lib/alertify.js"></script>
 		<link rel="stylesheet" href="view/css/themes/alertify.core.css" />
 		<link rel="stylesheet" href="view/css/themes/alertify.default.css" />
@@ -50,7 +52,8 @@
 		
 		
 		
-		<!-- TERMINA NOTIFICAIONES -->
+		<!-- TERMINA NOTIFICAIONES -->  
+         
         
        <style>
             input{
@@ -63,21 +66,21 @@
                 
             
         </style>
-       
-          <script >
+         
+         <script >
 		$(document).ready(function(){
 
 		    // cada vez que se cambia el valor del combo
 		    $("#Guardar").click(function() 
 			{
 		   
-		    	var nombre_controladores = $("#nombre_controladores").val();
+		    	var nombre_tipo_comprobantes = $("#nombre_tipo_comprobantes").val();
 		    
 		   				
-		    	if (nombre_controladores == "")
+		    	if (nombre_tipo_comprobantes == "")
 		    	{
 			    	
-		    		$("#mensaje_nombres").text("Introduzca un tipo de controlador ");
+		    		$("#mensaje_nombres").text("Introduzca un tipo de comprobantes ");
 		    		$("#mensaje_nombres").fadeIn("slow"); //Muestra mensaje de error
 		            return false;
 			    }
@@ -97,21 +100,25 @@
 
 		 
 				
-				$( "#nombre_controladores" ).focus(function() {
+				$( "#nombre_tipo_comprobantes" ).focus(function() {
 					$("#mensaje_nombres").fadeOut("slow");
     			});
 				
-	}); 
+			
+		
+				
+		
+		      
+				    
+		}); 
 
 	</script>
-	
+
     </head>
     <body style="background-color: #d9e3e4;">
     
-      <?php include("view/modulos/modal.php"); ?>
-    
+       <?php include("view/modulos/modal.php"); ?>
        <?php include("view/modulos/head.php"); ?>
-       
        <?php include("view/modulos/menu.php"); ?>
        
        
@@ -130,10 +137,10 @@
   
        <!-- empieza el form --> 
        
-      <form action="<?php echo $helper->url("Controladores","InsertaControladores"); ?>" method="post" enctype="multipart/form-data"  class="col-lg-6">
+      <form action="<?php echo $helper->url("TipoComprobantes","index"); ?>" method="post" enctype="multipart/form-data"  class="col-lg-6">
             
          
-        	    <h4 style="color:#ec971f;">Insertar Controladores</h4>
+        	    <h4 style="color:#ec971f;">Insertar Tipos de Comprobantes</h4>
             	<hr/>
             	
 		   		
@@ -145,10 +152,10 @@
         
 			   
 			   <div class="row">
-		       <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Nombres Controladores</p>
-			  	<input type="text"  name="nombre_controladores" id="nombre_controladores" value="<?php echo $resEdit->nombre_controladores; ?>" class="form-control"/> 
-			  	<input type="hidden"  name="id_controladores"  value="<?php echo $resEdit->id_controladores; ?>" class="form-control"/> 
+		       <div class="col-xs-12 col-md-12">
+			  	<p  class="formulario-subtitulo" >Nombres tipos de Comprobantes</p>
+			  	<input type="text"  name="nombre_tipo_comprobantes" id="nombre_tipo_comprobantes" value="<?php echo $resEdit->nombre_tipo_comprobantes; ?>" class="form-control"/> 
+			  	<input type="hidden"  name="id_tipo_comprobantes"  value="<?php echo $resEdit->id_tipo_comprobantes; ?>" class="form-control"/> 
 			    <div id="mensaje_nombres" class="errores"></div>
 			  </div>
 			   </div>
@@ -157,8 +164,8 @@
 		    
 			   <div class="row">
 		       <div class="col-xs-6 col-md-6">
-			  	<p  class="formulario-subtitulo" >Nombres Controladores</p>
-			  	<input type="text"  name="nombre_controladores" id="nombre_controladores" value="" class="form-control"/> 
+			  	<p  class="formulario-subtitulo" >Nombres tipos de Comprobantes</p>
+			  	<input type="text"  name="nombre_tipo_comprobantes" id="nombre_tipo_comprobantes" value="" class="form-control"/> 
 			    <div id="mensaje_nombres" class="errores"></div>
 			  </div>
 			 </div>
@@ -173,17 +180,16 @@
 		       <div class="row">
 			  <div class="col-xs-12 col-md-6" style="text-align: center;" >
 			  	<input type="submit" id="Guardar" name="Guardar" value="Guardar" onClick="Ok()" class="btn btn-success"/>
-			  </div>
-			</div>     
+				  </div>
+		</div>     
                
 		
 		 <hr>
           
        </form>
-       <!-- termina el form --> 
-       
+          
         <div class="col-lg-6">
-            <h4 style="color:#ec971f;">Lista de Controladores</h4>
+            <h4 style="color:#ec971f;">Lista de Tipos de Comprobantes</h4>
             <hr/>
         </div>
         <section class="col-lg-6 usuario" style="height:400px;overflow-y:scroll;">
@@ -198,20 +204,20 @@
             
 	            <?php if (!empty($resultSet)) {  foreach($resultSet as $res) {?>
 	        		<tr>
-	                   <td style="color:#000000;font-size:80%;"> <?php echo $res->id_controladores; ?></td>
-		               <td style="color:#000000;font-size:80%;"> <?php echo $res->nombre_controladores; ?>     </td> 
+	                   <td style="color:#000000;font-size:80%;"> <?php echo $res->id_tipo_comprobantes; ?></td>
+		               <td style="color:#000000;font-size:80%;"> <?php echo $res->nombre_tipo_comprobantes; ?>     </td> 
 		              
 		           	   <td>
 			           		<div class="right">
-			                    <a href="<?php echo $helper->url("Controladores","index"); ?>&id_controladores=<?php echo $res->id_controladores; ?>" class="btn btn-warning" onClick="notificacion()" style="font-size:65%;">Editar</a>
+			                    <a href="<?php echo $helper->url("TipoComprobantes","index"); ?>&id_tipo_comprobantes=<?php echo $res->id_tipo_comprobantes; ?>" class="btn btn-warning" onClick="notificacion()" style="font-size:65%;">Editar</a>
 			                </div>
 			            
 			             </td>
 			             <td>   
 			                	<div class="right">
-			                    <a href="<?php echo $helper->url("Controladores","borrarId"); ?>&id_controladores=<?php echo $res->id_controladores; ?>" class="btn btn-danger" onClick="Borrar()" style="font-size:65%;">Borrar</a>
+			                    <a href="<?php echo $helper->url("TipoComprobantes","borrarId"); ?>&id_tipo_comprobantes=<?php echo $res->id_tipo_comprobantes; ?>" class="btn btn-danger" onClick="Borrar()"style="font-size:65%;">Borrar</a>
 			                </div>
-			               
+			                <hr/>
 		               </td>
 		    		</tr>
 		        <?php } } ?>
@@ -226,6 +232,6 @@
       </section>
       </div>
       </div>
-  <?php include("view/modulos/footer.php"); ?>
-     </body>  
+   </body>  
+
     </html>   
