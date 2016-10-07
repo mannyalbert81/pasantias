@@ -275,9 +275,7 @@ public function index(){
 			$usuarios->setFuncion($funcion);
 	
 			$usuarios->setParametros($parametros);
-	
-	
-			$resultado=$usuarios->Insert();
+	        $resultado=$usuarios->Insert();
 		    
 		    }
 			

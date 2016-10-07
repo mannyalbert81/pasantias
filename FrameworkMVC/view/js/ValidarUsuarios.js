@@ -1,5 +1,6 @@
 
 	$(document).ready(function() {
+		$("#ok").hide();
 		//Validacion con BootstrapValidator
 		fl = $('#form-usuarios');
 	    fl.bootstrapValidator({ 

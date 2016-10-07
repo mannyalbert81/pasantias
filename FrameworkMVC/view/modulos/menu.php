@@ -73,6 +73,9 @@ $controladores=$_SESSION['controladores'];
 			<li style="<?php echo getcontrolador("PlanCuentas",$controladores) ?>">
 			<a href="index.php?controller=PlanCuentas&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Plan de Cuentas</span> </a>
 			</li>
+			<li style="<?php echo getcontrolador("Comprobantes",$controladores) ?>">
+			<a href="index.php?controller=Comprobantes&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Registrar Comprobantes</span> </a>
+			</li>
 			
 </ul>
 </li>

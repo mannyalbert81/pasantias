@@ -15,6 +15,27 @@
   <script src="view/js/noty.js"></script>
   <script src="view/js/ValidarLogin.js"></script>
 	
+	<script>
+   function verificar(){
+	   usuario = $('#usuarios').val();
+       pass = $('#clave').val();
+
+       //Comparamos si el usuario y la contraseña son correctos
+       if(usuario == "" || pass == ""){
+       	 nota("error","Los Datos Son Incorrectos.");
+       }
+
+        else{
+          
+        	
+       }
+       function nota(op,msg,time){
+   	    if(time == undefined)time = 1000;
+   	    var n = noty({text:msg,maxVisible: 1,type:op,killer:true,timeout:time,layout: 'inline'});
+   	  }
+        }
+   	
+	</script>
    <style>
 			body {
 			
@@ -50,7 +71,7 @@
        
    
  <form id="form-login"  action="<?php echo $helper->url("usuarios","Loguear"); ?>" method="post" class="col-lg-12" style="padding-top:100px;">
-                     
+                                 
     <div id="login-overlay" class="modal-dialog" >
       <div class="modal-content">
           
@@ -70,7 +91,7 @@
                                   <span class="help-block"></span>
                               </div>
                              
-                              <button type="submit" class="btn btn-success btn-block" >Login</button>
+                              <button type="submit" class="btn btn-success btn-block" onclick="verificar()">Login</button>
                                
                       </div>
                   </div>

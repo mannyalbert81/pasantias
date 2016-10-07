@@ -31,7 +31,6 @@
       <form  id="form-usuarios" action="<?php echo $helper->url("Usuarios","InsertaUsuarios"); ?>" method="post" enctype="multipart/form-data"  class="col-lg-5">
             <br>
            
-            
           <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
            
             <div class="well">
@@ -320,7 +319,7 @@
 		   
 		    
 		   
-               	
+           
 		     <?php } ?>
 		     
 		    <div class="row">
