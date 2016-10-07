@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-10-07T11:05:04 -->
+<!-- 2016-10-07T11:19:00 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
@@ -130,7 +130,22 @@ FROM plan_cuentas
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="214" splitType="Stretch"/>
+		<band height="214" splitType="Stretch">
+			<textField>
+				<reportElement x="240" y="129" width="150" height="15" uuid="76794c7b-f2e5-4dfc-8372-411e367b745d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="129" width="150" height="15" uuid="61287530-cfb2-4bf6-bfac-52c288b7d5b9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnHeader>
 	<detail>
 		<band height="48" splitType="Stretch">
@@ -160,19 +175,19 @@ FROM plan_cuentas
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="7">
-				<reportElement x="-1" y="-85" width="555" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="d32f4372-1c72-4075-b129-864a4d52f1f9"/>
+				<reportElement x="-1" y="-65" width="555" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="d32f4372-1c72-4075-b129-864a4d52f1f9"/>
 				<graphicElement>
 					<pen lineWidth="3.0" lineStyle="Solid"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="0">
-				<reportElement mode="Transparent" x="278" y="-85" width="151" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="3e74d869-5e95-4355-be2e-96fe9e169d43"/>
+				<reportElement mode="Transparent" x="278" y="-65" width="151" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="3e74d869-5e95-4355-be2e-96fe9e169d43"/>
 				<graphicElement>
 					<pen lineWidth="3.0" lineStyle="Solid"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="0">
-				<reportElement mode="Transparent" x="127" y="-85" width="151" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="187a2387-0f13-4f94-9baa-0275adedd8cb"/>
+				<reportElement mode="Transparent" x="127" y="-65" width="151" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="187a2387-0f13-4f94-9baa-0275adedd8cb"/>
 				<graphicElement>
 					<pen lineWidth="3.0" lineStyle="Solid"/>
 				</graphicElement>
@@ -219,56 +234,56 @@ FROM plan_cuentas
 				<textFieldExpression><![CDATA["Descripcion"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="-84" width="126" height="15" uuid="847db14c-a0d5-4b4c-9515-d618e53470e1"/>
+				<reportElement x="0" y="-64" width="126" height="15" uuid="847db14c-a0d5-4b4c-9515-d618e53470e1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Elaborado por:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="127" y="-84" width="150" height="15" uuid="0dd8f87f-4d1c-4e97-a996-f5fe66fa33ab"/>
+				<reportElement x="127" y="-64" width="150" height="15" uuid="0dd8f87f-4d1c-4e97-a996-f5fe66fa33ab"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Es Conforme"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="278" y="-84" width="150" height="15" uuid="7aab4399-161f-4cde-9352-ac2ce5ca12cf"/>
+				<reportElement x="278" y="-64" width="150" height="15" uuid="7aab4399-161f-4cde-9352-ac2ce5ca12cf"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Visto Bueno"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="429" y="-84" width="126" height="15" uuid="94cf29ff-9efb-4beb-88e9-b876188854f7"/>
+				<reportElement x="429" y="-64" width="126" height="15" uuid="94cf29ff-9efb-4beb-88e9-b876188854f7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Firma: _______________________"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="428" y="-57" width="126" height="15" uuid="5185c111-8b16-4888-afc8-0bccd3fbaaa2"/>
+				<reportElement x="428" y="-37" width="126" height="15" uuid="5185c111-8b16-4888-afc8-0bccd3fbaaa2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["C.I.: ________________________"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="-56" width="126" height="15" uuid="25e2f310-cba2-41f8-8004-21b2078574cf"/>
+				<reportElement x="0" y="-36" width="126" height="15" uuid="25e2f310-cba2-41f8-8004-21b2078574cf"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="140" y="-55" width="126" height="15" uuid="6bb57e0c-776b-4f08-8047-7b31e018f7b3"/>
+				<reportElement x="140" y="-35" width="126" height="15" uuid="6bb57e0c-776b-4f08-8047-7b31e018f7b3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["CONTADOR"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="293" y="-55" width="126" height="15" uuid="328e3025-3747-4128-a325-fabdfac9290e"/>
+				<reportElement x="293" y="-35" width="126" height="15" uuid="328e3025-3747-4128-a325-fabdfac9290e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
