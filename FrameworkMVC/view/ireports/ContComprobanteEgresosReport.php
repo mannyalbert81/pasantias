@@ -17,7 +17,7 @@ ini_set('display_errors', 0);
 
 $PHPJasperXML = new PHPJasperXML();
 //$PHPJasperXML->debugsql=true;
-$PHPJasperXML->load_xml_file("PlanCuentasReport.jrxml");
+$PHPJasperXML->load_xml_file("ComprobanteEgresosReport.jrxml");
 
 $PHPJasperXML->transferDBtoArray($server,$user,$pass,$db, $driver);
 $PHPJasperXML->outpage("I") 
