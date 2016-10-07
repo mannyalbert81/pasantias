@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-10-07T09:31:06 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
+	<queryString>
+		<![CDATA[SELECT entidades.nombre_entidades,
+	plan_cuentas.codigo_plan_cuentas,
+	plan_cuentas.nombre_plan_cuentas,
+	plan_cuentas.n_plan_cuentas,
+	plan_cuentas.t_plan_cuentas,
+	plan_cuentas.id_centro_costos,
+	plan_cuentas.nivel_plan_cuentas,
+	plan_cuentas.creado,
+	plan_cuentas.modificado,
+	monedas.nombre_monedas
+FROM plan_cuentas
+	INNER JOIN entidades ON 
+	 plan_cuentas.id_entidades = entidades.id_entidades 
+	INNER JOIN monedas ON 
+	 plan_cuentas.id_modenas = monedas.id_monedas]]>
+	</queryString>
+	<field name="nombre_entidades" class="java.lang.String"/>
+	<field name="codigo_plan_cuentas" class="java.lang.String"/>
+	<field name="nombre_plan_cuentas" class="java.lang.String"/>
+	<field name="n_plan_cuentas" class="java.lang.String"/>
+	<field name="t_plan_cuentas" class="java.lang.String"/>
+	<field name="id_centro_costos" class="java.lang.Integer"/>
+	<field name="nivel_plan_cuentas" class="java.lang.Integer"/>
+	<field name="creado" class="java.sql.Timestamp"/>
+	<field name="modificado" class="java.sql.Timestamp"/>
+	<field name="nombre_monedas" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<rectangle radius="7">
+				<reportElement x="0" y="0" width="555" height="60" forecolor="#000000" backcolor="#FFFFFF" uuid="d33056da-a91a-42ec-b4d4-1f05300e3205"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="12" width="555" height="30" forecolor="#000000" uuid="2e1395c1-7f5c-4c28-b4ce-5927e46bd9af"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_entidades}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="420" y="44" width="50" height="10" forecolor="#000000" uuid="ae8866e3-bc30-48c6-8887-a43391aef58b"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="4" width="160" height="46" uuid="0af34674-2907-46f3-8204-c316f36832c5"/>
+				<imageExpression><![CDATA["C:/Users/Steven/git/contabilidad/FrameworkMVC/view/ireports/PhpJasperLibrary/class/tcpdf/images/logo.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="170" y="42" width="240" height="14" forecolor="#000000" uuid="d1ebe344-c9e5-4b45-878c-50c235f137fd"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_entidades}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="50" splitType="Stretch">
+			<rectangle radius="7">
+				<reportElement x="0" y="6" width="555" height="44" forecolor="#000000" backcolor="#FFFFFF" uuid="e2521e34-8167-4e4a-b74e-f78d927c8ff1"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement x="10" y="13" width="300" height="15" uuid="a82d3d3a-56cd-4d65-82fd-bd2df51388d1"/>
+				<textElement textAlignment="Left">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement x="10" y="28" width="300" height="15" uuid="d97a0874-f071-473b-8066-8cb6079f4def"/>
+				<textElement textAlignment="Left">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="380" y="13" width="170" height="15" uuid="c4cf27c2-2cef-4a4d-bbe5-12f020268128"/>
+				<textElement textAlignment="Left">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="470" y="-16" width="80" height="10" uuid="6b5a8046-e7e8-466e-b6fd-645419a7a626"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="7" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="204" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="-69" width="72" height="8" uuid="86449d73-651f-4ea3-8e79-bcf2e2d6f02d"/>
+				<textElement textAlignment="Left">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="-69" width="72" height="8" uuid="4aa81f63-2faa-4b80-8937-b835ccb124f3"/>
+				<textElement textAlignment="Left">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="7">
+				<reportElement x="0" y="0" width="555" height="120" forecolor="#000000" backcolor="#FFFFFF" uuid="dbd8ea11-fb65-4a99-b5a8-f822cdc22eaf"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="11" y="5" width="532" height="15" uuid="51264e72-3a9c-41a3-9b9b-eedd09d35551"/>
+				<textElement textAlignment="Left">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="0">
+				<reportElement x="0" y="25" width="555" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="60ba87ba-0180-4ce2-8be8-67afa24c7e3b"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="0" y="25" width="99" height="95" forecolor="#000000" backcolor="#FFFFFF" uuid="ba2c2162-6459-44d3-9916-4a63cfff5004"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement x="456" y="40" width="99" height="80" forecolor="#000000" backcolor="#FFFFFF" uuid="030eb501-a80b-4394-9805-d7968ef19e63"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="357" y="25" width="99" height="95" forecolor="#000000" backcolor="#FFFFFF" uuid="b39a17e4-b90a-4d4d-8793-c8d0aca5adda"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="7">
+				<reportElement x="1" y="135" width="555" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="d32f4372-1c72-4075-b129-864a4d52f1f9"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="280" y="135" width="151" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="3e74d869-5e95-4355-be2e-96fe9e169d43"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="129" y="135" width="151" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="187a2387-0f13-4f94-9baa-0275adedd8cb"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="26" width="98" height="15" uuid="ddaeaa1d-d6d7-4954-af34-b01d72b11f74"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="25" width="258" height="15" uuid="cd0a4cbd-3563-4765-8f63-954627fdbfd4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="358" y="25" width="98" height="15" uuid="7e374930-ebfb-4717-a22e-a87dcb1223a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="456" y="26" width="98" height="15" uuid="d38ad710-4658-4816-82dc-a41e4befeff0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

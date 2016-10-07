@@ -23,7 +23,7 @@
   
   <div class="container">
   
-  <div class="row" style="background-color: #FAFAFA";>
+  <div class="row" style="background-color: #FAFAFA">
   
        <!-- empieza el form --> 
        
