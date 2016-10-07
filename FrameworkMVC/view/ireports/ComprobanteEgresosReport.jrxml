@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-10-07T11:25:25 -->
+<!-- 2016-10-07T11:37:06 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
@@ -21,16 +21,14 @@
 			 entidades.id_entidades = usuarios.id_entidades AND
              consecutivos.id_entidades = entidades.id_entidades]]>
 	</queryString>
+	<field name="id_entidades" class="java.lang.String"/>
+	<field name="ruc_entidades" class="java.lang.String"/>
 	<field name="nombre_entidades" class="java.lang.String"/>
-	<field name="codigo_plan_cuentas" class="java.lang.String"/>
-	<field name="nombre_plan_cuentas" class="java.lang.String"/>
-	<field name="n_plan_cuentas" class="java.lang.String"/>
-	<field name="t_plan_cuentas" class="java.lang.String"/>
-	<field name="id_centro_costos" class="java.lang.Integer"/>
-	<field name="nivel_plan_cuentas" class="java.lang.Integer"/>
-	<field name="creado" class="java.sql.Timestamp"/>
-	<field name="modificado" class="java.sql.Timestamp"/>
-	<field name="nombre_monedas" class="java.lang.String"/>
+	<field name="telefono_entidades" class="java.lang.String"/>
+	<field name="direccion_entidades" class="java.lang.String"/>
+	<field name="ciudad_entidades" class="java.lang.String"/>
+	<field name="numero_comprobantes" class="java.lang.String"/>
+	<field name="id_usuarios" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -66,28 +64,28 @@
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["COMPROBANTE DE EGRESOS N°: "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["COMPROBANTE DE EGRESOS N°:  "+$F{numero_comprobantes}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="4" y="50" width="86" height="8" uuid="fcfb2748-6331-4fcf-b0fa-0db48f8b9d3b"/>
 				<textElement textAlignment="Left">
 					<font size="6" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Ruc:"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Ruc:  "+$F{ruc_entidades}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="90" y="50" width="80" height="10" uuid="3795489f-d29d-4a61-9266-f134b5479718"/>
 				<textElement textAlignment="Left">
 					<font size="6" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Tlf:"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Tlf:  "+$F{telefono_entidades}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="4" y="22" width="548" height="8" forecolor="#000000" uuid="bf1b87b5-9840-49b0-8e77-26af840120e3"/>
 				<textElement textAlignment="Center">
 					<font size="5" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Direccion: El TELEGRAFO Y EL TIEMPO"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Direccion:  "+$F{direccion_entidades}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
