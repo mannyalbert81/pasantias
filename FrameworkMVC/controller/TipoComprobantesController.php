@@ -146,7 +146,7 @@ class TipoComprobantesController extends ControladorBase{
 				
 				$funcion = "ins_tipo_comprobantes";
 				
-				$parametros = " '$_nombre_tipo_comprobantes'  ";
+				$parametros = " '$_nombre_tipo_comprobantes' ";
 					
 				$tipo_comprobantes->setFuncion($funcion);
 		
@@ -155,12 +155,6 @@ class TipoComprobantesController extends ControladorBase{
 		
 				$resultado=$tipo_comprobantes->Insert();
 				
-				if($resultado)
-				{
-				$this->view("Error",array("resultado"=>"datos guardados"));
-				die();
-				}
-			 
 				$traza=new TrazasModel();
 				$_nombre_controlador = "Tipo Comprobantes";
 				$_accion_trazas  = "Guardar";
