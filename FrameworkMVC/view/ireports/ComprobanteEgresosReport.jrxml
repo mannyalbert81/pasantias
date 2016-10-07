@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-10-07T11:20:31 -->
+<!-- 2016-10-07T11:25:25 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
 	<queryString>
-		<![CDATA[SELECT entidades.nombre_entidades,
-	plan_cuentas.codigo_plan_cuentas,
-	plan_cuentas.nombre_plan_cuentas,
-	plan_cuentas.n_plan_cuentas,
-	plan_cuentas.t_plan_cuentas,
-	plan_cuentas.id_centro_costos,
-	plan_cuentas.nivel_plan_cuentas,
-	plan_cuentas.creado,
-	plan_cuentas.modificado,
-	monedas.nombre_monedas
-FROM plan_cuentas
-	INNER JOIN entidades ON 
-	 plan_cuentas.id_entidades = entidades.id_entidades 
-	INNER JOIN monedas ON 
-	 plan_cuentas.id_modenas = monedas.id_monedas]]>
+		<![CDATA[SELECT entidades.id_entidades, 
+			  entidades.ruc_entidades, 
+			  entidades.nombre_entidades, 
+			  entidades.telefono_entidades, 
+			  entidades.direccion_entidades, 
+			  entidades.ciudad_entidades, 
+			  consecutivos.numero_comprobantes, 
+			  usuarios.id_usuarios
+			FROM
+		      public.usuarios, 
+			  public.entidades, 
+			  public.consecutivos
+			WHERE
+			 entidades.id_entidades = usuarios.id_entidades AND
+             consecutivos.id_entidades = entidades.id_entidades]]>
 	</queryString>
 	<field name="nombre_entidades" class="java.lang.String"/>
 	<field name="codigo_plan_cuentas" class="java.lang.String"/>
