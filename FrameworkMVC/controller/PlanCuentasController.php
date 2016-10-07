@@ -14,12 +14,13 @@ class PlanCuentasController extends ControladorBase{
      	$entidades=new EntidadesModel();
      	$monedas = new MonedasModel();
 					//Conseguimos todos los usuarios
-		$resultSet=$entidades->getAll("id_entidades");
+		$resultSet=array();
 				
 		$resultEdit = "";
 		
 		//arrays
 		$resultMoneda=array();
+		$resultEntidad=array();
 
 		
 		session_start();
@@ -35,7 +36,12 @@ class PlanCuentasController extends ControladorBase{
 			
 			if (!empty($resultPer))
 			{
+				$id_usuarios=$_SESSION['id_usuarios'];
+				
 				$resultMoneda = $monedas->getAll("nombre_monedas");
+				$resultEntidad=$entidades->getCondiciones("entidades.id_entidades,entidades.nombre_entidades","public.usuarios,public.entidades",
+						"usuarios.id_entidades=entidades.id_entidades AND usuarios.id_usuarios='$id_usuarios'",
+						"entidades.id_entidades");
 				
 				if (isset ($_GET["id_entidades"])   )
 				{
@@ -73,7 +79,8 @@ class PlanCuentasController extends ControladorBase{
 		
 				
 				$this->view("PlanCuentas",array(
-						"resultSet"=>$resultSet, "resultEdit" =>$resultEdit,"resultMoneda"=>$resultMoneda
+						"resultSet"=>$resultSet, "resultEdit" =>$resultEdit,"resultMoneda"=>$resultMoneda,
+						"resultEntidad"=>$resultEntidad
 			
 				));
 		
@@ -216,6 +223,29 @@ class PlanCuentasController extends ControladorBase{
 		
 	}
 	
+	
+	public function returnGrupo()
+	{
+		
+		$id_grupo=(int)$_POST["idcuentas"];
+		$id_entidades=(int)$_POST["identidades"];
+		$codigo_plan_cuentas=$id_grupo.'%';
+		
+		$plan_cuentas = new PlanCuentasModel();
+		
+		$columnas = "id_plan_cuentas,nombre_plan_cuentas,nivel_plan_cuentas";
+		$tablas="plan_cuentas";
+		$id="id_plan_cuentas";		
+		$where=" t_plan_cuentas='G'
+				AND nivel_plan_cuentas=2
+				AND id_entidades='$id_entidades'
+				AND codigo_plan_cuentas like '$codigo_plan_cuentas'";
+		
+		$resultado=$plan_cuentas->getCondiciones($columnas ,$tablas , $where, $id);
+		
+		echo json_encode($resultado);
+	
+	}
 	
 	
 	

@@ -58,10 +58,19 @@
 		        }); 
 
 		        var  html = " <br><br><br>";
-		        html+="<div class = 'ui-state-highlight  ui-corner-all'>";
-		        html+="<div class = 'ui-icon ui-icon-info '></div>";
-		        html+="<center>¿Seguro que quiere Guardar los Datos ? </center></div><br><br><br>";
+		        html+="<div class = 'col-xs-12 col-md-12'>";
+		        html+="<div class='form-group'>";
+		        html+="<label for'codigo2' class='control-label'>Codigo</label><br>";
+		        html+="<input type='text' class='form-control' id='grupo_nombre' name='grupo_nombre' value='' >";
+		        html+="</div>";
+			    html+="<div class = 'ui-icon ui-icon-info '></div>";
+			    html+="<center>¿Seguro que quiere Guardar los Datos ? </center></div><br><br><br>";
+		       
+		       
 
+		       // /* html+="<div class = 'ui-state-highlight  ui-corner-all'>";
+		       // html+="<div class = 'ui-icon ui-icon-info '></div>";
+		       // html+="<center>¿Seguro que quiere Guardar los Datos ? </center></div><br><br><br>";/*
 
 
 
@@ -125,10 +134,8 @@
 		        var  html = " <br><br><br>";
 		        html+="<div class = 'ui-state-highlight  ui-corner-all'>";
 		        html+="<div class = 'ui-icon ui-icon-info '></div>";
-		        html+="<center>¿Seguro que quiere Guardar los Datos ? </center></div><br><br><br>";
-
-
-
+		        html+="<center>¿Seguro que quiere Guardar los Datos en contabilidad? </center></div><br><br><br>";
+		        
 
 		        $('#modal').html (html);  
 
@@ -141,6 +148,59 @@
 		});
 		
 		</script>
+		
+		<!-- funcion para llenar los grupos al selecionas las cuentas (Pasivo,Activo,Patrimonio,Egresos,Ingresos) -->
+		<script type="text/javascript">
+
+		$(document).ready(function(){
+
+			$("input:radio[name='cuentas']").change(function() {
+
+				// identificamos al ddl a cambiar
+		           var grupo = $("#id_grupo");
+		           
+		        // tomamos parametros -> idgrupo,entidades
+		           var cuentas = $(this).val();
+		           var entidades = $("#id_entidad").val();
+
+		        //vaciamos el ddl a cambiar
+		           grupo.empty();
+
+		          
+		            if(cuentas != 0)
+		            {
+			            var datos = {  
+			            		 	idcuentas: cuentas,
+			            		 	identidades: entidades 
+		                    	 	 };
+
+				        //alert(datos['idcuentas']+'\n'+datos['identidades']);
+		            	
+		         	   	$.post("<?php echo $helper->url("PlanCuentas","returnGrupo"); ?>", datos, function(resultado) {
+
+		         		 		$.each(resultado, function(index, value) {
+		         		 			grupo.append("<option value= " +value.id_plan_cuentas +" >" + value.nombre_plan_cuentas  + "</option>");	
+		                    		 });
+
+		         		 		 	 		   
+		         		  }, 'json');
+
+
+		            }
+		            else
+		            {
+		                
+		            	grupo.empty();
+		            	alert('vacio');
+
+		            }
+			  });
+
+			});
+		
+		</script>
+		
+		
         
     </head>
     <body>
@@ -235,35 +295,35 @@
 		    <div class="col-xs-4 col-md-4">
 		    <div class="form-group">
                  <label for="activo" class="control-label">Activo &nbsp; &nbsp;  &nbsp; &nbsp;</label>
-                 <input type="radio" name="cuentas" id="activo" value="activo" />
+                 <input type="radio" name="cuentas" id="activo" value="1" />
   			     <span class="help-block"></span>
             </div>
 		    </div>
 		     <div class="col-xs-4 col-md-4">
 		    <div class="form-group">
                  <label for="pasivo" class="control-label">Pasivo  &nbsp; &nbsp; &nbsp; </label>
-                 <input type="radio" name="cuentas" id="pasivo" value="pasivo" />
+                 <input type="radio" name="cuentas" id="pasivo" value="2" />
   			     <span class="help-block"></span>
             </div>
 		    </div>
 		     <div class="col-xs-4 col-md-4">
 		    <div class="form-group">
                  <label for="patrimonio" class="control-label">Patrimonio  &nbsp; &nbsp;</label>
-                 <input type="radio" name="cuentas" id="patrimonio" value="patrimonio" />
+                 <input type="radio" name="cuentas" id="patrimonio" value="3" />
   			     <span class="help-block"></span>
             </div>
 		    </div>
 		     <div class="col-xs-4 col-md-4">
 		    <div class="form-group">
                  <label for="ingresos" class="control-label">Ingresos  &nbsp; &nbsp;</label>
-                 <input type="radio" name="cuentas" id="ingresos" value="activo" />
+                 <input type="radio" name="cuentas" id="ingresos" value="4" />
   			     <span class="help-block"></span>
             </div>
 		    </div>
 		     <div class="col-xs-4 col-md-4">
 		    <div class="form-group">
                  <label for="egresos" class="control-label">Egresos  &nbsp; &nbsp;</label>
-                 <input type="radio" name="cuentas" id="egresos" value="egresos" />
+                 <input type="radio" name="cuentas" id="egresos" value="5" />
   			     <span class="help-block"></span>
             </div>
 		    </div>
