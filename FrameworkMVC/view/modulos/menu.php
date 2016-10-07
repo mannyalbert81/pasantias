@@ -73,16 +73,16 @@ $controladores=$_SESSION['controladores'];
 			<li style="<?php echo getcontrolador("PlanCuentas",$controladores) ?>">
 			<a href="index.php?controller=PlanCuentas&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Plan de Cuentas</span> </a>
 			</li>
-<<<<<<< HEAD
+
 			<li style="<?php echo getcontrolador("Comprobantes",$controladores) ?>">
 			<a href="index.php?controller=Comprobantes&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Registrar Comprobantes</span> </a>
 			</li>
 			
-=======
+
 			<li style="<?php echo getcontrolador("TipoComprobantes",$controladores) ?>">
 			<a href="index.php?controller=TipoComprobantes&action=index"> <span class=" glyphicon glyphicon-asterisk" aria-hidden="true"> Tipo de Comprobantes</span> </a>
 			</li>
->>>>>>> branch 'master' of https://github.com/mannyalbert81/contabilidad.git
+
 </ul>
 </li>
 

@@ -29,50 +29,38 @@
 	         
 	         
 	         <?php if (!empty($resultSet)) {  foreach($resultSet as $res) {?>
-	         
+	         <div class="col-lg-12">
+	         <div class="col-lg-1">
+	         </div>
+	         <div class="col-lg-10">
 	         <div class="panel panel-default">
   			 <div class="panel-body">
 	         <div class="row">
 	         <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;" > 
              <div class="form-group"> 
 	          						<p for="nombre_entidades" class="control-label"><b><?php echo $res->nombre_entidades; ?></b></p>
+                                    <p for="direccion_entidades" class="control-label"><b><?php echo $res->direccion_entidades; ?></b></p>
+                                    <p for="numero_comprobantes" class="control-label"><b>COMPROBANTE DE EGRESOS N°: <?php echo $res->numero_comprobantes; ?></b></p>
                    
              </div>                 
 			 </div>
   		     </div>
   		     
-  		     <div class="row">
-  		     <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;" > 
-			 <div class="form-group"> 
-			  						<p for="direccion_entidades" class="control-label"><b><?php echo $res->direccion_entidades; ?></b></p>
-                   
-             </div>                    
-			 </div>
-  		     </div>
   		     
   		     <div class="row">
-  		     <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;" > 
-			 <div class="form-group"> 
-			  						<p for="numero_comprobantes" class="control-label"><b>COMPROBANTE DE EGRESOS N°: <?php echo $res->numero_comprobantes; ?></b></p>
-                   
-             </div>                    
-			 </div>
-  		     </div>
-  		     
-  		     <div class="row">
-  		     <div class="col-xs-4 col-md-4 col-lg-4" style="text-align: center;">
+  		     <div class="col-lg-4" style="text-align: center;">
 			 <div class="form-group"> 
 			  						<p for="ruc_entidades" class="control-label"><b>Ruc: </b><?php echo $res->ruc_entidades; ?></p>
                    
              </div>                    
 			 </div>
-			 <div class="col-xs-4 col-md-4 col-lg-4" style="text-align: center;">
+			 <div class="col-lg-4" style="text-align: center;">
 			 <div class="form-group"> 
 			  						<p for="telefono_entidades" class="control-label"><b>Telf: </b><?php echo $res->telefono_entidades; ?></p>
                    
              </div>                    
 			 </div>
-			 <div class="col-xs-4 col-md-4 col-lg-4" style="text-align: center;">
+			 <div class="col-lg-4" style="text-align: center;">
 			 <div class="form-group"> 
 			  						<p for="fecha_comprobantes" class="control-label"><b>Fecha: </b><?php $sdate=date("d")."/".date("m")."/".date("Y"); $stime=date("h").":".date("i"); echo "$sdate";?></p>
                    
@@ -82,13 +70,37 @@
   		     
   		     </div>                    
 			 </div>
-  		 
-  		     
-         
+			 </div>
+  		     <div class="col-lg-1">
+	         </div>
+             </div>
          				
 		     <?php } }else{ ?>
              <?php } ?>
-	         
+	        
+	         <div class="col-lg-12">
+	         <div class="col-lg-1">
+	         </div>
+	         <div class="col-lg-10">
+	         <div class="row">
+  		     <div class="col-xs-6 col-md-6">
+		     <div class="form-group">
+                                  <label for="nombre_centro_costos" class="control-label">Nombre: </label>
+                                  <input type="text" class="form-control" id="nombre_centro_costos" name="nombre_centro_costos" value=""  placeholder="Nombre">
+                                  <span class="help-block"></span>
+             </div>
+		     </div>
+  		     </div>
+  		     </div>
+  		     <div class="col-lg-1">
+	         </div>
+             </div>
+	        
+	        
+	        
+	        
+	        
+	        <div class="col-lg-12">
 	        <div class="well">
             <h4 style="color:#ec971f;">Registrar Comprobantes</h4>
             <hr/>
@@ -146,7 +158,7 @@
                  
         </div>
         </div>
-  
+        </div>
        
        <?php include("view/modulos/footer.php"); ?>
         
