@@ -154,6 +154,12 @@ class TipoComprobantesController extends ControladorBase{
 		
 		
 				$resultado=$tipo_comprobantes->Insert();
+				
+				if($resultado)
+				{
+				$this->view("Error",array("resultado"=>"datos guardados"));
+				die();
+				}
 			 
 				$traza=new TrazasModel();
 				$_nombre_controlador = "Tipo Comprobantes";

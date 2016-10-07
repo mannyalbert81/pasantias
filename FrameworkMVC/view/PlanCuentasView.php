@@ -1,5 +1,6 @@
 <?php include("view/modulos/modal.php"); ?>
 <?php include("view/modulos/head.php"); ?>
+<?php $n_plan_cuentas=array("A"=>'Acreedora',"D"=>'Deudora')?>
 <!DOCTYPE HTML>
 <html lang="es">
      <head>
@@ -14,73 +15,131 @@
 		
 		<script type="text/javascript">
 		$(function(){
-		    
-		    var u = document.location.href.split("/");
-		    var n = u.length;
-		    var _url = "http:";
-		    var i=0;
-		    n=n-3;
 
-		    for(i=0;i<=n;i++){
-		        _url+="/"+u[i+1];
-		    }
-		        _url+="/guardar"    
+		        $('#agregar_grupo').click(function(){
 
-		    $('#agregar_grupo').click(function(){
-			    //alert('hola');
-			    //opciones para dialosg no usados position:'center',
-			        $('#modal').dialog({
-		                            autoOpen: false,
-		                            modal: true,
-		                            height: 500,
-		                            width: 250,
-		                            buttons: {
-		                "Aceptar": function() {
-		                    var checking = $('#check').jserialize();
-		                    loading('#cargando','Cargando');
-		                    $.ajax({
-		                           url:"<?php echo $helper->url("PlanCuentas","AgregarGrupo");?>"
-		                           ,type : "POST"
-		                           ,async: true
-		                           ,data : checking
-		                           ,success: function(msg){
-		                                $('#modal').dialog('close');
-		                                loading();
-		                           }
-		                    });                    
-		   
-		                },
-		                "Cancelar": function(){
-		                    $('#modal').dialog('close');
-		                }
-		            }    
-
-		        }); 
-
-		        var  html = " <br><br><br>";
-		        html+="<div class = 'col-xs-12 col-md-12'>";
-		        html+="<div class='form-group'>";
-		        html+="<label for'codigo2' class='control-label'>Codigo</label><br>";
-		        html+="<input type='text' class='form-control' id='grupo_nombre' name='grupo_nombre' value='' >";
-		        html+="</div>";
-			    html+="<div class = 'ui-icon ui-icon-info '></div>";
-			    html+="<center>¿Seguro que quiere Guardar los Datos ? </center></div><br><br><br>";
-		       
-		       
-
-		       // /* html+="<div class = 'ui-state-highlight  ui-corner-all'>";
-		       // html+="<div class = 'ui-icon ui-icon-info '></div>";
-		       // html+="<center>¿Seguro que quiere Guardar los Datos ? </center></div><br><br><br>";/*
+		        	var   valCuentas = $("#val_radio_cuentas").text();
 
 
+		        	if(valCuentas>0)
+				    {
+		        		//alert('hola');
+					    //opciones para dialosg no usados position:'center',
+					        $('#modal_grupo').dialog({
+				                            autoOpen: false,
+				                            modal: true,
+				                            height: 500,
+				                            width: 250,
+				                            buttons: {
+				                "Aceptar": function() {
+					                //code origin
+					                //var checking = $('#check').jserialize();
+				                    //loading('#cargando','Cargando');
+				                    
 
-		        $('#modal').html (html);  
+					                var datos = { 
+							                id_entidad_p_cuentas:$('#id_entidad').val(),
+			                    	 		nombre_p_cuentas:$('#modal_grupo_nombre').val(),
+			                    	 		codigo_p_cuentas:$('#modal_grupo_codigo').val(),
+			                    	 		id_moneda_p_cuentas:$('#modal_grupo_id_moneda').val(),
+			                    	 		n_p_cunetas:$('#modal_grupo_naturaleza').val(),
+			                    	 		t_p_cuentas:$('#modal_grupo_tipo').val(),
+			                    	 		id_centro_c_p_cuentas:$('#modal_grupo_id_centro_c').val(),
+			                    	 		nivel_p_cuentas:$('#modal_grupo_nivel').val()
+			                    	 	 };
+				                     //alert(datos['id_entidad_p_cuentas']);
+				                     
+				                                        
+				   
+				                },
+				                "Cancelar": function(){
+				                    $('#modal_grupo').dialog('close');
+				                }
+				            }    
 
-		        $('#modal').dialog('open');
+				        }); 
+
+				        var  html = " <br>";
+				        html+="<div class = 'col-xs-12 col-md-12'>";
+				        html+="<div class='form-group'>";
+				        html+="<label for='modal_grupo_nombre' class='control-label'>Nombre</label><br>";
+				        html+="<input type='text' class='form-control' id='modal_grupo_nombre' name='modal_grupo_nombre' value='' >";
+				        html+="</div>";
+				        html+="</div>";
+				        html+="<div class = 'col-xs-12 col-md-12'>";
+				        html+="<div class='form-group'>";
+				        html+="<label for='modal_grupo_codigo' class='control-label'>Codigo</label><br>";
+				        html+="<input type='text' class='form-control' id='modal_grupo_codigo' name='modal_grupo_codigo' value='' >";
+				        html+="</div>";
+				        html+="</div>";
+				        html+="<div class = 'col-xs-12 col-md-12'>";
+				        html+="<div class='form-group'>";
+				        html+="<label for='modal_grupo_tipo' class='control-label'>Tipo</label><br>";
+				        html+="<input type='text' class='form-control' id='modal_grupo_tipo' name='modal_grupo_tipo' value='' >";
+				        html+="</div>";
+				        html+="</div>";
+				        html+="<div class = 'col-xs-12 col-md-12'>";
+				        html+="<div class='form-group'>";
+				        html+="<label for='modal_grupo_nivel' class='control-label'>Nivel</label><br>";
+				        html+="<input type='text' class='form-control' id='modal_grupo_nivel' name='modal_grupo_nivel' value='2' >";
+				        html+="</div>";
+				        html+="</div>";
+				        html+="<div class='col-xs-12 col-md-12'>";
+				        html+="<div class='form-group'>";
+				        html+="<label for='modal_grupo_naturaleza' class='control-label'>Naturaleza</label>";
+				        html+="<select name='modal_grupo_naturaleza' id='modal_grupo_naturaleza'  class='form-control' >";
+				        html+="<?php if(!empty($n_plan_cuentas)){ foreach($n_plan_cuentas as $res=>$valor) {?>";
+				        html+="<option value='<?php echo $res; ?>' ><?php echo $valor; ?> </option>";
+						html+="<?php } }else{?>";
+						html+="<option value='-1' >Sin registros</option>";
+						html+="<?php }?>";
+					    html+="</select>"; 
+					    html+="<span class='help-block'></span>"; 
+					    html+="</div>";
+					    html+="</div>";
+				        html+="<div class='col-xs-12 col-md-12'>";
+				        html+="<div class='form-group'>";
+				        html+="<label for='modal_grupo_id_centro_c' class='control-label'>Centro Costos</label>";
+				        html+="<select name='modal_grupo_id_centro_c' id='modal_grupo_id_centro_c'  class='form-control' >";
+				        html+="<?php if(!empty($resultCentroC)){ foreach($resultCentroC as $res) {?>";
+				        html+="<option value='<?php echo $res->id_centro_costos; ?>' ><?php echo $res->nombre_centro_costos; ?> </option>";
+						html+="<?php } }else{?>";
+						html+="<option value='-1' >Sin registros</option>";
+						html+="<?php }?>";
+					    html+="</select>"; 
+					    html+="<span class='help-block'></span>"; 
+					    html+="</div>";
+					    html+="</div>";
+					    html+="<div class='col-xs-12 col-md-12'>";
+				        html+="<div class='form-group'>";
+				        html+="<label for='modal_grupo_id_moneda' class='control-label'>Moneda</label>";
+				        html+="<select name='modal_grupo_id_moneda' id='modal_grupo_id_moneda'  class='form-control' >";
+				        html+="<?php if(!empty($resultMoneda)){ foreach($resultMoneda as $res) {?>";
+				        html+="<option value='<?php echo $res->id_monedas; ?>' ><?php echo $res->nombre_monedas; ?> </option>";
+						html+="<?php } }else{?>";
+						html+="<option value='-1' >Sin Grupos</option>";
+						html+="<?php }?>";
+					    html+="</select>"; 
+					    html+="<span class='help-block'></span>"; 
+					    html+="</div>";
+					    html+="</div>";
+					    html+="<center>¿Seguro que quiere Guardar los Datos ? </center></div><br><br><br>";
+				       
+				       
+				        $('#modal_grupo').html (html);  
+
+				        $('#modal_grupo').dialog('open');
+						
+				    }
+				    else{
+
+					    alert('Seleccione una cuenta')
+					    
+				    }
 
 
-		        });    
-		   
+		        });
+
 		    
 		});
 		
@@ -103,7 +162,7 @@
 		    $('#agregar_subgrupo').click(function(){
 			    //alert('hola');
 			    //opciones para dialosg no usados position:'center',
-			        $('#modal').dialog({
+			        $('#modal_subgrupo').dialog({
 		                            autoOpen: false,
 		                            modal: true,
 		                            height: 500,
@@ -118,14 +177,14 @@
 		                           ,async: true
 		                           ,data : checking
 		                           ,success: function(msg){
-		                                $('#modal').dialog('close');
+		                                $('#modal_subgrupo').dialog('close');
 		                                loading();
 		                           }
 		                    });                    
 		   
 		                },
 		                "Cancelar": function(){
-		                    $('#modal').dialog('close');
+		                    $('#modal_subgrupo').dialog('close');
 		                }
 		            }    
 
@@ -137,9 +196,9 @@
 		        html+="<center>¿Seguro que quiere Guardar los Datos en contabilidad? </center></div><br><br><br>";
 		        
 
-		        $('#modal').html (html);  
+		        $('#modal_subgrupo').html (html);  
 
-		        $('#modal').dialog('open');
+		        $('#modal_subgrupo').dialog('open');
 
 
 		        });    
@@ -163,8 +222,12 @@
 		           var cuentas = $(this).val();
 		           var entidades = $("#id_entidad").val();
 
+		        //tomar valor de radio buton en la pagina
+		        $("#val_radio_cuentas").text(cuentas);
+
 		        //vaciamos el ddl a cambiar
-		           grupo.empty();
+		           //grupo.empty();
+		           //grupo.append("<option value='-1' >Sin Registros</option>");
 
 		          
 		            if(cuentas != 0)
@@ -179,6 +242,7 @@
 		         	   	$.post("<?php echo $helper->url("PlanCuentas","returnGrupo"); ?>", datos, function(resultado) {
 
 		         		 		$.each(resultado, function(index, value) {
+		         		 			grupo.empty();
 		         		 			grupo.append("<option value= " +value.id_plan_cuentas +" >" + value.nombre_plan_cuentas  + "</option>");	
 		                    		 });
 
@@ -189,9 +253,9 @@
 		            }
 		            else
 		            {
-		                
 		            	grupo.empty();
-		            	alert('vacio');
+		            	grupo.append("<option value='-1' >Sin Registros</option>");
+		            	//alert('vacio');
 
 		            }
 			  });
@@ -204,7 +268,7 @@
         
     </head>
     <body>
-    
+   
        
        <?php include("view/modulos/menu.php"); ?>
        
@@ -351,7 +415,7 @@
                   <span class="help-block"></span>
             </div>
             </div>
-            <div id="modal"></div>
+            <div id="modal_grupo"></div>
 			</div>
 			
 			<div class="row">
@@ -376,6 +440,7 @@
                   <span class="help-block"></span>
             </div>
             </div>
+            <div id="modal_subgrupo"></div>
 			</div>
             
 		    <div class="row">
@@ -620,6 +685,10 @@
              <footer class="col-lg-12">
 			 <?php include("view/modulos/footer.php"); ?>
 			 </footer>
+			 
+			 <!-- para los modal -->
+			 
+			  <span id="val_radio_cuentas" style="display: none;">0</span>
         
     </body>  
     </html>          

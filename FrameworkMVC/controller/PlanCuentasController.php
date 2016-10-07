@@ -13,6 +13,7 @@ class PlanCuentasController extends ControladorBase{
 		//Creamos el objeto usuario
      	$entidades=new EntidadesModel();
      	$monedas = new MonedasModel();
+     	$centro_costos= new CentroCostosModel();
 					//Conseguimos todos los usuarios
 		$resultSet=array();
 				
@@ -21,6 +22,7 @@ class PlanCuentasController extends ControladorBase{
 		//arrays
 		$resultMoneda=array();
 		$resultEntidad=array();
+		$resultCentroC=array();
 
 		
 		session_start();
@@ -38,10 +40,19 @@ class PlanCuentasController extends ControladorBase{
 			{
 				$id_usuarios=$_SESSION['id_usuarios'];
 				
+				//consultar  monedas
 				$resultMoneda = $monedas->getAll("nombre_monedas");
+				//consultar entidad por el usuario
 				$resultEntidad=$entidades->getCondiciones("entidades.id_entidades,entidades.nombre_entidades","public.usuarios,public.entidades",
 						"usuarios.id_entidades=entidades.id_entidades AND usuarios.id_usuarios='$id_usuarios'",
 						"entidades.id_entidades");
+				//consultar centro costos de acuerdo a la entidad y elk usuario
+				$resultCentroC=$centro_costos->getCondiciones("centro_costos.id_centro_costos,centro_costos.nombre_centro_costos",
+						"public.centro_costos, public.entidades, public.usuarios", 
+						"entidades.id_entidades = centro_costos.id_entidades AND  entidades.id_entidades = usuarios.id_entidades AND
+						 usuarios.id_usuarios='$id_usuarios'", "centro_costos.id_centro_costos");
+				
+				
 				
 				if (isset ($_GET["id_entidades"])   )
 				{
@@ -80,7 +91,7 @@ class PlanCuentasController extends ControladorBase{
 				
 				$this->view("PlanCuentas",array(
 						"resultSet"=>$resultSet, "resultEdit" =>$resultEdit,"resultMoneda"=>$resultMoneda,
-						"resultEntidad"=>$resultEntidad
+						"resultEntidad"=>$resultEntidad,"resultCentroC"=>$resultCentroC
 			
 				));
 		
@@ -220,6 +231,40 @@ class PlanCuentasController extends ControladorBase{
 	
 	public function AgregarGrupo()
 	{
+		
+		session_start();
+		
+		if (isset(  $_SESSION['usuario_usuarios']) )
+		{
+			$plan_cuentas= new PlanCuentasModel();
+			
+			$id_entidad_p_cuentas=$_POST['id_entidad_p_cuentas'];
+			$nombre_p_cuentas=$_POST['nombre_p_cuentas'];
+		    $codigo_p_cuentas=$_POST['codigo_p_cuentas'];
+		    $id_moneda_p_cuentas=$_POST['id_moneda_p_cuentas'];
+		    $n_p_cunetas=$_POST['n_p_cunetas'];
+		    $t_p_cuentas=$_POST['t_p_cuentas'];
+		    $id_centro_c_p_cuentas=$_POST['id_centro_c_p_cuentas'];
+		    $nivel_p_cuentas=$_POST['nivel_p_cuentas'];
+		    
+		    
+		    $funcion = "ins_plan_cuentas";
+		    	
+		    
+		    $parametros = "'$id_entidad_p_cuentas', '$codigo_p_cuentas', '$nombre_p_cuentas', '$id_moneda_p_cuentas',
+		    '$n_p_cunetas','$t_p_cuentas','$id_centro_c_p_cuentas','$nivel_p_cuentas'";
+		    
+		    $entidades->setFuncion($funcion);
+		    	
+		    $entidades->setParametros($parametros);
+		    	
+		    $resultado=$plan_cuentas->Insert();
+		    
+		    echo json_encode("1");
+		    
+		}else {
+			echo json_encode("0");
+		}
 		
 	}
 	
