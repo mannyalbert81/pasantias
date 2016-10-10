@@ -5,7 +5,7 @@
 <html lang="es">
      <head>
        <meta charset="utf-8"/>
-        <title>Roles - CallCenter 2016</title>
+        <title>Roles - Contabilidad 2016</title>
           <link rel="stylesheet" href="view/css/bootstrap.css">
           <script src="view/js/jquery.js"></script>
 		  <script src="view/js/bootstrapValidator.min.js"></script>
@@ -22,13 +22,13 @@
 
 <!-- empieza el form -->     
     
-      <form id="form-roles" action="<?php echo $helper->url("Roles","InsertaRoles"); ?>" method="post" class="col-lg-6">
+      <form id="form-roles" action="<?php echo $helper->url("Roles","InsertaRoles"); ?>" method="post" enctype="multipart/form-data" class="col-lg-6">
     <br>
     
                <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
                
             <div class="well">
-            <h4 style="color:#ec971f;">Insertar Tipos de Comprobantes</h4>
+            <h4 style="color:#ec971f;">Insertar Tipos de Roles</h4>
             <hr/>
             <div class="row">
 		    <div class="col-xs-6 col-md-6">
@@ -45,7 +45,7 @@
 		     <?php } } else {?>
 		    
 		    <div class="well">
-		    <h4 style="color:#ec971f;">Insertar Tipos de Comprobantes</h4>
+		    <h4 style="color:#ec971f;">Insertar Tipos de Roles</h4>
             <hr/>
             <div class="row">
 		    <div class="col-xs-6 col-md-6">
