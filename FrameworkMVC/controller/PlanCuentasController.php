@@ -14,6 +14,7 @@ class PlanCuentasController extends ControladorBase{
      	$entidades=new EntidadesModel();
      	$monedas = new MonedasModel();
      	$centro_costos= new CentroCostosModel();
+     	$plan_cuentas = new PlanCuentasModel();
 					//Conseguimos todos los usuarios
 		$resultSet=array();
 				
@@ -23,6 +24,7 @@ class PlanCuentasController extends ControladorBase{
 		$resultMoneda=array();
 		$resultEntidad=array();
 		$resultCentroC=array();
+		$resultCodigo_p_cuentas=array();
 
 		
 		session_start();
@@ -40,6 +42,7 @@ class PlanCuentasController extends ControladorBase{
 			{
 				$id_usuarios=$_SESSION['id_usuarios'];
 				
+				
 				//consultar  monedas
 				$resultMoneda = $monedas->getAll("nombre_monedas");
 				//consultar entidad por el usuario
@@ -52,6 +55,21 @@ class PlanCuentasController extends ControladorBase{
 						"entidades.id_entidades = centro_costos.id_entidades AND  entidades.id_entidades = usuarios.id_entidades AND
 						 usuarios.id_usuarios='$id_usuarios'", "centro_costos.id_centro_costos");
 				
+				$columnas_p_cuentas=" plan_cuentas.id_plan_cuentas,plan_cuentas.codigo_plan_cuentas, 
+									  plan_cuentas.nombre_plan_cuentas,monedas.nombre_monedas, 
+									  plan_cuentas.n_plan_cuentas,plan_cuentas.t_plan_cuentas, 
+									  centro_costos.nombre_centro_costos,plan_cuentas.nivel_plan_cuentas";
+				
+				$tablas_p_cuentas="public.plan_cuentas,public.usuarios,public.entidades,public.monedas,
+								   public.centro_costos";
+				
+				$where_p_cuentas="entidades.id_entidades = plan_cuentas.id_entidades AND
+								  entidades.id_entidades = usuarios.id_entidades AND
+								  monedas.id_monedas = plan_cuentas.id_modenas AND
+								  centro_costos.id_centro_costos = plan_cuentas.id_centro_costos AND
+							      usuarios.id_usuarios='$id_usuarios'";
+				
+				$resultSet=$plan_cuentas->getCondiciones($columnas_p_cuentas, $tablas_p_cuentas, $where_p_cuentas, "plan_cuentas.codigo_plan_cuentas");
 				
 				
 				if (isset ($_GET["id_entidades"])   )
@@ -87,11 +105,29 @@ class PlanCuentasController extends ControladorBase{
 					}
 					
 				}
-		
+				
+								
+				//array con codigo y subcodigo 
+				if(!empty($resultSet)){foreach ($resultSet as $linea=>$val ){
+					
+					$subcodigo=0;
+					
+					if($val->nivel_plan_cuentas=='2'){
+						$subcodigo=substr($val->codigo_plan_cuentas,2,1);}
+					if($val->nivel_plan_cuentas=='3'){
+						$subcodigo=substr($val->codigo_plan_cuentas,4,1);}
+					
+					$resultCodigo_p_cuentas[$linea]['id_p_cuentas']=$val->id_plan_cuentas;
+					$resultCodigo_p_cuentas[$linea]['codigo_p_cuentas']=$val->codigo_plan_cuentas;
+					$resultCodigo_p_cuentas[$linea]['nivel_p_cuentas']=$val->nivel_plan_cuentas;
+					$resultCodigo_p_cuentas[$linea]['subcodigo_p_cuentas']=$subcodigo;
+				}}
+				
 				
 				$this->view("PlanCuentas",array(
 						"resultSet"=>$resultSet, "resultEdit" =>$resultEdit,"resultMoneda"=>$resultMoneda,
-						"resultEntidad"=>$resultEntidad,"resultCentroC"=>$resultCentroC
+						"resultEntidad"=>$resultEntidad,"resultCentroC"=>$resultCentroC,
+						"resultCodigo_p_cuentas"=>$resultCodigo_p_cuentas
 			
 				));
 		
@@ -323,6 +359,81 @@ class PlanCuentasController extends ControladorBase{
 	
 	}
 	
+	
+	public function returnCodGrupo()
+	{
+	
+		$id_grupo=(int)$_POST["idcuentas"];
+		$id_entidades=(int)$_POST["identidades"];
+		$codigo_plan_cuentas=$id_grupo.'%';
+	
+		$plan_cuentas = new PlanCuentasModel();
+	
+		$columnas = "id_plan_cuentas,codigo_plan_cuentas,substring(codigo_plan_cuentas,3,1) as subcodigo";
+		
+		$tablas="plan_cuentas";
+				
+	    $id="subcodigo";
+				
+		$where=" t_plan_cuentas='G'
+				AND nivel_plan_cuentas=2
+				AND id_entidades='$id_entidades'
+				AND codigo_plan_cuentas like '$codigo_plan_cuentas'";
+				
+		$resultado=$plan_cuentas->getCondicionesDesc($columnas ,$tablas , $where, $id);
+		$respuesta=1;
+		
+		if(!empty($resultado)){$respuesta=$resultado[0]->subcodigo;	$respuesta=$respuesta+1;}
+	
+		echo json_encode($respuesta);
+	
+	}
+	
+	public function returnCodSubGrupo()
+	{
+	
+		
+		$id_cuenta=(int)$_POST["idcuentas"];
+		$id_entidades=(int)$_POST["identidades"];
+		$id_grupo=(int)$_POST["idgrupo"];
+		
+	
+		$plan_cuentas = new PlanCuentasModel();
+		
+		$resultGrupo=$plan_cuentas->getBy("id_plan_cuentas='$id_grupo'");
+		
+		//print_r($resultGrupo);
+		
+		$respuesta=0;
+		
+		if(!empty($resultGrupo)){
+		
+		$codigoGrupo_l2=$resultGrupo[0]->codigo_plan_cuentas;
+		
+		$codigo_plan_cuentas=$codigoGrupo_l2.'%';
+	
+		$columnas = "id_plan_cuentas,codigo_plan_cuentas,substring(codigo_plan_cuentas,5,1) as subcodigo";
+	
+		$tablas="plan_cuentas";
+	
+		$id="subcodigo";
+	
+		$where=" t_plan_cuentas='G'
+		AND nivel_plan_cuentas=3
+		AND id_entidades='$id_entidades'
+		AND codigo_plan_cuentas like '$codigo_plan_cuentas'";
+	
+		$resultado=$plan_cuentas->getCondicionesDesc($columnas ,$tablas , $where, $id);
+		
+		$respuesta=$codigoGrupo_l2.'1';
+	
+		if(!empty($resultado)){	$temp=$resultado[0]->subcodigo; $temp=$temp+1; $respuesta=(string)$codigoGrupo_l2.$temp;}
+		
+		}
+		
+		echo json_encode($respuesta);
+	
+	}
 	
 	
 }
