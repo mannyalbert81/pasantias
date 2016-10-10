@@ -231,7 +231,7 @@ class PlanCuentasController extends ControladorBase{
 	
 	public function AgregarGrupo()
 	{
-		
+		$respuesta="0";
 		session_start();
 		
 		if (isset(  $_SESSION['usuario_usuarios']) )
@@ -254,18 +254,26 @@ class PlanCuentasController extends ControladorBase{
 		    $parametros = "'$id_entidad_p_cuentas', '$codigo_p_cuentas', '$nombre_p_cuentas', '$id_moneda_p_cuentas',
 		    '$n_p_cunetas','$t_p_cuentas','$id_centro_c_p_cuentas','$nivel_p_cuentas'";
 		    
-		    $entidades->setFuncion($funcion);
+		    $plan_cuentas->setFuncion($funcion);
 		    	
-		    $entidades->setParametros($parametros);
+		    $plan_cuentas->setParametros($parametros);
 		    	
 		    $resultado=$plan_cuentas->Insert();
 		    
-		    echo json_encode("1");
+		    if($resultado)
+		    {
+		    	$respuesta="1";
+		    }else {
+		    	$respuesta="0";
+		    }    
+		    
 		    
 		}else {
-			echo json_encode("0");
+			
+			$respuesta="0";
 		}
 		
+		echo json_encode($respuesta);
 	}
 	
 	
@@ -288,6 +296,29 @@ class PlanCuentasController extends ControladorBase{
 		
 		$resultado=$plan_cuentas->getCondiciones($columnas ,$tablas , $where, $id);
 		
+		echo json_encode($resultado);
+	
+	}
+	
+	public function returnSubGrupo()
+	{
+	
+		$id_grupo=(int)$_POST["idcuentas"];
+		$id_entidades=(int)$_POST["identidades"];
+		$codigo_plan_cuentas=$id_grupo.'%';
+	
+		$plan_cuentas = new PlanCuentasModel();
+	
+		$columnas = "id_plan_cuentas,nombre_plan_cuentas,nivel_plan_cuentas";
+		$tablas="plan_cuentas";
+		$id="id_plan_cuentas";
+		$where=" t_plan_cuentas='G'
+		AND nivel_plan_cuentas=3
+		AND id_entidades='$id_entidades'
+		AND codigo_plan_cuentas like '$codigo_plan_cuentas'";
+	
+		$resultado=$plan_cuentas->getCondiciones($columnas ,$tablas , $where, $id);
+	
 		echo json_encode($resultado);
 	
 	}

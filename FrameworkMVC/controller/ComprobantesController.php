@@ -28,7 +28,8 @@ class ComprobantesController extends ControladorBase{
 			  entidades.direccion_entidades, 
 			  entidades.ciudad_entidades, 
 			  consecutivos.numero_comprobantes, 
-			  usuarios.id_usuarios";
+			  usuarios.id_usuarios,
+			  usuarios.nombre_usuarios";
 			$tablas_c_c="
 		      public.usuarios, 
 			  public.entidades, 

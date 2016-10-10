@@ -12,6 +12,19 @@
           <script src="view/js/jquery-ui.js"></script>
 		  <script src="view/js/bootstrapValidator.min.js"></script>
 		  <script src="view/js/ValidarEntidades.js"></script>
+		 <style type="text/css">
+		 .img:hover{
+		 
+		 	-moz-box-shadow: 0 0 10px #ccc;
+		 	 -webkit-box-shadow: 0 0 10px #ccc;
+		 	  box-shadow: 0 0 10px #ccc;
+		    -webkit-transform: scale(1.5);
+		    -moz-transform: scale(1.5);
+		    -o-transform: scale(1.5);
+		    -ms-transform: scale(1.5);
+		    transform: scale(1.5)
+		}
+		 </style>
 		
 		<script type="text/javascript">
 		$(function(){
@@ -29,7 +42,7 @@
 				                            autoOpen: false,
 				                            modal: true,
 				                            height: 500,
-				                            width: 250,
+				                            width: 500,
 				                            buttons: {
 				                "Aceptar": function() {
 					                //code origin
@@ -48,6 +61,23 @@
 			                    	 		nivel_p_cuentas:$('#modal_grupo_nivel').val()
 			                    	 	 };
 				                     //alert(datos['id_entidad_p_cuentas']);
+					                $.ajax({
+				                           url:"<?php echo $helper->url("PlanCuentas","AgregarGrupo");?>"
+				                           ,type : "POST"
+				                           ,async: true
+				                           ,data : datos
+				                           ,success: function(msg){
+
+					                           if(msg=='1' || msg==1)
+					                           {
+				                                $('#modal_grupo').dialog('close');
+				                                //loading();
+					                           }else
+					                           {
+					                        	 $('#modal_respuesta_grupo').html ("<span> sus datos no se registraron</span>"); 
+					                           }
+				                           }
+				                   });
 				                     
 				                                        
 				   
@@ -59,32 +89,33 @@
 
 				        }); 
 
-				        var  html = " <br>";
-				        html+="<div class = 'col-xs-12 col-md-12'>";
+				        var  html = "";
+				        html+="<h4 style='color:#ec971f;'>Registrar Nuevo Grupo </h4><hr/>"
+			            html+="<div class = 'col-xs-12 col-md-6'>";
 				        html+="<div class='form-group'>";
 				        html+="<label for='modal_grupo_nombre' class='control-label'>Nombre</label><br>";
-				        html+="<input type='text' class='form-control' id='modal_grupo_nombre' name='modal_grupo_nombre' value='' >";
+				        html+="<input type='text' class='form-control' style='text-transform:uppercase;' id='modal_grupo_nombre' name='modal_grupo_nombre' value='' >";
 				        html+="</div>";
 				        html+="</div>";
-				        html+="<div class = 'col-xs-12 col-md-12'>";
+				        html+="<div class = 'col-xs-12 col-md-6'>";
 				        html+="<div class='form-group'>";
 				        html+="<label for='modal_grupo_codigo' class='control-label'>Codigo</label><br>";
 				        html+="<input type='text' class='form-control' id='modal_grupo_codigo' name='modal_grupo_codigo' value='' >";
 				        html+="</div>";
 				        html+="</div>";
-				        html+="<div class = 'col-xs-12 col-md-12'>";
+				        html+="<div class = 'col-xs-12 col-md-6'>";
 				        html+="<div class='form-group'>";
 				        html+="<label for='modal_grupo_tipo' class='control-label'>Tipo</label><br>";
 				        html+="<input type='text' class='form-control' id='modal_grupo_tipo' name='modal_grupo_tipo' value='' >";
 				        html+="</div>";
 				        html+="</div>";
-				        html+="<div class = 'col-xs-12 col-md-12'>";
+				        html+="<div class = 'col-xs-12 col-md-6'>";
 				        html+="<div class='form-group'>";
 				        html+="<label for='modal_grupo_nivel' class='control-label'>Nivel</label><br>";
 				        html+="<input type='text' class='form-control' id='modal_grupo_nivel' name='modal_grupo_nivel' value='2' >";
 				        html+="</div>";
 				        html+="</div>";
-				        html+="<div class='col-xs-12 col-md-12'>";
+				        html+="<div class='col-xs-12 col-md-6'>";
 				        html+="<div class='form-group'>";
 				        html+="<label for='modal_grupo_naturaleza' class='control-label'>Naturaleza</label>";
 				        html+="<select name='modal_grupo_naturaleza' id='modal_grupo_naturaleza'  class='form-control' >";
@@ -97,7 +128,7 @@
 					    html+="<span class='help-block'></span>"; 
 					    html+="</div>";
 					    html+="</div>";
-				        html+="<div class='col-xs-12 col-md-12'>";
+				        html+="<div class='col-xs-12 col-md-6'>";
 				        html+="<div class='form-group'>";
 				        html+="<label for='modal_grupo_id_centro_c' class='control-label'>Centro Costos</label>";
 				        html+="<select name='modal_grupo_id_centro_c' id='modal_grupo_id_centro_c'  class='form-control' >";
@@ -110,7 +141,7 @@
 					    html+="<span class='help-block'></span>"; 
 					    html+="</div>";
 					    html+="</div>";
-					    html+="<div class='col-xs-12 col-md-12'>";
+					    html+="<div class='col-xs-12 col-md-6'>";
 				        html+="<div class='form-group'>";
 				        html+="<label for='modal_grupo_id_moneda' class='control-label'>Moneda</label>";
 				        html+="<select name='modal_grupo_id_moneda' id='modal_grupo_id_moneda'  class='form-control' >";
@@ -123,10 +154,11 @@
 					    html+="<span class='help-block'></span>"; 
 					    html+="</div>";
 					    html+="</div>";
-					    html+="<center>¿Seguro que quiere Guardar los Datos ? </center></div><br><br><br>";
+					    html+="<div id='modal_respuesta_grupo'></div><br><br><br>";
 				       
 				       
 				        $('#modal_grupo').html (html);  
+				       
 
 				        $('#modal_grupo').dialog('open');
 						
@@ -147,61 +179,146 @@
 		
 		<script type="text/javascript">
 		$(function(){
+			
+			$('#agregar_subgrupo').click(function(){
+
+	        	var   valCuentas = $("#val_radio_cuentas").text();
+
+
+	        	if(valCuentas>0)
+			    {
+	        		
+				        $('#modal_subgrupo').dialog({
+			                            autoOpen: false,
+			                            modal: true,
+			                            height: 500,
+			                            width: 500,
+			                            buttons: {
+			                "Aceptar": function() {
+				                
+				                var datos = { 
+						                id_entidad_p_cuentas:$('#id_entidad').val(),
+		                    	 		nombre_p_cuentas:$('#modal_grupo_nombre').val(),
+		                    	 		codigo_p_cuentas:$('#modal_grupo_codigo').val(),
+		                    	 		id_moneda_p_cuentas:$('#modal_grupo_id_moneda').val(),
+		                    	 		n_p_cunetas:$('#modal_grupo_naturaleza').val(),
+		                    	 		t_p_cuentas:$('#modal_grupo_tipo').val(),
+		                    	 		id_centro_c_p_cuentas:$('#modal_grupo_id_centro_c').val(),
+		                    	 		nivel_p_cuentas:$('#modal_grupo_nivel').val()
+		                    	 	 };
+			                     //alert(datos['id_entidad_p_cuentas']);
+				                $.ajax({
+			                           url:"<?php echo $helper->url("PlanCuentas","AgregarGrupo");?>"
+			                           ,type : "POST"
+			                           ,async: true
+			                           ,data : datos
+			                           ,success: function(msg){
+
+				                           if(msg=='1' || msg==1)
+				                           {
+			                                $('#modal_subgrupo').dialog('close');
+			                                //loading();
+				                           }else
+				                           {
+				                        	 $('#modal_respuesta_grupo').html ("<span> sus datos no se registraron</span>"); 
+				                           }
+			                           }
+			                   });
+			                     
+			                                        
+			   
+			                },
+			                "Cancelar": function(){
+			                    $('#modal_grupo').dialog('close');
+			                }
+			            }    
+
+			        }); 
+
+			        var  html = "";
+			        html+="<h4 style='color:#ec971f;'>Registrar Nuevo SubGrupo </h4><hr/>"
+		            html+="<div class = 'col-xs-12 col-md-6'>";
+			        html+="<div class='form-group'>";
+			        html+="<label for='modal_grupo_nombre' class='control-label'>Nombre</label><br>";
+			        html+="<input type='text' class='form-control' style='text-transform:uppercase;' id='modal_grupo_nombre' name='modal_grupo_nombre' value='' >";
+			        html+="</div>";
+			        html+="</div>";
+			        html+="<div class = 'col-xs-12 col-md-6'>";
+			        html+="<div class='form-group'>";
+			        html+="<label for='modal_grupo_codigo' class='control-label'>Codigo</label><br>";
+			        html+="<input type='text' class='form-control' id='modal_grupo_codigo' name='modal_grupo_codigo' value='' >";
+			        html+="</div>";
+			        html+="</div>";
+			        html+="<div class = 'col-xs-12 col-md-6'>";
+			        html+="<div class='form-group'>";
+			        html+="<label for='modal_grupo_tipo' class='control-label'>Tipo</label><br>";
+			        html+="<input type='text' class='form-control' id='modal_grupo_tipo' name='modal_grupo_tipo' value='' >";
+			        html+="</div>";
+			        html+="</div>";
+			        html+="<div class = 'col-xs-12 col-md-6'>";
+			        html+="<div class='form-group'>";
+			        html+="<label for='modal_grupo_nivel' class='control-label'>Nivel</label><br>";
+			        html+="<input type='text' class='form-control' id='modal_grupo_nivel' name='modal_grupo_nivel' value='2' >";
+			        html+="</div>";
+			        html+="</div>";
+			        html+="<div class='col-xs-12 col-md-6'>";
+			        html+="<div class='form-group'>";
+			        html+="<label for='modal_grupo_naturaleza' class='control-label'>Naturaleza</label>";
+			        html+="<select name='modal_grupo_naturaleza' id='modal_grupo_naturaleza'  class='form-control' >";
+			        html+="<?php if(!empty($n_plan_cuentas)){ foreach($n_plan_cuentas as $res=>$valor) {?>";
+			        html+="<option value='<?php echo $res; ?>' ><?php echo $valor; ?> </option>";
+					html+="<?php } }else{?>";
+					html+="<option value='-1' >Sin registros</option>";
+					html+="<?php }?>";
+				    html+="</select>"; 
+				    html+="<span class='help-block'></span>"; 
+				    html+="</div>";
+				    html+="</div>";
+			        html+="<div class='col-xs-12 col-md-6'>";
+			        html+="<div class='form-group'>";
+			        html+="<label for='modal_grupo_id_centro_c' class='control-label'>Centro Costos</label>";
+			        html+="<select name='modal_grupo_id_centro_c' id='modal_grupo_id_centro_c'  class='form-control' >";
+			        html+="<?php if(!empty($resultCentroC)){ foreach($resultCentroC as $res) {?>";
+			        html+="<option value='<?php echo $res->id_centro_costos; ?>' ><?php echo $res->nombre_centro_costos; ?> </option>";
+					html+="<?php } }else{?>";
+					html+="<option value='-1' >Sin registros</option>";
+					html+="<?php }?>";
+				    html+="</select>"; 
+				    html+="<span class='help-block'></span>"; 
+				    html+="</div>";
+				    html+="</div>";
+				    html+="<div class='col-xs-12 col-md-6'>";
+			        html+="<div class='form-group'>";
+			        html+="<label for='modal_grupo_id_moneda' class='control-label'>Moneda</label>";
+			        html+="<select name='modal_grupo_id_moneda' id='modal_grupo_id_moneda'  class='form-control' >";
+			        html+="<?php if(!empty($resultMoneda)){ foreach($resultMoneda as $res) {?>";
+			        html+="<option value='<?php echo $res->id_monedas; ?>' ><?php echo $res->nombre_monedas; ?> </option>";
+					html+="<?php } }else{?>";
+					html+="<option value='-1' >Sin Grupos</option>";
+					html+="<?php }?>";
+				    html+="</select>"; 
+				    html+="<span class='help-block'></span>"; 
+				    html+="</div>";
+				    html+="</div>";
+				    html+="<div id='modal_respuesta_grupo'></div><br><br><br>";
+			       
+			       
+			        $('#modal_subgrupo').html (html);  
+			       
+
+			        $('#modal_subgrupo').dialog('open');
+					
+			    }
+			    else{
+
+				    alert('Seleccione una cuenta')
+				    
+			    }
+
+
+	        });
 		    
-		    var u = document.location.href.split("/");
-		    var n = u.length;
-		    var _url = "http:";
-		    var i=0;
-		    n=n-3;
-
-		    for(i=0;i<=n;i++){
-		        _url+="/"+u[i+1];
-		    }
-		        _url+="/guardar"    
-
-		    $('#agregar_subgrupo').click(function(){
-			    //alert('hola');
-			    //opciones para dialosg no usados position:'center',
-			        $('#modal_subgrupo').dialog({
-		                            autoOpen: false,
-		                            modal: true,
-		                            height: 500,
-		                            width: 250,
-		                            buttons: {
-		                "Aceptar": function() {
-		                    var checking = $('#check').jserialize();
-		                    loading('#cargando','Cargando');
-		                    $.ajax({
-		                           url:"<?php echo $helper->url("PlanCuentas","AgregarGrupo");?>"
-		                           ,type : "POST"
-		                           ,async: true
-		                           ,data : checking
-		                           ,success: function(msg){
-		                                $('#modal_subgrupo').dialog('close');
-		                                loading();
-		                           }
-		                    });                    
-		   
-		                },
-		                "Cancelar": function(){
-		                    $('#modal_subgrupo').dialog('close');
-		                }
-		            }    
-
-		        }); 
-
-		        var  html = " <br><br><br>";
-		        html+="<div class = 'ui-state-highlight  ui-corner-all'>";
-		        html+="<div class = 'ui-icon ui-icon-info '></div>";
-		        html+="<center>¿Seguro que quiere Guardar los Datos en contabilidad? </center></div><br><br><br>";
-		        
-
-		        $('#modal_subgrupo').html (html);  
-
-		        $('#modal_subgrupo').dialog('open');
-
-
-		        });    
+			       
 		   
 		    
 		});
@@ -217,6 +334,7 @@
 
 				// identificamos al ddl a cambiar
 		           var grupo = $("#id_grupo");
+		           var subgrupo = $("#id_subgrupo");
 		           
 		        // tomamos parametros -> idgrupo,entidades
 		           var cuentas = $(this).val();
@@ -240,14 +358,29 @@
 				        //alert(datos['idcuentas']+'\n'+datos['identidades']);
 		            	
 		         	   	$.post("<?php echo $helper->url("PlanCuentas","returnGrupo"); ?>", datos, function(resultado) {
+		         	   	grupo.empty();
 
 		         		 		$.each(resultado, function(index, value) {
-		         		 			grupo.empty();
+		         		 			
 		         		 			grupo.append("<option value= " +value.id_plan_cuentas +" >" + value.nombre_plan_cuentas  + "</option>");	
 		                    		 });
 
 		         		 		 	 		   
 		         		  }, 'json');
+
+	            	
+	         	   	$.post("<?php echo $helper->url("PlanCuentas","returnSubGrupo"); ?>", datos, function(resultado) {
+	         	   	subgrupo.empty();
+
+	         		 		$.each(resultado, function(index, value) {
+	         		 			
+	         		 			subgrupo.append("<option value= " +value.id_plan_cuentas +" >" + value.nombre_plan_cuentas  + "</option>");	
+	                    		 });
+
+	         		 		 	 		   
+	         		  }, 'json');
+
+		         		  
 
 
 		            }
@@ -255,6 +388,8 @@
 		            {
 		            	grupo.empty();
 		            	grupo.append("<option value='-1' >Sin Registros</option>");
+		            	subgrupo.empty();
+		            	subgrupo.append("<option value='-1' >Sin Registros</option>");
 		            	//alert('vacio');
 
 		            }
@@ -442,17 +577,20 @@
             </div>
             <div id="modal_subgrupo"></div>
 			</div>
-            
+			
+			<!-- Para agregar la cuenta -->
+            <h4 style="color:#ec971f;">Agregar Cuenta</h4>
+            <hr/>
 		    <div class="row">
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
                  <label for="" class="control-label">Codigo</label><br>
                  <div class="row">
 	                 <div class="col-xs-8 col-md-8">
-	                 <input type="text" class="form-control " id="codigo1" name="codigo1" value="" >
+	                 <input type="text" class="form-control " id="codigo1_cuenta" name="codigo1_cuenta" value="" >
 	                 </div>
 	                 <div class="col-xs-4 col-md-4">
-	                 <input type="text" class="form-control" id="codigo2" name="codigo1" value="" >
+	                 <input type="text" class="form-control" id="codigo2_cuenta" name="codigo2_cuenta" value="" >
 	                 </div>
                  </div>
                  <span class="help-block"></span>
@@ -461,8 +599,8 @@
 		    
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
-                 <label for="nombre_cuentas" class="control-label">Nombre Cuenta</label>
-                 <input type="text" class="form-control" id="nombre_cuentas" name="nombre_cuentas" value=""  placeholder="Nombre">
+                 <label for="nombre_cuenta" class="control-label">Nombre Cuenta</label>
+                 <input type="text" class="form-control" id="nombre_cuenta" name="nombre_cuenta" value=""  placeholder="Nombre">
                  <span class="help-block"></span>
             </div>
             </div>
@@ -471,8 +609,8 @@
 	        <div class="row">
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
-                 <label for="id_moneda" class="control-label">Moneda</label>
-                 <select name="id_moneda" id="id_moneda"  class="form-control" >
+                 <label for="id_moneda_cuenta" class="control-label">Moneda</label>
+                 <select name="id_moneda_cuenta" id="id_moneda_cuenta"  class="form-control" >
 					 <?php if(!empty($resultMoneda)){ foreach($resultMoneda as $res) {?>
 					 <option value="<?php echo $res->id_monedas; ?>" ><?php echo $res->nombre_monedas; ?> </option>
 					 <?php } }else{?>
@@ -485,9 +623,9 @@
 		    
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
-                 <label for="id_tipo" class="control-label">Tipo</label>
-                 <select name="id_tipo" id="id_tipo"  class="form-control" >
-					 <?php if(!empty($t_plan_cuentas)){ foreach($t_plan_cuentas as $res=>$val) {?>
+                 <label for="id_naturaleza_cuenta" class="control-label">Naturaleza</label>
+                 <select name="id_naturaleza_cuenta" id="id_naturaleza_cuenta"  class="form-control" >
+					 <?php if(!empty($n_plan_cuentas)){ foreach($n_plan_cuentas as $res=>$val) {?>
 					 <option value="<?php echo $res;?>" ><?php echo $val; ?> </option>
 					 <?php } }else{?>
 					 <option value="-1" >Sin Tipo</option>
@@ -502,19 +640,114 @@
 	        <div class="row">
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
-                 <label for="s/d" class="control-label">s/d</label>
-                 <input type="text" class="form-control" id="s/d" name="s/d" value=""  placeholder="Ciudad">
+                 <label for="tipo_cuenta" class="control-label">Tipo</label>
+                 <input type="text" class="form-control" id="tipo_cuenta" name="tipo_cuenta" value="C"  >
                  <span class="help-block"></span>
             </div>
 		    </div>
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
-                 <label for="nivel" class="control-label">Nivel</label>
-                 <input type="text" class="form-control" id="nivel" name="nivel" value=""  placeholder="Ciudad">
+                 <label for="nivel_cuenta" class="control-label">Nivel</label>
+                 <input type="text" class="form-control" id="nivel_cuenta" name="nivel_cuenta" value="4"  >
                  <span class="help-block"></span>
             </div>
 		    </div>
 		    </div>
+		   
+		   <!-- Para agregar la subcuenta -->
+		   <script type="text/javascript">
+		   function mostrarSubcuenta(){
+			   
+			   if( $("#subcuenta").is(":hidden") ){
+				   $("#subcuenta").show();
+				}else{
+				   $("#subcuenta").hide();
+				}
+			   
+		   }
+		   </script>
+		   <h4 style="color:#ec971f; float: left;">Agregar SubCuenta</h4>
+		   <div class="div-img" style="float: left; padding-left: 20px;" >
+           <img  onclick="mostrarSubcuenta();"  class="img" src="view/images/agregar.jpg" title="agregar" alt="agregar" height="40px">
+           </div>
+		   <br>
+		   <hr/>
+            <div id="subcuenta" class ="clase_subcuenta" style="display:none;">
+		    <div class="row">
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group">
+                 <label for="" class="control-label">Codigo Subcuenta</label><br>
+                 <div class="row">
+	                 <div class="col-xs-8 col-md-8">
+	                 <input type="text" class="form-control " id="codigo1_subcuenta" name="codigo1_subcuenta" value="" >
+	                 </div>
+	                 <div class="col-xs-4 col-md-4">
+	                 <input type="text" class="form-control" id="codigo2_subcuenta" name="codigo2_subcuenta" value="" >
+	                 </div>
+                 </div>
+                 <span class="help-block"></span>
+            </div>
+		    </div>
+		    
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group">
+                 <label for="nombre_subcuenta" class="control-label">Nombre SubCuenta</label>
+                 <input type="text" class="form-control" id="nombre_subcuenta" name="nombre_subcuenta" value=""  placeholder="Nombre">
+                 <span class="help-block"></span>
+            </div>
+            </div>
+			</div>
+	         
+	        <div class="row">
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group">
+                 <label for="id_moneda_subcuenta" class="control-label">Moneda</label>
+                 <select name="id_moneda_subcuenta" id="id_moneda_subcuenta"  class="form-control" >
+					 <?php if(!empty($resultMoneda)){ foreach($resultMoneda as $res) {?>
+					 <option value="<?php echo $res->id_monedas; ?>" ><?php echo $res->nombre_monedas; ?> </option>
+					 <?php } }else{?>
+					 <option value="-1" >Sin Moneda</option>
+					 <?php }?>
+			     </select> 
+			     <span class="help-block"></span>
+            </div>
+		    </div>
+		    
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group">
+                 <label for="id_naturaleza_subcuenta" class="control-label">Naturaleza</label>
+                 <select name="id_naturaleza_subcuenta" id="id_naturaleza_subcuenta"  class="form-control" >
+					 <?php if(!empty($n_plan_cuentas)){ foreach($n_plan_cuentas as $res=>$val) {?>
+					 <option value="<?php echo $res;?>" ><?php echo $val; ?> </option>
+					 <?php } }else{?>
+					 <option value="-1" >Sin Tipo</option>
+					 <?php }?>
+			     </select> 
+			    <span class="help-block"></span>
+            </div>
+            </div>
+			</div>
+	        
+	        
+	        <div class="row">
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group">
+                 <label for="tipo_subcuenta" class="control-label">Tipo</label>
+                 <input type="text" class="form-control" id="tipo_subcuenta" name="tipo_subcuenta" value="S" >
+                 <span class="help-block"></span>
+            </div>
+		    </div>
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group">
+                 <label for="nivel_subcuenta" class="control-label">Nivel</label>
+                 <input type="text" class="form-control" id="nivel_subcuenta" name="nivel_subcuenta" value="5"  >
+                 <span class="help-block"></span>
+            </div>
+		    </div>
+		    </div>
+		    </div>
+		   
+		   
 		    </div>
 		    
 		     <?php } ?>
