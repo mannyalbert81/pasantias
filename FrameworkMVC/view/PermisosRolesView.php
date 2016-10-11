@@ -253,7 +253,7 @@
 									</select>
 		   		   
 		    	   <table class="table">
-		   	
+		   	<tr>
 		   		   		<th style="width: 33.3%">   Ver</th>
 		   		   		<th style="width: 33.3%"> Editar</th>
 		   		   		<th style="width: 33.3%"> Borrar</th>

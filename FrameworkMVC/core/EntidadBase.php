@@ -114,6 +114,17 @@ class EntidadBase{
     
     	return $resultSet;
     }
+    
+    public function getCondicionesDesc($columnas ,$tablas , $where, $id){
+    	 
+    	$query=pg_query($this->con, "SELECT $columnas FROM $tablas WHERE $where ORDER BY $id  DESC");
+    	$resultSet = array();
+    	while ($row = pg_fetch_object($query)) {
+    		$resultSet[]=$row;
+    	}
+    
+    	return $resultSet;
+    }
   
     public function getCondicionesPag($columnas ,$tablas , $where, $id, $limit){
     	 

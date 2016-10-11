@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-10-07T12:27:14 -->
+<!-- 2016-10-10T11:32:26 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
@@ -23,12 +23,12 @@
 	</queryString>
 	<field name="id_entidades" class="java.lang.String"/>
 	<field name="ruc_entidades" class="java.lang.String"/>
+	<field name="descripcion_dcomprobantes" class="java.lang.String"/>
 	<field name="nombre_entidades" class="java.lang.String"/>
-	<field name="telefono_entidades" class="java.lang.String"/>
 	<field name="direccion_entidades" class="java.lang.String"/>
-	<field name="ciudad_entidades" class="java.lang.String"/>
+	<field name="telefono_entidades" class="java.lang.String"/>
 	<field name="numero_comprobantes" class="java.lang.String"/>
-	<field name="id_usuarios" class="java.lang.String"/>
+	<field name="ciudad_entidades" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>

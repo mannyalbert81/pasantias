@@ -32,7 +32,7 @@ class RolesController extends ControladorBase{
 			{
 				
 				$this->view("Roles",array(
-						"resultSet"=>$resultSet, "resultEdit" =>$resultEdit
+				"resultSet"=>$resultSet, "resultEdit" =>$resultEdit
 							
 				));
 				
@@ -60,16 +60,18 @@ class RolesController extends ControladorBase{
 						$_accion_trazas  = "Editar";
 						$_parametros_trazas = $_id_rol;
 						$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
-						$this->view("Error",array(
-								"resultado"=>$resultado
-			
+						$this->view("Roles",array(
+								"resultSet"=>$resultSet, "resultEdit" =>$resultEdit
+									
 						));
-					
+						
+			
 					}
 					else
 					{
 						$this->view("Error",array(
 								"resultado"=>"No tiene Permisos de Editar Roles"
+								
 					
 						));
 					
