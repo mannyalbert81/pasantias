@@ -5,48 +5,77 @@
 <html lang="es">
      <head>
          <meta charset="utf-8"/>
-        <title>Comprobantes - Contabilidad 2016</title>
+         <title>Comprobantes - Contabilidad 2016</title>
         
           <link rel="stylesheet" href="view/css/bootstrap.css">
-          <script src="view/js/jquery.js"></script>
+           <script src="view/js/jquery.js"></script>
 		  <script src="view/js/bootstrapValidator.min.js"></script>
-		  <script src="view/js/ValidarCentroCostos.js"></script> 
+		  <script src="view/js/ValidarComprobantesTemporal.js"></script> 
+            
 		  
-		 <script src="http://code.jquery.com/jquery-latest.js"></script>
+		  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 
+        
+    	
+	<script>
+	       	$(document).ready(function(){ 	
+				$( "#id_plan_cuentas" ).autocomplete({
+      				source: "<?php echo $helper->url("Comprobantes","AutocompleteComprobantesCodigo"); ?>",
+      				minLength: 1
+    			});
 
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $("#add").click(function(){
-            var tds=$("#tabla tr:first td").length;
-            var trs=$("#tabla tr").length;
-            var nuevaFila="<tr>";
+				$("#id_plan_cuentas").focusout(function(){
+    				$.ajax({
+    					url:'<?php echo $helper->url("Comprobantes","AutocompleteComprobantesDevuelveNombre"); ?>',
+    					type:'POST',
+    					dataType:'json',
+    					data:{codigo_plan_cuentas:$('#id_plan_cuentas').val()}
+    				}).done(function(respuesta){
 
-            for(var i=0;i<tds;i++){
-                nuevaFila+="<td>columna"+(i+1)+"</td>";
-            }
-            
-                nuevaFila+="<td>"+"<input type='text' class='form-control' id='id_plan_cuentas' name='id_plan_cuentas' value=''  placeholder='Search' ></td>";
-                nuevaFila+="<td>"+"<input type='text' class='form-control' id='nombre_plan_cuentas' name='nombre_plan_cuentas' value=''  placeholder='Search'></td>";
-                nuevaFila+="<td>"+"<input type='text' class='form-control' id='descripcion_dcomprobantes' name='descripcion_dcomprobantes' value=''  placeholder='Descripción'></td>";
-                nuevaFila+="<td>"+"<input type='text' class='form-control' id='debe_dcomprobantes' name='debe_dcomprobantes' value=''  placeholder='Monto'></td>";
-                nuevaFila+="<td>"+"<input type='text' class='form-control' id='haber_dcomprobantes' name='haber_dcomprobantes' value=''  placeholder='Monto'></td>";
+    					$('#nombre_plan_cuentas').val(respuesta.nombre_plan_cuentas);
+    					$('#plan_cuentas').val(respuesta.id_plan_cuentas);
+    				
+        			});
+    				 
+    				
+    			});   
+				
+    		});
+
+			
+     </script>
 
 
-            
-            nuevaFila+="</tr>";
-            $("#tabla").append(nuevaFila);
-        });
-        $("#del").click(function(){
-            var trs=$("#tabla tr").length;
-            if(trs>1)
-            {
-                $("#tabla tr:last").remove();
-            }
-        });
-    });
-    </script>
+		<script>
+			       	$(document).ready(function(){ 	
+						$( "#nombre_plan_cuentas" ).autocomplete({
+		      				source: "<?php echo $helper->url("Comprobantes","AutocompleteComprobantesNombre"); ?>",
+		      				minLength: 1
+		    			});
+		
+						$("#nombre_plan_cuentas").focusout(function(){
+		    				$.ajax({
+		    					url:'<?php echo $helper->url("Comprobantes","AutocompleteComprobantesDevuelveCodigo"); ?>',
+		    					type:'POST',
+		    					dataType:'json',
+		    					data:{nombre_plan_cuentas:$('#nombre_plan_cuentas').val()}
+		    				}).done(function(respuesta){
+		
+		    					$('#id_plan_cuentas').val(respuesta.codigo_plan_cuentas);
+		    					$('#plan_cuentas').val(respuesta.id_plan_cuentas);
+		    				
+		        			});
+		    				 
+		    				
+		    			});   
+						
+		    		});
+		
+					
+		     </script>
+
 	
 	<style>
     #add, #del  {cursor:pointer;text-decoration:underline;color:#00f;}
@@ -61,31 +90,35 @@
         <div class="row" style="background-color: #FAFAFA;">
   
   
-            <form id="form-comprobantes" action="<?php echo $helper->url("Comprobantes","InsertaComprobantes"); ?>" method="post" class="col-lg-12">
+            <form id="form-comprobantes" action="<?php echo $helper->url("Comprobantes","InsertarTemporal"); ?>" method="post" class="col-lg-12">
             <br>	
             
-             <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
-	        
-	         <?php } } else {?>
-	         
+              
 	         
 	         <?php if (!empty($resultSet)) {  foreach($resultSet as $res) {?>
 	         <div class="col-lg-12">
 	         <div class="col-lg-1">
 	         </div>
 	         <div class="col-lg-10">
-	         <div class="panel panel-default">
-  			 <div class="panel-body">
+	         <div class="panel panel-info">
+	         <div class="panel-heading">
+	         <h4><i class='glyphicon glyphicon-edit'></i> Nuevo Comprobante N° <?php echo $res->numero_consecutivos; ?></h4>
+	         </div>
+	         </div>
+	         </div>
+	         <div class="col-lg-1">
+	         </div>
+	         </div>
+	         <?php } }else{ ?>
+  			 <?php } ?>
+  			 
+  			 <div class="col-lg-12">
+	         <div class="col-lg-1">
+	         </div>
+	         <div class="col-lg-10">
+	         <div class="panel panel-info">
+	         <div class="panel-body">
 	         <div class="row">
-	         <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;" > 
-             <div class="form-group"> 
-	          						 <p for="numero_comprobantes" class="control-label"><b>COMPROBANTE DE EGRESOS N°: <?php echo $res->numero_comprobantes; ?></b></p>
-                   
-             </div>                 
-			 </div>
-  		     </div>
-  		     
-  		      <div class="row">
   		     <div class="col-xs-5 col-md-5">
 		     <div class="form-group">
                                   <label for="nombres_ccomprobantes" class="control-label">Nombre: </label>
@@ -122,142 +155,132 @@
 	         </div>
              </div>
          				
-		     <?php } }else{ ?>
-             <?php } ?>
+		     
+		     
+		     
+		     
+		     
+             
 	        
 	         
-	        
+	         
 	         <div class="col-lg-12">
-	         <div class="col-lg-1">
-	         </div>
-	         <div class="col-lg-10">
-	         <div class="datagrid1"> 
-	         <table>
-	         <tbody>
-	   		 <tr>
-	   					<td style="font-size:80%;">
-	   					          <label for="concepto_ccomprobantes" class="control-label">CONCEPTO: </label>
-	   					          <textarea  class="form-control" id="concepto_ccomprobantes" name="concepto_ccomprobantes" wrap="physical" rows="1"></textarea>
-	          	                  <span class="help-block"></span>
-                        </td>
-	   					<td>
-	   					<input type="button" id="add" class="btn btn-success" value="Agregar">
-                        <input type="button" id="del" class="btn btn-danger" value="Quitar">
-	                    </td>
-	   					
-                      
-	   		</tr>
-	        </tbody>
-	        </table>
-            </div>
-            </div>
-	        <div class="col-lg-1">
-	        </div>
-	        </div>
-	        
-	        
-	        
-	        
 	         <div class="col-lg-12">
-	         <div class="col-lg-1">
+	         <div class="panel panel-info">
+	         <div class="panel-heading">
+	         <h4><i class='glyphicon glyphicon-edit'></i> Buscar Cuentas</h4>
 	         </div>
-	         <div class="col-lg-10">
-	         <div class="datagrid1"> 
-	         <section style="height:200px; overflow-y:scroll;">
-             <table id="tabla">
-             <thead>
-             <tr>
+	         <div class="panel-body">
+  			 <div class="row">
+  		     <div class="col-xs-2 col-md-2">
+		     <div class="form-group">
+                                  <label for="id_plan_cuentas" class="control-label">#Cuenta </label>
+                                  <input type="text" class="form-control" id="id_plan_cuentas" name="id_plan_cuentas" value=""  placeholder="Search">
+                                  <input type="hidden" class="form-control" id="plan_cuentas" name="plan_cuentas" value=""  placeholder="Search">
+                                  <span class="help-block"></span>
+             </div>
+		     </div>
+		     <div class="col-xs-3 col-md-3">
+		     <div class="form-group">
+                                  <label for="nombre_plan_cuentas" class="control-label">Nombre: </label>
+                                  <input type="text" class="form-control" id="nombre_plan_cuentas" name="nombre_plan_cuentas" value=""  placeholder="Search">
+                                  <span class="help-block"></span>
+             </div>
+		     </div>
+		     <div class="col-xs-3 col-md-3">
+		     <div class="form-group">
+                                  <label for="descripcion_dcomprobantes" class="control-label">Descripción: </label>
+                                  <input type="text" class="form-control" id="descripcion_dcomprobantes" name="descripcion_dcomprobantes" value=""  placeholder="">
+                                  <span class="help-block"></span>
+             </div>
+		     </div>
+		     <div class="col-xs-2 col-md-2">
+		     <div class="form-group">
+                                  <label for="debe_dcomprobantes" class="control-label">Debe: </label>
+                                  <input type="text" class="form-control" id="debe_dcomprobantes" name="debe_dcomprobantes" value=""  placeholder="">
+                                  <span class="help-block"></span>
+             </div>
+		     </div>
+		     <div class="col-xs-2 col-md-2">
+		     <div class="form-group">
+                                  <label for="haber_dcomprobantes" class="control-label">Haber: </label>
+                                  <input type="text" class="form-control" id="haber_dcomprobantes" name="haber_dcomprobantes" value=""  placeholder="">
+                                  <span class="help-block"></span>
+             </div>
+		     </div>
+		     </div>
+		     
+		    <div class="row">
+		    <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;">
+		    <div class="form-group">
+                                  <button type="submit" id="Agregar" name="Agregar" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i></button>
+            </div>
+		    </div>
+		    </div>
+		     </div>
+	         </div>
+	         </div>
+	         </div>
+	         
+	        							
+	         
+	          
+	         <div class="col-lg-12">
+	         <div class="col-lg-12">
+	         
+  			  <div class="datagrid3"> 
+       <table class="table table-hover ">
+       <thead>
+           <tr>
                     <th style="font-size:100%;">Cuenta</th>
 		    		<th style="font-size:100%;">Nombre de la Cuenta</th>
 		    		<th style="font-size:100%;">Descripción</th>
 		    		<th style="font-size:100%;">Debe</th>
 		    		<th style="font-size:100%;">Haber</th>
-		     </tr>
-	         </thead>
-         
-	         <tbody>
-	   		 <tr>
-	   					<td style="font-size:80%;">
-	   					          <input type="text" class="form-control" id="id_plan_cuentas" name="id_plan_cuentas" value=""  placeholder="Search">
-                                  <span class="help-block"></span>
-	   					</td>
-	   					<td style="font-size:80%;">
-	   					          <input type="text" class="form-control" id="nombre_plan_cuentas" name="nombre_plan_cuentas" value=""  placeholder="Search">
-                                  <span class="help-block"></span>
-	   					</td>
-	   					<td style="font-size:80%;">
-	   					          <input type="text" class="form-control" id="descripcion_dcomprobantes" name="descripcion_dcomprobantes" value=""  placeholder="Descripción">
-                                  <span class="help-block"></span>
-	   					</td>
-	   					<td style="font-size:80%;">
-	   					          <input type="text" class="form-control" id="debe_dcomprobantes" name="debe_dcomprobantes" value=""  placeholder="Monto">
-                                  <span class="help-block"></span>
-	   					</td>
-	   					<td style="font-size:80%;">
-	   					          <input type="text" class="form-control" id="haber_dcomprobantes" name="haber_dcomprobantes" value=""  placeholder="Monto">
-                                  <span class="help-block"></span>
-	   					</td>
-		                
-	   		 </tr>
-	         </tbody>	
-	         </table>     
-	    	 </section>
-             </div>
-	        
-	        
+		    		<th></th>
+		    		
+	  		</tr>
+	   </thead>
+                <?php if (!empty($resultRes)) {  foreach($resultRes as $res) {?>
+	        	 
+               
+	   <tbody>
+	   		<tr>
+	   					<td style="font-size:80%;"> <?php echo $res->codigo_plan_cuentas; ?>  </td>
+		                <td style="font-size:80%;" > <?php echo $res->nombre_plan_cuentas; ?>     </td> 
+		                <td style="font-size:80%;"> <?php echo $res->observacion_temp_comprobantes; ?>     </td>
+		                <td style="font-size:80%;"> <?php echo $res->debe_temp_comprobantes; ?>     </td>  
+		                <td style="font-size:80%;"> <?php echo $res->haber_temp_comprobantes; ?>     </td>  
+			           	<td>   
+			               	<div class="right">
+			                    <a href="<?php echo $helper->url("Comprobantes","borrarId"); ?>&id_temp_comprobantes=<?php echo $res->id_temp_comprobantes; ?>"><i class="glyphicon glyphicon-trash"></i></a>
+			                </div>
+			            </td>
+	   		</tr>
+	   
+	   </tbody>	
+	        		
+		        <?php } }else{ ?>
+              <?php 
+		}
+            
+            ?>
+            
+       	</table>     
+		     
+		     </div>
+	         </div>
+	         </div>
 	         
-	         <div class="row">
-  		     <div class="col-xs-8 col-md-8" style="text-align: center;">
-		     <div class="form-group" >
-                                  <p>TOTAL: </p>
-                                  
-             </div>
-		     </div>
-		     <div class="col-xs-2 col-md-2" style="text-align: center;">
-		     <div class="form-group">
-                                  <p>660.00</p>
-                                  
-             </div>
-		     </div>
-		     <div class="col-xs-2 col-md-2" style="text-align: center;">
-		     <div class="form-group">
-                                  <p>660.00</p>
-             </div>
-		     </div>
-		     </div>
-  		     
-  		     
-	         <div class="datagrid1"> 
-	         <table>
-	         <?php if (!empty($resultSet)) {  foreach($resultSet as $res2) {?>
-             <tbody>
-	   		 <tr>
-	   					<td style="font-size:80%; text-aling:center;">Elaborado por:<p><?php echo $res2->nombre_usuarios; ?></p></td>
-	   					<td style="font-size:80%; text-aling:center;">Es Conforme:<p>CONTADOR</p></td>
-	   					<td style="font-size:80%; text-aling:center;">Visto Bueno:<p>GERENTE</p></td>
-	   					<td style="font-size:80%; text-aling:center;">Firma: ________________________<p>C.I: __________________________</p></td>
-	   					
-                      
-	   		 </tr>
-	        </tbody>
-	        <?php } }else{ ?>
-            <?php }?>
-	        </table>
-            </div>
-             
-             
-	         </div>
-  		     <div class="col-lg-1">
-	         </div>
-             </div>
-	        
-	         </br>
-	         </br>
-	        
-		     <?php } ?>
+	         
+	         
+	         
+	         
+	             
+		    
 		     
 		    <div class="row">
-			<div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;" > 
+			<div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center; margin-top:20px" > 
             <div class="form-group">
             					  <button type="submit" id="Guardar" name="Guardar" class="btn btn-success">Guardar</button>
             </div>
