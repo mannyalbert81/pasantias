@@ -412,18 +412,10 @@
 		         		 		 	 		   
 		         		  }, 'json');
 
-	            	
-	         	   	$.post("<?php echo $helper->url("PlanCuentas","returnSubGrupo"); ?>", datos, function(resultado) {
-	         	   	subgrupo.empty();
+		         	   subgrupo.empty();  
 
-	         		 		$.each(resultado, function(index, value) {
-	         		 			
-	         		 			subgrupo.append("<option value= " +value.id_plan_cuentas +" >" + value.nombre_plan_cuentas  + "</option>");	
-	                    		 });
-
-	         		 		 	 		   
-	         		  }, 'json');
-
+			         subgrupo.append("<option value='-1'>Sin Registros</option>");	
+			                    		 
 
 	         	 //para traer el ultimo codigo 
 		        	$.ajax({
@@ -530,15 +522,13 @@
 
         	$.post("<?php echo $helper->url("PlanCuentas","returnSubGrupo1"); ?>", {identidades:entidades,idgrupo:valGrupo}, function(resultado) {
          	   	subgrupo.empty();
-
-         	   console.log(resultado);
-
-         		 		$.each(resultado, function(index, value) {
-         		 			subgrupo.append("<option value= " +value.id_plan_cuentas +" data-codigo_plan_cuentas="+value.codigo_plan_cuentas+" >" + value.nombre_plan_cuentas  + "</option>");	
-         		 			    		 });
+         	   	
+         		$.each(resultado, function(index, value) {
+         		    subgrupo.append("<option value= " +value.id_plan_cuentas +" data-codigo_plan_cuentas="+value.codigo_plan_cuentas+" >" + value.nombre_plan_cuentas  + "</option>");	
+         		 });
 
          		 		 	 		   
-         		  }, 'json');
+         	 }, 'json');
 
 		}
 
@@ -563,6 +553,111 @@
          		 		 	 		   
          		  }, 'json');
 
+		}
+
+		function call_returnCodCuenta()
+		{
+			var codgrupo_l3 = $("#val_subgrupo").text();
+        	var entidades = $("#id_entidad").val();
+
+			$.ajax({
+	            url:"<?php echo $helper->url("PlanCuentas","returnCodCuenta");?>"
+	            ,type : "POST"
+	            ,async: true
+	            ,data : {cod_grupo:codgrupo_l3,identidades:entidades}
+	            ,success: function(msg){
+
+		              if(msg!='')
+		               {
+		            	 var res = msg.split('"');
+		            	 var cod = res[1].split('.');
+		            	 var cod1 = cod[0]+'.'+cod[1]+'.'+cod[2]+'.';
+		            	 var cod2 = cod[3]+'.';
+		            	 
+		            	$("#codigo1_cuenta").val(String(cod1));
+		            	$("#codigo2_cuenta").val(String(cod2));
+		               }
+	               }
+        		});
+
+		}
+
+		function call_returnSubCuenta()
+		{
+			
+        	var valGrupo = $("#val_radio_cuentas").text();
+        	var entidades = $("#id_entidad").val();
+        	var cuenta = $("#id_cuenta");
+
+        	$.post("<?php echo $helper->url("PlanCuentas","returnCuenta"); ?>", {identidades:entidades,idgrupo:valGrupo}, function(resultado) {
+        		cuenta.empty();
+        		cuenta.append("<option value='0'>--Seleccione--</option>");	
+         		 
+        		
+         		 		$.each(resultado, function(index, value) {
+         		 			cuenta.append("<option value= " +value.id_plan_cuentas +" data-cuenta_codigo_plan_cuentas="+value.codigo_plan_cuentas+" >" + value.nombre_plan_cuentas  + "</option>");	
+         	         		 });
+
+         		 		 	 		   
+         		  }, 'json');
+
+		}
+
+		function call_returnCodSubCuenta()
+		{
+			var codgrupo_l3 = $("#val_subgrupo").text();
+        	var entidades = $("#id_entidad").val();
+
+			$.ajax({
+	            url:"<?php echo $helper->url("PlanCuentas","returnCodCuenta");?>"
+	            ,type : "POST"
+	            ,async: true
+	            ,data : {cod_grupo:codgrupo_l3,identidades:entidades}
+	            ,success: function(msg){
+
+		              if(msg!='')
+		               {
+		            	 var res = msg.split('"');
+		            	 var cod = res[1].split('.');
+		            	 var cod1 = cod[0]+'.'+cod[1]+'.'+cod[2]+'.';
+		            	 var cod2 = cod[3]+'.';
+		            	 
+		            	$("#codigo1_cuenta").val(String(cod1));
+		            	$("#codigo2_cuenta").val(String(cod2));
+		               }
+	               }
+        		});
+
+		}
+
+		function call_returnCuentaAnalisis(valor)
+		{
+			var id_plan_cuentas_view = valor;
+			
+        	var entidades = $("#id_entidad").val();
+        	
+        	var cuentaAnalisis = $("#id_cuenta_analisis");
+        	
+
+        	$.post("<?php echo $helper->url("PlanCuentas","returnCuentaAnalisis"); ?>", {identidades:entidades,id_plan_cuentas:id_plan_cuentas_view}, function(resultado) {
+
+        		cuentaAnalisis.empty();
+        		cuentaAnalisis.append("<option value='0'>--Seleccione--</option>");	
+        		var codigo='';
+        		var substr_codigo='';
+         		 
+        		
+         		 		$.each(resultado, function(index, value) {
+             		 		
+         		 			codigo = value.codigo_plan_cuentas;
+         		 			substr_codigo=codigo.split('.');
+         		 			//strvalores[strvalores.length-1]
+         		 			
+         		 			cuentaAnalisis.append("<option value= " +value.id_plan_cuentas +" data-cuenta_analisis_codigo_plan_cuentas="+value.codigo_plan_cuentas+" >"+substr_codigo[substr_codigo.length-2]+'.-' + value.nombre_plan_cuentas  + "</option>");	
+         	         		 });
+
+         		 		 	 		   
+         		  }, 'json');
 		}
 			
 		</script>
@@ -589,10 +684,52 @@
 		
 		</script>
 		
+		<script type="text/javascript">
+		$(document).ready(function(){
+
+			$('#id_subgrupo').change( function(){
+				
+				var cod_subgrupo = $(this).children('option:selected').data('codigo_plan_cuentas');
+				$("#val_subgrupo").text(cod_subgrupo);
+
+				call_returnCodCuenta();
+				
+			 });
+
+			
+		});
 		
+		//para validar array
+		//if(arrayName.length > 0){  //this array is not empty}else{//this array is empty}
+
+		</script>
 		
+		<script type="text/javascript">
+		$(document).ready(function(){
+
+			$('#id_cuenta').change( function(){
+
+				$("#codigo1_subcuenta").val('');
+
+				var cod_cuenta = $(this).val();
+
+				//para pasar el codigo
+				var codigo = $(this).children('option:selected').data('cuenta_codigo_plan_cuentas');
+				
+				var cod1_input = $("#codigo1_subcuenta").val(codigo);
+				
+				call_returnCuentaAnalisis(cod_cuenta);
+				
+			 });
+
+			
+		});
+
 		
+
+		</script>
 		
+	
         
     </head>
     <body>
@@ -821,7 +958,7 @@
 					 <?php if(!empty($n_plan_cuentas)){ foreach($n_plan_cuentas as $res=>$val) {?>
 					 <option value="<?php echo $res;?>" ><?php echo $val; ?> </option>
 					 <?php } }else{?>
-					 <option value="-1" >Sin Tipo</option>
+					 <option value="-1" >Sin registros</option>
 					 <?php }?>
 			     </select> 
 			    <span class="help-block"></span>
@@ -845,31 +982,81 @@
                  <span class="help-block"></span>
             </div>
 		    </div>
+		    
+		    <div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				 <label for="id_centro_c" class="control-label">Centro Costos</label>
+				 <select name="id_centro_c" id="id_centro_c"  class="form-control" >
+				        <?php if(!empty($resultCentroC)){ foreach($resultCentroC as $res) {?>
+				        <option value="<?php echo $res->id_centro_costos; ?>" ><?php echo $res->nombre_centro_costos; ?> </option>
+						<?php } }else{?>
+						<option value="-1" >Sin registros</option>
+						<?php }?>
+					    </select> 
+					    <span class="help-block"></span>
+			</div>
+			</div>
+			
 		    </div>
 		   
 		   <!-- Para agregar la subcuenta -->
 		   <script type="text/javascript">
 		   function mostrarSubcuenta(){
+
+			   var grupo = $("#val_radio_cuentas").text();
+
+			   if(grupo==null||grupo==0||grupo=='0'||grupo=='')
+			   {
+				   alert("selecione una cuenta principal");
+			   }else{
+				   
+				   if( $("#subcuenta").is(":hidden") ){
+					   $("#subcuenta").show();
+					   call_returnSubCuenta();
+					}else{
+					   $("#subcuenta").hide();
+					}
+			   }
 			   
-			   if( $("#subcuenta").is(":hidden") ){
-				   $("#subcuenta").show();
-				}else{
-				   $("#subcuenta").hide();
-				}
+			   
 			   
 		   }
 		   </script>
-		   <h4 style="color:#ec971f; float: left;">Agregar SubCuenta</h4>
+		   <h4 style="color:#ec971f; float: left;">Cuenta de Analisis</h4>
 		   <div class="div-img" style="float: left; padding-left: 20px;" >
            <img  onclick="mostrarSubcuenta();"  class="img" src="view/images/add.jpg" title="agregar" alt="agregar" height="40px">
            </div>
 		   <br>
 		   <hr/>
             <div id="subcuenta" class ="clase_subcuenta" style="display:none;">
+            
+            <div class="row">
+		    <div class="col-xs-12 col-md-6">
+		    <div class="form-group">
+                 <label for="id_cuenta" class="control-label">Cuenta</label>
+                 <select name="id_cuenta" id="id_cuenta"  class="form-control" >
+					 <option value="-1" >Sin Registros</option>
+			     </select> 
+			     <span class="help-block"></span>
+            </div>
+		    </div>
+		    <div class="col-xs-12 col-md-6">
+		    <div class="form-group">
+                 <label for="id_cuenta_analisis" class="control-label">Existentes</label>
+                 <select name="id_cuenta_analisis" id="id_cuenta_analisis"  class="form-control" >
+					 <option value="-1" >Sin Registros</option>
+			     </select> 
+			     <span class="help-block"></span>
+			     <input type="hidden" class="form-control" id="cuenta_analisis_existente" name="codigo2_subcuenta" value="" >
+	         </div>
+		    </div>
+		    
+			</div>
+			
 		    <div class="row">
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
-                 <label for="" class="control-label">Codigo Subcuenta</label><br>
+                 <label for="" class="control-label">Codigo Cuenta Analisis</label><br>
                  <div class="row">
 	                 <div class="col-xs-8 col-md-8">
 	                 <input type="text" class="form-control " id="codigo1_subcuenta" name="codigo1_subcuenta" value="" >
@@ -884,7 +1071,7 @@
 		    
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
-                 <label for="nombre_subcuenta" class="control-label">Nombre SubCuenta</label>
+                 <label for="nombre_subcuenta" class="control-label">Nombre Cuenta Analisis</label>
                  <input type="text" class="form-control" id="nombre_subcuenta" name="nombre_subcuenta" value=""  placeholder="Nombre">
                  <span class="help-block"></span>
             </div>
@@ -913,7 +1100,7 @@
 					 <?php if(!empty($n_plan_cuentas)){ foreach($n_plan_cuentas as $res=>$val) {?>
 					 <option value="<?php echo $res;?>" ><?php echo $val; ?> </option>
 					 <?php } }else{?>
-					 <option value="-1" >Sin Tipo</option>
+					 <option value="-1" >Sin registros</option>
 					 <?php }?>
 			     </select> 
 			    <span class="help-block"></span>
@@ -938,6 +1125,26 @@
             </div>
 		    </div>
 		    </div>
+		    
+		    <div class="row">
+		    <div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				 <label for="id_centro_c_subcuenta" class="control-label">Centro Costos</label>
+				 <select name="id_centro_c_subcuenta" id="id_centro_c_subcuenta"  class="form-control" >
+				        <?php if(!empty($resultCentroC)){ foreach($resultCentroC as $res) {?>
+				        <option value="<?php echo $res->id_centro_costos; ?>" ><?php echo $res->nombre_centro_costos; ?> </option>
+						<?php } }else{?>
+						<option value="-1" >Sin registros</option>
+						<?php }?>
+				</select> 
+					    <span class="help-block"></span>
+			</div>
+			</div>
+		    
+		    </div>
+		    
+		    
+		    
 		    </div>
 		   
 		   
@@ -948,8 +1155,8 @@
 		    <div class="row">
 		    <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;">
 		    <div class="form-group">
-                 <button type="submit" id="Guardar" name="Guardar" class="btn btn-success">Guardar</button>
-           
+                 <input type="submit" id="Guardar" name="Guardar" value="Guardar" class="btn btn-success"/>
+            
             </div>
 		    </div>
 		    </div>
@@ -1103,9 +1310,9 @@
 		</section>
         </div>
         </div>
-        </form>
-        </div>
-        </div>
+            </form>
+            </div>
+            </div>
   
              <br>
 			 <br>
@@ -1121,6 +1328,8 @@
 			  <span id="val_radio_cuentas" style="display: none;">0</span>
 			  <span id="val_codigo" style="display: none;">0</span>
 			  <span id="val_grupo" style="display: none;">0</span>
+			  <span id="val_subgrupo" style="display: none;">0</span>
+			  
         
     </body>  
     </html>          

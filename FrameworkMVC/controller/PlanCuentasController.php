@@ -159,53 +159,99 @@ class PlanCuentasController extends ControladorBase{
 	public function InsertaPlanCuentas(){
 			
 		session_start();
-		$entidades=new EntidadesModel();
+		$plan_cuentas = new PlanCuentasModel();
 		
-
 		$nombre_controladores = "PlanCuentas";
 		$id_rol= $_SESSION['id_rol'];
-		$resultPer = $entidades->getPermisosEditar("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
+		$resultPer = $plan_cuentas->getPermisosEditar("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 						
 		if (!empty($resultPer))
 		{
-		
-		
-		
 			$resultado = null;
-			$entidades=new EntidadesModel();
-		
+			
+			
 			//_nombre_categorias character varying, _path_categorias character varying
-			if (isset ($_POST["ruc_entidades"])   )
-				
+			if (isset ($_POST["Guardar"]))				
 			{
 				
-				$_ruc_entidades = $_POST["ruc_entidades"];
-				$_nombre_entidades = $_POST["nombre_entidades"];
-				$_telefono_entidades = $_POST["telefono_entidades"];
-				$_direccion_entidades = $_POST["direccion_entidades"];
-				$_ciudad_entidades = $_POST["ciudad_entidades"];
+				$_id_cuenta = $_POST["id_cuenta"];	
 				
-				$funcion = "ins_entidades";
-				$parametros = "'$_ruc_entidades', '$_nombre_entidades', '$_telefono_entidades', '$_direccion_entidades', '$_ciudad_entidades'";
+				if($_id_cuenta==-1||$_id_cuenta=="-1")
+				{
+					$_codigo1_cuenta = $_POST["codigo1_cuenta"];
+					$_codigo2_cuenta = $_POST["codigo2_cuenta"];
+					$_nombre_cuenta = strtoupper($_POST["nombre_cuenta"]);
+					$_id_moneda_cuenta = $_POST["id_moneda_cuenta"];
+					$_id_naturaleza_cuenta = $_POST["id_naturaleza_cuenta"];
+					$_tipo_cuenta = $_POST["tipo_cuenta"];
+					$_nivel_cuenta = $_POST["nivel_cuenta"];
+					$_id_entidades = $_POST["id_entidad"];
+					$_id_centro_costos = $_POST["id_centro_c"];
 					
-				$entidades->setFuncion($funcion);
-		
-				$entidades->setParametros($parametros);
-		
-		
-				$resultado=$entidades->Insert();
-		
-				//$this->view("Error",array(
-				//"resultado"=>"entro"
-				//));
+					$_codigo_p_cuentas = $_codigo1_cuenta.$_codigo2_cuenta;
+					
+					
+					$funcion = "ins_plan_cuentas";
+					
+					$parametros = "'$_id_entidades', '$_codigo_p_cuentas', '$_nombre_cuenta', '$_id_moneda_cuenta',
+					'$_id_naturaleza_cuenta','$_tipo_cuenta','$_id_centro_costos','$_nivel_cuenta'";
+						
+					$plan_cuentas->setFuncion($funcion);
+			
+					$plan_cuentas->setParametros($parametros);
+			
+					$resultado=$plan_cuentas->Insert();
+			
+					$traza=new TrazasModel();
+					$_nombre_controlador = "Plan_cuentas";
+					$_accion_trazas  = "Guardar";
+					$_parametros_trazas = $_nombre_cuenta." de la entidad -> ".$_id_entidades;
+					$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
 				
-				$traza=new TrazasModel();
-				$_nombre_controlador = "Entidades";
-				$_accion_trazas  = "Guardar";
-				$_parametros_trazas = $_nombre_entidades;
-				$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+				}else{
+					
+					$_codigo1_cuenta = $_POST["codigo1_subcuenta"];
+					$_codigo2_cuenta = $_POST["codigo2_subcuenta"];
+					$_nombre_cuenta = $_POST["nombre_subcuenta"];
+					$_id_moneda_cuenta = $_POST["id_moneda_subcuenta"];
+					$_id_naturaleza_cuenta = $_POST["id_naturaleza_subcuenta"];
+					$_tipo_cuenta = $_POST["tipo_subcuenta"];
+					$_nivel_cuenta = $_POST["nivel_subcuenta"];
+					$_id_entidades = $_POST["id_entidad"];
+					$_id_centro_costos = $_POST["id_centro_c_subcuenta"];
+						
+					$_codigo_p_cuentas = $_codigo1_cuenta.$_codigo2_cuenta;
+						
+						
+					$funcion = "ins_plan_cuentas";
+						
+					$parametros = "'$_id_entidades', '$_codigo_p_cuentas', '$_nombre_cuenta', '$_id_moneda_cuenta',
+					'$_id_naturaleza_cuenta','$_tipo_cuenta','$_id_centro_costos','$_nivel_cuenta'";
+					
+					$plan_cuentas->setFuncion($funcion);
+						
+					$plan_cuentas->setParametros($parametros);
+						
+					$resultado=$plan_cuentas->Insert();
+					
+						
+					$traza=new TrazasModel();
+					$_nombre_controlador = "Plan_cuentas";
+					$_accion_trazas  = "Guardar";
+					$_parametros_trazas = $_nombre_cuenta." de la entidad -> ".$_id_entidades;
+					$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+					
+				}
 				
+			}else {
+				
+				$this->view("Error",array(
+						"resultado"=>"no hay guardar"
+				));
+				die();
+					
 			}
+			
 			$this->redirect("PlanCuentas", "index");
 
 		}
@@ -517,6 +563,97 @@ class PlanCuentasController extends ControladorBase{
 		}
 		
 		echo json_encode($respuesta);
+	
+	}
+	
+	public function returnCodCuenta()
+	{
+	
+		$id_codgrupo_l3=(string)$_POST["cod_grupo"];
+		$id_entidades=(int)$_POST["identidades"];
+		$codigoGrupo_l3=$id_codgrupo_l3.'%';
+	
+		$plan_cuentas = new PlanCuentasModel();
+	
+		$columnas = "id_plan_cuentas,codigo_plan_cuentas,substring(codigo_plan_cuentas,7,1) as subcodigo";
+	
+		$tablas="plan_cuentas";
+	
+		$id="subcodigo";
+	
+		$where=" t_plan_cuentas='C'
+		AND nivel_plan_cuentas=4
+		AND id_entidades='$id_entidades'
+		AND codigo_plan_cuentas like '$codigoGrupo_l3'";
+	
+		$resultado=$plan_cuentas->getCondicionesDesc($columnas ,$tablas , $where, $id);
+		
+		$respuesta=$id_codgrupo_l3.'1.';
+	
+		if(!empty($resultado)){	$temp=$resultado[0]->subcodigo; $temp=$temp+1; $respuesta=(string)$id_codgrupo_l3.$temp.'.';}
+		
+		echo json_encode($respuesta);
+	
+	}
+	
+	public function returnCuenta()
+	{
+	
+		$id_grupo=(int)$_POST["idgrupo"];
+		$id_entidades=(int)$_POST["identidades"];
+		$codigo_plan_cuentas=$id_grupo.'%';
+	
+		$plan_cuentas = new PlanCuentasModel();
+	
+		
+		$resultado=array();
+	
+				
+			$columnas = "id_plan_cuentas,nombre_plan_cuentas,nivel_plan_cuentas,codigo_plan_cuentas";
+			$tablas="plan_cuentas";
+			$id="id_plan_cuentas";
+			$where=" t_plan_cuentas='C'
+			AND nivel_plan_cuentas=4
+			AND id_entidades='$id_entidades'
+			AND codigo_plan_cuentas like '$codigo_plan_cuentas'";
+				
+			$resultado=$plan_cuentas->getCondiciones($columnas ,$tablas , $where, $id);
+				
+		
+	
+		echo json_encode($resultado);
+	
+	}
+	
+	public function returnCuentaAnalisis()
+	{
+	
+		$id_p_cuenta=(int)$_POST["id_plan_cuentas"];
+		$id_entidades=(int)$_POST["identidades"];
+	
+		$plan_cuentas = new PlanCuentasModel();
+		
+		$resultGrupo= $plan_cuentas->getBy("id_plan_cuentas='$id_p_cuenta'");
+		
+		$resultado=array();
+		
+		if(!empty($resultGrupo))
+		{
+			$codigoCuenta=$resultGrupo[0]->codigo_plan_cuentas;
+			
+			$columnas = "id_plan_cuentas,nombre_plan_cuentas,nivel_plan_cuentas,codigo_plan_cuentas";
+			$tablas="plan_cuentas";
+			$where=" t_plan_cuentas='S'
+			AND nivel_plan_cuentas=5
+			AND id_entidades='$id_entidades'
+			AND codigo_plan_cuentas like '$codigoCuenta%'";
+			$id="id_plan_cuentas";
+			
+			$resultado=$plan_cuentas->getCondiciones($columnas ,$tablas , $where, $id);
+			
+		}
+		
+		echo json_encode($resultado);
 	
 	}
 	
