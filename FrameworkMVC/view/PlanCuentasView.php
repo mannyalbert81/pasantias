@@ -29,6 +29,13 @@
 			    -ms-transform: scale(1.25);
 			    transform: scale(1.25)
 			}
+			.textfail.form-control
+			{
+			border: 1px solid red;
+			-moz-box-shadow: 0 0 10px red;
+			-webkit-box-shadow: 0 0 10px red;
+			box-shadow: 0 0 10px red;
+			}
 		 </style>
 		
 		<script type="text/javascript">
@@ -47,7 +54,7 @@
 					        $('#modal_grupo').dialog({
 				                            autoOpen: false,
 				                            modal: true,
-				                            height: 500,
+				                            height: 550,
 				                            width: 500,
 				                            buttons: {
 				                "Aceptar": function() {
@@ -67,6 +74,11 @@
 			                    	 		nivel_p_cuentas:$('#modal_grupo_nivel').val()
 			                    	 	 };
 				                     //alert(datos['id_entidad_p_cuentas']);
+				                     
+				                 var nombreSubgrupo= $('#modal_grupo_nombre').val();
+			                    
+			                     if(nombreSubgrupo!='')
+			                     {
 					                $.ajax({
 				                           url:"<?php echo $helper->url("PlanCuentas","AgregarGrupo");?>"
 				                           ,type : "POST"
@@ -74,18 +86,26 @@
 				                           ,data : datos
 				                           ,success: function(msg){
 
-					                           if(msg=='1' || msg==1)
+				                        	   var res = msg.split('"');
+				                        	   
+					                           if(res[1]=='1' || res[1]==1)
 					                           {
 				                                $('#modal_grupo').dialog('close');
 				                                //loading();
 					                           }else
 					                           {
-					                        	 $('#modal_respuesta_grupo').html ("<span> sus datos no se registraron</span>"); 
+					                        	   $('#modal_respuesta_grupo').html ("<span style='color:red'>!sus datos no se registraron..</span>"); 
+							                     
 					                           }
 				                           }
 				                   });
 				                     
-				                                        
+			                     }else
+			                     {
+			                    	 textFail("modal_grupo_nombre");
+			                         $('#modal_respuesta_grupo').html ("<span style='color:red'>!Existen campos vacios..</span>"); 
+			                           
+			                     }                      
 				   
 				                },
 				                "Cancelar": function(){
@@ -102,7 +122,7 @@
 			            html+="<div class = 'col-xs-12 col-md-6'>";
 				        html+="<div class='form-group'>";
 				        html+="<label for='modal_grupo_nombre' class='control-label'>Nombre</label><br>";
-				        html+="<input type='text' class='form-control' style='text-transform:uppercase;' id='modal_grupo_nombre' name='modal_grupo_nombre' value='' >";
+				        html+="<input type='text' class='form-control' style='text-transform:uppercase;' id='modal_grupo_nombre' name='modal_grupo_nombre' value='' onfocus='textSucces(this)' >";
 				        html+="</div>";
 				        html+="</div>";
 				        html+="<div class = 'col-xs-12 col-md-6'>";
@@ -162,7 +182,7 @@
 					    html+="<span class='help-block'></span>"; 
 					    html+="</div>";
 					    html+="</div>";
-					    html+="<div id='modal_respuesta_grupo'></div><br><br><br>";
+					    html+="<div class='col-xs-12 col-md-12' id='modal_respuesta_grupo'></div><br>";
 
 					    				       
 				        $('#modal_grupo').html (html);  
@@ -200,7 +220,7 @@
 				        $('#modal_subgrupo').dialog({
 			                            autoOpen: false,
 			                            modal: true,
-			                            height: 500,
+			                            height: 550,
 			                            width: 500,
 			                            buttons: {
 			                "Aceptar": {
@@ -219,7 +239,9 @@
 		                    	 		nivel_p_cuentas:$('#modal_subgrupo_nivel').val()
 		                    	 	 };
 			                     //alert(datos['id_entidad_p_cuentas']);
-			                     if($('#modal_subgrupo_nombre').val()!='')
+			                    var nombreSubgrupo= $('#modal_subgrupo_nombre').val();
+			                    
+			                     if(nombreSubgrupo!='')
 			                     {
 				                	$.ajax({
 			                           url:"<?php echo $helper->url("PlanCuentas","AgregarSubGrupo");?>"
@@ -227,23 +249,24 @@
 			                           ,async: true
 			                           ,data : datos
 			                           ,success: function(msg){
-				                           
-				                           console.log(msg);
 
-				                           if(msg=='1' || msg==1)
+			                        	   var res = msg.split('"');
+			                        	   
+				                           if(res[1]=='1' || res[1]==1)
 				                           {
 			                                $('#modal_subgrupo').dialog('close');
 			                                
 				                           }else
-				                           {
+				                           {  
 				                        	 $('#modal_respuesta_subgrupo').html ("<span> sus datos no se registraron</span>"); 
 				                           }
 			                           }
 			                   		});
 			                     }else
 			                     {
-			                    	 $('#modal_respuesta_subgrupo').html ("<span style=''>existen campos vacios</span>"); 
-			                              
+			                    	 textFail("modal_subgrupo_nombre");
+			                         $('#modal_respuesta_subgrupo').html ("<span style='color:red'>!Existen campos vacios..</span>"); 
+			                           
 				                  }
 			                     
 			                	}
@@ -260,7 +283,7 @@
 		            html+="<div class = 'col-xs-12 col-md-6'>";
 			        html+="<div class='form-group'>";
 			        html+="<label for='modal_subgrupo_nombre' class='control-label'>Nombre</label><br>";
-			        html+="<input type='text' class='form-control' style='text-transform:uppercase;' id='modal_subgrupo_nombre' name='modal_subgrupo_nombre' value='' required >";
+			        html+="<input type='text' class='form-control' style='text-transform:uppercase;' id='modal_subgrupo_nombre' name='modal_subgrupo_nombre' value='' onfocus='textSucces(this)'>";
 			        html+="<span class='help-block'></span>"; 
 			        html+="</div>";
 			        html+="</div>";
@@ -321,7 +344,7 @@
 				    html+="<span class='help-block'></span>"; 
 				    html+="</div>";
 				    html+="</div>";
-				    html+="<div class='col-xs-12 col-md-12' id='modal_respuesta_subgrupo'></div><br><br><br>";
+				    html+="<div class='col-xs-12 col-md-12' id='modal_respuesta_subgrupo'></div><br>";
 			       
 			       
 			        $('#modal_subgrupo').html (html);  
@@ -447,11 +470,14 @@
 				if(numElementos==1)
 				{
 					call_returnCodSubGrupo();
+					call_returnSubGrupo();
 					
 				}else if(numElementos>1)
 				{
 					$("#id_grupo").change(function() {		
 						call_returnCodSubGrupo();
+						call_returnSubGrupo();
+						
 												
 					});
 					
@@ -488,9 +514,82 @@
 		               }
 	               }
         		});
+
+			
     		
 		}
+
+		function call_returnSubGrupo()
+		{
+			var cuentas = $("#val_radio_cuentas").text();
+        	var valGrupo = $("#id_grupo").val();
+        	var entidades = $("#id_entidad").val();
+        	var subgrupo=$("#id_subgrupo");
+
+        	
+
+        	$.post("<?php echo $helper->url("PlanCuentas","returnSubGrupo1"); ?>", {identidades:entidades,idgrupo:valGrupo}, function(resultado) {
+         	   	subgrupo.empty();
+
+         	   console.log(resultado);
+
+         		 		$.each(resultado, function(index, value) {
+         		 			subgrupo.append("<option value= " +value.id_plan_cuentas +" data-codigo_plan_cuentas="+value.codigo_plan_cuentas+" >" + value.nombre_plan_cuentas  + "</option>");	
+         		 			    		 });
+
+         		 		 	 		   
+         		  }, 'json');
+
+		}
+
+		function call_returnSubGrupo2()
+		{
+			var cuentas = $("#val_radio_cuentas").text();
+        	var valGrupo = $("#id_grupo").val();
+        	var entidades = $("#id_entidad").val();
+        	var subgrupo=$("#id_subgrupo");
+
+        	
+
+        	$.post("<?php echo $helper->url("PlanCuentas","returnSubGrupo1"); ?>", {identidades:entidades,idgrupo:valGrupo}, function(resultado) {
+         	   	subgrupo.empty();
+
+         	   
+
+         		 		$.each(resultado, function(index, value) {
+         		 			subgrupo.append("<option value= " +value.id_plan_cuentas +" >" + value.nombre_plan_cuentas  + "</option>");	
+                    		 });
+
+         		 		 	 		   
+         		  }, 'json');
+
+		}
+			
 		</script>
+		
+		<script type="text/javascript">
+		function textFail(field)
+		{
+			
+			
+			$("#"+field).removeClass("form-control");
+			$("#"+field).addClass("textfail form-control");
+		}
+
+		function textSucces(field)
+		{
+			var id_campo = field.id
+			$("#"+id_campo).removeClass("textfail form-control");
+			$("#"+id_campo).addClass("form-control");
+			$('#modal_respuesta_subgrupo').html ("");
+		}
+
+		
+		
+		
+		</script>
+		
+		
 		
 		
 		

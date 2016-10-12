@@ -226,32 +226,37 @@ class PlanCuentasController extends ControladorBase{
 
 		session_start();
 		$permisos_rol=new PermisosRolesModel();
+		$plan_cuentas = new PlanCuentasModel();
+		$mayor = new MayorModel();
 		$nombre_controladores = "Roles";
 		$id_rol= $_SESSION['id_rol'];
 		$resultPer = $permisos_rol->getPermisosEditar("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 			
 		if (!empty($resultPer))
 		{
-			if(isset($_GET["id_entidades"]))
+			if(isset($_GET["id_p_cuentas"]))
 			{
-				$id_entidades=(int)$_GET["id_entidades"];
+				$id_plan_cuentas=(int)$_GET["id_p_cuentas"];
+				
+				$resultMayor=$mayor->getBy("id_plan_cuentas='$id_plan_cuentas'");
+				
+				if(empty($resultMayor))
+				{
+					$plan_cuentas->deleteBy("id_plan_cuentas",$id_plan_cuentas);
+					
+					$traza=new TrazasModel();
+					$_nombre_controlador = "PlanCuentas";
+					$_accion_trazas  = "Borrar";
+					$_parametros_trazas = $id_plan_cuentas;
+					$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+					
+				}		
 		
-				$entidades=new EntidadesModel();
-				
-				$entidades->deleteBy(" id_entidades",$id_entidades);
-				
-				
-				$traza=new TrazasModel();
-				$_nombre_controlador = "PlanCuentas";
-				$_accion_trazas  = "Borrar";
-				$_parametros_trazas = $id_entidades;
-				$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
 				
 				
 			}
 			
 			$this->redirect("PlanCuentas", "index");
-			
 			
 		}
 		else
@@ -340,15 +345,16 @@ class PlanCuentasController extends ControladorBase{
 			 
 			$plan_cuentas->setParametros($parametros);
 			 
-			$resultado=$plan_cuentas->Insert();
-		
-			if($resultado)
+			try
 			{
+				$resultado=$plan_cuentas->Insert();
 				$respuesta="1";
-			}else {
+				
+			}catch (exception $x)
+			{
 				$respuesta="0";
 			}
-		
+			
 		
 		}else {
 				
@@ -401,6 +407,39 @@ class PlanCuentasController extends ControladorBase{
 	
 		$resultado=$plan_cuentas->getCondiciones($columnas ,$tablas , $where, $id);
 	
+		echo json_encode($resultado);
+	
+	}
+	
+	public function returnSubGrupo1()
+	{
+	
+		$id_grupo=(int)$_POST["idgrupo"];
+		$id_entidades=(int)$_POST["identidades"];
+		$codigo_plan_cuentas=$id_grupo.'%';
+	
+		$plan_cuentas = new PlanCuentasModel();
+		
+		$resultGrupo= $plan_cuentas->getBy("id_plan_cuentas='$id_grupo'");
+		
+		$resultado=array();
+		
+		if(!empty($resultGrupo))
+		{
+			$codigoGrupo=$resultGrupo[0]->codigo_plan_cuentas;
+			
+			$columnas = "id_plan_cuentas,nombre_plan_cuentas,nivel_plan_cuentas,codigo_plan_cuentas";
+			$tablas="plan_cuentas";
+			$id="id_plan_cuentas";
+			$where=" t_plan_cuentas='G'
+			AND nivel_plan_cuentas=3
+			AND id_entidades='$id_entidades'
+			AND codigo_plan_cuentas like '$codigoGrupo%'";
+			
+			$resultado=$plan_cuentas->getCondiciones($columnas ,$tablas , $where, $id);
+			
+		}
+		
 		echo json_encode($resultado);
 	
 	}
