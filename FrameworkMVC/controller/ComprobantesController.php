@@ -38,15 +38,18 @@ class ComprobantesController extends ControladorBase{
 		{
 			
 			
+			$tipo_comprobante=new TipoComprobantesModel();
+			$resultTipCom = $tipo_comprobante->getAll("nombre_tipo_comprobantes");
+				
 			
-		    $columnas_enc = "entidades.nombre_entidades, 
-							  consecutivos.nombre_consecutivos, 
-							  consecutivos.numero_consecutivos";
-		    $tablas_enc ="public.consecutivos, 
-						  public.usuarios, 
+			
+			
+			
+		    $columnas_enc = "entidades.id_entidades, 
+  							entidades.nombre_entidades";
+		    $tablas_enc ="public.usuarios, 
 						  public.entidades";
-		    $where_enc ="consecutivos.id_entidades = usuarios.id_entidades AND
-  					entidades.id_entidades = consecutivos.id_entidades AND consecutivos.nombre_consecutivos='INGRESOS' AND usuarios.id_usuarios='$_id_usuarios'";
+		    $where_enc ="entidades.id_entidades = usuarios.id_entidades AND usuarios.id_usuarios='$_id_usuarios'";
 		    $id_enc="entidades.nombre_entidades";
 		    $resultSet=$d_comprobantes->getCondiciones($columnas_enc ,$tablas_enc ,$where_enc, $id_enc);
 		    	
@@ -63,7 +66,7 @@ class ComprobantesController extends ControladorBase{
 					
 					$this->view("Comprobantes",array(
 							
-							"resultSet"=>$resultSet, "resultRes"=>$resultRes
+							"resultSet"=>$resultSet, "resultRes"=>$resultRes, "resultTipCom"=>$resultTipCom
 					));
 			
 			
@@ -154,7 +157,269 @@ class ComprobantesController extends ControladorBase{
 			
    }
 		
-	
+   
+   public function InsertaComprobantes(){
+   
+   	session_start();
+   
+   	$resultado = null;
+   	$permisos_rol=new PermisosRolesModel();
+   
+   	
+   	$consecutivos = new ConsecutivosModel();
+    $ccomprobantes = new CComprobantesModel();
+   	$dcomprobantes = new DComprobantesModel();
+   	$tem_comprobantes = new ComprobantesTemporalModel();
+   	$tipo_comprobantes = new TipoComprobantesModel();
+   
+   
+   	$nombre_controladores = "Comprobantes";
+   	$id_rol= $_SESSION['id_rol'];
+   	$resultPer = $ccomprobantes->getPermisosEditar("   nombre_controladores = '$nombre_controladores' AND id_rol = '$id_rol' " );
+   
+   	if (!empty($resultPer))
+   	{
+   		
+   		if (isset ($_POST["id_entidades"]))
+   		{
+   
+   			$_id_usuarios = $_SESSION['id_usuarios'];
+   			
+   			$where =  "id_usuario_registra= '$_id_usuarios' ";
+   			$resultCom =  $tem_comprobantes->getBy($where);
+   			
+   			$_id_tipo_comprobantes =$_POST['id_tipo_comprobantes'];
+   			$resultTip = $tipo_comprobantes->getBy("id_tipo_comprobantes='$_id_tipo_comprobantes'");
+   			$_nombre_tipo_comprobantes=$resultTip[0]->nombre_tipo_comprobantes;
+   			
+   			
+   		if ($_nombre_tipo_comprobantes == "INGRESOS")
+   	 	{
+   				
+   				
+   				
+   			$_id_entidades =$_POST['id_entidades'];
+   			$resultConsecutivos = $consecutivos->getBy("nombre_consecutivos LIKE '%INGRESOS%' AND id_entidades='$_id_entidades'");
+   			$_id_consecutivos=$resultConsecutivos[0]->id_consecutivos;
+   			
+   			$_numero_consecutivos=$resultConsecutivos[0]->numero_consecutivos;
+   			$_update_numero_consecutivo=((int)$_numero_consecutivos)+1;
+   				
+   			
+   			$_ruc_ccomprobantes =$_POST['ruc_ccomprobantes'];
+   			$_nombres_ccomprobantes =$_POST['nombres_ccomprobantes'];
+   			$_id_tipo_comprobantes =$_POST['id_tipo_comprobantes'];
+   			$_retencion_ccomprobantes =$_POST['retencion_ccomprobantes'];
+   			$_valor_ccomprobantes =$_POST['valor_ccomprobantes'];
+   			$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
+   			$_id_usuario_creador=$_SESSION['id_usuarios'];
+   			
+   
+   
+   
+   			///PRIMERO INSERTAMOS LA CABEZA DEL COMPROBANTE
+   			try
+   			{
+   					
+   				$funcion = "ins_ccomprobantes";
+   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador'";
+   				$ccomprobantes->setFuncion($funcion);
+   				$ccomprobantes->setParametros($parametros);
+   				$resultado=$ccomprobantes->Insert();
+   				
+   				$resultConsecutivo=$consecutivos->UpdateBy("numero_consecutivos='$_update_numero_consecutivo'", "consecutivos", "id_consecutivos='$_id_consecutivos'");
+   				
+   				
+   				//$print="'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador'";
+   				//$this->view("Error",array("resultado"=>$print));	
+   				//die();
+   
+   				///INSERTAMOS DETALLE  DEL MOVIMIENTO
+   					
+   				foreach($resultCom as $res)
+   				{
+   
+   					//busco si existe este nuevo id
+   					try
+   					{
+   						$_id_plan_cuentas = $res->id_plan_cuentas;
+   						$_descripcion_dcomprobantes = $res->observacion_temp_comprobantes;
+   						$_debe_dcomprobantes = $res->debe_temp_comprobantes;
+   						$_haber_dcomprobantes = $res->haber_temp_comprobantes;
+   
+   						$resultComprobantes = $ccomprobantes->getBy("numero_ccomprobantes ='$_numero_consecutivos' AND id_entidades ='$_id_entidades' AND id_tipo_comprobantes='$_id_tipo_comprobantes'");
+   						$_id_ccomprobantes=$resultComprobantes[0]->id_ccomprobantes;
+   						
+   						
+   						
+   						$funcion = "ins_dcomprobantes";
+   						$parametros = "'$_id_ccomprobantes','$_numero_consecutivos','$_id_plan_cuentas', '$_descripcion_dcomprobantes', '$_debe_dcomprobantes', '$_haber_dcomprobantes'";
+   						$dcomprobantes->setFuncion($funcion);
+   						$dcomprobantes->setParametros($parametros);
+   						$resultado=$dcomprobantes->Insert();
+   						
+   						
+   							
+   						///LAS TRAZAS
+   						$traza=new TrazasModel();
+   						$_nombre_controlador = "Comprobantes";
+   						$_accion_trazas  = "Guardar";
+   						$_parametros_trazas = $_id_plan_cuentas;
+   						$resulta = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+   							
+   						
+   						///borro de las solicitudes el carton
+   						$where_del = "id_usuario_registra= '$_id_usuarios'";
+   						$tem_comprobantes->deleteByWhere($where_del);
+   							
+   							
+   							
+   							
+   
+   					} catch (Exception $e)
+   					{
+   						$this->view("Error",array(
+   								"resultado"=>"Eror al Insertar Comprobantes ->". $id
+   						));
+   						exit();
+   					}
+   						
+   				}					
+   					
+   					
+   			}
+   			catch (Exception $e)
+   			{
+   
+   					
+   
+   			}
+   
+   
+   			
+   		}
+   		else{
+   			
+   			$_id_entidades =$_POST['id_entidades'];
+   			$resultConsecutivos = $consecutivos->getBy("nombre_consecutivos LIKE '%EGRESOS%' AND id_entidades='$_id_entidades'");
+   			$_id_consecutivos=$resultConsecutivos[0]->id_consecutivos;
+   			
+   			$_numero_consecutivos=$resultConsecutivos[0]->numero_consecutivos;
+   			$_update_numero_consecutivo=((int)$_numero_consecutivos)+1;
+   			
+   			$_ruc_ccomprobantes =$_POST['ruc_ccomprobantes'];
+   			$_nombres_ccomprobantes =$_POST['nombres_ccomprobantes'];
+   			$_id_tipo_comprobantes =$_POST['id_tipo_comprobantes'];
+   			$_retencion_ccomprobantes =$_POST['retencion_ccomprobantes'];
+   			$_valor_ccomprobantes =$_POST['valor_ccomprobantes'];
+   			$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
+   			$_id_usuario_creador=$_SESSION['id_usuarios'];
+   			
+   			 
+   			 
+   			 
+   			///PRIMERO INSERTAMOS LA CABEZA DEL COMPROBANTE
+   			try
+   			{
+   			
+   				$funcion = "ins_ccomprobantes";
+   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador'";
+   				$ccomprobantes->setFuncion($funcion);
+   				$ccomprobantes->setParametros($parametros);
+   				$resultado=$ccomprobantes->Insert();
+   				
+   				$resultConsecutivo=$consecutivos->UpdateBy("numero_consecutivos='$_update_numero_consecutivo'", "consecutivos", "id_consecutivos='$_id_consecutivos'");
+   					
+   					
+   				//$print="'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador'";
+   				//$this->view("Error",array("resultado"=>$print));
+   				//die();
+   				 
+   				///INSERTAMOS DETALLE  DEL MOVIMIENTO
+   			
+   				foreach($resultCom as $res)
+   				{
+   					 
+   					//busco si existe este nuevo id
+   					try
+   					{
+   						$_id_plan_cuentas = $res->id_plan_cuentas;
+   						$_descripcion_dcomprobantes = $res->observacion_temp_comprobantes;
+   						$_debe_dcomprobantes = $res->debe_temp_comprobantes;
+   						$_haber_dcomprobantes = $res->haber_temp_comprobantes;
+   						 
+   						$resultComprobantes = $ccomprobantes->getBy("numero_ccomprobantes ='$_numero_consecutivos' AND id_entidades ='$_id_entidades' AND id_tipo_comprobantes='$_id_tipo_comprobantes'");
+   						$_id_ccomprobantes=$resultComprobantes[0]->id_ccomprobantes;
+   							
+   							
+   							
+   						$funcion = "ins_dcomprobantes";
+   						$parametros = "'$_id_ccomprobantes','$_numero_consecutivos','$_id_plan_cuentas', '$_descripcion_dcomprobantes', '$_debe_dcomprobantes', '$_haber_dcomprobantes'";
+   						$dcomprobantes->setFuncion($funcion);
+   						$dcomprobantes->setParametros($parametros);
+   						$resultado=$dcomprobantes->Insert();
+   			
+   						///LAS TRAZAS
+   						$traza=new TrazasModel();
+   						$_nombre_controlador = "Comprobantes";
+   						$_accion_trazas  = "Guardar";
+   						$_parametros_trazas = $_id_plan_cuentas;
+   						$resulta = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+   			
+   							
+   						///borro de las solicitudes el carton
+   						$where_del = "id_usuario_registra= '$_id_usuarios'";
+   						$tem_comprobantes->deleteByWhere($where_del);
+   			
+   			
+   			
+   			
+   						 
+   					} catch (Exception $e)
+   					{
+   						$this->view("Error",array(
+   								"resultado"=>"Eror al Insertar Comprobantes ->". $id
+   						));
+   						exit();
+   					}
+   						
+   				}
+   			
+   			
+   			}
+   			catch (Exception $e)
+   			{
+   				 
+   			
+   				 
+   			}
+   			 
+   			
+   			
+   		}
+   		
+   		
+   
+   		}	
+   		
+   		$this->redirect("Comprobantes","index")	;
+   	}
+   	else
+   	{
+   		$this->view("Error",array(
+   				"resultado"=>"No tiene Permisos de Guardar Comprobantes"
+   
+   		));
+   
+   
+   	}
+   
+   
+   
+   }
+   
+    
+   
    
    public function borrarId()
    {
@@ -243,13 +508,28 @@ class ComprobantesController extends ControladorBase{
 	
 	
 	public function AutocompleteComprobantesDevuelveNombre(){
-	
-		$plan_cuentas = new PlanCuentasModel();
+		session_start();
+		$_id_usuarios= $_SESSION['id_usuarios'];
 		
+		
+		$plan_cuentas = new PlanCuentasModel();
 		$codigo_plan_cuentas = $_POST['codigo_plan_cuentas'];
+		
+		
+		$columnas ="plan_cuentas.codigo_plan_cuentas,
+				  plan_cuentas.nombre_plan_cuentas,
+				  plan_cuentas.id_plan_cuentas";
+		$tablas =" public.usuarios,
+				  public.entidades,
+				  public.plan_cuentas";
+		$where ="plan_cuentas.codigo_plan_cuentas = '$codigo_plan_cuentas' AND entidades.id_entidades = usuarios.id_entidades AND
+		plan_cuentas.id_entidades = entidades.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND plan_cuentas.nivel_plan_cuentas='3'";
+		$id ="plan_cuentas.codigo_plan_cuentas";
+		
+		
+		$resultSet=$plan_cuentas->getCondiciones($columnas, $tablas, $where, $id);
+		
 	
-		$resultSet = $plan_cuentas->getBy("codigo_plan_cuentas='$codigo_plan_cuentas'");
-	    
 		$respuesta = new stdClass();
 	
 		if(!empty($resultSet)){
@@ -306,12 +586,27 @@ class ComprobantesController extends ControladorBase{
 	
 	public function AutocompleteComprobantesDevuelveCodigo(){
 	
+		session_start();
+		$_id_usuarios= $_SESSION['id_usuarios'];
+		
 		$plan_cuentas = new PlanCuentasModel();
 	
 		$nombre_plan_cuentas = $_POST['nombre_plan_cuentas'];
 	
-		$resultSet = $plan_cuentas->getBy("nombre_plan_cuentas='$nombre_plan_cuentas'");
-	
+
+		$columnas ="plan_cuentas.codigo_plan_cuentas,
+				  plan_cuentas.nombre_plan_cuentas,
+				  plan_cuentas.id_plan_cuentas";
+		$tablas =" public.usuarios,
+				  public.entidades,
+				  public.plan_cuentas";
+		$where ="plan_cuentas.nombre_plan_cuentas = '$nombre_plan_cuentas' AND entidades.id_entidades = usuarios.id_entidades AND
+		plan_cuentas.id_entidades = entidades.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND plan_cuentas.nivel_plan_cuentas='3'";
+		$id ="plan_cuentas.codigo_plan_cuentas";
+		
+		
+		$resultSet=$plan_cuentas->getCondiciones($columnas, $tablas, $where, $id);
+		
 	
 		$respuesta = new stdClass();
 	
