@@ -7,129 +7,14 @@
      <head>
          <meta charset="utf-8"/>
          <title>Comprobantes - Contabilidad 2016</title>
-          <link rel="stylesheet" href="view/css/bootstrap.css">
-          <link rel="stylesheet" href="view/css/Comprobantes/bootstrap.min.css">
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-	      <script src="view/css/Comprobantes/jquery-1.11.1.min.js"></script>
-	      <script src="view/js/bootstrapValidator.min.js"></script>
-		  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-       
-       
-       
-       <script type="text/javascript">
-        var v=true;
-        $("span.help-block").hide();
-
-        function verificar(){
-
-            var v1=0, v2=0, v3=0, v4=0, v5=0;
-            
-            v1=validacion('id_plan_cuentas');
-            v2=validacion('nombre_plan_cuentas');
-            v3=validacion('descripcion_dcomprobantes');
-            v4=validacion('debe_dcomprobantes');
-            v5=validacion('haber_dcomprobantes');
-            if (v1===false || v2===false || v3===false || v4===false || v5===false) {
-                 $("#exito").hide();
-                 $("#error").show();
-            }else{
-                $("#error").hide();
-                $("#exito").show();
-            }
-            } 
-
-  
-
-        
-        function validacion(campo){
-            var a=0;
-
-            if (campo==='id_plan_cuentas')
-            {
-                codigo = document.getElementById(campo).value;
-                if( codigo == null || codigo.length == 0 || /^\s+$/.test(codigo) ) {
-                    $("#glypcn"+campo).remove();
-                    $('#'+campo).parent().parent().attr("class", "form-group has-error has-feedback");
-                    $('#'+campo).parent().children('span').text("Ingrese Codigo").show();
-                    $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-remove form-control-feedback'></span>");
-                    return false;
-                   
-                }
-                else
-                {
-                    if(isNaN(codigo)) {
-
-                        $("#glypcn"+campo).remove();
-                        $('#'+campo).parent().parent().attr("class", "form-group has-success has-feedback");
-                        $('#'+campo).parent().children('span').hide();
-                        $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-ok form-control-feedback'></span>");
-
-              
-                        return false;
-                    }
-                    else{
-
-                        $("#glypcn"+campo).remove();
-                        $('#'+campo).parent().parent().attr("class", "form-group has-success has-feedback");
-                        $('#'+campo).parent().children('span').hide();
-                        $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-ok form-control-feedback'></span>");
-             
-                        return true;
-                    }
-                    
-                    
-                }
-                
-            }
-
-            if (campo==='nombre_plan_cuentas'){
-                apellido = document.getElementById(campo).value;
-                if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
-                    
-                    $("#glypcn"+campo).remove();
-                    $('#'+campo).parent().parent().attr("class", "form-group has-error has-feedback");
-                    $('#'+campo).parent().children('span').text("Ingrese Nombre").show();
-                    $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-remove form-control-feedback'></span>");
-                    return false;
-                    
-                }
-                else{
-                    $("#glypcn"+campo).remove();
-                    $('#'+campo).parent().parent().attr("class", "form-group has-success has-feedback");
-                    $('#'+campo).parent().children('span').hide();
-                    $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-ok form-control-feedback'></span>");
-                    return true;
-                    
-                } 
-            }
-
-
-            if (campo==='descripcion_dcomprobantes'){
-                apellido = document.getElementById(campo).value;
-                if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
-                    
-                    $("#glypcn"+campo).remove();
-                    $('#'+campo).parent().parent().attr("class", "form-group has-error has-feedback");
-                    $('#'+campo).parent().children('span').text("Ingrese Descripción").show();
-                    $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-remove form-control-feedback'></span>");
-                    return false;
-                    
-                }
-                else{
-                    $("#glypcn"+campo).remove();
-                    $('#'+campo).parent().parent().attr("class", "form-group has-success has-feedback");
-                    $('#'+campo).parent().children('span').hide();
-                    $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-ok form-control-feedback'></span>");
-                    return true;
-                    
-                } 
-            }
-        }
-    </script>
-       
-      
-      
-       
+	      <link rel="stylesheet" href="view/css/bootstrap.css">
+          <script src="view/js/jquery.js"></script>
+		  <script src="view/js/bootstrapValidator.min.js"></script>
+		  <script src="view/js/ValidarComprobantesTemporal.js"></script>
+	      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    
+    
     
     <script >   
     function numeros(e){
@@ -151,12 +36,19 @@
      }
     </script > 
  
-      <script>
-      function activar(){
-    	     var cana1=document.getElementById("debe_comprobantes").disabled=true;
-    	}
-      </script>
-        
+      <script type="text/javascript">
+		     function validardebe(field) {
+				var nombre_elemento = field.id;
+				if(nombre_elemento=="debe_dcomprobantes")
+				{
+					var debe=$("#haber_dcomprobantes").val('');
+					
+				}else
+				{
+					var debe=$("#debe_dcomprobantes").val('');
+				}
+			  }
+	 </script>
 
 	<script>
 	       	$(document).ready(function(){ 	
@@ -301,7 +193,7 @@
   
   
   	
-        <form id="frm-comprobantes" action="<?php echo $helper->url("Comprobantes","index"); ?>" method="post" enctype="multipart/form-data" class="col-lg-12">
+        <form id="form-comprobantes" action="<?php echo $helper->url("Comprobantes","index"); ?>" method="post" enctype="multipart/form-data" class="col-lg-12">
             <br>	
             
               
@@ -315,7 +207,7 @@
 	         <div class="panel-heading">
 	         <div class="row">
 	         <div class="form-group" style="margin-left: 20px">
-				               <label for="nombres_ccomprobantes" class="control-label"><h4><i class='glyphicon glyphicon-edit'></i> Nuevo Comprobante de </h4></label>
+				               <label for="nuevo_comprobante" class="control-label"><h4><i class='glyphicon glyphicon-edit'></i> Nuevo Comprobante de </h4></label>
 				               <input type="hidden" class="form-control" id="id_entidades" name="id_entidades" value="<?php echo $res->id_entidades; ?>">
                                  
              <div class="col-md-3 col-lg-3 col-xs-4" style="margin-top: 5px">
@@ -438,17 +330,18 @@
                                   <span class="help-block"></span>
              </div>
 		     </div>
+		     
 		     <div class="form-group">
              <div class="col-xs-2 col-md-2">
 		                          <label for="debe_dcomprobantes" class="control-label">Debe: </label>
-                                  <input type="text" class="form-control" id="debe_dcomprobantes" name="debe_dcomprobantes" value="" onkeypress="return numeros(event)" onkeyup="validacion('debe_dcomprobantes');" placeholder=""  onclick="activar()" disabled="disabled>
+                                  <input type="text" class="form-control" id="debe_dcomprobantes" name="debe_dcomprobantes" value="" onkeypress="return numeros(event)" onkeyup="validacion('debe_dcomprobantes');" placeholder=""  onfocus="validardebe(this);">
                                   <span class="help-block"></span>
              </div>
 		     </div>
 		     <div class="form-group">
              <div class="col-xs-2 col-md-2">
 		                          <label for="haber_dcomprobantes" class="control-label">Haber: </label>
-                                  <input type="text" class="form-control" id="haber_dcomprobantes" name="haber_dcomprobantes" value="" onkeypress="return numeros(event)" onkeyup="validacion('haber_dcomprobantes');" placeholder=""  disabled="disabled>
+                                  <input type="text" class="form-control" id="haber_dcomprobantes" name="haber_dcomprobantes" value="" onkeypress="return numeros(event)" onkeyup="validacion('haber_dcomprobantes');" placeholder="" onfocus="validardebe(this);">
                                   <span class="help-block"></span>
              </div>
 		     </div>
@@ -457,10 +350,13 @@
 		    <div class="row">
 		    <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;">
 		    <div class="form-group">
-                  <button type="button" id="Agregar" name="Agregar" onclick='verificar();' class="btn btn-info"><i class="glyphicon glyphicon-plus"></i></button>
+                  <button type="submit" id="Agregar" name="Agregar" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i></button>
+                      
             </div>
 		    </div>
 		    </div>
+		    
+		    
 		    </div>
 	        </div>
 	        </div>
@@ -523,14 +419,22 @@
 		  <?php } else {?>
 		  <?php } ?>
 		 
-	     
-		    <div class="row">
-			<div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center; margin-top:20px" > 
-            <div class="form-group">
-            					  <input type="submit" id="Guardar" name="Guardar" onclick="this.form.action='<?php echo $helper->url("Comprobantes","InsertaComprobantes"); ?>'" value="Guardar" class="btn btn-success"/>
-            </div>
-            </div>
-            </div>
+	        
+	      <?php if($subtotal_debe==$subtotal_haber)  {?>
+		   
+		   <div class="row">
+		   <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center; margin-top:20px" > 
+           <div class="form-group">
+            					  <button type="submit" id="Guardar" name="Guardar" onclick="this.form.action='<?php echo $helper->url("Comprobantes","InsertaComprobantes"); ?>'" class="btn btn-success">Guardar</button>
+           </div>
+           </div>
+           </div>          
+		  <?php } else {?>
+		  
+		  <?php } ?> 
+		   
+            
+            
             </form>
             
               

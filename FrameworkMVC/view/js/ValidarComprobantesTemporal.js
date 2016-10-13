@@ -10,20 +10,82 @@ $(document).ready(function() {
                 validating: 'glyphicon glyphicon-refresh'
             },
 	        fields: {
-	        	    
-		                descripcion_dcomprobantes: {
+	        	id_tipo_comprobantes: {
+	        		message: 'El nombre no es valido',
+	                        validators: {
+	                                notEmpty: {
+	                                        message: 'El tipo es requerido.'
+	                                }
+	                             
+	                        }
+	                },
+	                nombres_ccomprobantes: {
+		        		message: 'El nombre no es valido',
+		                        validators: {
+		                                notEmpty: {
+		                                        message: 'La descripción es requerida.'
+		                                }
+		                             
+		                        }
+		                },
+		                ruc_ccomprobantes: {
 			        		message: 'El nombre no es valido',
 			                        validators: {
 			                                notEmpty: {
-			                                        message: 'La descripción es requerida.'
+			                                        message: 'El ruc es requerido.'
+			                                },
+			                                regexp: {
+			                                	 
+				               					 regexp: /^[0-9]+$/,
+				                
+				               					 message: 'Ingrese números'
+				                
+				               				 },
+				            				 stringLength: {
+				            					 
+				            					 min: 13,
+				            					 max: 13,
+				             
+				            					
+				            				 }
+			                             
+			                        }
+			                },
+			                retencion_ccomprobantes: {
+				        		message: 'El nombre no es valido',
+				                        validators: {
+				                                notEmpty: {
+				                                        message: 'El campo es requerido.'
+				                                },
+				                                regexp: {
+				                                	 
+					               					 regexp: /^[0-9]+$/,
+					                
+					               					 message: 'Ingrese números'
+					                
+					               				 }
+				                             
+				                        }
+				                },
+				                concepto_ccomprobantes: {
+			        		message: 'El nombre no es valido',
+			                        validators: {
+			                                notEmpty: {
+			                                        message: 'El campo es requerido.'
 			                                }
 			                             
 			                        }
-			                }
-		                
-		              
+			                },
+			                descripcion_dcomprobantes: {
+				        		message: 'El nombre no es valido',
+				                        validators: {
+				                                notEmpty: {
+				                                        message: 'El campo es requerido.'
+				                                }
+				                             
+				                        }
+				                }
+				               
 	        }
-	        //Cuando el formulario se lleno correctamente y se envia, se ejecuta esta funcion
-	    
 	    });
 	});
