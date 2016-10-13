@@ -418,10 +418,11 @@
 	         
 		  <?php } else {?>
 		  <?php } ?>
-		 
+		 </br>
+		 </br>
+		 </br>
 	        
-	      <?php if($subtotal_debe==$subtotal_haber)  {?>
-		   
+	      <?php if(!empty($resultRes)&&($subtotal_debe==$subtotal_haber))  {?>
 		   <div class="row">
 		   <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center; margin-top:20px" > 
            <div class="form-group">
