@@ -417,6 +417,9 @@ class ComprobantesController extends ControladorBase{
    						$dcomprobantes->setParametros($parametros);
    						$resultado=$dcomprobantes->Insert();
    			
+   						
+   						////llamas a la funcion mayoriza();
+   						
    						///LAS TRAZAS
    						$traza=new TrazasModel();
    						$_nombre_controlador = "Comprobantes";
