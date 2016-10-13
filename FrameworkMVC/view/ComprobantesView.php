@@ -20,7 +20,7 @@
     function numeros(e){
     key = e.keyCode || e.which;
     tecla = String.fromCharCode(key).toLowerCase();
-    letras = "0123456789";
+    letras = "-/0123456789";
     especiales = [8,37,39,46];
  
     tecla_especial = false
@@ -254,7 +254,7 @@
 		     <div class="col-xs-3 col-md-3">
 		     <div class="form-group">
                                   <label for="retencion_ccomprobantes" class="control-label">#Retención: </label>
-                                  <input type="text" class="form-control" id="retencion_ccomprobantes" name="retencion_ccomprobantes" value="<?php echo $sel_retencion_ccomprobantes;?>"  placeholder="# Retención">
+                                  <input type="text" class="form-control" id="retencion_ccomprobantes" name="retencion_ccomprobantes" onkeypress="return numeros(event)" value="<?php echo $sel_retencion_ccomprobantes;?>"  placeholder="# Retención">
                                   <span class="help-block"></span>
              </div>
 		     </div>
