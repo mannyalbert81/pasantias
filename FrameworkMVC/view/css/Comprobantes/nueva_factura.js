@@ -2,8 +2,10 @@
 		$(document).ready(function(){
 			load(1);
 		});
+		
 
 		function load(page){
+			$(".outer_div").html('');
 			var q= $("#q").val();
 			$("#loader").fadeIn('slow');
 			$.ajax({
@@ -12,13 +14,16 @@
 				 $('#loader').html('<img src="view/images/ajax-loader.gif"> Cargando...');
 			  },
 				success:function(data){
-					$(".outer_div").html(data).fadeIn('slow');
-					$('#loader').html('');
+					console.log(data);
+					//$(".outer_div").html(data).fadeIn('slow');
+					//$('#loader').html('');
 					
 				}
 			})
 		}
 
+		
+		
 	function agregar (id)
 	
 		{  

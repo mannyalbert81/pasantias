@@ -29,7 +29,7 @@ class ComprobantesController extends ControladorBase{
 		usuarios.id_usuarios = temp_comprobantes.id_usuario_registra AND
 		usuarios.id_entidades = entidades.id_entidades AND
 		entidades.id_entidades = plan_cuentas.id_entidades AND usuarios.id_usuarios='$_id_usuarios'";
-		$id_res="plan_cuentas.codigo_plan_cuentas";
+		$id_res="temp_comprobantes.id_temp_comprobantes";
 		
 		$resultRes=$d_comprobantes->getCondiciones($columnas_res ,$tablas_res ,$where_res, $id_res);
 		
@@ -204,7 +204,7 @@ class ComprobantesController extends ControladorBase{
    			
    			$_numero_consecutivos=$resultConsecutivos[0]->numero_consecutivos;
    			$_update_numero_consecutivo=((int)$_numero_consecutivos)+1;
-   				
+   			$_update_numero_consecutivo=str_pad($_update_numero_consecutivo,6,"0",STR_PAD_LEFT);
    			
    			$_ruc_ccomprobantes =$_POST['ruc_ccomprobantes'];
    			$_nombres_ccomprobantes =$_POST['nombres_ccomprobantes'];
@@ -213,6 +213,7 @@ class ComprobantesController extends ControladorBase{
    			$_valor_ccomprobantes =$_POST['valor_ccomprobantes'];
    			$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
    			$_id_usuario_creador=$_SESSION['id_usuarios'];
+   			$_valor_letras =$_POST['valor_letras'];
    			
    
    
@@ -222,10 +223,11 @@ class ComprobantesController extends ControladorBase{
    			{
    					
    				$funcion = "ins_ccomprobantes";
-   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador'";
+   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras'";
    				$ccomprobantes->setFuncion($funcion);
    				$ccomprobantes->setParametros($parametros);
    				$resultado=$ccomprobantes->Insert();
+   				
    				
    				$resultConsecutivo=$consecutivos->UpdateBy("numero_consecutivos='$_update_numero_consecutivo'", "consecutivos", "id_consecutivos='$_id_consecutivos'");
    				
@@ -306,6 +308,7 @@ class ComprobantesController extends ControladorBase{
    			
    			$_numero_consecutivos=$resultConsecutivos[0]->numero_consecutivos;
    			$_update_numero_consecutivo=((int)$_numero_consecutivos)+1;
+   			$_update_numero_consecutivo=str_pad($_update_numero_consecutivo,6,"0",STR_PAD_LEFT);
    			
    			$_ruc_ccomprobantes =$_POST['ruc_ccomprobantes'];
    			$_nombres_ccomprobantes =$_POST['nombres_ccomprobantes'];
@@ -314,6 +317,7 @@ class ComprobantesController extends ControladorBase{
    			$_valor_ccomprobantes =$_POST['valor_ccomprobantes'];
    			$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
    			$_id_usuario_creador=$_SESSION['id_usuarios'];
+   			$_valor_letras =$_POST['valor_letras'];
    			
    			 
    			 
@@ -323,7 +327,7 @@ class ComprobantesController extends ControladorBase{
    			{
    			
    				$funcion = "ins_ccomprobantes";
-   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador'";
+   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', $_valor_letras";
    				$ccomprobantes->setFuncion($funcion);
    				$ccomprobantes->setParametros($parametros);
    				$resultado=$ccomprobantes->Insert();
