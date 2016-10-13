@@ -490,7 +490,7 @@ class ComprobantesController extends ControladorBase{
 				  public.entidades, 
 				  public.plan_cuentas";
 		$where ="plan_cuentas.codigo_plan_cuentas LIKE '$codigo_plan_cuentas%' AND entidades.id_entidades = usuarios.id_entidades AND
- 				 plan_cuentas.id_entidades = entidades.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND plan_cuentas.nivel_plan_cuentas='3'";
+ 				 plan_cuentas.id_entidades = entidades.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND plan_cuentas.nivel_plan_cuentas='4'";
 		$id ="plan_cuentas.codigo_plan_cuentas";
 		
 		
@@ -527,7 +527,7 @@ class ComprobantesController extends ControladorBase{
 				  public.entidades,
 				  public.plan_cuentas";
 		$where ="plan_cuentas.codigo_plan_cuentas = '$codigo_plan_cuentas' AND entidades.id_entidades = usuarios.id_entidades AND
-		plan_cuentas.id_entidades = entidades.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND plan_cuentas.nivel_plan_cuentas='3'";
+		plan_cuentas.id_entidades = entidades.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND plan_cuentas.nivel_plan_cuentas='4'";
 		$id ="plan_cuentas.codigo_plan_cuentas";
 		
 		
@@ -567,7 +567,7 @@ class ComprobantesController extends ControladorBase{
 				  public.entidades,
 				  public.plan_cuentas";
 		$where ="plan_cuentas.nombre_plan_cuentas LIKE '$nombre_plan_cuentas%' AND entidades.id_entidades = usuarios.id_entidades AND
-		plan_cuentas.id_entidades = entidades.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND plan_cuentas.nivel_plan_cuentas='3'";
+		plan_cuentas.id_entidades = entidades.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND plan_cuentas.nivel_plan_cuentas='4'";
 		$id ="plan_cuentas.codigo_plan_cuentas";
 	
 	
@@ -605,7 +605,7 @@ class ComprobantesController extends ControladorBase{
 				  public.entidades,
 				  public.plan_cuentas";
 		$where ="plan_cuentas.nombre_plan_cuentas = '$nombre_plan_cuentas' AND entidades.id_entidades = usuarios.id_entidades AND
-		plan_cuentas.id_entidades = entidades.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND plan_cuentas.nivel_plan_cuentas='3'";
+		plan_cuentas.id_entidades = entidades.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND plan_cuentas.nivel_plan_cuentas='4'";
 		$id ="plan_cuentas.codigo_plan_cuentas";
 		
 		
