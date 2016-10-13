@@ -56,14 +56,7 @@ $(document).ready(function() {
 				                        validators: {
 				                                notEmpty: {
 				                                        message: 'El campo es requerido.'
-				                                },
-				                                regexp: {
-				                                	 
-					               					 regexp: /^[0-9]+$/,
-					                
-					               					 message: 'Ingrese números'
-					                
-					               				 }
+				                                }
 				                             
 				                        }
 				                },
@@ -75,17 +68,7 @@ $(document).ready(function() {
 			                                }
 			                             
 			                        }
-			                },
-			                descripcion_dcomprobantes: {
-				        		message: 'El nombre no es valido',
-				                        validators: {
-				                                notEmpty: {
-				                                        message: 'El campo es requerido.'
-				                                }
-				                             
-				                        }
-				                }
-				               
+			                }   
 	        }
 	    });
 	});
