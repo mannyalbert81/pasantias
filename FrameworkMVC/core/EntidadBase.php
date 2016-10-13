@@ -818,18 +818,18 @@ class EntidadBase{
     	///buscamos la naturaleza e la cuenta
     	$where =  "id_plan_cuentas= '$_id_plan_cuentas' ";
    		$resultCuenta =  $plan_cuentas->getBy($where);
-   		foreach($resultSet as $res)
+   		foreach($resultCuenta as $res)
    		{
-   			$_naturaleza =  $res->n_plan_cuentas;
+   			$_n_plan_cuentas =  $res->n_plan_cuentas;
    			$_saldo_final_plan_cuentas =  $res->_saldo_final_plan_cuentas;
    			
    		}
-    	if ($_naturaleza == 'D')
+    	if ($_n_plan_cuentas == 'D')
     	{
     		//deudora
     		$_saldo_final_plan_cuentas = $_saldo_final_plan_cuentas + $_debe_mayor - $_haber_mayor ;
     	}
-    	If ($_naturaleza == 'A')
+    	If ($_n_plan_cuentas == 'A')
     	{
     		//acreedora	
     		$_saldo_final_plan_cuentas = $_saldo_final_plan_cuentas - $_debe_mayor + $_haber_mayor ;
