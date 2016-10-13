@@ -1,6 +1,6 @@
 $(document).ready(function() {
 		//Validacion con BootstrapValidator
-	    fl = $('#form-plan_cuentas');
+	    fl = $('#');
 	    
 	    fl.bootstrapValidator({ 
 	        message: 'El valor no es valido.',
@@ -32,28 +32,13 @@ $(document).ready(function() {
 	    
 	    });
 	    
+	    $('#modal_id_subgrupo').click(function(){
+			
+			alert('hola');
+			
+		});
+	    
 		
 	});
 
-$(function(){
-	$('#modal_id_subgrupo').click(function(){
-		
-		var _nombre = $('#modal_subgrupo_nombre');
-		
-        _this.attr('style', 'background:white');
-        
-		if(_nombre.indexOf(' ') >= 0){
-			_this.attr('style', 'background:#FF4A4A');
-		}
 
-		if(_nombre.indexOf("'") >= 0){
-			_this.attr('style', 'background:#FF4A4A');
-		}
-
-		if(_nombre.val() == ''){
-			_this.attr('style', 'background:#FF4A4A');
-		}
-		
-		
-	});
-});
