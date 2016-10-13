@@ -417,9 +417,10 @@ class ComprobantesController extends ControladorBase{
    						$dcomprobantes->setParametros($parametros);
    						$resultado=$dcomprobantes->Insert();
    			
+   						$_fecha_mayor = getdate();
    						
    						////llamas a la funcion mayoriza();
-   						
+   						$resul = $dcomprobantes->Mayoriza($_id_plan_cuentas, $_id_ccomprobantes, $_fecha_mayor, $_debe_dcomprobantes, $_haber_dcomprobantes);
    						///LAS TRAZAS
    						$traza=new TrazasModel();
    						$_nombre_controlador = "Comprobantes";
@@ -428,7 +429,6 @@ class ComprobantesController extends ControladorBase{
    						$resulta = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
    			
    							
-   						///borro de las solicitudes el carton
    						$where_del = "id_usuario_registra= '$_id_usuarios'";
    						$tem_comprobantes->deleteByWhere($where_del);
    			
