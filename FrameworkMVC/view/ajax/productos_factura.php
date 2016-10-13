@@ -2,117 +2,74 @@
   session_start();
 	
   
-  
-	
-	
-	
-	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
-	if($action == 'ajax'){
-	
-		
-		
 		$conn  = pg_connect("user=postgres port=5432 password=.Romina.2012 dbname=contabilidad host=186.4.241.148");
 		
 		if(!$conn)
 		{
 			die( "No se pudo conectar");
 		}
-		/*
-		$resultSet = array();
-		
-		$id_usuarios=$_SESSION['id_usuarios'];
-		
-		
-		$columnas ="plan_cuentas.id_plan_cuentas,
-				    plan_cuentas.codigo_plan_cuentas, 
-                    plan_cuentas.nombre_plan_cuentas";
-		
-		$tablas ="public.entidades, 
-				  public.plan_cuentas, 
-				  public.usuarios";
-		
-		$where ="entidades.id_entidades = usuarios.id_entidades AND
-                 entidades.id_entidades = plan_cuentas.id_entidades AND usuarios.id_usuarios = '$id_usuarios' AND plan_cuentas.nivel_plan_cuentas='3'";
-		
-		$id ="plan_cuentas.id_plan_cuentas";
-		
-		
-		$query=pg_query($conn, "SELECT $columnas FROM $tablas WHERE $where ORDER BY $id  ASC");
-		
-		
-		
-		while ($row = pg_fetch_object($query)) {
-			$resultSet[]=$row;
-		}
-		*/
-		//$q = $_REQUEST['q'];
-		$q = pg_escape_string($conn,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
+	
+	
+		$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
+		if($action == 'ajax'){
 			
-		$aColumns = array('codigo_plan_cuentas', 'nombre_plan_cuentas');//Columnas de busqueda
-		$sTable = "plan_cuentas";
-		$sWhere = "";
-		if ( $_GET['q'] != "" )
-		{
-			$buscador=$_GET['q'];
-			$sWhere = " WHERE (codigo_plan_cuentas LIKE '$buscador%' OR nombre_plan_cuentas LIKE '$buscador%')";
 			
-		}
-		
-		//include('pagination.php');
-		
-		$numrows=1;
-		$sql="SELECT * FROM  $sTable $sWhere";
-		$query = pg_query($conn, $sql);
-		
-		while ($row = pg_fetch_object($query)) {
-			$resultSet[]=$row;
-		}
-		
-		
-		//$query=pg_query($conn, "SELECT $columnas FROM $tablas WHERE $where LIMIT $offset offset $per_page");
-		
-		
-		if ($numrows>0){
+			include 'pagination.php'; 
 			
-			?>
-			<div class="table-responsive">
-			  <table class="table">
-				<tr  class="warning">
-					<th>Código</th>
-					<th>Nombre</th>
-					
-				</tr>
+			
+			$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
+			$per_page = 10; 
+			$adjacents  = 4;
+			$offset = ($page - 1) * $per_page;
+			
+			
+			$count_query   = pg_query($conn,"SELECT count(*) AS numrows FROM plan_cuentas ");
+			if ($row= pg_fetch_array($count_query)){$numrows = $row['numrows'];}
+			$total_pages = ceil($numrows/$per_page);
+			$reload = 'index.php';
+			
+			$query = pg_query($con,"SELECT * FROM plan_cuentas  order by codigo_plan_cuentas LIMIT $offset,$per_page");
+		
+			if ($numrows>0){
+				?>
+				<table class="table table-bordered">
+					  <thead>
+						<tr>
+						  <th>Código</th>
+						  <th>Nombre</th>
+						</tr>
+					</thead>
+					<tbody>
 					<?php
-					$id_plan_cuentas="";
-					$codigo_plan_cuentas="";
-					$nombre_plan_cuentas="";
 					
-					foreach($resultSet as $res) 
-					{
-						$codigo_plan_cuentas						   =$res->codigo_plan_cuentas;
-						$nombre_plan_cuentas                           =$res->nombre_plan_cuentas;
-						
+					while($row = pg_fetch_array($query)){
 						?>
-											<tr>
-												<td><?php echo $codigo_plan_cuentas; ?></td>
-												<td><?php echo $nombre_plan_cuentas; ?></td>
-										   </tr>
-											<?php
+						<tr>
+							<td><?php echo $row['codigo_plan_cuentas'];?></td>
+							<td><?php echo $row['nombre_plan_cuentas'];?></td>
+							
+						</tr>
+						<?php
 					}
-					
-					
 					?>
-				   <tr>
-					<td colspan=1><span class="pull-right"><?
-					// echo paginate($reload, $page, $total_pages, $adjacents);
-					?></span></td>
-				</tr>
-			  </table>
-			</div>
-			<?php
-			}
-			}
-			pg_close($conn);
+					</tbody>
+				</table>
+				<div class="table-pagination pull-right">
+					<?php echo paginate($reload, $page, $total_pages, $adjacents);?>
+				</div>
 				
-				
+					<?php
+					
+				} else {
+					?>
+					<div class="alert alert-warning alert-dismissable">
+		              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		              <h4>Aviso!!!</h4> No hay datos para mostrar
+		            </div>
+					<?php
+				}
+			}
+	
+	
+					
 ?>

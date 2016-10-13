@@ -12,37 +12,15 @@ class ComprobantesController extends ControladorBase{
 	
 		session_start();
 		$_id_usuarios= $_SESSION['id_usuarios'];
-		$d_comprobantes = new DComprobantesModel();
 		
-		$columnas_res = " temp_comprobantes.id_temp_comprobantes,
-				          plan_cuentas.id_plan_cuentas,
-		    		      plan_cuentas.codigo_plan_cuentas,
-						  plan_cuentas.nombre_plan_cuentas,
-						  temp_comprobantes.observacion_temp_comprobantes,
-						  temp_comprobantes.debe_temp_comprobantes,
-						  temp_comprobantes.haber_temp_comprobantes";
-		$tablas_res ="public.temp_comprobantes,
-						  public.usuarios,
-						  public.plan_cuentas,
-						  public.entidades";
-		$where_res ="temp_comprobantes.id_plan_cuentas = plan_cuentas.id_plan_cuentas AND
-		usuarios.id_usuarios = temp_comprobantes.id_usuario_registra AND
-		usuarios.id_entidades = entidades.id_entidades AND
-		entidades.id_entidades = plan_cuentas.id_entidades AND usuarios.id_usuarios='$_id_usuarios'";
-		$id_res="temp_comprobantes.id_temp_comprobantes";
-		
-		$resultRes=$d_comprobantes->getCondiciones($columnas_res ,$tablas_res ,$where_res, $id_res);
-		
-	
 		if (isset(  $_SESSION['usuario_usuarios']) )
 		{
-			
+			$arrayGet=array();
+			$temp_comprobantes=new ComprobantesTemporalModel();
+			$d_comprobantes = new DComprobantesModel();
 			
 			$tipo_comprobante=new TipoComprobantesModel();
 			$resultTipCom = $tipo_comprobante->getAll("nombre_tipo_comprobantes");
-				
-			
-			
 			
 			
 		    $columnas_enc = "entidades.id_entidades, 
@@ -54,15 +32,51 @@ class ComprobantesController extends ControladorBase{
 		    $resultSet=$d_comprobantes->getCondiciones($columnas_enc ,$tablas_enc ,$where_enc, $id_enc);
 		    	
 				
-		    
-			$permisos_rol = new PermisosRolesModel();
+		    $permisos_rol = new PermisosRolesModel();
 			$nombre_controladores = "Comprobantes";
 			$id_rol= $_SESSION['id_rol'];
 			$resultPer = $permisos_rol->getPermisosVer("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 				
 			if (!empty($resultPer))
 			{
+				
+				if (isset($_POST['ruc_ccomprobantes'])){
 					
+				$_ruc_ccomprobantes =$_POST['ruc_ccomprobantes'];
+				$_nombres_ccomprobantes =$_POST['nombres_ccomprobantes'];
+				$_id_tipo_comprobantes =$_POST['id_tipo_comprobantes'];
+				$_retencion_ccomprobantes =$_POST['retencion_ccomprobantes'];
+				$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
+				$resultTipoComprobantes = $tipo_comprobante->getBy("id_tipo_comprobantes='$_id_tipo_comprobantes'");
+					
+				$arrayGet['array_ruc_ccomprobantes']=$_ruc_ccomprobantes;
+				$arrayGet['array_nombres_ccomprobantes']=$_nombres_ccomprobantes;
+				//$arrayGet['array_nombre_tipo_comprobantes']=$resultTipoComprobantes[0]->nombre_tipo_comprobantes;
+				$arrayGet['array_id_tipo_comprobantes']=$resultTipoComprobantes[0]->id_tipo_comprobantes;
+				$arrayGet['array_retencion_ccomprobantes']=$_retencion_ccomprobantes;
+				$arrayGet['array_concepto_ccomprobantes']=$_concepto_ccomprobantes;
+				}
+				
+					
+				if(isset($_GET["id_temp_comprobantes"]))
+				{
+					$_id_usuarios= $_SESSION['id_usuarios'];
+					$id_temp_comprobantes=(int)$_GET["id_temp_comprobantes"];
+						
+					$where = "id_usuario_registra = '$_id_usuarios' AND id_temp_comprobantes = '$id_temp_comprobantes'  ";
+					$resultado = $temp_comprobantes->deleteByWhere($where);
+						
+					//$temp_comprobantes->deleteBy(" id_temp_comprobantes",$id_temp_comprobantes);
+				
+					$traza=new TrazasModel();
+					$_nombre_controlador = "Comprobantes";
+					$_accion_trazas  = "Borrar";
+					$_parametros_trazas = $id_temp_comprobantes;
+					$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+				}
+				
+				
+				
 				if (isset ($_POST["plan_cuentas"]) && isset ($_POST["descripcion_dcomprobantes"]) && isset ($_POST["debe_dcomprobantes"]) && isset($_POST["haber_dcomprobantes"])  )
 				{
 				
@@ -90,21 +104,39 @@ class ComprobantesController extends ControladorBase{
 					$temp_comprobantes->setParametros($parametros);
 					$resultado=$temp_comprobantes->Insert();
 				
-				}
+			        }
 				
 				
 				
+			
+				
+			
+				
+				$columnas_res = " temp_comprobantes.id_temp_comprobantes,
+				          plan_cuentas.id_plan_cuentas,
+		    		      plan_cuentas.codigo_plan_cuentas,
+						  plan_cuentas.nombre_plan_cuentas,
+						  temp_comprobantes.observacion_temp_comprobantes,
+						  temp_comprobantes.debe_temp_comprobantes,
+						  temp_comprobantes.haber_temp_comprobantes";
+				$tablas_res ="public.temp_comprobantes,
+						  public.usuarios,
+						  public.plan_cuentas,
+						  public.entidades";
+				$where_res ="temp_comprobantes.id_plan_cuentas = plan_cuentas.id_plan_cuentas AND
+				usuarios.id_usuarios = temp_comprobantes.id_usuario_registra AND
+				usuarios.id_entidades = entidades.id_entidades AND
+				entidades.id_entidades = plan_cuentas.id_entidades AND usuarios.id_usuarios='$_id_usuarios'";
+				$id_res="temp_comprobantes.id_temp_comprobantes";
+				
+				$resultRes=$d_comprobantes->getCondiciones($columnas_res ,$tablas_res ,$where_res, $id_res);
 				
 				
-				
-				
-				
-				
-				
+				 
 					
 					$this->view("Comprobantes",array(
 							
-							"resultSet"=>$resultSet, "resultRes"=>$resultRes, "resultTipCom"=>$resultTipCom
+							"resultSet"=>$resultSet, "resultRes"=>$resultRes, "resultTipCom"=>$resultTipCom, "arrayGet"=>$arrayGet
 					));
 			
 			
@@ -133,7 +165,7 @@ class ComprobantesController extends ControladorBase{
 	 
 	
 	
-	
+	/*
 	public function InsertarTemporal(){
 		
 		session_start();
@@ -176,16 +208,10 @@ class ComprobantesController extends ControladorBase{
 			$resultado=$temp_comprobantes->Insert();
 		
 		}
+	}
 		
-		
-		
-		
-		
-			
-			
-   }
-		
-   
+   */
+	
    public function InsertaComprobantes(){
    
    	session_start();
@@ -451,7 +477,7 @@ class ComprobantesController extends ControladorBase{
    }
    
     
-   
+   /*
    
    public function borrarId()
    {
@@ -495,7 +521,7 @@ class ComprobantesController extends ControladorBase{
    }
    
     
-   
+   */
    
    
 		

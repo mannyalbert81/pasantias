@@ -5,23 +5,21 @@
 		
 
 		function load(page){
-			$(".outer_div").html('');
-			var q= $("#q").val();
+			var parametros = {"action":"ajax","page":page};
 			$("#loader").fadeIn('slow');
 			$.ajax({
-				url:'view/ajax/productos_factura.php?action=ajax&page='+page+'&q='+q,
+				url:'view/ajax/productos_factura.phppaises_ajax.php',
+				data: parametros,
 				 beforeSend: function(objeto){
-				 $('#loader').html('<img src="view/images/ajax-loader.gif"> Cargando...');
-			  },
+				$("#loader").html('<img src="view/images/ajax-loader.gif"> Cargando...');
+				},
 				success:function(data){
-					console.log(data);
-					//$(".outer_div").html(data).fadeIn('slow');
-					//$('#loader').html('');
-					
+					$(".outer_div").html(data).fadeIn('slow');
+					$("#loader").html("");
 				}
 			})
 		}
-
+		
 		
 		
 	function agregar (id)

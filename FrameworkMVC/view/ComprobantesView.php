@@ -88,7 +88,7 @@
        ?>
        <?php   
        
-        
+       $array_get=urlencode(serialize($arrayGet));
        $sel_id_tipo_comprobantes = "";
        $sel_nombres_ccomprobantes = "";
        $sel_ruc_ccomprobantes="";
@@ -110,6 +110,30 @@
         $sel_concepto_ccomprobantes=$_POST['concepto_ccomprobantes'];
        //	$sel_valor_ccomprobantes=$_POST['valor_ccomprobantes'];
       }
+      //if(empty($array_get))
+      	
+      if($_SERVER['REQUEST_METHOD']=='GET')
+      {
+      
+      	if(isset($_GET['arrayGet']))
+      	{
+      		$a=stripslashes($_GET['arrayGet']);
+      
+      		$_dato=urldecode($a);
+      
+      		$_dato=unserialize($a);
+      
+      		$sel_id_tipo_comprobantes = $_dato['array_id_tipo_comprobantes'];
+      		$sel_nombres_ccomprobantes = $_dato['array_nombres_ccomprobantes'];
+      		$sel_ruc_ccomprobantes=$_dato['array_ruc_ccomprobantes'];
+      		$sel_retencion_ccomprobantes=$_dato['array_retencion_ccomprobantes'];
+      		$sel_concepto_ccomprobantes=$_dato['array_concepto_ccomprobantes'];
+      		
+      	}
+      
+      } 
+     
+      
      
       ?>
         
@@ -295,7 +319,6 @@
 		    <div class="row">
 		    <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;">
 		    <div class="form-group">
-                  <input type="submit" value="Guardar" id="btnGuardar" name="btnGuardar" class="btn btn-success"/>
                   <button type="submit" id="Agregar" name="Agregar" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i></button>
             </div>
 		    </div>
@@ -335,7 +358,7 @@
 		                <td style="font-size:80%;"> <?php echo $res->haber_temp_comprobantes; ?>     </td>  
 			           	<td>   
 			               	<div class="right">
-			                    <a href="<?php echo $helper->url("Comprobantes","borrarId"); ?>&id_temp_comprobantes=<?php echo $res->id_temp_comprobantes; ?>"><i class="glyphicon glyphicon-trash"></i></a>
+			                    <a href="<?php echo $helper->url("Comprobantes","index"); ?>&id_temp_comprobantes=<?php echo $res->id_temp_comprobantes; ?>&arrayGet=<?php echo  $array_get ;?>"><i class="glyphicon glyphicon-trash"></i></a>
 			                </div>
 			            </td>
 	   		</tr>
