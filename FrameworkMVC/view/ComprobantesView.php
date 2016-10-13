@@ -1,5 +1,3 @@
-<?php include("view/modulos/modal.php"); ?>
-<?php include("view/modulos/head.php"); ?>
       
 <!DOCTYPE HTML>
 <html lang="es">
@@ -82,6 +80,9 @@
       <body class="cuerpo">
        
        <?php 
+        include("view/modulos/modal.php"); 
+        include("view/modulos/head.php"); 
+              
        include("view/modulos/menu.php");
        include("view/modal/buscar_productos.php");
        ?>
