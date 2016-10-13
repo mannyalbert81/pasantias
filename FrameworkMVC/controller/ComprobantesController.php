@@ -63,6 +63,44 @@ class ComprobantesController extends ControladorBase{
 			if (!empty($resultPer))
 			{
 					
+				if (isset ($_POST["plan_cuentas"]) && isset ($_POST["descripcion_dcomprobantes"]) && isset ($_POST["debe_dcomprobantes"]) && isset($_POST["haber_dcomprobantes"])  )
+				{
+				
+				
+					$_id_plan_cuentas= $_POST["plan_cuentas"];
+					$_descripcion_dcomprobantes= $_POST["descripcion_dcomprobantes"];
+					$_debe_dcomprobantes= $_POST["debe_dcomprobantes"];
+				
+					if ($_debe_dcomprobantes=="")
+					{
+						$_debe_dcomprobantes=0;
+							
+					}
+					$_haber_dcomprobantes= $_POST["haber_dcomprobantes"];
+				
+					if ($_haber_dcomprobantes=="")
+					{
+						$_haber_dcomprobantes=0;
+				
+					}
+				
+					$funcion = "ins_temp_comprobantes";
+					$parametros = "'$_id_usuarios','$_id_plan_cuentas','$_descripcion_dcomprobantes','$_debe_dcomprobantes','$_haber_dcomprobantes'";
+					$temp_comprobantes->setFuncion($funcion);
+					$temp_comprobantes->setParametros($parametros);
+					$resultado=$temp_comprobantes->Insert();
+				
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 					
 					$this->view("Comprobantes",array(
 							
@@ -108,8 +146,6 @@ class ComprobantesController extends ControladorBase{
 		$resultPer = $temp_comprobantes->getPermisosEditar("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 		
 		
-		if (!empty($resultPer))
-		{
 		
 		
 		if (isset ($_POST["plan_cuentas"]) && isset ($_POST["descripcion_dcomprobantes"]) && isset ($_POST["debe_dcomprobantes"]) && isset($_POST["haber_dcomprobantes"])  )
@@ -141,17 +177,9 @@ class ComprobantesController extends ControladorBase{
 		
 		}
 		
-		$this->redirect("Comprobantes","index");
 		
-		}
-		else
-		{
-			$this->view("Error",array(
 		
-					"resultado"=>"No tiene Permisos de Insertar Ciudades"
 		
-			));
-		}
 		
 			
 			

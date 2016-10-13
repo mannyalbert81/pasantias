@@ -113,7 +113,7 @@
      
       ?>
         
-                  <?php 
+       <?php 
                   
                    $sumador_debe_total=0;
                    $sumador_haber_total=0;
@@ -141,7 +141,8 @@
         <div class="row" style="background-color: #FAFAFA;">
   
   
-            <form action="<?php echo $helper->url("Comprobantes","InsertarTemporal"); ?>" method="post" enctype="multipart/form-data" class="col-lg-12">
+  	
+        <form action="<?php echo $helper->url("Comprobantes","index"); ?>" method="post" enctype="multipart/form-data" class="col-lg-12">
             <br>	
             
               
@@ -294,7 +295,8 @@
 		    <div class="row">
 		    <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;">
 		    <div class="form-group">
-                                  <button type="submit" id="Agregar" name="Agregar" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i></button>
+                  <input type="submit" value="Guardar" id="btnGuardar" name="btnGuardar" class="btn btn-success"/>
+                  <button type="submit" id="Agregar" name="Agregar" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i></button>
             </div>
 		    </div>
 		    </div>
