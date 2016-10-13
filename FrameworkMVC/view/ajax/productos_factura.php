@@ -25,10 +25,11 @@
 			
 			$count_query   = pg_query($conn,"SELECT count(*) AS numrows FROM plan_cuentas ");
 			if ($row= pg_fetch_array($count_query)){$numrows = $row['numrows'];}
+			
 			$total_pages = ceil($numrows/$per_page);
 			$reload = 'index.php';
 			
-			$query = pg_query($con,"SELECT * FROM plan_cuentas  order by codigo_plan_cuentas LIMIT $offset,$per_page");
+			$query = pg_query($conn,"SELECT * FROM plan_cuentas  order by codigo_plan_cuentas LIMIT $offset,$per_page");
 		
 			if ($numrows>0){
 				?>

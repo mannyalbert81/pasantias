@@ -1,22 +1,163 @@
-      
+    <?php include("view/modulos/head.php");?> 
+    <?php include("view/modulos/menu.php");?>  
+    <?php include("view/modulos/modal.php");?>
+    
 <!DOCTYPE HTML>
 <html lang="es">
      <head>
          <meta charset="utf-8"/>
          <title>Comprobantes - Contabilidad 2016</title>
-        
           <link rel="stylesheet" href="view/css/bootstrap.css">
-          <script src="view/js/jquery.js"></script>
-		  <script src="view/js/bootstrapValidator.min.js"></script>
-		  <script type="text/javascript" src="view/css/Comprobantes/VentanaCentrada.js"></script>
-	      <script type="text/javascript" src="view/css/Comprobantes/nueva_factura.js"></script>
+          <link rel="stylesheet" href="view/css/Comprobantes/bootstrap.min.css">
+          <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	      <script src="view/css/Comprobantes/jquery-1.11.1.min.js"></script>
+	      <script src="view/js/bootstrapValidator.min.js"></script>
+		  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+       
+       
+       
+       <script type="text/javascript">
+        var v=true;
+        $("span.help-block").hide();
+
+        function verificar(){
+
+            var v1=0, v2=0, v3=0, v4=0, v5=0;
             
-		  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-	      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        
+            v1=validacion('id_plan_cuentas');
+            v2=validacion('nombre_plan_cuentas');
+            v3=validacion('descripcion_dcomprobantes');
+            v4=validacion('debe_dcomprobantes');
+            v5=validacion('haber_dcomprobantes');
+            if (v1===false || v2===false || v3===false || v4===false || v5===false) {
+                 $("#exito").hide();
+                 $("#error").show();
+            }else{
+                $("#error").hide();
+                $("#exito").show();
+            }
+            } 
+
+  
 
         
-    	
+        function validacion(campo){
+            var a=0;
+
+            if (campo==='id_plan_cuentas')
+            {
+                codigo = document.getElementById(campo).value;
+                if( codigo == null || codigo.length == 0 || /^\s+$/.test(codigo) ) {
+                    $("#glypcn"+campo).remove();
+                    $('#'+campo).parent().parent().attr("class", "form-group has-error has-feedback");
+                    $('#'+campo).parent().children('span').text("Ingrese Codigo").show();
+                    $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+                    return false;
+                   
+                }
+                else
+                {
+                    if(isNaN(codigo)) {
+
+                        $("#glypcn"+campo).remove();
+                        $('#'+campo).parent().parent().attr("class", "form-group has-success has-feedback");
+                        $('#'+campo).parent().children('span').hide();
+                        $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+
+              
+                        return false;
+                    }
+                    else{
+
+                        $("#glypcn"+campo).remove();
+                        $('#'+campo).parent().parent().attr("class", "form-group has-success has-feedback");
+                        $('#'+campo).parent().children('span').hide();
+                        $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+             
+                        return true;
+                    }
+                    
+                    
+                }
+                
+            }
+
+            if (campo==='nombre_plan_cuentas'){
+                apellido = document.getElementById(campo).value;
+                if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
+                    
+                    $("#glypcn"+campo).remove();
+                    $('#'+campo).parent().parent().attr("class", "form-group has-error has-feedback");
+                    $('#'+campo).parent().children('span').text("Ingrese Nombre").show();
+                    $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+                    return false;
+                    
+                }
+                else{
+                    $("#glypcn"+campo).remove();
+                    $('#'+campo).parent().parent().attr("class", "form-group has-success has-feedback");
+                    $('#'+campo).parent().children('span').hide();
+                    $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+                    return true;
+                    
+                } 
+            }
+
+
+            if (campo==='descripcion_dcomprobantes'){
+                apellido = document.getElementById(campo).value;
+                if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
+                    
+                    $("#glypcn"+campo).remove();
+                    $('#'+campo).parent().parent().attr("class", "form-group has-error has-feedback");
+                    $('#'+campo).parent().children('span').text("Ingrese Descripción").show();
+                    $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+                    return false;
+                    
+                }
+                else{
+                    $("#glypcn"+campo).remove();
+                    $('#'+campo).parent().parent().attr("class", "form-group has-success has-feedback");
+                    $('#'+campo).parent().children('span').hide();
+                    $('#'+campo).parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+                    return true;
+                    
+                } 
+            }
+        }
+    </script>
+       
+      
+      
+       
+    
+    <script >   
+    function numeros(e){
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = "0123456789";
+    especiales = [8,37,39,46];
+ 
+    tecla_especial = false
+    for(var i in especiales){
+    if(key == especiales[i]){
+     tecla_especial = true;
+     break;
+        } 
+    }
+ 
+    if(letras.indexOf(tecla)==-1 && !tecla_especial)
+        return false;
+     }
+    </script > 
+ 
+      <script>
+      function activar(){
+    	     var cana1=document.getElementById("debe_comprobantes").disabled=true;
+    	}
+      </script>
+        
+
 	<script>
 	       	$(document).ready(function(){ 	
 				$( "#id_plan_cuentas" ).autocomplete({
@@ -79,13 +220,7 @@
      </head>
       <body class="cuerpo">
        
-       <?php 
-        include("view/modulos/modal.php"); 
-        include("view/modulos/head.php"); 
-              
-       include("view/modulos/menu.php");
-       include("view/modal/buscar_productos.php");
-       ?>
+       
        <?php   
        
        $array_get=urlencode(serialize($arrayGet));
@@ -166,7 +301,7 @@
   
   
   	
-        <form action="<?php echo $helper->url("Comprobantes","index"); ?>" method="post" enctype="multipart/form-data" class="col-lg-12">
+        <form id="frm-comprobantes" action="<?php echo $helper->url("Comprobantes","index"); ?>" method="post" enctype="multipart/form-data" class="col-lg-12">
             <br>	
             
               
@@ -278,39 +413,42 @@
 	         </div>
 	         <div class="panel-body">
   			 <div class="row">
-  		     <div class="col-xs-2 col-md-2">
-		     <div class="form-group">
-                                  <label for="id_plan_cuentas" class="control-label">#Cuenta </label>
-                                  <input type="text" class="form-control" id="id_plan_cuentas" name="id_plan_cuentas" value=""  placeholder="Search">
+  			 <div class="form-group" style="margin-top:13px">
+             <div class="col-xs-2 col-md-2">
+             
+                                  <label for="id_plan_cuentas" class="control-label" >#Cuenta: </label>
+                                  <input type="text" class="form-control" id="id_plan_cuentas" name="id_plan_cuentas" value="" onkeyup="validacion('id_plan_cuentas');" placeholder="Search">
                                   <input type="hidden" class="form-control" id="plan_cuentas" name="plan_cuentas" value=""  placeholder="Search">
                                   <span class="help-block"></span>
              </div>
-		     </div>
-		     <div class="col-xs-3 col-md-3">
+             </div>
+		     
 		     <div class="form-group">
+		     <div class="col-xs-3 col-md-3">                     
                                   <label for="nombre_plan_cuentas" class="control-label">Nombre: </label>
-                                  <input type="text" class="form-control" id="nombre_plan_cuentas" name="nombre_plan_cuentas" value=""  placeholder="Search">
+                                  <input type="text" class="form-control" id="nombre_plan_cuentas" name="nombre_plan_cuentas" value="" onkeyup="validacion('nombre_plan_cuentas');" placeholder="Search">
                                   <span class="help-block"></span>
              </div>
 		     </div>
-		     <div class="col-xs-3 col-md-3">
+		     
 		     <div class="form-group">
-                                  <label for="descripcion_dcomprobantes" class="control-label">Descripción: </label>
-                                  <input type="text" class="form-control" id="descripcion_dcomprobantes" name="descripcion_dcomprobantes" value=""  placeholder="">
+             <div class="col-xs-3 col-md-3">
+		                          <label for="descripcion_dcomprobantes" class="control-label">Descripción: </label>
+                                  <input type="text" class="form-control" id="descripcion_dcomprobantes" name="descripcion_dcomprobantes" value="" onkeyup="validacion('descripcion_dcomprobantes');" placeholder="">
                                   <span class="help-block"></span>
              </div>
 		     </div>
-		     <div class="col-xs-2 col-md-2">
 		     <div class="form-group">
-                                  <label for="debe_dcomprobantes" class="control-label">Debe: </label>
-                                  <input type="text" class="form-control" id="debe_dcomprobantes" name="debe_dcomprobantes" value=""  placeholder="">
+             <div class="col-xs-2 col-md-2">
+		                          <label for="debe_dcomprobantes" class="control-label">Debe: </label>
+                                  <input type="text" class="form-control" id="debe_dcomprobantes" name="debe_dcomprobantes" value="" onkeypress="return numeros(event)" onkeyup="validacion('debe_dcomprobantes');" placeholder=""  onclick="activar()" disabled="disabled>
                                   <span class="help-block"></span>
              </div>
 		     </div>
-		     <div class="col-xs-2 col-md-2">
 		     <div class="form-group">
-                                  <label for="haber_dcomprobantes" class="control-label">Haber: </label>
-                                  <input type="text" class="form-control" id="haber_dcomprobantes" name="haber_dcomprobantes" value=""  placeholder="">
+             <div class="col-xs-2 col-md-2">
+		                          <label for="haber_dcomprobantes" class="control-label">Haber: </label>
+                                  <input type="text" class="form-control" id="haber_dcomprobantes" name="haber_dcomprobantes" value="" onkeypress="return numeros(event)" onkeyup="validacion('haber_dcomprobantes');" placeholder=""  disabled="disabled>
                                   <span class="help-block"></span>
              </div>
 		     </div>
@@ -319,7 +457,7 @@
 		    <div class="row">
 		    <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center;">
 		    <div class="form-group">
-                  <button type="submit" id="Agregar" name="Agregar" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i></button>
+                  <button type="button" id="Agregar" name="Agregar" onclick='verificar();' class="btn btn-info"><i class="glyphicon glyphicon-plus"></i></button>
             </div>
 		    </div>
 		    </div>
