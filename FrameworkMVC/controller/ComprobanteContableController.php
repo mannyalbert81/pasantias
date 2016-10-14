@@ -1,6 +1,6 @@
 <?php
 
-class ComprobantesController extends ControladorBase{
+class ComprobanteContableController extends ControladorBase{
 
 	public function __construct() {
 		parent::__construct();
@@ -33,7 +33,7 @@ class ComprobantesController extends ControladorBase{
 		    	
 				
 		    $permisos_rol = new PermisosRolesModel();
-			$nombre_controladores = "Comprobantes";
+			$nombre_controladores = "ComprobanteContable";
 			$id_rol= $_SESSION['id_rol'];
 			$resultPer = $permisos_rol->getPermisosVer("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 				
@@ -69,7 +69,7 @@ class ComprobantesController extends ControladorBase{
 					//$temp_comprobantes->deleteBy(" id_temp_comprobantes",$id_temp_comprobantes);
 				
 					$traza=new TrazasModel();
-					$_nombre_controlador = "Comprobantes";
+					$_nombre_controlador = "ComprobanteContable";
 					$_accion_trazas  = "Borrar";
 					$_parametros_trazas = $id_temp_comprobantes;
 					$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
@@ -134,7 +134,7 @@ class ComprobantesController extends ControladorBase{
 				
 				 
 					
-					$this->view("Comprobantes",array(
+					$this->view("ComprobanteContable",array(
 							
 							"resultSet"=>$resultSet, "resultRes"=>$resultRes, "resultTipCom"=>$resultTipCom, "arrayGet"=>$arrayGet
 					));
@@ -227,7 +227,7 @@ class ComprobantesController extends ControladorBase{
    	$tipo_comprobantes = new TipoComprobantesModel();
    
    
-   	$nombre_controladores = "Comprobantes";
+   	$nombre_controladores = "ComprobanteContable";
    	$id_rol= $_SESSION['id_rol'];
    	$resultPer = $ccomprobantes->getPermisosEditar("   nombre_controladores = '$nombre_controladores' AND id_rol = '$id_rol' " );
    
@@ -318,7 +318,7 @@ class ComprobantesController extends ControladorBase{
    							
    						///LAS TRAZAS
    						$traza=new TrazasModel();
-   						$_nombre_controlador = "Comprobantes";
+   						$_nombre_controlador = "ComprobanteContable";
    						$_accion_trazas  = "Guardar";
    						$_parametros_trazas = $_id_plan_cuentas;
    						$resulta = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
@@ -432,7 +432,7 @@ class ComprobantesController extends ControladorBase{
    						
    						///LAS TRAZAS
    						$traza=new TrazasModel();
-   						$_nombre_controlador = "Comprobantes";
+   						$_nombre_controlador = "ComprobanteContable";
    						$_accion_trazas  = "Guardar";
    						$_parametros_trazas = $_id_plan_cuentas;
    						$resulta = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
@@ -472,7 +472,7 @@ class ComprobantesController extends ControladorBase{
    
    		}	
    		
-   		$this->redirect("Comprobantes","index")	;
+   		$this->redirect("ComprobanteContable","index")	;
    	}
    	else
    	{

@@ -807,7 +807,7 @@ class EntidadBase{
     }
     
     
-    public  function Mayoriza($_id_plan_cuentas, $_id_ccomprobantes, $_fecha_mayor, $_debe_mayor, $_haber_mayor)
+    public  function Mayoriza($_id_plan_cuentas, $_id_ccomprobantes, $_fecha_actual, $_debe_mayor, $_haber_mayor)
     {
     	$mayor = new MayorModel();
     	$plan_cuentas = new PlanCuentasModel();
@@ -851,7 +851,7 @@ class EntidadBase{
     	$funcion = "ins_mayor";
     
     	//$parametros = " '$_id_plan_cuentas', '$_id_ccomprobantes' , '$_fecha_mayor', '$_debe_mayor', '$_haber_mayor', '$_saldo_mayor' ";
-    	$parametros = " '$_id_plan_cuentas', '$_id_ccomprobantes' , '$_fecha_mayor', '$_debe_mayor', '$_haber_mayor', '$_saldo_mayor' ";
+    	$parametros = " '$_id_plan_cuentas', '$_id_ccomprobantes' , '$_fecha_actual', '$_debe_mayor', '$_haber_mayor', '$_saldo_mayor' ";
     	//$parametros = " '4', '27' , '2016-01-01', '100', '0', '100' ";
     	
     	

@@ -29,7 +29,7 @@ $(document).ready(function() {
 		                        }
 		                },
 		                ruc_ccomprobantes: {
-			        		message: 'El nombre no es valido',
+			        		message: 'El ruc no es valido',
 			                        validators: {
 			                                notEmpty: {
 			                                        message: 'El ruc es requerido.'
@@ -45,7 +45,8 @@ $(document).ready(function() {
 				            					 
 				            					 min: 13,
 				            					 max: 13,
-				             
+				                                
+				            					 message: 'Ingrese 13 números'
 				            					
 				            				 }
 			                             
@@ -68,7 +69,7 @@ $(document).ready(function() {
 			                                }
 			                             
 			                        }
-			                }   
+			                }
 	        }
 	    });
 	});

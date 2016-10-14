@@ -6,7 +6,7 @@
 <html lang="es">
      <head>
          <meta charset="utf-8"/>
-         <title>Comprobantes - Contabilidad 2016</title>
+         <title>Comprobante Contable - Contabilidad 2016</title>
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	      <link rel="stylesheet" href="view/css/bootstrap.css">
           <script src="view/js/jquery.js"></script>
