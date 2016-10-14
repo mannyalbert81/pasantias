@@ -86,7 +86,7 @@ $controladores=$_SESSION['controladores'];
           <ul class="dropdown-menu">
           
           	<li style="<?php echo getcontrolador("Comprobantes",$controladores) ?>">
-			<a href="index.php?controller=Comprobantes&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Comprobantes Ingreso-Egreso</span> </a>
+			<a href="index.php?controller=Comprobantes&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Comprobantes Ingreso / Egreso</span> </a>
 			</li>
 			
 			<li style="<?php echo getcontrolador("ComprobanteContable",$controladores) ?>">

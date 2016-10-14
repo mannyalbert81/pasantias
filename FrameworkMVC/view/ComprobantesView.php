@@ -1,6 +1,7 @@
     <?php include("view/modulos/head.php");?> 
     <?php include("view/modulos/menu.php");?>  
     <?php include("view/modulos/modal.php");?>
+    <?php include("view/css/Comprobantes/modal/buscar_plan_cuentas.php");?>
     
 <!DOCTYPE HTML>
 <html lang="es">
@@ -13,7 +14,9 @@
 		  <script src="view/js/bootstrapValidator.min.js"></script>
 		  <script src="view/js/ValidarComprobantesTemporal.js"></script>
 	      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    
+          <script type="text/javascript" src="view/css/Comprobantes/js/VentanaCentrada.js"></script>
+	      <script type="text/javascript" src="view/css/Comprobantes/js/procesos-comprobantes.js"></script>
+	   
     
     
     <script >   
@@ -107,7 +110,11 @@
 					
 		     </script>
 
-	
+             
+             
+             
+		
+       
 		         
      </head>
       <body class="cuerpo">
@@ -219,6 +226,8 @@
 								   </select> 
                                   <span class="help-block"></span>	
 		     </div>
+		     
+		     
 			 </div>
 	         </div>
 	         </div>

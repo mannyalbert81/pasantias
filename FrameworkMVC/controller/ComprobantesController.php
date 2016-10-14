@@ -20,7 +20,7 @@ class ComprobantesController extends ControladorBase{
 			$d_comprobantes = new DComprobantesModel();
 			
 			$tipo_comprobante=new TipoComprobantesModel();
-			$resultTipCom = $tipo_comprobante->getAll("nombre_tipo_comprobantes");
+			$resultTipCom = $tipo_comprobante->getBy("nombre_tipo_comprobantes='INGRESOS' OR nombre_tipo_comprobantes='EGRESOS'");
 			
 			
 		    $columnas_enc = "entidades.id_entidades, 
@@ -77,35 +77,40 @@ class ComprobantesController extends ControladorBase{
 				
 				
 				
-				if (isset ($_POST["plan_cuentas"]) && isset ($_POST["descripcion_dcomprobantes"]) && isset ($_POST["debe_dcomprobantes"]) && isset($_POST["haber_dcomprobantes"])  )
-				{
-				
-				
+				if(isset($_POST["plan_cuentas"])){
 					$_id_plan_cuentas= $_POST["plan_cuentas"];
-					$_descripcion_dcomprobantes= $_POST["descripcion_dcomprobantes"];
-					$_debe_dcomprobantes= $_POST["debe_dcomprobantes"];
 				
-					if ($_debe_dcomprobantes=="")
+					if($_id_plan_cuentas==""){
+							
+					}else
 					{
-						$_debe_dcomprobantes=0;
+							
+							
+						$_descripcion_dcomprobantes= $_POST["descripcion_dcomprobantes"];
+				
+						$_debe_dcomprobantes= $_POST["debe_dcomprobantes"];
+							
+						if ($_debe_dcomprobantes=="")
+						{
+							$_debe_dcomprobantes=0;
+				
+						}
+						$_haber_dcomprobantes= $_POST["haber_dcomprobantes"];
+							
+						if ($_haber_dcomprobantes=="")
+						{
+							$_haber_dcomprobantes=0;
+								
+						}
+							
+						$funcion = "ins_temp_comprobantes";
+						$parametros = "'$_id_usuarios','$_id_plan_cuentas','$_descripcion_dcomprobantes','$_debe_dcomprobantes','$_haber_dcomprobantes'";
+						$temp_comprobantes->setFuncion($funcion);
+						$temp_comprobantes->setParametros($parametros);
+						$resultado=$temp_comprobantes->Insert();
 							
 					}
-					$_haber_dcomprobantes= $_POST["haber_dcomprobantes"];
-				
-					if ($_haber_dcomprobantes=="")
-					{
-						$_haber_dcomprobantes=0;
-				
-					}
-				
-					$funcion = "ins_temp_comprobantes";
-					$parametros = "'$_id_usuarios','$_id_plan_cuentas','$_descripcion_dcomprobantes','$_debe_dcomprobantes','$_haber_dcomprobantes'";
-					$temp_comprobantes->setFuncion($funcion);
-					$temp_comprobantes->setParametros($parametros);
-					$resultado=$temp_comprobantes->Insert();
-				
-			        }
-				
+				}	
 				
 				
 			
@@ -253,7 +258,8 @@ class ComprobantesController extends ControladorBase{
    				
    				
    			$_id_entidades =$_POST['id_entidades'];
-   			$resultConsecutivos = $consecutivos->getBy("nombre_consecutivos LIKE '%INGRESOS%' AND id_entidades='$_id_entidades'");
+   			$_id_tipo_comprobantes =$_POST['id_tipo_comprobantes'];
+   			$resultConsecutivos = $consecutivos->getBy("nombre_consecutivos LIKE '%INGRESOS%' AND id_entidades='$_id_entidades' AND id_tipo_comprobantes='$_id_tipo_comprobantes'");
    			$_id_consecutivos=$resultConsecutivos[0]->id_consecutivos;
    			
    			$_numero_consecutivos=$resultConsecutivos[0]->numero_consecutivos;
@@ -262,7 +268,6 @@ class ComprobantesController extends ControladorBase{
    			
    			$_ruc_ccomprobantes =$_POST['ruc_ccomprobantes'];
    			$_nombres_ccomprobantes =$_POST['nombres_ccomprobantes'];
-   			$_id_tipo_comprobantes =$_POST['id_tipo_comprobantes'];
    			$_retencion_ccomprobantes =$_POST['retencion_ccomprobantes'];
    			$_valor_ccomprobantes =$_POST['valor_ccomprobantes'];
    			$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
@@ -314,7 +319,17 @@ class ComprobantesController extends ControladorBase{
    						$dcomprobantes->setParametros($parametros);
    						$resultado=$dcomprobantes->Insert();
    						
-   						
+   						$_fecha_mayor = getdate();
+   						$_fecha_año=$_fecha_mayor['year'];
+   						$_fecha_mes=$_fecha_mayor['mon'];
+   						$_fecha_dia=$_fecha_mayor['mday'];
+   							
+   						$_fecha_actual=$_fecha_año.'-'.$_fecha_mes.'-'.$_fecha_dia;
+   							
+   						////llamas a la funcion mayoriza();
+   						$resul = $dcomprobantes->Mayoriza($_id_plan_cuentas, $_id_ccomprobantes, $_fecha_actual, $_debe_dcomprobantes, $_haber_dcomprobantes);
+   						$_cadena = $_id_plan_cuentas .'-'. $_id_ccomprobantes .'-'. $_fecha_actual .'-'. $_debe_dcomprobantes .'-'. $_haber_dcomprobantes ;
+   							
    							
    						///LAS TRAZAS
    						$traza=new TrazasModel();
@@ -357,7 +372,8 @@ class ComprobantesController extends ControladorBase{
    		else{
    			
    			$_id_entidades =$_POST['id_entidades'];
-   			$resultConsecutivos = $consecutivos->getBy("nombre_consecutivos LIKE '%EGRESOS%' AND id_entidades='$_id_entidades'");
+   			$_id_tipo_comprobantes =$_POST['id_tipo_comprobantes'];
+   			$resultConsecutivos = $consecutivos->getBy("nombre_consecutivos LIKE '%EGRESOS%' AND id_entidades='$_id_entidades'AND id_tipo_comprobantes='$_id_tipo_comprobantes'");
    			$_id_consecutivos=$resultConsecutivos[0]->id_consecutivos;
    			
    			$_numero_consecutivos=$resultConsecutivos[0]->numero_consecutivos;
@@ -366,7 +382,6 @@ class ComprobantesController extends ControladorBase{
    			
    			$_ruc_ccomprobantes =$_POST['ruc_ccomprobantes'];
    			$_nombres_ccomprobantes =$_POST['nombres_ccomprobantes'];
-   			$_id_tipo_comprobantes =$_POST['id_tipo_comprobantes'];
    			$_retencion_ccomprobantes =$_POST['retencion_ccomprobantes'];
    			$_valor_ccomprobantes =$_POST['valor_ccomprobantes'];
    			$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
@@ -690,7 +705,7 @@ class ComprobantesController extends ControladorBase{
 	
 	}
 	
-	
+    
 	
 	
 }
