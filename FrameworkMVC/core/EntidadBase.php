@@ -813,7 +813,7 @@ class EntidadBase{
     	$plan_cuentas = new PlanCuentasModel();
     	$_saldo_mayor = 0;
     	$_n_plan_cuentas = '';
-    	$_saldo_final_plan_cuentas = '';
+    	$_saldo_fin_plan_cuentas = '';
     	
     	///buscamos la naturaleza e la cuenta
     	$where =  "id_plan_cuentas= '$_id_plan_cuentas' ";
@@ -821,26 +821,26 @@ class EntidadBase{
    		foreach($resultCuenta as $res)
    		{
    			$_n_plan_cuentas =  $res->n_plan_cuentas;
-   			$_saldo_final_plan_cuentas =  $res->_saldo_final_plan_cuentas;
+   			$_saldo_fin_plan_cuentas =  $res->_saldo_fin_plan_cuentas;
    			
    		}
     	if ($_n_plan_cuentas == 'D')
     	{
     		//deudora
-    		$_saldo_final_plan_cuentas = $_saldo_final_plan_cuentas + $_debe_mayor - $_haber_mayor ;
+    		$_saldo_fin_plan_cuentas = $_saldo_fin_plan_cuentas + $_debe_mayor - $_haber_mayor ;
     	}
     	If ($_n_plan_cuentas == 'A')
     	{
     		//acreedora	
-    		$_saldo_final_plan_cuentas = $_saldo_final_plan_cuentas - $_debe_mayor + $_haber_mayor ;
+    		$_saldo_fin_plan_cuentas = $_saldo_fin_plan_cuentas - $_debe_mayor + $_haber_mayor ;
     	}
 
-    	$_saldo_mayor = $_saldo_final_plan_cuentas;
+    	$_saldo_mayor = $_saldo_fin_plan_cuentas;
     	
      	///actualizo el saldo de la cuenta
 
     	
-    	$colval=" saldo_final_plan_cuentas = '$_saldo_final_plan_cuentas' ";
+    	$colval=" saldo_fin_plan_cuentas = '$_saldo_fin_plan_cuentas' ";
     	$tabla="plan_cuentas";
     	$where=" id_plan_cuentas = '$_id_plan_cuentas'  ";
     	 
