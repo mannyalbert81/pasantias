@@ -90,7 +90,7 @@ $controladores=$_SESSION['controladores'];
 			</li>
 			
 			<li style="<?php echo getcontrolador("ComprobanteContable",$controladores) ?>">
-			<a href="index.php?controller=ComprobanteContable&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Comprobante-Contable</span> </a>
+			<a href="index.php?controller=ComprobanteContable&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Comprobante Contable</span> </a>
 			</li>
 			
 </ul>
