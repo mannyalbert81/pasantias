@@ -421,6 +421,8 @@ class ComprobantesController extends ControladorBase{
    						
    						////llamas a la funcion mayoriza();
    						$resul = $dcomprobantes->Mayoriza($_id_plan_cuentas, $_id_ccomprobantes, $_fecha_mayor, $_debe_dcomprobantes, $_haber_dcomprobantes);
+   						$_cadena = $_id_plan_cuentas .'-'. $_id_ccomprobantes .'-'. $_fecha_mayor .'-'. $_debe_dcomprobantes .'-'. $_haber_dcomprobantes ; 
+   						
    						///LAS TRAZAS
    						$traza=new TrazasModel();
    						$_nombre_controlador = "Comprobantes";

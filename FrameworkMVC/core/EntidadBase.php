@@ -813,7 +813,7 @@ class EntidadBase{
     	$plan_cuentas = new PlanCuentasModel();
     	$_saldo_mayor = 0;
     	$_n_plan_cuentas = '';
-    	$_saldo_fin_plan_cuentas = '';
+    	$_saldo_fin_plan_cuentas = 0;
     	
     	///buscamos la naturaleza e la cuenta
     	$where =  "id_plan_cuentas= '$_id_plan_cuentas' ";
@@ -821,7 +821,7 @@ class EntidadBase{
    		foreach($resultCuenta as $res)
    		{
    			$_n_plan_cuentas =  $res->n_plan_cuentas;
-   			$_saldo_fin_plan_cuentas =  $res->_saldo_fin_plan_cuentas;
+   			$_saldo_fin_plan_cuentas =  $res->saldo_fin_plan_cuentas;
    			
    		}
     	if ($_n_plan_cuentas == 'D')
@@ -850,16 +850,16 @@ class EntidadBase{
     	
     	$funcion = "ins_mayor";
     
-    	$_usuario_origen=$_SESSION['id_usuarios'];
-    
-    
+    	//$parametros = " '$_id_plan_cuentas', '$_id_ccomprobantes' , '$_fecha_mayor', '$_debe_mayor', '$_haber_mayor', '$_saldo_mayor' ";
     	$parametros = " '$_id_plan_cuentas', '$_id_ccomprobantes' , '$_fecha_mayor', '$_debe_mayor', '$_haber_mayor', '$_saldo_mayor' ";
+    	//$parametros = " '4', '27' , '2016-01-01', '100', '0', '100' ";
+    	
+    	
+    	$plan_cuentas->setFuncion($funcion);
     
-    	$notificaciones->setFuncion($funcion);
+    	$plan_cuentas->setParametros($parametros);
     
-    	$notificaciones->setParametros($parametros);
-    
-    	$resultadoT=$notificaciones->Insert();
+    	$resultadoT=$plan_cuentas->Insert();
     }
     
 }

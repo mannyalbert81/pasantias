@@ -190,7 +190,7 @@
              
     	<div class="container">
         <div class="row" style="background-color: #FAFAFA;">
-  
+  		
   
   	
         <form id="form-comprobantes" action="<?php echo $helper->url("Comprobantes","index"); ?>" method="post" enctype="multipart/form-data" class="col-lg-12">
