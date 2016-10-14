@@ -27,6 +27,7 @@
 			
 			$count_query   = pg_query($conn,"SELECT count(*) AS numrows FROM plan_cuentas, entidades, usuarios WHERE entidades.id_entidades = plan_cuentas.id_entidades AND
             entidades.id_entidades = usuarios.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND plan_cuentas.nivel_plan_cuentas='5'");
+			
 			if ($row= pg_fetch_array($count_query)){$numrows = $row['numrows'];}
 			$total_pages = ceil($numrows/$per_page);
 			$reload = 'index.php';
@@ -40,8 +41,8 @@
                   <table class="table table-bordered">
 					  <thead>
 						<tr>
-						  <th>Código</th>
-						  <th>Nombre</th>
+						  <th>Código Cuenta</th>
+						  <th>Nombre Cuenta</th>
 						
 						</tr>
 					</thead>
