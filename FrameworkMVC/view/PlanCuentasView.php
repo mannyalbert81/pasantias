@@ -1,6 +1,7 @@
-<?php include("view/modulos/modal.php"); ?>
+
 <?php include("view/modulos/head.php"); ?>
-<?php $n_plan_cuentas=array("A"=>'Acreedora',"D"=>'Deudora')?>
+<?php $n_plan_cuentas=array("A"=>'Acreedora',"D"=>'Deudora');
+      $resultMenu = array("codigo"=>'Codigo',"nombre"=>'Nombre',"tipo"=>'Tipo',"naturaleza"=>'Naturaleza');?>
 
 <?php //print_r($resultCodigo_p_cuentas);				?>
 
@@ -15,6 +16,7 @@
           <script src="view/js/jquery-ui.js"></script>
 		  <script src="view/js/bootstrapValidator.min.js"></script>
 		  <script src="view/js/ValidarPlanCuentas.js"></script>
+		  
 		  <style type="text/css">
 			 .img{border-radius: 25px;}
 			 .img:hover{
@@ -128,19 +130,19 @@
 				        html+="<div class = 'col-xs-12 col-md-6'>";
 				        html+="<div class='form-group'>";
 				        html+="<label for='modal_grupo_codigo' class='control-label'>Codigo</label><br>";
-				        html+="<input type='text' class='form-control' id='modal_grupo_codigo' name='modal_grupo_codigo' value='"+codigoC+"' >";
+				        html+="<input type='text' class='form-control' id='modal_grupo_codigo' name='modal_grupo_codigo' value='"+codigoC+"' readonly />";
 				        html+="</div>";
 				        html+="</div>";
 				        html+="<div class = 'col-xs-12 col-md-6'>";
 				        html+="<div class='form-group'>";
 				        html+="<label for='modal_grupo_tipo' class='control-label'>Tipo</label><br>";
-				        html+="<input type='text' class='form-control' id='modal_grupo_tipo' name='modal_grupo_tipo' value='G' >";
+				        html+="<input type='text' class='form-control' id='modal_grupo_tipo' name='modal_grupo_tipo' value='G' readonly >";
 				        html+="</div>";
 				        html+="</div>";
 				        html+="<div class = 'col-xs-12 col-md-6'>";
 				        html+="<div class='form-group'>";
 				        html+="<label for='modal_grupo_nivel' class='control-label'>Nivel</label><br>";
-				        html+="<input type='text' class='form-control' id='modal_grupo_nivel' name='modal_grupo_nivel' value='2' >";
+				        html+="<input type='text' class='form-control' id='modal_grupo_nivel' name='modal_grupo_nivel' value='2' readonly >";
 				        html+="</div>";
 				        html+="</div>";
 				        html+="<div class='col-xs-12 col-md-6'>";
@@ -279,7 +281,7 @@
 			        }); 
 
 			        var  html = "";
-			        html+="<h4 style='color:#ec971f;'>Registrar Nuevo SubGrupo </h4><hr/>"
+			        html+="<h4 style='color:#ec971f;'>Registrar Nuevo SubGrupo </h4><hr/>";
 		            html+="<div class = 'col-xs-12 col-md-6'>";
 			        html+="<div class='form-group'>";
 			        html+="<label for='modal_subgrupo_nombre' class='control-label'>Nombre</label><br>";
@@ -290,19 +292,19 @@
 			        html+="<div class = 'col-xs-12 col-md-6'>";
 			        html+="<div class='form-group'>";
 			        html+="<label for='modal_subgrupo_codigo' class='control-label'>Codigo</label><br>";
-			        html+="<input type='text' class='form-control' id='modal_subgrupo_codigo' name='modal_subgrupo_codigo' value='"+subgrupo+"' >";
+			        html+="<input type='text' class='form-control' id='modal_subgrupo_codigo' name='modal_subgrupo_codigo' value='"+subgrupo+"' readonly>";
 			        html+="</div>";
 			        html+="</div>";
 			        html+="<div class = 'col-xs-12 col-md-6'>";
 			        html+="<div class='form-group'>";
 			        html+="<label for='modal_subgrupo_tipo' class='control-label'>Tipo</label><br>";
-			        html+="<input type='text' class='form-control' id='modal_subgrupo_tipo' name='modal_subgrupo_tipo' value='G' >";
+			        html+="<input type='text' class='form-control' id='modal_subgrupo_tipo' name='modal_subgrupo_tipo' value='G' readonly>";
 			        html+="</div>";
 			        html+="</div>";
 			        html+="<div class = 'col-xs-12 col-md-6'>";
 			        html+="<div class='form-group'>";
 			        html+="<label for='modal_subgrupo_nivel' class='control-label'>Nivel</label><br>";
-			        html+="<input type='text' class='form-control' id='modal_subgrupo_nivel' name='modal_subgrupo_nivel' value='3' >";
+			        html+="<input type='text' class='form-control' id='modal_subgrupo_nivel' name='modal_subgrupo_nivel' value='3' readonly>";
 			        html+="</div>";
 			        html+="</div>";
 			        html+="<div class='col-xs-12 col-md-6'>";
@@ -369,7 +371,167 @@
 		
 		</script>
 		
-		<!-- funcion para llenar los grupos al selecionas las cuentas (Pasivo,Activo,Patrimonio,Egresos,Ingresos) -->
+		<script type="text/javascript">
+		
+		//sin definir el click
+				
+		  function editar_cuenta_modal(rowTabla){
+
+		        	var  valCuentas = 1;		        	
+		        	var id_plan_cuentas = '';
+		        	var nombre_plan_cuentas = '';
+		        	var codigo_plan_cuentas = ''; 		        	
+		        	var datoscuenta = rowTabla.id;
+		        	var array_plan_cuentas;
+
+		        	array_plan_cuentas = datoscuenta.split(',');
+		        	id_plan_cuentas = array_plan_cuentas[0];
+		        	codigo_plan_cuentas = array_plan_cuentas[1];
+		        	nombre_plan_cuentas = array_plan_cuentas[2];
+		        	
+
+		        	//console.log(id_plan_cuentas+'\n'+nombre_plan_cuentas+'\n'+codigo_plan_cuentas);
+		        	
+		        	  	
+		        	if(datoscuenta!='')
+				    {
+
+					      $('#modal_edit_cuenta').dialog({
+				                            autoOpen: false,
+				                            modal: true,
+				                            height: 450,
+				                            width: 500,
+				                            buttons: {
+				                "Actualizar": function() {
+
+					                var datos = { 
+							                id_entidad_p_cuentas:$('#id_entidad').val(),
+							                id_p_cuentas:$('#modal_edit_id').val(),
+			                    	 		nombre_p_cuentas:$('#modal_edit_nombre').val(),
+			                    	 		codigo_p_cuentas:$('#modal_edit_codigo').val(),
+			                    	 		id_moneda_p_cuentas:$('#modal_edit_id_moneda').val(),
+			                    	 		n_p_cuentas:$('#modal_edit_naturaleza').val(),
+			                    	 		id_centro_c_p_cuentas:$('#modal_edit_id_centro_c').val()
+			                    	 	 };
+				                     //alert(datos['id_entidad_p_cuentas']);
+				                     
+				                 var nombre_edit= $('#modal_edit_nombre').val();
+			                    
+			                     if(nombre_edit!='')
+			                     {
+					                $.ajax({
+				                           url:"<?php echo $helper->url("PlanCuentas","ActualizarCuenta");?>"
+				                           ,type : "POST"
+				                           ,async: true
+				                           ,data : datos
+				                           ,success: function(msg){
+
+												var res = msg.split('"');
+				                        	   
+					                           if(res[1]=='1' || res[1]==1)
+					                           {
+				                                $('#modal_edit_cuenta').dialog('close');
+				                                //loading();
+					                           }else
+					                           {
+					                        	   $('#modal_respuesta_grupo').html ("<span style='color:red'>!datos no han sido actualizados..</span>"); 
+							                     
+					                           }
+				                           }
+				                   });
+				                     
+			                     }else
+			                     {
+			                    	 textFail("modal_edit_nombre");
+			                         $('#modal_respuesta_edit').html ("<span style='color:red'>!Existen campos vacios..</span>"); 
+			                           
+			                     }                      
+				   
+				                },
+				                "Cancelar": function(){
+				                    $('#modal_edit_cuenta').dialog('close');
+				                }
+				            }    
+
+				        }); 
+
+				        var  html = "";
+				        html+="<h4 style='color:#ec971f;'>Actualizar Cuentas</h4><hr/>";
+				        html+="<div class = 'col-xs-12 col-md-6'>";
+				        html+="<div class='form-group'>";
+				        html+="<label for='modal_edit_codigo' class='control-label'>Codigo</label><br>";
+				        html+="<input type='text' class='form-control' id='modal_edit_codigo' name='modal_edit_codigo' value='"+codigo_plan_cuentas+"' readonly >";
+				        html+="</div>";
+				        html+="</div><br>";	
+			            html+="<div class = 'col-xs-12 col-md-6'>";
+				        html+="<div class='form-group'>";
+				        html+="<label for='modal_edit_nombre' class='control-label'>Nombre</label><br>";
+				        html+="<input type='text' class='form-control' id='modal_edit_nombre' name='modal_edit_nombre' value='"+nombre_plan_cuentas+"' onfocus='textSucces(this)' >";
+				        html+="<input type='hidden' class='form-control'  id='modal_edit_id' name='modal_edit_id' value='"+id_plan_cuentas+"'  >";
+					    html+="</div>";
+				        html+="</div>";				        
+				        html+="<div class='col-xs-12 col-md-6'>";
+				        html+="<div class='form-group'>";
+				        html+="<label for='modal_edit_naturaleza' class='control-label'>Naturaleza</label>";
+				        html+="<select name='modal_edit_naturaleza' id='modal_edit_naturaleza'  class='form-control' >";
+				        html+="<?php if(!empty($n_plan_cuentas)){ foreach($n_plan_cuentas as $res=>$valor) {?>";
+				        html+="<option value='<?php echo $res; ?>' ><?php echo $valor; ?> </option>";
+						html+="<?php } }else{?>";
+						html+="<option value='-1' >Sin registros</option>";
+						html+="<?php }?>";
+					    html+="</select>"; 
+					    html+="<span class='help-block'></span>"; 
+					    html+="</div>";
+					    html+="</div>";
+				        html+="<div class='col-xs-12 col-md-6'>";
+				        html+="<div class='form-group'>";
+				        html+="<label for='modal_edit_id_centro_c' class='control-label'>Centro Costos</label>";
+				        html+="<select name='modal_edit_id_centro_c' id='modal_edit_id_centro_c'  class='form-control' >";
+				        html+="<?php if(!empty($resultCentroC)){ foreach($resultCentroC as $res) {?>";
+				        html+="<option value='<?php echo $res->id_centro_costos; ?>' ><?php echo $res->nombre_centro_costos; ?> </option>";
+						html+="<?php } }else{?>";
+						html+="<option value='-1' >Sin registros</option>";
+						html+="<?php }?>";
+					    html+="</select>"; 
+					    html+="<span class='help-block'></span>"; 
+					    html+="</div>";
+					    html+="</div>";
+					    html+="<div class='col-xs-12 col-md-6'>";
+				        html+="<div class='form-group'>";
+				        html+="<label for='modal_edit_id_moneda' class='control-label'>Moneda</label>";
+				        html+="<select name='modal_edit_id_moneda' id='modal_edit_id_moneda'  class='form-control' >";
+				        html+="<?php if(!empty($resultMoneda)){ foreach($resultMoneda as $res) {?>";
+				        html+="<option value='<?php echo $res->id_monedas; ?>' ><?php echo $res->nombre_monedas; ?> </option>";
+						html+="<?php } }else{?>";
+						html+="<option value='-1' >Sin Grupos</option>";
+						html+="<?php }?>";
+					    html+="</select>"; 
+					    html+="<span class='help-block'></span>"; 
+					    html+="</div>";
+					    html+="</div>";
+					    html+="<div class='col-xs-12 col-md-12' id='modal_respuesta_edit'></div><br>";
+
+					    				       
+				        $('#modal_edit_cuenta').html (html);  
+				       
+
+				        $('#modal_edit_cuenta').dialog('open');
+						
+				    }
+				    else{
+
+					    alert('no exiten datos');
+					    
+				    }
+
+
+		        }
+
+		
+		</script>
+		
+		
+		<!-- funcion para llenar los grupos al selecionar las cuentas (Pasivo,Activo,Patrimonio,Egresos,Ingresos) -->
 		<script type="text/javascript">
 
 		$(document).ready(function(){
@@ -404,7 +566,15 @@
 		         	   	$.post("<?php echo $helper->url("PlanCuentas","returnGrupo"); ?>", datos, function(resultado) {
 		         	   	grupo.empty();
 
+		         	   console.log(resultado);
+
 		         		 		$.each(resultado, function(index, value) {
+
+		         		 			if (index < resultado.length) {
+		         		 			  console.log('sin datos');
+		         		 			}
+
+			         		 		
 		         		 			
 		         		 			grupo.append("<option value= " +value.id_plan_cuentas +" >" + value.nombre_plan_cuentas  + "</option>");	
 		                    		 });
@@ -665,8 +835,6 @@
 		<script type="text/javascript">
 		function textFail(field)
 		{
-			
-			
 			$("#"+field).removeClass("form-control");
 			$("#"+field).addClass("textfail form-control");
 		}
@@ -1160,6 +1328,7 @@
             </div>
 		    </div>
 		    </div>
+		    
             
             
             </form>
@@ -1278,10 +1447,10 @@
 		                <td style="font-size:80%;"> <?php echo $res->nombre_centro_costos; ?>     </td>
 		                <td style="font-size:80%;"> <?php echo $res->nivel_plan_cuentas; ?>     </td>
 		                <td>
-			           		<div class="right">
-			                    <a href="<?php echo $helper->url("PlanCuentas","index"); ?>&id_p_cuentas=<?php echo $res->id_plan_cuentas; ?>" class="btn btn-warning" onClick="notificacion()" style="font-size:65%;">Editar</a>
-			                </div>
-			            
+			           	   <div class="right">
+			           	      <?php $datoscuenta=$res->id_plan_cuentas.','.$res->codigo_plan_cuentas.','.$res->nombre_plan_cuentas; ?>
+			                  <a  title="<?php echo $res->nombre_plan_cuentas; ?>" id="<?php echo $datoscuenta; ?>"  href="<?php echo '#';?>" class="btn btn-warning" onclick="editar_cuenta_modal(this);" style="font-size:65%;">Editar</a>
+			               </div>			            
 			            </td>
 			            <td>   
 			               	<div class="right">
@@ -1310,6 +1479,8 @@
 		</section>
         </div>
         </div>
+        
+        
             </form>
             </div>
             </div>
@@ -1317,9 +1488,18 @@
              <br>
 			 <br>
 			 <br> 
+		
+		<!-- modaledita -->
+        <div id="modal_edit_cuenta">
+        
+		</div>
+	
+		
+			
   
        
              <footer class="col-lg-12">
+             
 			 <?php include("view/modulos/footer.php"); ?>
 			 </footer>
 			 
@@ -1332,4 +1512,21 @@
 			  
         
     </body>  
-    </html>          
+    </html>  
+    <?php include("view/modulos/modal.php"); ?>
+   <?php
+   $arbol = $resultSet;
+   $html = "";
+   $nivel1=array();
+   $nivel2=array();
+   $nivel3=array();
+   $nivel4=array();
+   $nivel5=array();
+   //print_r($arbol);
+   
+   foreach ($arbol as $resarbol)
+   {
+   		
+   }
+   
+   ?>        

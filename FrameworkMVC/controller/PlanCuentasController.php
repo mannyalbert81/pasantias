@@ -71,6 +71,52 @@ class PlanCuentasController extends ControladorBase{
 				
 				$resultSet=$plan_cuentas->getCondiciones($columnas_p_cuentas, $tablas_p_cuentas, $where_p_cuentas, "plan_cuentas.codigo_plan_cuentas");
 				
+				if(isset($_POST['Buscar']))
+				{
+					$contenido=$_POST['contenido'];
+					$criterio=$_POST['criterio'];
+					
+					$where1="";
+					$where2="";
+					$where3="";
+					$where4="";
+					
+					switch ($criterio)
+					{
+						case "codigo":
+							$where1=" AND plan_cuentas.codigo_plan_cuentas LIKE '$contenido%'";
+						break;
+						case "nombre":
+							$where2=" AND plan_cuentas.nombre_plan_cuentas = '$contenido'";
+						break;
+						case "tipo":
+							$where3=" AND plan_cuentas.t_plan_cuentas = '$contenido'";
+						break;
+						case "naturaleza":
+							$where4=" AND plan_cuentas.n_plan_cuentas = '$contenido'";
+						break;
+					}
+					
+					$columnas_p_cuentas=" plan_cuentas.id_plan_cuentas,plan_cuentas.codigo_plan_cuentas,
+									  plan_cuentas.nombre_plan_cuentas,monedas.nombre_monedas,
+									  plan_cuentas.n_plan_cuentas,plan_cuentas.t_plan_cuentas,
+									  centro_costos.nombre_centro_costos,plan_cuentas.nivel_plan_cuentas";
+					
+					$tablas_p_cuentas="public.plan_cuentas,public.usuarios,public.entidades,public.monedas,
+								   public.centro_costos";
+					
+					$where_p_cuentas="entidades.id_entidades = plan_cuentas.id_entidades AND
+					entidades.id_entidades = usuarios.id_entidades AND
+					monedas.id_monedas = plan_cuentas.id_modenas AND
+					centro_costos.id_centro_costos = plan_cuentas.id_centro_costos AND
+					usuarios.id_usuarios='$id_usuarios'";
+					
+					$where_to=$where_p_cuentas.$where1.$where2.$where3;
+					
+					
+					$resultSet=$plan_cuentas->getCondiciones($columnas_p_cuentas, $tablas_p_cuentas, $where_to, "plan_cuentas.codigo_plan_cuentas");
+					
+				}
 				
 				if (isset ($_GET["id_entidades"])   )
 				{
@@ -267,6 +313,64 @@ class PlanCuentasController extends ControladorBase{
 		
 	}
 	
+	public function ActualizarCuenta()
+	{
+		$respuesta='';
+		session_start();
+		$permisos_rol=new PermisosRolesModel();
+		$plan_cuentas = new PlanCuentasModel();
+		
+		$nombre_controladores = "PlanCuentas";
+		$id_rol= $_SESSION['id_rol'];
+		$resultPer = $permisos_rol->getPermisosEditar("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
+			
+		if (!empty($resultPer))
+		{
+			if(isset($_POST["id_entidad_p_cuentas"]))
+			{
+				
+				$_id_entidad = $_POST["id_entidad_p_cuentas"];
+				$_id_plan_cuentas = $_POST["id_p_cuentas"];
+				$_nombre_plan_cuentas = $_POST["nombre_p_cuentas"];
+				$_codigo_plan_cuentas = $_POST["codigo_p_cuentas"];
+				$_n_plan_cuentas = $_POST["n_p_cuentas"];
+				$_id_moneda_plan_cuentas = $_POST["id_moneda_p_cuentas"];
+				$_id_centro_costos_plan_cuentas = $_POST["id_centro_c_p_cuentas"];	
+				
+				
+				
+				$colval="nombre_plan_cuentas='$_nombre_plan_cuentas',id_modenas='$_id_moneda_plan_cuentas',n_plan_cuentas='$_n_plan_cuentas',id_centro_costos='$_id_centro_costos_plan_cuentas'";
+				$tabla="plan_cuentas";
+				$where="id_plan_cuentas='$_id_plan_cuentas' AND id_entidades='$_id_entidad'";
+				
+				try {
+					
+					$update=$plan_cuentas->UpdateBy($colval, $tabla, $where);
+					$respuesta='1';
+					
+				}catch (Exception $ex)
+				{
+					
+				}
+				
+				$traza=new TrazasModel();
+				$_nombre_controlador = "PlanCuentas";
+				$_accion_trazas  = "Update";
+				$_parametros_trazas = $_id_plan_cuentas;
+				$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+				
+			}
+				
+		}
+		else
+		{
+			$respuesta='sin permisos';
+		}
+		
+		echo json_encode($respuesta);
+	
+	}
+	
 	public function borrarId()
 	{
 
@@ -326,7 +430,7 @@ class PlanCuentasController extends ControladorBase{
 			$plan_cuentas= new PlanCuentasModel();
 			
 			$id_entidad_p_cuentas=$_POST['id_entidad_p_cuentas'];
-			$nombre_p_cuentas=$_POST['nombre_p_cuentas'];
+			$nombre_p_cuentas=strtoupper($_POST['nombre_p_cuentas']);
 		    $codigo_p_cuentas=$_POST['codigo_p_cuentas'];
 		    $id_moneda_p_cuentas=$_POST['id_moneda_p_cuentas'];
 		    $n_p_cunetas=$_POST['n_p_cunetas'];
@@ -373,7 +477,7 @@ class PlanCuentasController extends ControladorBase{
 			$plan_cuentas= new PlanCuentasModel();
 				
 			$id_entidad_p_cuentas=$_POST['id_entidad_p_cuentas'];
-			$nombre_p_cuentas=$_POST['nombre_p_cuentas'];
+			$nombre_p_cuentas=strtoupper($_POST['nombre_p_cuentas']);
 			$codigo_p_cuentas=$_POST['codigo_p_cuentas'];
 			$id_moneda_p_cuentas=$_POST['id_moneda_p_cuentas'];
 			$n_p_cunetas=$_POST['n_p_cunetas'];
