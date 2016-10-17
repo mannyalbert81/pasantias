@@ -292,7 +292,7 @@ class PlanCuentasController extends ControladorBase{
 			}else {
 				
 				$this->view("Error",array(
-						"resultado"=>"no hay guardar"
+						"resultado"=>"Error al Guardar Datos"
 				));
 				die();
 					
