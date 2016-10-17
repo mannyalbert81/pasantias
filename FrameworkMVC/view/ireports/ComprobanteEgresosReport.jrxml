@@ -1,34 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-10-10T11:32:26 -->
+<!-- 2016-10-12T16:50:41 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
 	<queryString>
-		<![CDATA[SELECT entidades.id_entidades, 
-			  entidades.ruc_entidades, 
-			  entidades.nombre_entidades, 
-			  entidades.telefono_entidades, 
-			  entidades.direccion_entidades, 
-			  entidades.ciudad_entidades, 
-			  consecutivos.numero_comprobantes, 
-			  usuarios.id_usuarios
-			FROM
-		      public.usuarios, 
-			  public.entidades, 
-			  public.consecutivos
-			WHERE
-			 entidades.id_entidades = usuarios.id_entidades AND
-             consecutivos.id_entidades = entidades.id_entidades]]>
+		<![CDATA[SELECT 
+  entidades.nombre_entidades, 
+  entidades.telefono_entidades, 
+  entidades.direccion_entidades, 
+  usuarios.nombre_usuarios, 
+  entidades.ruc_entidades, 
+  ccomprobantes.concepto_ccomprobantes, 
+  ccomprobantes.numero_ccomprobantes, 
+  ccomprobantes.retencion_ccomprobantes, 
+  dcomprobantes.descripcion_dcomprobantes, 
+  dcomprobantes.debe_dcomprobantes, 
+  dcomprobantes.haber_dcomprobantes, 
+  entidades.ciudad_entidades, 
+  ccomprobantes.ruc_ccomprobantes, 
+  ccomprobantes.nombres_ccomprobantes, 
+  ccomprobantes.valor_ccomprobantes, 
+  plan_cuentas.codigo_plan_cuentas, 
+  plan_cuentas.nombre_plan_cuentas
+FROM 
+  public.entidades, 
+  public.usuarios, 
+  public.ccomprobantes, 
+  public.dcomprobantes, 
+  public.plan_cuentas
+WHERE 
+  entidades.id_entidades = usuarios.id_entidades AND
+  ccomprobantes.id_usuarios = usuarios.id_usuarios AND
+  dcomprobantes.id_ccomprobantes = ccomprobantes.id_ccomprobantes AND
+  plan_cuentas.id_plan_cuentas = dcomprobantes.id_plan_cuentas
+]]>
 	</queryString>
-	<field name="id_entidades" class="java.lang.String"/>
+	<field name="nombre_entidades" class="java.lang.String"/>
+	<field name="telefono_entidades" class="java.lang.String"/>
+	<field name="direccion_entidades" class="java.lang.String"/>
+	<field name="nombre_usuarios" class="java.lang.String"/>
 	<field name="ruc_entidades" class="java.lang.String"/>
 	<field name="descripcion_dcomprobantes" class="java.lang.String"/>
-	<field name="nombre_entidades" class="java.lang.String"/>
-	<field name="direccion_entidades" class="java.lang.String"/>
-	<field name="telefono_entidades" class="java.lang.String"/>
-	<field name="numero_comprobantes" class="java.lang.String"/>
+	<field name="concepto_ccomprobantes" class="java.lang.String"/>
+	<field name="numero_ccomprobantes" class="java.lang.String"/>
+	<field name="retencion_ccomprobantes" class="java.lang.String"/>
+	<field name="debe_dcomprobantes" class="java.lang.String"/>
+	<field name="haber_dcomprobantes" class="java.lang.String"/>
 	<field name="ciudad_entidades" class="java.lang.String"/>
+	<field name="ruc_ccomprobantes" class="java.lang.String"/>
+	<field name="nombres_ccomprobantes" class="java.lang.String"/>
+	<field name="valor_ccomprobantes" class="java.lang.String"/>
+	<field name="codigo_plan_cuentas" class="java.lang.String"/>
+	<field name="nombre_plan_cuentas" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -64,28 +88,28 @@
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["COMPROBANTE DE EGRESOS N°:  "+$F{numero_comprobantes}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["COMPROBANTE DE EGRESOS N°:   "+$F{numero_ccomprobantes}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="4" y="50" width="86" height="8" uuid="fcfb2748-6331-4fcf-b0fa-0db48f8b9d3b"/>
 				<textElement textAlignment="Left">
 					<font size="6" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Ruc:  "+$F{ruc_entidades}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Ruc:   "+$F{ruc_entidades}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="90" y="50" width="80" height="10" uuid="3795489f-d29d-4a61-9266-f134b5479718"/>
 				<textElement textAlignment="Left">
 					<font size="6" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Tlf:  "+$F{telefono_entidades}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Tlf:   "+$F{telefono_entidades}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="4" y="22" width="548" height="8" forecolor="#000000" uuid="bf1b87b5-9840-49b0-8e77-26af840120e3"/>
 				<textElement textAlignment="Center">
 					<font size="5" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Direccion:  "+$F{direccion_entidades}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Direccion:   "+$F{direccion_entidades}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -102,21 +126,21 @@
 				<textElement textAlignment="Left">
 					<font size="6" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["NOMBRE:"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["NOMBRE:  "+$F{nombre_usuarios}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
 				<reportElement x="10" y="28" width="300" height="15" uuid="d97a0874-f071-473b-8066-8cb6079f4def"/>
 				<textElement textAlignment="Left">
 					<font size="6" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["LA CANTIDAD DE: "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["LA CANTIDAD DE:   "+$F{valor_ccomprobantes}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="380" y="13" width="170" height="15" uuid="c4cf27c2-2cef-4a4d-bbe5-12f020268128"/>
 				<textElement textAlignment="Left">
 					<font size="6" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["N Ret:"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["N Ret:  "+$F{retencion_ccomprobantes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="MMMMM dd, yyyy">
 				<reportElement x="470" y="-18" width="80" height="10" uuid="6b5a8046-e7e8-466e-b6fd-645419a7a626"/>
@@ -130,18 +154,18 @@
 	<columnHeader>
 		<band height="214" splitType="Stretch">
 			<textField>
-				<reportElement x="240" y="129" width="150" height="15" uuid="491cccdc-0fce-4c92-8faa-0e8dbd4e12a7"/>
+				<reportElement x="240" y="129" width="117" height="15" uuid="491cccdc-0fce-4c92-8faa-0e8dbd4e12a7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["TOTAL:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="129" width="150" height="15" uuid="5fc781a8-4f00-41e8-854f-5d6233750522"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<reportElement x="357" y="129" width="99" height="15" uuid="5fc781a8-4f00-41e8-854f-5d6233750522"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{debe_dcomprobantes}]]></textFieldExpression>
 			</textField>
 			<rectangle radius="7">
 				<reportElement x="-1" y="149" width="555" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="9384f6fc-d48f-4819-8c3c-6bd2373dc07c"/>
@@ -217,6 +241,13 @@
 				</textElement>
 				<textFieldExpression><![CDATA["GERENTE"]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="456" y="129" width="99" height="15" uuid="795d69b4-f2ff-43a4-9183-4ee1fbfdfed4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{haber_dcomprobantes}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
@@ -232,7 +263,7 @@
 				<textElement textAlignment="Left">
 					<font size="6" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["CONCEPTO:"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["CONCEPTO:  "+$F{concepto_ccomprobantes}]]></textFieldExpression>
 			</textField>
 			<rectangle radius="0">
 				<reportElement x="0" y="-185" width="555" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="60ba87ba-0180-4ce2-8be8-67afa24c7e3b"/>
@@ -286,6 +317,41 @@
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Descripcion"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="-169" width="98" height="15" uuid="42790c16-188b-4950-9c3f-f78d0f021a40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="-169" width="130" height="15" uuid="888a735b-80f7-4e71-bc84-ecba68c9459c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="-169" width="127" height="15" uuid="bb557ff5-1c16-4862-8c71-5a444a73411a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion_dcomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="358" y="-169" width="98" height="15" uuid="ca70811e-7413-4ed9-a6ab-bfe59b6530cf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{debe_dcomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="-169" width="98" height="15" uuid="c0fd1a64-1758-4805-a12a-f5b942f5cec2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{haber_dcomprobantes}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

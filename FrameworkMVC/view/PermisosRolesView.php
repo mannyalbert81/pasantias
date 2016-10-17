@@ -1,167 +1,32 @@
-<!DOCTYPE HTML>
+ <?php include("view/modulos/modal.php"); ?>
+ <?php include("view/modulos/head.php"); ?>
+      
+   <!DOCTYPE HTML>
 <html lang="es">
+
       <head>
+      
         <meta charset="utf-8"/>
-        <title>Permisos Rol - CallCenter 2016</title>
-   
-     <!-- AQUI NOTIFICAIONES -->
-		<script type="text/javascript" src="view/css/lib/alertify.js"></script>
-		<link rel="stylesheet" href="view/css/themes/alertify.core.css" />
-		<link rel="stylesheet" href="view/css/themes/alertify.default.css" />
-		
-		
-		
-		<script>
-
-		function Ok(){
-				alertify.success("Has Pulsado en Guardar"); 
-				return false;
-			}
-			
-			function Borrar(){
-				alertify.success("Has Pulsado en Borrar"); 
-				return false; 
-			}
-
-			function notificacion(){
-				alertify.success("Has Pulsado en Editar"); 
-				return false; 
-			}
-		</script>
-		
-		
-		
-		<!-- TERMINA NOTIFICAIONES -->
-		
-      <script>
-        
-       $(document).ready(function(){
-
-		    // cada vez que se cambia el valor del combo
-		    $("#id_controladores").change(function() {
-
-               // obtenemos el combo de subcategorias
-                var $id_acciones = $("#id_acciones");
-               // lo vaciamos
-               
-				///obtengo el id seleccionado
-				
-
-               var id_controladores = $(this).val();
-
-
-               $id_acciones.empty();
-
-               $id_acciones.append("<option value= " +"0" +" > --TODOS--</option>");
-           
-               if(id_controladores > 0)
-               {
-            	   var datos = {
-            			   id_controladores : $(this).val()
-                   };
-
-
-            	   $.post("<?php echo $helper->url("PermisosRoles","devuelveAcciones"); ?>", datos, function(resultAcc) {
-
-            		 		$.each(resultAcc, function(index, value) {
-               		 	    $id_acciones.append("<option value= " +value.id_acciones +" >" + value.nombre_acciones  + "</option>");	
-                       		 });
-
-            		 		 	 		   
-            		  }, 'json');
-
-
-               }
-               else
-               {
-            	   $.post("<?php echo $helper->url("PermisosRoles","devuelveAllAcciones"); ?>", datos, function(resultAcc) {
-
-   		 		        $.each(resultAcc, function(index, value) {
-          		 	    $id_acciones.append("<option value= " +value.id_acciones +" >" + value.nombre_acciones  + "</option>");	
-                	  });
-     		  		}, 'json');
-
-               }
-               
-		    });
-    
-		}); 
-
-	</script>
-		
-	<script>
-
-		$(document).ready(function(){
-
-			$("#id_acciones").change(function() {
-
-	               // obtenemos el combo de categorias
-	                var $id_controladores = $("#id_controladores");
-	               
-					///obtengo el id seleccionado
-					var id_acciones = $(this).val();
-
-	               if(id_acciones > 0)
-
-	               {
-	            	   var datos = {
-	            			   id_acciones : $(this).val()
-	                   };
-
-
-	            	   //$categorias.append("<option value= " +"0" +" >"+ id_subcategorias  +"</option>");
-	                   $.post("<?php echo $helper->url("PermisosRoles","devuelveSubByAcciones"); ?>", datos, function(resultAcc) {
-	            		   
-         		 		  $.each(resultAcc, function(index, value) {
-         		 			$('#id_controladores').val( value.id_controladores );//To select Blue	 
- 								
-							 });
-
-         		 		 	 		   
-         		  		}, 'json');
-	                   
-	               }
-	               else
-	               {
-
-	          		 $('#controladres').val( 0 );//To select Blue
-
-			        }
-	               
-	               
-			    });
-		}); 
-
-	</script>
-       
-       
-        <style>
-            input{
-                margin-top:5px;
-                margin-bottom:5px;
-            }
-            .right{
-                float:right;
-            }
-                
-            
-        </style>
+        <title>Tipo de Comprobantes - Contabilidad 2016</title>
+        <link rel="stylesheet" href="view/css/bootstrap.css">
+          <script src="view/js/jquery.js"></script>
+		  <script src="view/js/bootstrapValidator.min.js"></script>
+		  <script src="view/js/ValidarTipoComprobantes.js"></script>
     </head>
-    <body style="background-color: #d9e3e4;">
+    <body class="cuerpo">
     
      
-       <?php include("view/modulos/head.php"); ?>
+       
        <?php include("view/modulos/menu.php"); ?>
   
    <div class="container">
   
-  <div class="row" style="background-color: #ffffff;">
+  <div class="row" style="background-color: #FAFAFA;">
   
   <div></div>
        
-      <form action="<?php echo $helper->url("PermisosRoles","InsertaPermisosRoles"); ?>" method="post" class="col-lg-4">
-            <h4 style="color:#ec971f;">Insertar Permisos Roles</h4>
-            <hr/>
+      <form id="form-permisos-roles" action="<?php echo $helper->url("PermisosRoles","InsertaPermisosRoles"); ?>" method="post" enctype="multipart/form-data" class="col-lg-4">
+            <br>
             	
 		   		
             
@@ -225,35 +90,47 @@
 		   		
 		     <?php } } else {?>
 		    
-		     		
-		     		
-		     		<div class="row">
-		       <div class="col-xs-6 col-md-12">
-			  	<p  class="formulario-subtitulo" >Nombres Permisos Roles</p>
-			  	<input type="text" id="nombre_permisos_rol" name="nombre_permisos_rol" value="" class="form-control"/>
-			  	 <div id="mensaje_nombres" class="errores"></div>
-			  </div>
-			   </div>
-		     		
-		     		
-		     		
-	            	
-	            	Nombre Rol: <select name="id_rol" id="id_rol"  class="form-control">
+		     		  <div class="well">
+		    <h4 style="color:#ec971f;">Nombres Permisos Roles</h4>
+            <hr/>
+            <div class="row">
+		    <div class="col-xs-12 col-md-12">
+		    <div class="form-group">
+                                  <label for="nombre_permisos_rol" class="control-label">Nombre</label>
+                                  <input type="text" class="form-control" id="nombre_permisos_rol" name="nombre_permisos_rol" value=""  placeholder="Nombre de Permisos Rol">
+                                  <span class="help-block"></span>
+            </div>
+		    </div>
+          
+            <div class="col-xs-6 col-md-12">
+		    <div class="form-group">
+                                  <label for="id_rol" class="control-label">Rol</label>
+                                  <select name="id_rol" id="id_rol"  class="form-control" >
+                                  <option value="" selected="selected">--Seleccione--</option>
 									<?php foreach($resultRol as $resRol) {?>
-				 						<option value="<?php echo $resRol->id_rol; ?>" ><?php echo $resRol->nombre_rol; ?> </option>
-						            <?php } ?>
-								    	
-									</select>
-		   		      <br>
-	            	 Nombre Controlador: <select name="id_controladores" id="id_controladores"  class="form-control">
+										<option value="<?php echo $resRol->id_rol; ?>"  ><?php echo $resRol->nombre_rol; ?> </option>
+							        <?php } ?>
+								   </select> 
+                                  <span class="help-block"></span>
+            </div>
+            </div>
+            
+            <div class="col-xs-6 col-md-12">
+		    <div class="form-group">
+                                  <label for="id_controladores" class="control-label">Controladores</label>
+                                  <select name="id_controladores" id="id_controladores"  class="form-control" >
+                                  <option value="" selected="selected">--Seleccione--</option>
 									<?php foreach($resultCon as $resCon) {?>
-				 						<option value="<?php echo $resCon->id_controladores; ?>"  ><?php echo $resCon->nombre_controladores; ?> </option>
-						            <?php } ?>
-								    	
-									</select>
-		   		   
+										<option value="<?php echo $resCon->id_controladores; ?>"  ><?php echo $resCon->nombre_controladores; ?> </option>
+							        <?php } ?>
+								   </select> 
+                                  <span class="help-block"></span>
+            </div>
+            </div>
+           
+		     		
 		    	   <table class="table">
-		   	<tr>
+		   			<tr>
 		   		   		<th style="width: 33.3%">   Ver</th>
 		   		   		<th style="width: 33.3%"> Editar</th>
 		   		   		<th style="width: 33.3%"> Borrar</th>
@@ -279,6 +156,8 @@
 		   		   		</td>
 		   		   	</tr>
 		   		   </table>
+		   		   </div>
+            	   </div>
 		        
 		     <?php } ?>
 		        
@@ -288,6 +167,7 @@
            </div>
            </div>
           </form>
+          <hr>
        
        
         <div class="col-lg-8">
