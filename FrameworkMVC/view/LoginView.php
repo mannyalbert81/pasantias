@@ -80,12 +80,12 @@
               <div class="row" >
                <div class="col-lg-6 col-md-3" >
                       <div class="well">
-                              <div class="form-group">
+                              <div class="control-group">
                                   <label for="usuarios" class="control-label">Usuario</label>
                                   <input type="text" class="form-control" id="usuarios" name="usuarios" value=""  placeholder="Usuario">
                                   <span class="help-block"></span>
                               </div>
-                              <div class="form-group">
+                              <div class="control-group">
                                   <label for="clave" class="control-label">Password</label>
                                   <input type="password" class="form-control" id="clave" name="clave" value="" placeholder="Password">
                                   <span class="help-block"></span>
