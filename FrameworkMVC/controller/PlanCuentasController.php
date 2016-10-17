@@ -223,70 +223,77 @@ class PlanCuentasController extends ControladorBase{
 				$_id_cuenta = $_POST["id_cuenta"];	
 				
 				if($_id_cuenta==-1||$_id_cuenta=="-1")
-				{
+				{					
 					$_codigo1_cuenta = $_POST["codigo1_cuenta"];
 					$_codigo2_cuenta = $_POST["codigo2_cuenta"];
 					$_nombre_cuenta = strtoupper($_POST["nombre_cuenta"]);
-					$_id_moneda_cuenta = $_POST["id_moneda_cuenta"];
-					$_id_naturaleza_cuenta = $_POST["id_naturaleza_cuenta"];
-					$_tipo_cuenta = $_POST["tipo_cuenta"];
-					$_nivel_cuenta = $_POST["nivel_cuenta"];
-					$_id_entidades = $_POST["id_entidad"];
-					$_id_centro_costos = $_POST["id_centro_c"];
 					
-					$_codigo_p_cuentas = $_codigo1_cuenta.$_codigo2_cuenta;
-					
-					
-					$funcion = "ins_plan_cuentas";
-					
-					$parametros = "'$_id_entidades', '$_codigo_p_cuentas', '$_nombre_cuenta', '$_id_moneda_cuenta',
-					'$_id_naturaleza_cuenta','$_tipo_cuenta','$_id_centro_costos','$_nivel_cuenta'";
+					if($_codigo1_cuenta!='' && $_codigo2_cuenta!=''&& $_nombre_cuenta!='')
+					{
+						$_id_moneda_cuenta = $_POST["id_moneda_cuenta"];
+						$_id_naturaleza_cuenta = $_POST["id_naturaleza_cuenta"];
+						$_tipo_cuenta = $_POST["tipo_cuenta"];
+						$_nivel_cuenta = $_POST["nivel_cuenta"];
+						$_id_entidades = $_POST["id_entidad"];
+						$_id_centro_costos = $_POST["id_centro_c"];
 						
-					$plan_cuentas->setFuncion($funcion);
-			
-					$plan_cuentas->setParametros($parametros);
-			
-					$resultado=$plan_cuentas->Insert();
-			
-					$traza=new TrazasModel();
-					$_nombre_controlador = "Plan_cuentas";
-					$_accion_trazas  = "Guardar";
-					$_parametros_trazas = $_nombre_cuenta." de la entidad -> ".$_id_entidades;
-					$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+						$_codigo_p_cuentas = $_codigo1_cuenta.$_codigo2_cuenta;
+						
+						
+						$funcion = "ins_plan_cuentas";
+						
+						$parametros = "'$_id_entidades', '$_codigo_p_cuentas', '$_nombre_cuenta', '$_id_moneda_cuenta',
+						'$_id_naturaleza_cuenta','$_tipo_cuenta','$_id_centro_costos','$_nivel_cuenta'";
+							
+						$plan_cuentas->setFuncion($funcion);
 				
+						$plan_cuentas->setParametros($parametros);
+				
+						$resultado=$plan_cuentas->Insert();
+				
+						$traza=new TrazasModel();
+						$_nombre_controlador = "Plan_cuentas";
+						$_accion_trazas  = "Guardar";
+						$_parametros_trazas = $_nombre_cuenta." de la entidad -> ".$_id_entidades;
+						$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+					
+					}
 				}else{
 					
 					$_codigo1_cuenta = $_POST["codigo1_subcuenta"];
 					$_codigo2_cuenta = $_POST["codigo2_subcuenta"];
 					$_nombre_cuenta = $_POST["nombre_subcuenta"];
-					$_id_moneda_cuenta = $_POST["id_moneda_subcuenta"];
-					$_id_naturaleza_cuenta = $_POST["id_naturaleza_subcuenta"];
-					$_tipo_cuenta = $_POST["tipo_subcuenta"];
-					$_nivel_cuenta = $_POST["nivel_subcuenta"];
-					$_id_entidades = $_POST["id_entidad"];
-					$_id_centro_costos = $_POST["id_centro_c_subcuenta"];
-						
-					$_codigo_p_cuentas = $_codigo1_cuenta.$_codigo2_cuenta;
-						
-						
-					$funcion = "ins_plan_cuentas";
-						
-					$parametros = "'$_id_entidades', '$_codigo_p_cuentas', '$_nombre_cuenta', '$_id_moneda_cuenta',
-					'$_id_naturaleza_cuenta','$_tipo_cuenta','$_id_centro_costos','$_nivel_cuenta'";
 					
-					$plan_cuentas->setFuncion($funcion);
+					if($_codigo1_cuenta!='' && $_codigo2_cuenta!=''&& $_nombre_cuenta!='')
+					{
+						$_id_moneda_cuenta = $_POST["id_moneda_subcuenta"];
+						$_id_naturaleza_cuenta = $_POST["id_naturaleza_subcuenta"];
+						$_tipo_cuenta = $_POST["tipo_subcuenta"];
+						$_nivel_cuenta = $_POST["nivel_subcuenta"];
+						$_id_entidades = $_POST["id_entidad"];
+						$_id_centro_costos = $_POST["id_centro_c_subcuenta"];
+							
+						$_codigo_p_cuentas = $_codigo1_cuenta.$_codigo2_cuenta;
+							
+							
+						$funcion = "ins_plan_cuentas";
+							
+						$parametros = "'$_id_entidades', '$_codigo_p_cuentas', '$_nombre_cuenta', '$_id_moneda_cuenta',
+						'$_id_naturaleza_cuenta','$_tipo_cuenta','$_id_centro_costos','$_nivel_cuenta'";
 						
-					$plan_cuentas->setParametros($parametros);
+						$plan_cuentas->setFuncion($funcion);
+							
+						$plan_cuentas->setParametros($parametros);
+							
+						$resultado=$plan_cuentas->Insert();
 						
-					$resultado=$plan_cuentas->Insert();
-					
-						
-					$traza=new TrazasModel();
-					$_nombre_controlador = "Plan_cuentas";
-					$_accion_trazas  = "Guardar";
-					$_parametros_trazas = $_nombre_cuenta." de la entidad -> ".$_id_entidades;
-					$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
-					
+							
+						$traza=new TrazasModel();
+						$_nombre_controlador = "Plan_cuentas";
+						$_accion_trazas  = "Guardar";
+						$_parametros_trazas = $_nombre_cuenta." de la entidad -> ".$_id_entidades;
+						$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+					}	
 				}
 				
 			}else {
@@ -378,9 +385,9 @@ class PlanCuentasController extends ControladorBase{
 		$permisos_rol=new PermisosRolesModel();
 		$plan_cuentas = new PlanCuentasModel();
 		$mayor = new MayorModel();
-		$nombre_controladores = "Roles";
+		$nombre_controladores = "PlanCuentas";
 		$id_rol= $_SESSION['id_rol'];
-		$resultPer = $permisos_rol->getPermisosEditar("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
+		$resultPer = $permisos_rol->getPermisosEditar(" controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 			
 		if (!empty($resultPer))
 		{
@@ -388,22 +395,39 @@ class PlanCuentasController extends ControladorBase{
 			{
 				$id_plan_cuentas=(int)$_GET["id_p_cuentas"];
 				
-				$resultMayor=$mayor->getBy("id_plan_cuentas='$id_plan_cuentas'");
 				
-				if(empty($resultMayor))
+				$resultCuenta=$plan_cuentas->getBy("id_plan_cuentas='$id_plan_cuentas'");
+				
+												
+				if(!empty($resultCuenta))
 				{
-					$plan_cuentas->deleteBy("id_plan_cuentas",$id_plan_cuentas);
+					$codigo_cuenta=$resultCuenta[0]->codigo_plan_cuentas;
+					$id_entidad_cuenta=$resultCuenta[0]->id_entidades;
 					
-					$traza=new TrazasModel();
-					$_nombre_controlador = "PlanCuentas";
-					$_accion_trazas  = "Borrar";
-					$_parametros_trazas = $id_plan_cuentas;
-					$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+					if($codigo_cuenta!=""){$codigo_cuenta.=$codigo_cuenta.'%';}
+				
+					$resultMayor=$mayor->getCondiciones("mayor.id_plan_cuentas, plan_cuentas.codigo_plan_cuentas",
+														"public.plan_cuentas, public.mayor",
+														"plan_cuentas.id_plan_cuentas = mayor.id_plan_cuentas AND 
+														 plan_cuentas.codigo_plan_cuentas LIKE '$codigo_cuenta' AND
+														 plan_cuentas.id_entidades='$id_entidad_cuenta'",
+														"mayor.id_plan_cuentas"
+														);
 					
+						if(empty($resultMayor))
+						{
+							
+						$plan_cuentas->deleteByWhere(" id_entidades='$id_entidad_cuenta' AND codigo_plan_cuentas LIKE '$codigo_cuenta'");
+						
+						$traza=new TrazasModel();
+						$_nombre_controlador = "PlanCuentas";
+						$_accion_trazas  = "Borrar";
+						$_parametros_trazas = $codigo_cuenta;
+						$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+						
+						}
 				}		
 		
-				
-				
 			}
 			
 			$this->redirect("PlanCuentas", "index");
