@@ -64,22 +64,22 @@
 			
 			
 			$count_query   = pg_query($conn,"SELECT count(*) AS numrows FROM plan_cuentas, entidades, usuarios WHERE entidades.id_entidades = plan_cuentas.id_entidades AND
-            entidades.id_entidades = usuarios.id_entidades AND usuarios.id_usuarios='$_id_usuarios'  AND (plan_cuentas.codigo_plan_cuentas LIKE '%".$q."%' OR plan_cuentas.nombre_plan_cuentas LIKE '%".$q."%')");
+            entidades.id_entidades = usuarios.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND nivel_plan_cuentas='5' AND (plan_cuentas.codigo_plan_cuentas LIKE '%".$q."%' OR plan_cuentas.nombre_plan_cuentas LIKE '%".$q."%')");
 			
 			if ($row= pg_fetch_array($count_query)){$numrows = $row['numrows'];}
 			$total_pages = ceil($numrows/$per_page);
 			$reload = 'index.php';
 			//consulta principal para recuperar los datos
 			$query = pg_query($conn,"SELECT * FROM plan_cuentas, entidades, usuarios WHERE entidades.id_entidades = plan_cuentas.id_entidades AND
-            entidades.id_entidades = usuarios.id_entidades AND usuarios.id_usuarios='$_id_usuarios'  AND (plan_cuentas.codigo_plan_cuentas LIKE '%".$q."%' OR plan_cuentas.nombre_plan_cuentas LIKE '%".$q."%') ORDER BY codigo_plan_cuentas LIMIT $per_page OFFSET $offset");
+            entidades.id_entidades = usuarios.id_entidades AND usuarios.id_usuarios='$_id_usuarios' AND nivel_plan_cuentas='5' AND (plan_cuentas.codigo_plan_cuentas LIKE '%".$q."%' OR plan_cuentas.nombre_plan_cuentas LIKE '%".$q."%') ORDER BY codigo_plan_cuentas LIMIT $per_page OFFSET $offset");
 			
 			
 			if ($numrows>0){
 				?>
 				 <section style="height:425px; overflow-y:scroll;">
-                  <table class="table table-bordered">
+                  <table class="table table-hover">
 					  <thead>
-						<tr>
+						<tr class="info">
 						  <th>Código Cuenta</th>
 						  <th>Nombre Cuenta</th>
 						

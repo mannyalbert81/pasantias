@@ -11,9 +11,9 @@
 					<form class="form-horizontal">
 					  <div class="form-group">
 						<div class="col-sm-6">
-						  <input type="text" class="form-control" id="q" placeholder="Buscar Plan de Cuentas" onkeyup="load(1)">
+						  <input type="text" class="form-control" id="q" placeholder="Buscar Plan de Cuentas" onkeyup="load_comprobantes(1)">
 						</div>
-						<button type="button" class="btn btn-default" onclick="load(1)"><span class='glyphicon glyphicon-search'></span> Buscar</button>
+						<button type="button" class="btn btn-default" onclick="load_comprobantes(1)"><span class='glyphicon glyphicon-search'></span> Buscar</button>
 					  </div>
 					</form>
 					<div id="loader" style="position: absolute;	text-align: center;	top: 55px;	width: 100%;display:none;"></div><!-- Carga gif animado -->

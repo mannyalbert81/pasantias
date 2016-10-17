@@ -2,8 +2,8 @@
     <?php include("view/modulos/menu.php");?>  
     <?php include("view/modulos/modal.php");?>
     <?php include("view/css/Comprobantes/modal/buscar_plan_cuentas.php");?>
-    <?php include("view/css/Comprobantes/modal/buscar_ingresos.php");?>
-    <?php include("view/css/Comprobantes/modal/buscar_egresos.php");?>
+    <?php include("view/css/Ingresos/modal/buscar_ingresos.php");?>
+    <?php include("view/css/Egresos/modal/buscar_egresos.php");?>
     
 <!DOCTYPE HTML>
 <html lang="es">
@@ -18,6 +18,8 @@
 	      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
           <script type="text/javascript" src="view/css/Comprobantes/js/VentanaCentrada.js"></script>
 	      <script type="text/javascript" src="view/css/Comprobantes/js/procesos-comprobantes.js"></script>
+	      <script type="text/javascript" src="view/css/Egresos/js/procesos-egresos.js"></script>
+	      <script type="text/javascript" src="view/css/Ingresos/js/procesos-ingresos.js"></script>
 	      
     
     <script >   
@@ -30,8 +32,8 @@
     tecla_especial = false
     for(var i in especiales){
     if(key == especiales[i]){
-     tecla_especial = true;
-     break;
+    tecla_especial = true;
+    break;
         } 
     }
  
@@ -40,7 +42,7 @@
      }
     </script > 
  
-      <script type="text/javascript">
+    <script type="text/javascript">
 		     function validardebe(field) {
 				var nombre_elemento = field.id;
 				if(nombre_elemento=="debe_dcomprobantes")
@@ -460,9 +462,7 @@
         <?php include("view/modulos/footer.php"); ?>
         </div>
      </body>  
-      <script type="text/javascript" src="view/css/Comprobantes/js/procesos-egresos.js"></script>
-	  <script type="text/javascript" src="view/css/Comprobantes/js/procesos-ingresos.js"></script>
-	     
+         
     </html>  
     
    

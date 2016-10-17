@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-10-12T16:50:41 -->
+<!-- 2016-10-17T17:19:06 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
+	<parameter name="_id_ccomprobantes" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT 
+ ccomprobantes. id_ccomprobantes,
   entidades.nombre_entidades, 
   entidades.telefono_entidades, 
   entidades.direccion_entidades, 
@@ -33,8 +35,7 @@ WHERE
   entidades.id_entidades = usuarios.id_entidades AND
   ccomprobantes.id_usuarios = usuarios.id_usuarios AND
   dcomprobantes.id_ccomprobantes = ccomprobantes.id_ccomprobantes AND
-  plan_cuentas.id_plan_cuentas = dcomprobantes.id_plan_cuentas
-]]>
+  plan_cuentas.id_plan_cuentas = dcomprobantes.id_plan_cuentas AND  ccomprobantes. id_ccomprobantes = $P{_id_ccomprobantes}]]>
 	</queryString>
 	<field name="nombre_entidades" class="java.lang.String"/>
 	<field name="telefono_entidades" class="java.lang.String"/>
