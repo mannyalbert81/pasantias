@@ -1,6 +1,6 @@
 <?php
 
-class ComprobantesController extends ControladorBase{
+class ComprobanteContableController extends ControladorBase{
 
 	public function __construct() {
 		parent::__construct();
@@ -20,42 +20,34 @@ class ComprobantesController extends ControladorBase{
 			$d_comprobantes = new DComprobantesModel();
 			
 			$tipo_comprobante=new TipoComprobantesModel();
-			$resultTipCom = $tipo_comprobante->getBy("nombre_tipo_comprobantes='INGRESOS' OR nombre_tipo_comprobantes='EGRESOS'");
+			$resultTipCom = $tipo_comprobante->getBy("nombre_tipo_comprobantes='CONTABLE'");
 			
 			
 		    $columnas_enc = "entidades.id_entidades, 
-  							entidades.nombre_entidades";
+  							entidades.nombre_entidades,
+		    		        consecutivos.numero_consecutivos";
 		    $tablas_enc ="public.usuarios, 
-						  public.entidades";
-		    $where_enc ="entidades.id_entidades = usuarios.id_entidades AND usuarios.id_usuarios='$_id_usuarios'";
+						  public.entidades,
+		    		      public.consecutivos";
+		    $where_enc ="consecutivos.id_entidades = entidades.id_entidades AND entidades.id_entidades = usuarios.id_entidades AND consecutivos.nombre_consecutivos='CONTABLE' AND usuarios.id_usuarios='$_id_usuarios'";
 		    $id_enc="entidades.nombre_entidades";
 		    $resultSet=$d_comprobantes->getCondiciones($columnas_enc ,$tablas_enc ,$where_enc, $id_enc);
 		    	
 				
 		    $permisos_rol = new PermisosRolesModel();
-			$nombre_controladores = "Comprobantes";
+			$nombre_controladores = "ComprobanteContable";
 			$id_rol= $_SESSION['id_rol'];
 			$resultPer = $permisos_rol->getPermisosVer("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 				
 			if (!empty($resultPer))
 			{
 				
-				if (isset($_POST['ruc_ccomprobantes'])){
-					
-				$_ruc_ccomprobantes =$_POST['ruc_ccomprobantes'];
-				$_nombres_ccomprobantes =$_POST['nombres_ccomprobantes'];
-				$_id_tipo_comprobantes =$_POST['id_tipo_comprobantes'];
-				$_retencion_ccomprobantes =$_POST['retencion_ccomprobantes'];
-				$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
-				$resultTipoComprobantes = $tipo_comprobante->getBy("id_tipo_comprobantes='$_id_tipo_comprobantes'");
-					
-				$arrayGet['array_ruc_ccomprobantes']=$_ruc_ccomprobantes;
-				$arrayGet['array_nombres_ccomprobantes']=$_nombres_ccomprobantes;
-				//$arrayGet['array_nombre_tipo_comprobantes']=$resultTipoComprobantes[0]->nombre_tipo_comprobantes;
-				$arrayGet['array_id_tipo_comprobantes']=$resultTipoComprobantes[0]->id_tipo_comprobantes;
-				$arrayGet['array_retencion_ccomprobantes']=$_retencion_ccomprobantes;
-				$arrayGet['array_concepto_ccomprobantes']=$_concepto_ccomprobantes;
+				if (isset($_POST['concepto_ccomprobantes'])){
+						
+					$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
+					$arrayGet['array_concepto_ccomprobantes']=$_concepto_ccomprobantes;
 				}
+				
 				
 					
 				if(isset($_GET["id_temp_comprobantes"]))
@@ -69,53 +61,44 @@ class ComprobantesController extends ControladorBase{
 					//$temp_comprobantes->deleteBy(" id_temp_comprobantes",$id_temp_comprobantes);
 				
 					$traza=new TrazasModel();
-					$_nombre_controlador = "Comprobantes";
+					$_nombre_controlador = "ComprobanteContable";
 					$_accion_trazas  = "Borrar";
 					$_parametros_trazas = $id_temp_comprobantes;
 					$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
 				}
 				
-				
-				
 				if(isset($_POST["plan_cuentas"])){
-					$_id_plan_cuentas= $_POST["plan_cuentas"];
+				$_id_plan_cuentas= $_POST["plan_cuentas"];
 				
-					if($_id_plan_cuentas==""){
-							
-					}else
-					{
-							
-							
+				if($_id_plan_cuentas==""){
+					
+				}else 
+				{
 						$_descripcion_dcomprobantes= $_POST["descripcion_dcomprobantes"];
-				
+						
 						$_debe_dcomprobantes= $_POST["debe_dcomprobantes"];
-							
+					
 						if ($_debe_dcomprobantes=="")
 						{
 							$_debe_dcomprobantes=0;
-				
+								
 						}
 						$_haber_dcomprobantes= $_POST["haber_dcomprobantes"];
-							
+					
 						if ($_haber_dcomprobantes=="")
 						{
 							$_haber_dcomprobantes=0;
-								
+					
 						}
-							
+					
 						$funcion = "ins_temp_comprobantes";
 						$parametros = "'$_id_usuarios','$_id_plan_cuentas','$_descripcion_dcomprobantes','$_debe_dcomprobantes','$_haber_dcomprobantes'";
 						$temp_comprobantes->setFuncion($funcion);
 						$temp_comprobantes->setParametros($parametros);
 						$resultado=$temp_comprobantes->Insert();
-							
-					}
-				}	
-				
-				
-			
-				
-			
+					
+				}
+				}
 				
 				$columnas_res = " temp_comprobantes.id_temp_comprobantes,
 				          plan_cuentas.id_plan_cuentas,
@@ -139,7 +122,7 @@ class ComprobantesController extends ControladorBase{
 				
 				 
 					
-					$this->view("Comprobantes",array(
+					$this->view("ComprobanteContable",array(
 							
 							"resultSet"=>$resultSet, "resultRes"=>$resultRes, "resultTipCom"=>$resultTipCom, "arrayGet"=>$arrayGet
 					));
@@ -217,7 +200,7 @@ class ComprobantesController extends ControladorBase{
 		
    */
 	
-   public function InsertaComprobantes(){
+   public function InsertaComprobanteContable(){
    
    	session_start();
    
@@ -232,7 +215,7 @@ class ComprobantesController extends ControladorBase{
    	$tipo_comprobantes = new TipoComprobantesModel();
    
    
-   	$nombre_controladores = "Comprobantes";
+   	$nombre_controladores = "ComprobanteContable";
    	$id_rol= $_SESSION['id_rol'];
    	$resultPer = $ccomprobantes->getPermisosEditar("   nombre_controladores = '$nombre_controladores' AND id_rol = '$id_rol' " );
    
@@ -247,28 +230,20 @@ class ComprobantesController extends ControladorBase{
    			$where =  "id_usuario_registra= '$_id_usuarios' ";
    			$resultCom =  $tem_comprobantes->getBy($where);
    			
-   			$_id_tipo_comprobantes =$_POST['id_tipo_comprobantes'];
-   			$resultTip = $tipo_comprobantes->getBy("id_tipo_comprobantes='$_id_tipo_comprobantes'");
-   			$_nombre_tipo_comprobantes=$resultTip[0]->nombre_tipo_comprobantes;
    			
-   			
-   		if ($_nombre_tipo_comprobantes == "INGRESOS")
-   	 	{
-   				
-   				
-   				
    			$_id_entidades =$_POST['id_entidades'];
    			$_id_tipo_comprobantes =$_POST['id_tipo_comprobantes'];
-   			$resultConsecutivos = $consecutivos->getBy("nombre_consecutivos LIKE '%INGRESOS%' AND id_entidades='$_id_entidades' AND id_tipo_comprobantes='$_id_tipo_comprobantes'");
+   			
+   			$resultConsecutivos = $consecutivos->getBy("nombre_consecutivos LIKE '%CONTABLE%' AND id_entidades='$_id_entidades' AND id_tipo_comprobantes='$_id_tipo_comprobantes'");
    			$_id_consecutivos=$resultConsecutivos[0]->id_consecutivos;
    			
    			$_numero_consecutivos=$resultConsecutivos[0]->numero_consecutivos;
    			$_update_numero_consecutivo=((int)$_numero_consecutivos)+1;
    			$_update_numero_consecutivo=str_pad($_update_numero_consecutivo,6,"0",STR_PAD_LEFT);
    			
-   			$_ruc_ccomprobantes =$_POST['ruc_ccomprobantes'];
-   			$_nombres_ccomprobantes =$_POST['nombres_ccomprobantes'];
-   			$_retencion_ccomprobantes =$_POST['retencion_ccomprobantes'];
+   			$_ruc_ccomprobantes ="";
+   			$_nombres_ccomprobantes ="";
+   			$_retencion_ccomprobantes ="";
    			$_valor_ccomprobantes =$_POST['valor_ccomprobantes'];
    			$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
    			$_id_usuario_creador=$_SESSION['id_usuarios'];
@@ -333,7 +308,7 @@ class ComprobantesController extends ControladorBase{
    							
    						///LAS TRAZAS
    						$traza=new TrazasModel();
-   						$_nombre_controlador = "Comprobantes";
+   						$_nombre_controlador = "ComprobanteContable";
    						$_accion_trazas  = "Guardar";
    						$_parametros_trazas = $_id_plan_cuentas;
    						$resulta = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
@@ -343,14 +318,11 @@ class ComprobantesController extends ControladorBase{
    						$where_del = "id_usuario_registra= '$_id_usuarios'";
    						$tem_comprobantes->deleteByWhere($where_del);
    							
-   							
-   							
-   							
-   
+   					   
    					} catch (Exception $e)
    					{
    						$this->view("Error",array(
-   								"resultado"=>"Eror al Insertar Comprobantes ->". $id
+   								"resultado"=>"Eror al Insertar Comprobante Contable ->". $id
    						));
    						exit();
    					}
@@ -362,137 +334,17 @@ class ComprobantesController extends ControladorBase{
    			catch (Exception $e)
    			{
    
-   					
-   
    			}
-   
-   
-   			
-   		}
-   		else{
-   			
-   			$_id_entidades =$_POST['id_entidades'];
-   			$_id_tipo_comprobantes =$_POST['id_tipo_comprobantes'];
-   			$resultConsecutivos = $consecutivos->getBy("nombre_consecutivos LIKE '%EGRESOS%' AND id_entidades='$_id_entidades'AND id_tipo_comprobantes='$_id_tipo_comprobantes'");
-   			$_id_consecutivos=$resultConsecutivos[0]->id_consecutivos;
-   			
-   			$_numero_consecutivos=$resultConsecutivos[0]->numero_consecutivos;
-   			$_update_numero_consecutivo=((int)$_numero_consecutivos)+1;
-   			$_update_numero_consecutivo=str_pad($_update_numero_consecutivo,6,"0",STR_PAD_LEFT);
-   			
-   			$_ruc_ccomprobantes =$_POST['ruc_ccomprobantes'];
-   			$_nombres_ccomprobantes =$_POST['nombres_ccomprobantes'];
-   			$_retencion_ccomprobantes =$_POST['retencion_ccomprobantes'];
-   			$_valor_ccomprobantes =$_POST['valor_ccomprobantes'];
-   			$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
-   			$_id_usuario_creador=$_SESSION['id_usuarios'];
-   			$_valor_letras =$_POST['valor_letras'];
-   			
-   			 
-   			 
-   			 
-   			///PRIMERO INSERTAMOS LA CABEZA DEL COMPROBANTE
-   			try
-   			{
-   			
-   				$funcion = "ins_ccomprobantes";
-   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras'";
-   				$ccomprobantes->setFuncion($funcion);
-   				$ccomprobantes->setParametros($parametros);
-   				$resultado=$ccomprobantes->Insert();
-   				
-   				$resultConsecutivo=$consecutivos->UpdateBy("numero_consecutivos='$_update_numero_consecutivo'", "consecutivos", "id_consecutivos='$_id_consecutivos'");
-   					
-   					
-   				//$print="'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras'";
-   				//$this->view("Error",array("resultado"=>$print));
-   				//die();
-   				 
-   				///INSERTAMOS DETALLE  DEL MOVIMIENTO
-   			
-   				foreach($resultCom as $res)
-   				{
-   					 
-   					//busco si existe este nuevo id
-   					try
-   					{
-   						$_id_plan_cuentas = $res->id_plan_cuentas;
-   						$_descripcion_dcomprobantes = $res->observacion_temp_comprobantes;
-   						$_debe_dcomprobantes = $res->debe_temp_comprobantes;
-   						$_haber_dcomprobantes = $res->haber_temp_comprobantes;
-   						 
-   						$resultComprobantes = $ccomprobantes->getBy("numero_ccomprobantes ='$_numero_consecutivos' AND id_entidades ='$_id_entidades' AND id_tipo_comprobantes='$_id_tipo_comprobantes'");
-   						$_id_ccomprobantes=$resultComprobantes[0]->id_ccomprobantes;
-   							
-   							
-   							
-   						$funcion = "ins_dcomprobantes";
-   						$parametros = "'$_id_ccomprobantes','$_numero_consecutivos','$_id_plan_cuentas', '$_descripcion_dcomprobantes', '$_debe_dcomprobantes', '$_haber_dcomprobantes'";
-   						$dcomprobantes->setFuncion($funcion);
-   						$dcomprobantes->setParametros($parametros);
-   						$resultado=$dcomprobantes->Insert();
-   			
-   						$_fecha_mayor = getdate();
-   						$_fecha_año=$_fecha_mayor['year'];
-   						$_fecha_mes=$_fecha_mayor['mon'];
-   						$_fecha_dia=$_fecha_mayor['mday'];
-   						
-   						$_fecha_actual=$_fecha_año.'-'.$_fecha_mes.'-'.$_fecha_dia;
-   						
-   						////llamas a la funcion mayoriza();
-   						$resul = $dcomprobantes->Mayoriza($_id_plan_cuentas, $_id_ccomprobantes, $_fecha_actual, $_debe_dcomprobantes, $_haber_dcomprobantes);
-   						$_cadena = $_id_plan_cuentas .'-'. $_id_ccomprobantes .'-'. $_fecha_actual .'-'. $_debe_dcomprobantes .'-'. $_haber_dcomprobantes ; 
-   						
-   						
-   						
-   						///LAS TRAZAS
-   						$traza=new TrazasModel();
-   						$_nombre_controlador = "Comprobantes";
-   						$_accion_trazas  = "Guardar";
-   						$_parametros_trazas = $_id_plan_cuentas;
-   						$resulta = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
-   			
-   							
-   						$where_del = "id_usuario_registra= '$_id_usuarios'";
-   						$tem_comprobantes->deleteByWhere($where_del);
-   			
-   			
-   			
-   			
-   						 
-   					} catch (Exception $e)
-   					{
-   						$this->view("Error",array(
-   								"resultado"=>"Eror al Insertar Comprobantes ->". $id
-   						));
-   						exit();
-   					}
-   						
-   				}
-   			
-   			
-   			}
-   			catch (Exception $e)
-   			{
-   				 
-   			
-   				 
-   			}
-   			 
-   			
-   			
-   		}
-   		
    		
    
    		}	
    		
-   		$this->redirect("Comprobantes","index")	;
+   		$this->redirect("ComprobanteContable","index")	;
    	}
    	else
    	{
    		$this->view("Error",array(
-   				"resultado"=>"No tiene Permisos de Guardar Comprobantes"
+   				"resultado"=>"No tiene Permisos de Guardar Comprobante Contable"
    
    		));
    
@@ -705,7 +557,7 @@ class ComprobantesController extends ControladorBase{
 	
 	}
 	
-    
+	
 	
 	
 }

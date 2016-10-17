@@ -16,12 +16,7 @@ opacity: 0.6;
 
 }
 </style>
-<script>
-$(document).ready(function(){
-   // alert("document0 listo");
-   
-});
-</script>
+
 <script>
 $(window).load(function(){
 //alert("document0 listo");

@@ -2,23 +2,23 @@
     <?php include("view/modulos/menu.php");?>  
     <?php include("view/modulos/modal.php");?>
     <?php include("view/css/Comprobantes/modal/buscar_plan_cuentas.php");?>
-    <?php include("view/css/Comprobantes/modal/buscar_ingresos.php");?>
-    <?php include("view/css/Comprobantes/modal/buscar_egresos.php");?>
+    
     
 <!DOCTYPE HTML>
 <html lang="es">
      <head>
          <meta charset="utf-8"/>
-         <title>Comprobantes - Contabilidad 2016</title>
+         <title>Comprobante Contable - Contabilidad 2016</title>
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	      <link rel="stylesheet" href="view/css/bootstrap.css">
           <script src="view/js/jquery.js"></script>
 		  <script src="view/js/bootstrapValidator.min.js"></script>
-		  <script src="view/js/ValidarComprobantesTemporal.js"></script>
+		  <script src="view/js/ValidarComprobanteContable.js"></script>
 	      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
           <script type="text/javascript" src="view/css/Comprobantes/js/VentanaCentrada.js"></script>
 	      <script type="text/javascript" src="view/css/Comprobantes/js/procesos-comprobantes.js"></script>
-	      
+	   
+    
     
     <script >   
     function numeros(e){
@@ -57,13 +57,13 @@
 	<script>
 	       	$(document).ready(function(){ 	
 				$( "#id_plan_cuentas" ).autocomplete({
-      				source: "<?php echo $helper->url("Comprobantes","AutocompleteComprobantesCodigo"); ?>",
+      				source: "<?php echo $helper->url("ComprobanteContable","AutocompleteComprobantesCodigo"); ?>",
       				minLength: 1
     			});
 
 				$("#id_plan_cuentas").focusout(function(){
     				$.ajax({
-    					url:'<?php echo $helper->url("Comprobantes","AutocompleteComprobantesDevuelveNombre"); ?>',
+    					url:'<?php echo $helper->url("ComprobanteContable","AutocompleteComprobantesDevuelveNombre"); ?>',
     					type:'POST',
     					dataType:'json',
     					data:{codigo_plan_cuentas:$('#id_plan_cuentas').val()}
@@ -86,13 +86,13 @@
 		<script>
 			       	$(document).ready(function(){ 	
 						$( "#nombre_plan_cuentas" ).autocomplete({
-		      				source: "<?php echo $helper->url("Comprobantes","AutocompleteComprobantesNombre"); ?>",
+		      				source: "<?php echo $helper->url("ComprobanteContable","AutocompleteComprobantesNombre"); ?>",
 		      				minLength: 1
 		    			});
 		
 						$("#nombre_plan_cuentas").focusout(function(){
 		    				$.ajax({
-		    					url:'<?php echo $helper->url("Comprobantes","AutocompleteComprobantesDevuelveCodigo"); ?>',
+		    					url:'<?php echo $helper->url("ComprobanteContable","AutocompleteComprobantesDevuelveCodigo"); ?>',
 		    					type:'POST',
 		    					dataType:'json',
 		    					data:{nombre_plan_cuentas:$('#nombre_plan_cuentas').val()}
@@ -111,41 +111,26 @@
 					
 		     </script>
 
-             
-             
-             
-		
-       
+	
 		         
      </head>
       <body class="cuerpo">
        
-       
-       <?php   
+                   
+                   
+                   
+                   
+      <?php   
        
        $array_get=urlencode(serialize($arrayGet));
-       $sel_id_tipo_comprobantes = "";
-       $sel_nombres_ccomprobantes = "";
-       $sel_ruc_ccomprobantes="";
-       $sel_retencion_ccomprobantes="";
        $sel_concepto_ccomprobantes="";
-     //  $sel_valor_ccomprobantes="";
        
       
        
        if($_SERVER['REQUEST_METHOD']=='POST' )
        {
-       
-       	//die('entro a pst');
-       
-       	$sel_id_tipo_comprobantes = $_POST['id_tipo_comprobantes'];
-       	$sel_nombres_ccomprobantes = $_POST['nombres_ccomprobantes'];
-       	$sel_ruc_ccomprobantes=$_POST['ruc_ccomprobantes'];
-       	$sel_retencion_ccomprobantes=$_POST['retencion_ccomprobantes'];
         $sel_concepto_ccomprobantes=$_POST['concepto_ccomprobantes'];
-       //	$sel_valor_ccomprobantes=$_POST['valor_ccomprobantes'];
-      }
-      //if(empty($array_get))
+       }
       	
       if($_SERVER['REQUEST_METHOD']=='GET')
       {
@@ -158,10 +143,6 @@
       
       		$_dato=unserialize($a);
       
-      		$sel_id_tipo_comprobantes = $_dato['array_id_tipo_comprobantes'];
-      		$sel_nombres_ccomprobantes = $_dato['array_nombres_ccomprobantes'];
-      		$sel_ruc_ccomprobantes=$_dato['array_ruc_ccomprobantes'];
-      		$sel_retencion_ccomprobantes=$_dato['array_retencion_ccomprobantes'];
       		$sel_concepto_ccomprobantes=$_dato['array_concepto_ccomprobantes'];
       		
       	}
@@ -171,8 +152,8 @@
       
      
       ?>
-        
-       <?php 
+     
+                 <?php 
                   
                    $sumador_debe_total=0;
                    $sumador_haber_total=0;
@@ -201,7 +182,7 @@
   		
   
   	
-        <form id="form-comprobantes" action="<?php echo $helper->url("Comprobantes","index"); ?>" method="post" enctype="multipart/form-data" class="col-lg-12">
+        <form id="form-comprobante-contable" action="<?php echo $helper->url("ComprobanteContable","index"); ?>" method="post" enctype="multipart/form-data" class="col-lg-12">
             <br>	
             
               
@@ -215,20 +196,18 @@
 	         <div class="panel-heading">
 	         <div class="row">
 	         <div class="form-group" style="margin-left: 20px">
-				               <label for="nuevo_comprobante" class="control-label"><h4><i class='glyphicon glyphicon-edit'></i> Nuevo Comprobante de </h4></label>
-				               <input type="hidden" class="form-control" id="id_entidades" name="id_entidades" value="<?php echo $res->id_entidades; ?>">
+			                      <label for="nuevo_comprobante" class="control-label"><h4><i class='glyphicon glyphicon-edit'></i> Nuevo Comprobante N° <?php echo $res->numero_consecutivos; ?></h4></label>
+				                  <input type="hidden" class="form-control" id="id_entidades" name="id_entidades" value="<?php echo $res->id_entidades; ?>">
                                  
              <div class="col-md-3 col-lg-3 col-xs-4" style="margin-top: 5px">
-					           <select name="id_tipo_comprobantes" id="id_tipo_comprobantes"  class="form-control" >
-                                  <option value="" selected="selected">--Seleccione--</option>
-									<?php foreach($resultTipCom as $res) {?>
-										<option value="<?php echo $res->id_tipo_comprobantes; ?>" <?php if($sel_id_tipo_comprobantes==$res->id_tipo_comprobantes){echo "selected";}?>   ><?php echo $res->nombre_tipo_comprobantes; ?> </option>
+					           <select name="id_tipo_comprobantes" id="id_tipo_comprobantes"  class="form-control" readonly>
+                                  <?php foreach($resultTipCom as $res) {?>
+										<option value="<?php echo $res->id_tipo_comprobantes; ?>" ><?php echo $res->nombre_tipo_comprobantes; ?> </option>
 							        <?php } ?>
 								   </select> 
                                   <span class="help-block"></span>	
-		     </div>
-		     
-		     
+             </div>
+		                   
 			 </div>
 	         </div>
 	         </div>
@@ -240,37 +219,13 @@
 	         <?php } }else{ ?>
   			 <?php } ?>
   			 
-  			 <div class="col-lg-12">
+  			  <div class="col-lg-12">
 	         <div class="col-lg-1">
 	         </div>
 	         <div class="col-lg-10">
 	         <div class="panel panel-info">
 	         <div class="panel-body">
 	         <div class="row">
-  		     <div class="col-xs-5 col-md-5">
-		     <div class="form-group">
-                                  <label for="nombres_ccomprobantes" class="control-label">Nombre: </label>
-                                  <input type="text" class="form-control" id="nombres_ccomprobantes" name="nombres_ccomprobantes" value="<?php echo $sel_nombres_ccomprobantes;?>"  placeholder="Nombre">
-                                  <span class="help-block"></span>
-             </div>
-		     </div>
-		     <div class="col-xs-3 col-md-3">
-		     <div class="form-group">
-                                  <label for="ruc_ccomprobantes" class="control-label">Ruc: </label>
-                                  <input type="text" class="form-control" id="ruc_ccomprobantes" name="ruc_ccomprobantes" value="<?php echo $sel_ruc_ccomprobantes;?>"  placeholder="Ruc">
-                                  <span class="help-block"></span>
-             </div>
-		     </div>
-		     <div class="col-xs-3 col-md-3">
-		     <div class="form-group">
-                                  <label for="retencion_ccomprobantes" class="control-label">#Retención: </label>
-                                  <input type="text" class="form-control" id="retencion_ccomprobantes" name="retencion_ccomprobantes" onkeypress="return numeros(event)" value="<?php echo $sel_retencion_ccomprobantes;?>"  placeholder="# Retención">
-                                  <span class="help-block"></span>
-             </div>
-		     </div>
-  		     </div>
-  		     
-  		     <div class="row">
   		     <div class="col-xs-5 col-md-5">
 		     <div class="form-group">
                                   <label for="concepto_ccomprobantes" class="control-label">Concepto de: </label>
@@ -292,11 +247,8 @@
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
 						 <span class="glyphicon glyphicon-search"></span> Buscar Cuentas
 						</button>
-						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#Ingresos">
-						  <span class="glyphicon glyphicon-print"></span> Ingresos
-						</button>
-						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#Egresos">
-						  <span class="glyphicon glyphicon-print"></span> Egresos
+						<button type="submit" class="btn btn-default">
+						  <span class="glyphicon glyphicon-print"></span> Imprimir
 						</button>
 					</div>	
 			 </div>		
@@ -309,6 +261,7 @@
 	         </div>
              </div>
          	
+  			 
          	 
 	         <div class="col-lg-12">
 	         <div class="col-lg-12">
@@ -405,7 +358,7 @@
 		                <td style="font-size:80%;"> <?php echo $res->haber_temp_comprobantes; ?>     </td>  
 			           	<td>   
 			               	<div class="right">
-			                    <a href="<?php echo $helper->url("Comprobantes","index"); ?>&id_temp_comprobantes=<?php echo $res->id_temp_comprobantes; ?>&arrayGet=<?php echo  $array_get ;?>"><i class="glyphicon glyphicon-trash"></i></a>
+			                    <a href="<?php echo $helper->url("ComprobanteContable","index"); ?>&id_temp_comprobantes=<?php echo $res->id_temp_comprobantes; ?>&arrayGet=<?php echo  $array_get ;?>"><i class="glyphicon glyphicon-trash"></i></a>
 			                </div>
 			            </td>
 	   		</tr>
@@ -439,7 +392,7 @@
 		   <div class="row">
 		   <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center; margin-top:20px" > 
            <div class="form-group">
-            					  <button type="submit" id="Guardar" name="Guardar" onclick="this.form.action='<?php echo $helper->url("Comprobantes","InsertaComprobantes"); ?>'" class="btn btn-success" >Guardar</button>
+            					  <button type="submit" id="Guardar" name="Guardar" onclick="this.form.action='<?php echo $helper->url("ComprobanteContable","InsertaComprobanteContable"); ?>'" class="btn btn-success" >Guardar</button>
            </div>
            </div>
            </div>          
@@ -460,9 +413,6 @@
         <?php include("view/modulos/footer.php"); ?>
         </div>
      </body>  
-      <script type="text/javascript" src="view/css/Comprobantes/js/procesos-egresos.js"></script>
-	  <script type="text/javascript" src="view/css/Comprobantes/js/procesos-ingresos.js"></script>
-	     
     </html>  
     
    

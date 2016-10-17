@@ -103,10 +103,37 @@ class EntidadBase{
         return $query;
     }
     
+     public function deleteByWhere($where){
+    
+    	try
+    	{
+    		$query=pg_query($this->con,"DELETE FROM $this->table WHERE $where ");
+    	}
+    	catch (Exeption $Ex)
+    	{
+    
+    
+    	}
+    
+    	return $query;
+    }
+    
+    
 
     public function getCondiciones($columnas ,$tablas , $where, $id){
     	
     	$query=pg_query($this->con, "SELECT $columnas FROM $tablas WHERE $where ORDER BY $id  ASC");
+    	$resultSet = array();
+    	while ($row = pg_fetch_object($query)) {
+    		$resultSet[]=$row;
+    	}
+    
+    	return $resultSet;
+    }
+    
+    public function getCondicionesDesc($columnas ,$tablas , $where, $id){
+    	 
+    	$query=pg_query($this->con, "SELECT $columnas FROM $tablas WHERE $where ORDER BY $id  DESC");
     	$resultSet = array();
     	while ($row = pg_fetch_object($query)) {
     		$resultSet[]=$row;
@@ -777,6 +804,62 @@ class EntidadBase{
     	$resultPermisos = $perimisos_rol->getCondiciones($columnas, $tablas, $where, $id);
     	 
     	$_SESSION['controladores']=$resultPermisos;
+    }
+    
+    
+    public  function Mayoriza($_id_plan_cuentas, $_id_ccomprobantes, $_fecha_actual, $_debe_mayor, $_haber_mayor)
+    {
+    	$mayor = new MayorModel();
+    	$plan_cuentas = new PlanCuentasModel();
+    	$_saldo_mayor = 0;
+    	$_n_plan_cuentas = '';
+    	$_saldo_fin_plan_cuentas = 0;
+    	
+    	///buscamos la naturaleza e la cuenta
+    	$where =  "id_plan_cuentas= '$_id_plan_cuentas' ";
+   		$resultCuenta =  $plan_cuentas->getBy($where);
+   		foreach($resultCuenta as $res)
+   		{
+   			$_n_plan_cuentas =  $res->n_plan_cuentas;
+   			$_saldo_fin_plan_cuentas =  $res->saldo_fin_plan_cuentas;
+   			
+   		}
+    	if ($_n_plan_cuentas == 'D')
+    	{
+    		//deudora
+    		$_saldo_fin_plan_cuentas = $_saldo_fin_plan_cuentas + $_debe_mayor - $_haber_mayor ;
+    	}
+    	If ($_n_plan_cuentas == 'A')
+    	{
+    		//acreedora	
+    		$_saldo_fin_plan_cuentas = $_saldo_fin_plan_cuentas - $_debe_mayor + $_haber_mayor ;
+    	}
+
+    	$_saldo_mayor = $_saldo_fin_plan_cuentas;
+    	
+     	///actualizo el saldo de la cuenta
+
+    	
+    	$colval=" saldo_fin_plan_cuentas = '$_saldo_fin_plan_cuentas' ";
+    	$tabla="plan_cuentas";
+    	$where=" id_plan_cuentas = '$_id_plan_cuentas'  ";
+    	 
+    	$resultado=$plan_cuentas->UpdateBy($colval, $tabla, $where);
+    	
+    	
+    	
+    	$funcion = "ins_mayor";
+    
+    	//$parametros = " '$_id_plan_cuentas', '$_id_ccomprobantes' , '$_fecha_mayor', '$_debe_mayor', '$_haber_mayor', '$_saldo_mayor' ";
+    	$parametros = " '$_id_plan_cuentas', '$_id_ccomprobantes' , '$_fecha_actual', '$_debe_mayor', '$_haber_mayor', '$_saldo_mayor' ";
+    	//$parametros = " '4', '27' , '2016-01-01', '100', '0', '100' ";
+    	
+    	
+    	$plan_cuentas->setFuncion($funcion);
+    
+    	$plan_cuentas->setParametros($parametros);
+    
+    	$resultadoT=$plan_cuentas->Insert();
     }
     
 }
