@@ -1,10 +1,10 @@
 
 		$(document).ready(function(){
-			load(1);
+			load_comprobantes(1);
 		});
 		
 		
-		function load(page){
+		function load_comprobantes(page){
 		   // var parametros = {"action":"ajax","page":page};
 			var q= $("#q").val();
 			$("#loader").fadeIn('slow');
