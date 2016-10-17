@@ -1,10 +1,6 @@
 <?php
-
   session_start();
   $_id_usuarios= $_SESSION['id_usuarios'];
-  
-	  
-        
   
     	$conn  = pg_connect("user=postgres port=5432 password=.Romina.2012 dbname=contabilidad host=186.4.241.148");
 		
@@ -17,9 +13,9 @@
 		 $action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 		  if($action == 'ajax'){
 		  
-		  	$q =  pg_escape_string($conn,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
+		  	$i =  pg_escape_string($conn,(strip_tags($_REQUEST['i'], ENT_QUOTES)));
 		  
-		  	if ( $_GET['q'] != "" )
+		  	if ( $_GET['i'] != "" )
 		  	{
 		  	
 		  	//$q = "codigo_plan_cuentas LIKE '%".$q."%'";
@@ -63,15 +59,15 @@
 			
 			
 			
-			$count_query   = pg_query($conn,"SELECT count(*) AS numrows FROM plan_cuentas, entidades, usuarios WHERE entidades.id_entidades = plan_cuentas.id_entidades AND
-            entidades.id_entidades = usuarios.id_entidades AND usuarios.id_usuarios='$_id_usuarios'  AND (plan_cuentas.codigo_plan_cuentas LIKE '%".$q."%' OR plan_cuentas.nombre_plan_cuentas LIKE '%".$q."%')");
+			$count_query   = pg_query($conn,"SELECT count(*) AS numrows FROM public.ccomprobantes, public.usuarios, public.tipo_comprobantes, public.entidades WHERE ccomprobantes.id_usuarios = usuarios.id_usuarios AND
+            ccomprobantes.id_entidades = entidades.id_entidades AND tipo_comprobantes.id_tipo_comprobantes = ccomprobantes.id_tipo_comprobantes AND entidades.id_entidades = usuarios.id_entidades AND nombre_tipo_comprobantes='INGRESOS' AND usuarios.id_usuarios='$_id_usuarios'  AND (ccomprobantes.ruc_ccomprobantes LIKE '%".$i."%' OR ccomprobantes.nombres_ccomprobantes LIKE '%".$i."%' OR ccomprobantes.numero_ccomprobantes LIKE '%".$i."%')");
 			
 			if ($row= pg_fetch_array($count_query)){$numrows = $row['numrows'];}
 			$total_pages = ceil($numrows/$per_page);
 			$reload = 'index.php';
 			//consulta principal para recuperar los datos
-			$query = pg_query($conn,"SELECT * FROM plan_cuentas, entidades, usuarios WHERE entidades.id_entidades = plan_cuentas.id_entidades AND
-            entidades.id_entidades = usuarios.id_entidades AND usuarios.id_usuarios='$_id_usuarios'  AND (plan_cuentas.codigo_plan_cuentas LIKE '%".$q."%' OR plan_cuentas.nombre_plan_cuentas LIKE '%".$q."%') ORDER BY codigo_plan_cuentas LIMIT $per_page OFFSET $offset");
+			$query = pg_query($conn,"SELECT * FROM public.ccomprobantes, public.usuarios, public.tipo_comprobantes, public.entidades WHERE ccomprobantes.id_usuarios = usuarios.id_usuarios AND
+            ccomprobantes.id_entidades = entidades.id_entidades AND tipo_comprobantes.id_tipo_comprobantes = ccomprobantes.id_tipo_comprobantes AND entidades.id_entidades = usuarios.id_entidades AND nombre_tipo_comprobantes='INGRESOS' AND usuarios.id_usuarios='$_id_usuarios'  AND (ccomprobantes.ruc_ccomprobantes LIKE '%".$i."%' OR ccomprobantes.nombres_ccomprobantes LIKE '%".$i."%' OR ccomprobantes.numero_ccomprobantes LIKE '%".$i."%') ORDER BY ccomprobantes.numero_ccomprobantes LIMIT $per_page OFFSET $offset");
 			
 			
 			if ($numrows>0){
@@ -80,8 +76,11 @@
                   <table class="table table-bordered">
 					  <thead>
 						<tr>
-						  <th>Código Cuenta</th>
-						  <th>Nombre Cuenta</th>
+						  <th>Ruc</th>
+						  <th>Nombre</th>
+						  <th># Comprobante</th>
+						  <th>Concepto</th>
+						  <th>Valor</th>
 						
 						</tr>
 					</thead>
@@ -90,11 +89,11 @@
 					while($row = pg_fetch_array($query)){
 						?>
 						<tr>
-							<td><?php echo $row['codigo_plan_cuentas'];?></td>
-							<td><?php echo $row['nombre_plan_cuentas'];?></td>
-							
-							
-							
+							<td><?php echo $row['ruc_ccomprobantes'];?></td>
+							<td><?php echo $row['nombres_ccomprobantes'];?></td>
+							<td><?php echo $row['numero_ccomprobantes'];?></td>
+							<td><?php echo $row['concepto_ccomprobantes'];?></td>
+							<td><?php echo $row['valor_letras'];?></td>
 							
 						</tr>
 						<?php

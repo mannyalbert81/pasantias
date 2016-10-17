@@ -2,6 +2,8 @@
     <?php include("view/modulos/menu.php");?>  
     <?php include("view/modulos/modal.php");?>
     <?php include("view/css/Comprobantes/modal/buscar_plan_cuentas.php");?>
+    <?php include("view/css/Comprobantes/modal/buscar_ingresos.php");?>
+    <?php include("view/css/Comprobantes/modal/buscar_egresos.php");?>
     
 <!DOCTYPE HTML>
 <html lang="es">
@@ -16,8 +18,7 @@
 	      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
           <script type="text/javascript" src="view/css/Comprobantes/js/VentanaCentrada.js"></script>
 	      <script type="text/javascript" src="view/css/Comprobantes/js/procesos-comprobantes.js"></script>
-	   
-    
+	      
     
     <script >   
     function numeros(e){
@@ -291,8 +292,11 @@
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
 						 <span class="glyphicon glyphicon-search"></span> Buscar Cuentas
 						</button>
-						<button type="submit" class="btn btn-default">
-						  <span class="glyphicon glyphicon-print"></span> Imprimir
+						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#Ingresos">
+						  <span class="glyphicon glyphicon-print"></span> Ingresos
+						</button>
+						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#Egresos">
+						  <span class="glyphicon glyphicon-print"></span> Egresos
 						</button>
 					</div>	
 			 </div>		
@@ -456,6 +460,9 @@
         <?php include("view/modulos/footer.php"); ?>
         </div>
      </body>  
+      <script type="text/javascript" src="view/css/Comprobantes/js/procesos-egresos.js"></script>
+	  <script type="text/javascript" src="view/css/Comprobantes/js/procesos-ingresos.js"></script>
+	     
     </html>  
     
    
