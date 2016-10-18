@@ -253,7 +253,7 @@ public function index(){
 		    
 		    	//para la foto
 		    	 
-		    	$directorio = $_SERVER['DOCUMENT_ROOT'].'/fotos/';
+		    	$directorio = $_SERVER['DOCUMENT_ROOT'].'/contabilidad/fotos/';
 		    	 
 		    	$nombre = $_FILES['imagen_usuarios']['name'];
 		    	$tipo = $_FILES['imagen_usuarios']['type'];
@@ -479,7 +479,7 @@ public function index(){
 					
 						//para la foto
 					
-						$directorio = $_SERVER['DOCUMENT_ROOT'].'/fotos/';
+						$directorio = $_SERVER['DOCUMENT_ROOT'].'/contabilidad/fotos/';
 					
 						$nombre = $_FILES['imagen_usuarios']['name'];
 						$tipo = $_FILES['imagen_usuarios']['type'];
