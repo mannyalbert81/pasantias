@@ -71,8 +71,34 @@ public function index(){
 					if (isset ($_GET["id_usuarios"])   )
 					{
 						$_id_usuario = $_GET["id_usuarios"];
-						$where    = "rol.id_rol = usuarios.id_rol AND estado.id_estado = usuarios.id_estado AND ciudad.id_ciudad = usuarios.id_ciudad AND usuarios.id_usuarios = '$_id_usuario' "; 
-						$resultEdit = $usuarios->getCondiciones($columnas ,$tablas ,$where, $id); 
+						
+						$columnas1 = "usuarios.id_usuarios, 
+									  usuarios.nombre_usuarios, 
+									  usuarios.telefono_usuarios, 
+									  usuarios.celular_usuarios, 
+									  usuarios.correo_usuarios, 
+									  rol.id_rol, 
+									  rol.nombre_rol, 
+									  estado.id_estado, 
+									  estado.nombre_estado, 
+									  usuarios.usuario_usuarios, 
+									  usuarios.cedula_usuarios, 
+									  ciudad.id_ciudad, 
+									  ciudad.codigo_ciudad, 
+									  entidades.id_entidades, 
+									  entidades.nombre_entidades";
+						
+						$tablas1   = " public.usuarios, 
+									  public.rol, 
+									  public.estado, 
+									  public.ciudad, 
+									  public.entidades";
+						$where1    = "rol.id_rol = usuarios.id_rol AND
+									  estado.id_estado = usuarios.id_estado AND
+									  ciudad.id_ciudad = usuarios.id_ciudad AND
+									  entidades.id_entidades = usuarios.id_entidades AND usuarios.id_usuarios= '$_id_usuario' "; 
+						$id1       = "usuarios.id_usuarios";
+						$resultEdit = $usuarios->getCondiciones($columnas1 ,$tablas1 ,$where1, $id1); 
 				
 					
 						$traza=new TrazasModel();
