@@ -29,7 +29,9 @@
 			    -moz-transform: scale(1.25);
 			    -o-transform: scale(1.25);
 			    -ms-transform: scale(1.25);
-			    transform: scale(1.25)
+			    transform: scale(1.25);
+			    cursor:pointer;
+			    cursor:hand;
 			}
 			.textfail.form-control
 			{
@@ -38,18 +40,176 @@
 			-webkit-box-shadow: 0 0 10px red;
 			box-shadow: 0 0 10px red;
 			}
+			.errores{
+		    -webkit-boxshadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		    -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		    border-radius:10px;
+		    -webkit-border-radius: 10px;
+		    background: red;
+		    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		    color: #fff;
+		    display: none;
+		    font-size: 12px;
+		    margin-top: -40px;
+		    margin-left: 150px;
+		    padding: 10px;
+		    position: absolute;
+		     z-index: 1;
+		}
+		.errores:before{ /* Este es un truco para crear una flechita */
+		    content: '';
+		    border-top: 8px solid transparent;
+		    border-bottom: 8px solid transparent;
+		    border-right: 8px solid #BC1010;
+		    border-left: 8px solid transparent;
+		    left: -16px;
+		    position: absolute;
+		    top: 5px;
+		    
+		}
 		 </style>
+		 
+		 <!-- funcion para llenar los grupos al selecionar las cuentas (Pasivo,Activo,Patrimonio,Egresos,Ingresos) -->
+		<script type="text/javascript">
+
+		$(document).ready(function(){
+
+			$("input:radio[name='cuentas']").change(function() {
+
+				$("#subcuenta").hide();
+
+				// identificamos al ddl a cambiar
+		           var grupo = $("#id_grupo");
+		           var subgrupo = $("#id_subgrupo");
+		           
+		        // tomamos parametros -> idgrupo,entidades
+		           var cuentas = $(this).val();
+		           var entidades = $("#id_entidad").val();
+
+		        //tomar valor de radio buton en la pagina
+		        $("#val_radio_cuentas").text(cuentas);
+
+		            if(cuentas != 0)
+		            {
+			            var datos = {  
+			            		 	idcuentas: cuentas,
+			            		 	identidades: entidades 
+		                    	 	 };
+
+		         	   	$.post("<?php echo $helper->url("PlanCuentas","returnGrupo"); ?>", datos, function(resultado) {
+
+		         	   	 //vaciamos el ddl a cambiar
+			         	   	grupo.empty();
+
+		         	  		if ( resultado.length == 0 ) {
+		         	  			grupo.append("<option value ='0' >Sin Grupos</option>");
+      		 			        console.log("NO DATA!")
+			   		 		    }else{
+			   		 		    grupo.append("<option value ='0' >-Seleccione-</option>");
+									$.each(resultado, function(index, value) {
+										grupo.append("<option value= " +value.id_plan_cuentas +" >" + value.nombre_plan_cuentas  + "</option>");	
+		                    		 });
+			   		 		    }
+	 		   
+		         		  }, 'json');
+
+		         	   subgrupo.empty();  
+
+			         subgrupo.append("<option value='-1'>Sin Registros</option>");	
+			                    		 
+
+	         	 //para traer el ultimo codigo 
+		        	$.ajax({
+				            url:"<?php echo $helper->url("PlanCuentas","returnCodGrupo");?>"
+				            ,type : "POST"
+				            ,async: true
+				            ,data : {idcuentas:cuentas,identidades:entidades}
+				            ,success: function(msg){
+					            
+					            if(msg!='')
+					               {
+					            	$("#val_codigo").text(parseInt(msg));
+					               }
+				            }
+		            });
+	                //fin codigo anterior
+
+		         		  
+
+
+		            }
+		            else
+		            {
+		            	grupo.empty();
+		            	grupo.append("<option value='-1' >Sin Registros</option>");
+		            	subgrupo.empty();
+		            	subgrupo.append("<option value='-1' >Sin Registros</option>");
+		            	//alert('vacio');
+
+		            }
+			  });
+
+			  //click en botton guardar
+			  $("#Guardar").click(function(){
+
+				  var resultado_guardar = false;
+   
+					   if( $("#subcuenta").is(":hidden") ){
+						   
+						   var value_cuenta_principal=$("#val_radio_cuentas").text();
+						   var value_id_grupo_guardar = $("#id_grupo").val();
+
+						   if(value_cuenta_principal==0)
+						   {
+							   resultado_guardar = false;
+						   }
+						   if(value_id_grupo_guardar<=0)
+						   {
+							   resultado_guardar = false;
+						   }
+						   if(value_id_grupo_guardar<=0)
+						   {
+							   resultado_guardar = false;
+						   }
+ 
+
+						   
+						}else{
+						   $("#subcuenta").hide();
+						}
+
+						return resultado_guardar;
+				  
+			  });   
+			
+
+			});
+		
+		</script>
 		
 		<script type="text/javascript">
 		$(function(){
 
 		        $('#agregar_grupo').click(function(){
 
+		        	var respuesta=true;
+
+		        	var cuentas = $('input:radio[name=cuentas]:checked').val();
 		        	var  valCuentas = $("#val_radio_cuentas").text();
 		        	var  valCodigo = $("#val_codigo").text();
-		        	
-		        	
-		        	if(valCuentas>0)
+
+					if(typeof(cuentas) == "undefined")
+					{
+						
+						$("#mensaje_cuentas").text("selecione una opcion");
+			    		$("#mensaje_cuentas").fadeIn("slow");
+
+			    		respuesta = false;
+						
+					}
+					
+		        	if(valCuentas>0||respuesta==true)
 				    {
 		        		//alert('hola');
 					    //opcion para dialosg no usados position:'center',
@@ -193,30 +353,72 @@
 				        $('#modal_grupo').dialog('open');
 						
 				    }
-				    else{
-
-					    alert('Seleccione una cuenta')
-					    
-				    }
-
-
+				   
 		        });
 
+		        $("input:radio[name=cuentas]" ).focus(function() {
+					  $("#mensaje_cuentas").fadeOut("slow");
+				    });
 		    
 		});
 		
 		</script>
 		
+		<!-- funcion : traer valor de los grupos q contiene -->
+		<script type="text/javascript">
+		$(document).ready(function(){
+
+			$("#id_grupo").change(function() {
+
+				var value_id_grupo=$('#id_grupo').val();	
+
+				if(value_id_grupo >= 0)
+				{
+					
+					call_returnCodSubGrupo();
+					call_returnSubGrupo();
+					
+				}	
+						
+			});
+		});
+		</script>
+		
+		
+		<!-- funcion: agregar cuenta nivel3 -->
 		<script type="text/javascript">
 		$(function(){
 			
 			$('#agregar_subgrupo').click(function(){
 
-	        	var   valCuentas = $("#val_radio_cuentas").text();
-	        	var valGrupo = $("#id_grupo").val();
+				var respuesta=true;
+				
+				var cuentas = $('input:radio[name=cuentas]:checked').val();
+				var val_id_grupo = $("#id_grupo").val();
+                var valCuentas = $("#val_radio_cuentas").text();
 	        	var subgrupo = $("#val_grupo").text();
 
-	        	if(valCuentas>0&&(valGrupo!=null||valGrupo<0))
+				if(typeof(cuentas) == "undefined")
+				{
+					
+					$("#mensaje_cuentas").text("selecione cuenta");
+		    		$("#mensaje_cuentas").fadeIn("slow");
+
+		    		respuesta = false;
+					
+				}
+
+				if(val_id_grupo <= 0)
+				{
+
+				$("#mensaje_id_grupo").text("Selecione grupo");
+	    		$("#mensaje_id_grupo").fadeIn("slow");
+
+	    		respuesta = false;
+				
+				}
+
+	        	if(respuesta==true)
 			    {
 	        		
 				        $('#modal_subgrupo').dialog({
@@ -355,22 +557,22 @@
 			        $('#modal_subgrupo').dialog('open');
 					
 			    }
-			    else{
-
-				    alert('Seleccione una cuenta \n o \n aun no a gregado un grupo ')
-				    
-			    }
-
-
+			    
 	        });
+
+			$("input:radio[name=cuentas]" ).focus(function() {
+				  $("#mensaje_cuentas").fadeOut("slow");
+			    });
 		    
-			       
-		   
+			$("#id_grupo" ).focus(function() {
+				  $("#mensaje_id_grupo").fadeOut("slow");
+			    });
 		    
 		});
 		
 		</script>
 		
+		<!-- script editar cuenta -->
 		<script type="text/javascript">
 		
 		//sin definir el click
@@ -531,129 +733,7 @@
 		</script>
 		
 		
-		<!-- funcion para llenar los grupos al selecionar las cuentas (Pasivo,Activo,Patrimonio,Egresos,Ingresos) -->
-		<script type="text/javascript">
-
-		$(document).ready(function(){
-
-			$("input:radio[name='cuentas']").change(function() {
-
-				// identificamos al ddl a cambiar
-		           var grupo = $("#id_grupo");
-		           var subgrupo = $("#id_subgrupo");
-		           
-		        // tomamos parametros -> idgrupo,entidades
-		           var cuentas = $(this).val();
-		           var entidades = $("#id_entidad").val();
-
-		        //tomar valor de radio buton en la pagina
-		        $("#val_radio_cuentas").text(cuentas);
-
-		        //vaciamos el ddl a cambiar
-		           //grupo.empty();
-		           //grupo.append("<option value='-1' >Sin Registros</option>");
-
-		          
-		            if(cuentas != 0)
-		            {
-			            var datos = {  
-			            		 	idcuentas: cuentas,
-			            		 	identidades: entidades 
-		                    	 	 };
-
-				        //alert(datos['idcuentas']+'\n'+datos['identidades']);
-		            	
-		         	   	$.post("<?php echo $helper->url("PlanCuentas","returnGrupo"); ?>", datos, function(resultado) {
-		         	   	grupo.empty();
-
-		         	   console.log(resultado);
-
-		         		 		$.each(resultado, function(index, value) {
-
-		         		 			if (index < resultado.length) {
-		         		 			  console.log('sin datos');
-		         		 			}
-
-			         		 		
-		         		 			
-		         		 			grupo.append("<option value= " +value.id_plan_cuentas +" >" + value.nombre_plan_cuentas  + "</option>");	
-		                    		 });
-
-		         		 		 	 		   
-		         		  }, 'json');
-
-		         	   subgrupo.empty();  
-
-			         subgrupo.append("<option value='-1'>Sin Registros</option>");	
-			                    		 
-
-	         	 //para traer el ultimo codigo 
-		        	$.ajax({
-				            url:"<?php echo $helper->url("PlanCuentas","returnCodGrupo");?>"
-				            ,type : "POST"
-				            ,async: true
-				            ,data : {idcuentas:cuentas,identidades:entidades}
-				            ,success: function(msg){
-					            
-					            if(msg!='')
-					               {
-					            	$("#val_codigo").text(parseInt(msg));
-					               }
-				            }
-		            });
-	                //fin codigo anterior
-
-		         		  
-
-
-		            }
-		            else
-		            {
-		            	grupo.empty();
-		            	grupo.append("<option value='-1' >Sin Registros</option>");
-		            	subgrupo.empty();
-		            	subgrupo.append("<option value='-1' >Sin Registros</option>");
-		            	//alert('vacio');
-
-		            }
-			  });
-
-			});
-		
-		</script>
-		
-		<script type="text/javascript">
-		$(document).ready(function(){
-
-			$('#id_grupo').bind('click', function(){
-				
-				var numElementos=$('#id_grupo option').size(); 
-
-				if(numElementos==1)
-				{
-					call_returnCodSubGrupo();
-					call_returnSubGrupo();
-					
-				}else if(numElementos>1)
-				{
-					$("#id_grupo").change(function() {		
-						call_returnCodSubGrupo();
-						call_returnSubGrupo();
-						
-												
-					});
-					
-					
-				}
-				
-			 });
-
-			
-		});
-		</script>
-		
 		<!-- funciones con conexion a bd -->
-		
 		<script type="text/javascript">
 		function call_returnCodSubGrupo()
 		{
@@ -670,7 +750,6 @@
 		            //alert(msg);
 		            if(msg!='')
 		               {
-		            	
 		            	 var res = msg.split('"');
 		            	$("#val_grupo").text(String(res[1]));
 		               }
@@ -692,10 +771,18 @@
 
         	$.post("<?php echo $helper->url("PlanCuentas","returnSubGrupo1"); ?>", {identidades:entidades,idgrupo:valGrupo}, function(resultado) {
          	   	subgrupo.empty();
+
+         	   if ( resultado.length == 0 ) {
+         		  subgrupo.append("<option value ='0' >Sin Registros</option>");
+    	  			
+  		 		    }else{
+  		 		  subgrupo.append("<option value ='0' >-Seleccione-</option>");
          	   	
-         		$.each(resultado, function(index, value) {
-         		    subgrupo.append("<option value= " +value.id_plan_cuentas +" data-codigo_plan_cuentas="+value.codigo_plan_cuentas+" >" + value.nombre_plan_cuentas  + "</option>");	
-         		 });
+	         		$.each(resultado, function(index, value) {
+	         		    subgrupo.append("<option value= " +value.id_plan_cuentas +" data-codigo_plan_cuentas="+value.codigo_plan_cuentas+" >" + value.nombre_plan_cuentas  + "</option>");	
+	
+	            		 });
+  		 		    }
 
          		 		 	 		   
          	 }, 'json');
@@ -845,6 +932,7 @@
 			$("#"+id_campo).removeClass("textfail form-control");
 			$("#"+id_campo).addClass("form-control");
 			$('#modal_respuesta_subgrupo').html ("");
+			$('#modal_respuesta_grupo').html ("");
 		}
 
 		
@@ -897,7 +985,14 @@
 
 		</script>
 		
-	
+		<script type="text/javascript">
+		function mensaje(){
+			
+		  var respuesta = confirm('¿Eliminar Cuenta?')
+		   return respuesta;
+		}
+		
+		</script>
         
     </head>
     <body>
@@ -914,59 +1009,6 @@
             
             <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
 	       
-	        <div class="well">
-	        <h4 style="color:#ec971f;">Registrar Plan de Cuentas</h4>
-            <hr/>
-	        <div class="row">
-		    <div class="col-xs-6 col-md-6">
-		    <div class="form-group">
-                                  <label for="ruc_entidades" class="control-label">Ruc</label>
-                                  <input type="text" class="form-control" id="ruc_entidades" name="ruc_entidades" value="<?php echo $resEdit->ruc_entidades; ?>"  placeholder="Ruc">
-                                  <span class="help-block"></span>
-            </div>
-		    </div>
-		    
-		    <div class="col-xs-6 col-md-6">
-		    <div class="form-group">
-                                  <label for="nombre_entidades" class="control-label">Nombre</label>
-                                  <input type="text" class="form-control" id="nombre_entidades" name="nombre_entidades" value="<?php echo $resEdit->nombre_entidades; ?>"  placeholder="Nombre">
-                                  <span class="help-block"></span>
-            </div>
-            </div>
-			</div>
-	         
-	        <div class="row">
-		    <div class="col-xs-6 col-md-6">
-		    <div class="form-group">
-                                  <label for="telefono_entidades" class="control-label">Teléfono</label>
-                                  <input type="text" class="form-control" id="telefono_entidades" name="telefono_entidades" value="<?php echo $resEdit->telefono_entidades; ?>"  placeholder="Teléfono">
-                                  <span class="help-block"></span>
-            </div>
-		    </div>
-		    
-		    <div class="col-xs-6 col-md-6">
-		    <div class="form-group">
-                                  <label for="direccion_entidades" class="control-label">Dirección</label>
-                                  <input type="text" class="form-control" id="direccion_entidades" name="direccion_entidades" value="<?php echo $resEdit->direccion_entidades; ?>"  placeholder="Dirección">
-                                  <span class="help-block"></span>
-            </div>
-            </div>
-			</div>
-	        
-	        
-	        <div class="row">
-		    <div class="col-xs-6 col-md-6">
-		    <div class="form-group">
-                                  <label for="ciudad_entidades" class="control-label">Ciudad</label>
-                                  <input type="text" class="form-control" id="ciudad_entidades" name="ciudad_entidades" value="<?php echo $resEdit->ciudad_entidades; ?>"  placeholder="Ciudad">
-                                  <span class="help-block"></span>
-            </div>
-		    </div>
-		    </div>
-	        </div>
-	     	
-	            	  
-            
 		     <?php } } else {?>
 		    
 		    <div class="well">
@@ -1023,6 +1065,7 @@
                  <input type="radio" name="cuentas" id="egresos" value="5" />
   			     <span class="help-block"></span>
             </div>
+            <div id="mensaje_cuentas" class="errores"></div>
 		    </div>
 			</div>
             
@@ -1037,6 +1080,7 @@
 					 <option value="-1" >Sin Grupos</option>
 					 <?php }?>
 			     </select> 
+			     <div id="mensaje_id_grupo" class="errores"></div> 
 			     <span class="help-block"></span> 
             </div>
 		    </div>
@@ -1085,7 +1129,7 @@
                  <label for="" class="control-label">Codigo</label><br>
                  <div class="row">
 	                 <div class="col-xs-8 col-md-8">
-	                 <input type="text" class="form-control " id="codigo1_cuenta" name="codigo1_cuenta" value="" >
+	                 <input type="text" class="form-control " id="codigo1_cuenta" name="codigo1_cuenta" value="" readonly>
 	                 </div>
 	                 <div class="col-xs-4 col-md-4">
 	                 <input type="text" class="form-control" id="codigo2_cuenta" name="codigo2_cuenta" value="" >
@@ -1139,14 +1183,14 @@
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
                  <label for="tipo_cuenta" class="control-label">Tipo</label>
-                 <input type="text" class="form-control" id="tipo_cuenta" name="tipo_cuenta" value="C"  >
+                 <input type="text" class="form-control" id="tipo_cuenta" name="tipo_cuenta" value="C"  readonly>
                  <span class="help-block"></span>
             </div>
 		    </div>
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
                  <label for="nivel_cuenta" class="control-label">Nivel</label>
-                 <input type="text" class="form-control" id="nivel_cuenta" name="nivel_cuenta" value="4"  >
+                 <input type="text" class="form-control" id="nivel_cuenta" name="nivel_cuenta" value="4" readonly >
                  <span class="help-block"></span>
             </div>
 		    </div>
@@ -1227,7 +1271,7 @@
                  <label for="" class="control-label">Codigo Cuenta Analisis</label><br>
                  <div class="row">
 	                 <div class="col-xs-8 col-md-8">
-	                 <input type="text" class="form-control " id="codigo1_subcuenta" name="codigo1_subcuenta" value="" >
+	                 <input type="text" class="form-control " id="codigo1_subcuenta" name="codigo1_subcuenta" value="" readonly>
 	                 </div>
 	                 <div class="col-xs-4 col-md-4">
 	                 <input type="text" class="form-control" id="codigo2_subcuenta" name="codigo2_subcuenta" value="" >
@@ -1281,14 +1325,14 @@
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
                  <label for="tipo_subcuenta" class="control-label">Tipo</label>
-                 <input type="text" class="form-control" id="tipo_subcuenta" name="tipo_subcuenta" value="S" >
+                 <input type="text" class="form-control" id="tipo_subcuenta" name="tipo_subcuenta" value="S" readonly>
                  <span class="help-block"></span>
             </div>
 		    </div>
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
                  <label for="nivel_subcuenta" class="control-label">Nivel</label>
-                 <input type="text" class="form-control" id="nivel_subcuenta" name="nivel_subcuenta" value="5"  >
+                 <input type="text" class="form-control" id="nivel_subcuenta" name="nivel_subcuenta" value="5"  readonly>
                  <span class="help-block"></span>
             </div>
 		    </div>
@@ -1339,6 +1383,9 @@
      		<br>
      		<div class="well">  
             <h4 style="color:#ec971f;">Plan de Cuentas Registrados</h4>
+            
+            <div id="modal_mensajes"></div>
+            <div style="display:none" id="modal-confirmation" title="¿Eliminar?">¿Esta seguro de eliminar cuenta?</div>
             
             <div class="row">
 		    <div class="col-xs-4 col-md-4 col-lg-4">
@@ -1392,41 +1439,27 @@
 						<div id="paging">
 							<ul>
 								<li>
-									<a href="#">
-						<span>Previous</span>
-									</a>
+									<a href="#"><span>Previous</span></a>
 								</li>
 								<li>
-									<a href="#" class="active">
-						<span>1</span>
-									</a>
+									<a href="#" class="active"><span>1</span></a>
 								</li>
 								<li>
-									<a href="#">
-						<span>2</span>
-									</a>
+									<a href="#"><span>2</span></a>
 								</li>
 								<li>
-									<a href="#">
-						<span>3</span>
-									</a>
+									<a href="#"><span>3</span></a>
 								</li>
 								<li>
-									<a href="#">
-						<span>4</span>
-									</a>
+									<a href="#"><span>4</span></a>
 								</li>
 								<li>
-									<a href="#">
-						<span>5</span>
-									</a>
+									<a href="#"><span>5</span></a>
 								</li>
 								<li>
-									<a href="#">
-						<span>Next</span>
-									</a>
+									<a href="#"><span>Next</span></a>
 								</li>
-								</ul>
+							</ul>
 						</div>
 					
 			</tr>
@@ -1449,12 +1482,12 @@
 		                <td>
 			           	   <div class="right">
 			           	      <?php $datoscuenta=$res->id_plan_cuentas.','.$res->codigo_plan_cuentas.','.$res->nombre_plan_cuentas; ?>
-			                  <a  title="<?php echo $res->nombre_plan_cuentas; ?>" id="<?php echo $datoscuenta; ?>"  href="<?php echo '#';?>" class="btn btn-warning" onclick="editar_cuenta_modal(this);" style="font-size:65%;">Editar</a>
+			                  <a  title="<?php echo $res->nombre_plan_cuentas; ?>" id="<?php echo $datoscuenta; ?>"  href="javascript:null()" class="btn btn-warning" onclick="editar_cuenta_modal(this);" style="font-size:65%;">Editar</a>
 			               </div>			            
 			            </td>
 			            <td>   
 			               	<div class="right">
-			                    <a href="<?php echo $helper->url("PlanCuentas","borrarId"); ?>&id_p_cuentas=<?php echo $res->id_plan_cuentas; ?>" class="btn btn-danger" onClick="Borrar()" style="font-size:65%;">Borrar</a>
+			                    <a href="<?php echo $helper->url("PlanCuentas","borrarId"); ?>&id_p_cuentas=<?php echo $res->id_plan_cuentas; ?>" class="btn btn-danger" onClick="return mensaje();" style="font-size:65%;">Borrar</a>
 			                </div>
 			            </td>
 	   		</tr>
