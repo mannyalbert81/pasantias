@@ -35,7 +35,7 @@ class ImportacionCuentasController extends ControladorBase{
 		{
 			//Notificaciones
 			
-			$nombre_controladores = "PlanCuentas";
+			$nombre_controladores = "ImportacionCuentas";
 			$id_rol= $_SESSION['id_rol'];
 			$resultPer = $entidades->getPermisosVer("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 			
@@ -129,7 +129,7 @@ class ImportacionCuentasController extends ControladorBase{
 		session_start();
 		$plan_cuentas = new PlanCuentasModel();
 		
-		$nombre_controladores = "PlanCuentas";
+		$nombre_controladores = "ImportacionCuentas";
 		$id_rol= $_SESSION['id_rol'];
 		$resultPer = $plan_cuentas->getPermisosEditar("controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 						
