@@ -19,8 +19,7 @@
 		  
 		  <style type="text/css">
 			 .img{border-radius: 25px;}
-			 .img:hover{
-			 
+			 .img:hover{			 
 			 	border-radius: 25px;
 			 	-moz-box-shadow: 0 0 10px #ccc;
 			 	 -webkit-box-shadow: 0 0 10px #ccc;
