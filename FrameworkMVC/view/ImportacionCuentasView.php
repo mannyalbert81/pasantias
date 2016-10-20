@@ -137,7 +137,7 @@
        
        <?php $t_plan_cuentas=array("acreedora"=>'Acreedora',"deudora"=>'Deudora')?>
   
- 	    <div class="container">
+ 	 <div class="container">
   		<div class="row" style="background-color: #FAFAFA;">
   		
   		<form action="<?php echo $helper->url("ImportacionCuentas","index"); ?>" method="post" enctype="multipart/form-data"  class="col-lg-6">
@@ -163,10 +163,17 @@
                  <label for="Buscar" class="control-label"></label>
                  <input type="submit" id="Buscar" value="Buscar" name="Buscar" class="form-control btn btn-info"/>
                  <span class="help-block"></span>
+
             </div>
 		    </div>
 		   
 			</div>
+      
+	      
+			</div>
+			            
+            
+              
             
        <div class="datagrid"> 
        <section style="height:380px; overflow-y:scroll;">
@@ -256,13 +263,11 @@
        	</table>     
 		</section>
         </div>
-        </div>
+        
+         </form>
         
         
-            </form>
-  		
-  		
-        <form id="form-plan_cuentas" action="<?php echo $helper->url("ImportacionCuentas","ImportarPlanCuentas"); ?>" method="post" enctype="multipart/form-data" class="col-lg-6">
+          <form id="form-plan_cuentas" action="<?php echo $helper->url("ImportacionCuentas","ImportarPlanCuentas"); ?>" method="post" enctype="multipart/form-data" class="col-lg-6">
             <br>
             
             <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
@@ -274,6 +279,7 @@
             <hr/>
             
             <div class="row">
+		    <div class="col-xs-12 col-md-12">
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
                  <label for="id_entidad" class="control-label">Entidad A Importar</label>
@@ -287,10 +293,19 @@
 			    
             </div>
 		    </div>
-		    
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group">
+                 <label for="id_archivo_importar" class="control-label">Seleccione Archivo</label>
+                    <input type="file" name="archivo_cuentas" id="archivo_cuentas" accept="txt" onKeyDown="return intro(event)" value="" class="form-control"/> 
+			   	 <div id="mensaje_archivo" class="errores"></div>
+                  <span class="help-block"></span>
+            </div>
+		   
+		    </div>
+		     
 		   
 			</div>
-			
+			</div>
 			<div class="row">
 		    <div class="col-xs-6 col-md-4">
 		    <div class="form-group">
@@ -325,10 +340,15 @@
 		    </div>
 		    </div>
 		    
-            </form>
+      </form>
+           	
+        
+        </div>
+
+  		
+         
+     </div>
             
-            </div>
-            </div>
   
              <br>
 			 <br>

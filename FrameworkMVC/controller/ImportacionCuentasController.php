@@ -190,6 +190,149 @@ class ImportacionCuentasController extends ControladorBase{
 					    	 
 					    }
 				    }
+				    
+				    if (isset ($_POST["importar"])  &&   isset ($_POST["archivo_cuentas"])   )
+				    {
+				    	
+				    	$directorio = $_SERVER['DOCUMENT_ROOT'].'/importar/';
+				    
+				    	$nombre = $_FILES['archivo_cuentas']['name'];
+				    	$tipo = $_FILES['archivo_cuentas']['type'];
+				    	$tamano = $_FILES['archivo_cuentas']['size'];
+				    	move_uploaded_file($_FILES['archivo_cuentas']['tmp_name'],$directorio.$nombre);
+				    
+				    		
+				    	$contador = 0;
+				    	$contador_linea = 0;
+				    	//$encabezado_linea = "";
+				    	$contenido_linea = "";
+				    
+				    	$lectura_linea = "";
+				    		
+				    	$file = fopen($directorio.$nombre, "r") or exit("Unable to open file!");
+				    
+				    	while(!feof($file))
+				    	{
+				    		$contador = $contador + 1;
+				    
+				    		if ($contador > 0) ///INSERTO EL ENCABEZADO
+				    		{
+				    				
+				    			$lectura_linea =  fgets($file) ;
+				    			//$encabezado_linea = fgets($file) ;
+				    				
+				    				
+				    			$funcion = "ins_clientes";
+				    
+				    			$_id_tipo_identificacion =substr($lectura_linea,0,1);
+				    				
+				    			if ($_id_tipo_identificacion == "C")
+				    			{
+				    				$_nombre_tipo_identificacion = "CEDULA";
+				    
+				    			}
+				    			if ($_id_tipo_identificacion == "R")
+				    			{
+				    				$_nombre_tipo_identificacion = "RUC";
+				    					
+				    			}
+				    			if ($_id_tipo_identificacion == "P")
+				    			{
+				    				$_nombre_tipo_identificacion = "PASAPORTE";
+				    					
+				    			}
+				    				
+				    			$where = "nombre_tipo_identificacion = '$_nombre_tipo_identificacion' ";
+				    				
+				    				
+				    			$resultIdent = $tipo_identificacion->getBy($where);
+				    
+				    			foreach($resultIdent as $res)
+				    			{
+				    
+				    				$_id_tipo_identificacion =   $res->id_tipo_identificacion;
+				    			}
+				    
+				    				
+				    			if ($_id_tipo_identificacion > 0)
+				    			{
+				    					
+				    				$_identificacion_clientes = substr($lectura_linea,1,13);
+				    				$_nombres_clientes = trim(substr($lectura_linea,14,100));
+				    				$_telefono_clientes = substr($lectura_linea,114,10);
+				    				$_celular_clientes = substr($lectura_linea,124,10);
+				    				$_direccion_clientes = trim(substr($lectura_linea,134,200));
+				    					
+				    					
+				    				$_id_ciudad =substr($lectura_linea,334,5);
+				    					
+				    					
+				    
+				    				$where = "codigo_ciudad = '$_id_ciudad' ";
+				    
+				    
+				    				$resultCiu = $ciudad->getBy($where);
+				    					
+				    				foreach($resultCiu as $res)
+				    				{
+				    						
+				    					$_id_ciudad =   $res->id_ciudad;
+				    				}
+				    					
+				    					
+				    					
+				    				$_id_tipo_persona = substr($lectura_linea,339,1);
+				    					
+				    				if ($_id_tipo_persona == "N")
+				    				{
+				    					$_nombre_tipo_persona = "NATURAL";
+				    						
+				    				}
+				    				if ($_id_tipo_persona == "J")
+				    				{
+				    					$_nombre_tipo_persona = "JURIDICA";
+				    						
+				    				}
+				    
+				    					
+				    				$where = "nombre_tipo_persona = '$_nombre_tipo_persona' ";
+				    					
+				    					
+				    				$resultTipoPer = $tipo_persona->getBy($where);
+				    
+				    				foreach($resultTipoPer as $res)
+				    				{
+				    						
+				    					$_id_tipo_persona =   $res->id_tipo_persona;
+				    				}
+				    					
+				    					
+				    				$parametros = " '$_id_tipo_identificacion' ,'$_identificacion_clientes' , '$_nombres_clientes' , '$_telefono_clientes' , '$_celular_clientes', '$_direccion_clientes', '$_id_ciudad' , '$_id_tipo_persona' ";
+				    				$clientes->setFuncion($funcion);
+				    				$clientes->setParametros($parametros);
+				    
+				    				try {
+				    
+				    					$resultado=$clientes->Insert();
+				    
+				    
+				    				} catch (Exception $e) {
+				    
+				    					$this->view("Error",array(
+				    							"resultado"=>$e
+				    					));
+				    
+				    				}
+				    			}
+				    
+				    		}
+				    
+				    	}
+				    
+				    	fclose ($file);
+				    }
+				    
+				    
 					
 			}else {
 				
