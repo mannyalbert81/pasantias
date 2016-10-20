@@ -67,9 +67,6 @@ $controladores=$_SESSION['controladores'];
 			<li style="<?php echo getcontrolador("Entidades",$controladores) ?>">
 			<a href="index.php?controller=Entidades&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Entidades</span> </a>
 			</li>
-			<li style="<?php echo getcontrolador("CentroCostos",$controladores) ?>">
-			<a href="index.php?controller=CentroCostos&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Centro Costos</span> </a>
-			</li>
 			<li style="<?php echo getcontrolador("PlanCuentas",$controladores) ?>">
 			<a href="index.php?controller=PlanCuentas&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Plan de Cuentas</span> </a>
 			</li>
@@ -97,14 +94,18 @@ $controladores=$_SESSION['controladores'];
 </li>
         
 
-          <li class="dropdown" style="<?php echo getcontrolador("PlanCuentas",$controladores) ?>">
+          <li class="dropdown" style="<?php echo getcontrolador("MenuPlanCuentas",$controladores) ?>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-refresh" ><?php echo " Plan de Cuentas" ;?> </span> <span class="caret"></span></a>
           <ul class="dropdown-menu">
           
           <li style="<?php echo getcontrolador("PlanCuentas",$controladores) ?>">
 		  <a href="index.php?controller=PlanCuentas&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Cuentas</span> </a>
 		  </li>
-          
+		  
+          <li style="<?php echo getcontrolador("CentroCostos",$controladores) ?>">
+		  <a href="index.php?controller=CentroCostos&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Centro Costos</span> </a>
+		  </li>
+			
           <li style="<?php echo getcontrolador("ImportacionCuentas",$controladores) ?>">
 		  <a href="index.php?controller=ImportacionCuentas&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Importación Cuentas</span> </a>
 		  </li>
