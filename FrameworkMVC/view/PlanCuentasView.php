@@ -152,35 +152,7 @@
 			  //click en botton guardar
 			  $("#Guardar").click(function(){
 
-				  var resultado_guardar = false;
-   
-					   if( $("#subcuenta").is(":hidden") ){
-						   
-						   var value_cuenta_principal=$("#val_radio_cuentas").text();
-						   var value_id_grupo_guardar = $("#id_grupo").val();
-
-						   if(value_cuenta_principal==0)
-						   {
-							   resultado_guardar = false;
-						   }
-						   if(value_id_grupo_guardar<=0)
-						   {
-							   resultado_guardar = false;
-						   }
-						   if(value_id_grupo_guardar<=0)
-						   {
-							   resultado_guardar = false;
-						   }
- 
-
-						   
-						}else{
-						   $("#subcuenta").hide();
-						}
-
-						return resultado_guardar;
-				  
-			  });   
+				  			  });   
 			
 
 			});

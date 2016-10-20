@@ -9,8 +9,6 @@
        {
        	$sel_id_entidad_importar=$_POST['id_entidad_a_importar'];
        
-       	//die('entro a pst');
-       
       }
 ?>
 

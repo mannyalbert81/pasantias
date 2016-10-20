@@ -145,8 +145,17 @@ class ImportacionCuentasController extends ControladorBase{
 				    if(isset($_POST["id_entidad"])){$_id_entidad_a_importar = $_POST["id_entidad"];}else{$_id_entidad_a_importar="";};
 				    $_id_entidad_importada = $_POST["id_entidad_importada"];
 				    
-				    if(isset($_POST["saldos"])&&$_id_entidad_a_importar!="")
+				    $_archivo_cuenta='';
+				    
+				   
+				    
+				    $_archivo_cuenta=(isset($_FILES['archivo_cuentas']))? $_FILES['archivo_cuentas']['name']:'';
+				    
+				   				    
+				    if(isset($_POST["saldos"])&&$_id_entidad_a_importar!=""&&$_archivo_cuenta=='')
 					{ 
+						echo 'entro';
+						die();
 						$_saldos = (int)$_POST["saldos"];
 					    					    
 					    if($_saldos==1)
@@ -191,8 +200,16 @@ class ImportacionCuentasController extends ControladorBase{
 					    }
 				    }
 				    
-				    if (isset ($_POST["importar"])  &&   isset ($_POST["archivo_cuentas"])   )
+				    if (isset ($_POST["Importar"])  &&   isset ($_FILES["archivo_cuentas"])   )
 				    {
+				    	
+				    	
+				    	$id_entidad=isset($_POST["id_entidad_importada"])?$_POST["id_entidad_importada"]:0;
+				    	
+				    	$moneda = new MonedasModel();
+				    	$resultMoneda=$moneda->getBy("nombre_monedas='DOLARES'");
+				    	$id_moneda=$resultMoneda[0]->id_monedas;
+				    	
 				    	
 				    	$directorio = $_SERVER['DOCUMENT_ROOT'].'/importar/';
 				    
@@ -208,6 +225,8 @@ class ImportacionCuentasController extends ControladorBase{
 				    	$contenido_linea = "";
 				    
 				    	$lectura_linea = "";
+				    	
+				    	$error_linea="";
 				    		
 				    	$file = fopen($directorio.$nombre, "r") or exit("Unable to open file!");
 				    
@@ -217,114 +236,93 @@ class ImportacionCuentasController extends ControladorBase{
 				    
 				    		if ($contador > 0) ///INSERTO EL ENCABEZADO
 				    		{
-				    				
 				    			$lectura_linea =  fgets($file) ;
 				    			//$encabezado_linea = fgets($file) ;
-				    				
-				    				
-				    			$funcion = "ins_clientes";
-				    
-				    			$_id_tipo_identificacion =substr($lectura_linea,0,1);
-				    				
-				    			if ($_id_tipo_identificacion == "C")
+				    			
+				    			$cuenta='';
+				    			$num_cuenta=0;
+				    			$nivel_cuenta=0;
+				    			$t_cuenta='';
+				    			$n_cuenta='';
+				    			
+				    			if((string)$lectura_linea!="")
 				    			{
-				    				$_nombre_tipo_identificacion = "CEDULA";
-				    
-				    			}
-				    			if ($_id_tipo_identificacion == "R")
-				    			{
-				    				$_nombre_tipo_identificacion = "RUC";
-				    					
-				    			}
-				    			if ($_id_tipo_identificacion == "P")
-				    			{
-				    				$_nombre_tipo_identificacion = "PASAPORTE";
-				    					
-				    			}
+					    			$array_linea=explode(";", $lectura_linea);
+					    			
+					    			$codigo_cuenta=trim($array_linea[0]);
+					    			$nombre_cuenta=trim($array_linea[1]);
+					    			
+					    			$num_cuenta=substr($codigo_cuenta,0,1);
+					    			
+					    			if($num_cuenta==1)
+					    			{
+					    				$n_cuenta='D';
+					    			}else if($num_cuenta==2)
+					    			{
+					    				$n_cuenta='A';
+					    			}
+					    							    			
+					    			$longitud_str=strlen($codigo_cuenta);
+					    			
+					    			if($longitud_str>0)
+					    			{
+					    				switch ($longitud_str)
+					    				{
+					    					case 2 :
+					    						$nivel_cuenta=1;
+					    						$t_cuenta='G';
+					    					break;
+					    					case 4 :
+					    						$nivel_cuenta=2;
+					    						$t_cuenta='G';
+					    					break;
+					    					case 6 :
+					    						$nivel_cuenta=3;
+					    						$t_cuenta='G';
+					    					break;
+					    					case 8 :
+					    						$nivel_cuenta=4;
+					    						$t_cuenta='C';
+					    					break;
+					    					case 9 :
+					    						$nivel_cuenta=5;
+					    						$t_cuenta='S';
+					    					break;
+					    					case 10 :
+					    						$nivel_cuenta=5;
+					    						$t_cuenta='S';
+					    					break;
+					    				}
+					    				
+					    			}
 				    				
-				    			$where = "nombre_tipo_identificacion = '$_nombre_tipo_identificacion' ";
+					    		$funcion = "ins_plan_cuentas";
+							
+								$parametros = "'$id_entidad', '$codigo_cuenta', '$nombre_cuenta', '$id_moneda',
+								'$n_cuenta','$t_cuenta','$nivel_cuenta'";
+									
+								$plan_cuentas->setFuncion($funcion);
+						
+								$plan_cuentas->setParametros($parametros);
+						
+									try {
+					    
+					    					$resultado=$plan_cuentas->Insert();
+					    					
+					    					echo 'linea --> '.$contador;
+					    					echo '<br>';
+					    					echo 'resultado -->'.$resultado.'<br><br>';
+					    										
+					    					
+					    
+					    
+					    				} catch (Exception $e) {
+					    
+					    					$error_linea.=$contador.',';
+					    				}
 				    				
-				    				
-				    			$resultIdent = $tipo_identificacion->getBy($where);
-				    
-				    			foreach($resultIdent as $res)
-				    			{
-				    
-				    				$_id_tipo_identificacion =   $res->id_tipo_identificacion;
 				    			}
-				    
-				    				
-				    			if ($_id_tipo_identificacion > 0)
-				    			{
-				    					
-				    				$_identificacion_clientes = substr($lectura_linea,1,13);
-				    				$_nombres_clientes = trim(substr($lectura_linea,14,100));
-				    				$_telefono_clientes = substr($lectura_linea,114,10);
-				    				$_celular_clientes = substr($lectura_linea,124,10);
-				    				$_direccion_clientes = trim(substr($lectura_linea,134,200));
-				    					
-				    					
-				    				$_id_ciudad =substr($lectura_linea,334,5);
-				    					
-				    					
-				    
-				    				$where = "codigo_ciudad = '$_id_ciudad' ";
-				    
-				    
-				    				$resultCiu = $ciudad->getBy($where);
-				    					
-				    				foreach($resultCiu as $res)
-				    				{
-				    						
-				    					$_id_ciudad =   $res->id_ciudad;
-				    				}
-				    					
-				    					
-				    					
-				    				$_id_tipo_persona = substr($lectura_linea,339,1);
-				    					
-				    				if ($_id_tipo_persona == "N")
-				    				{
-				    					$_nombre_tipo_persona = "NATURAL";
-				    						
-				    				}
-				    				if ($_id_tipo_persona == "J")
-				    				{
-				    					$_nombre_tipo_persona = "JURIDICA";
-				    						
-				    				}
-				    
-				    					
-				    				$where = "nombre_tipo_persona = '$_nombre_tipo_persona' ";
-				    					
-				    					
-				    				$resultTipoPer = $tipo_persona->getBy($where);
-				    
-				    				foreach($resultTipoPer as $res)
-				    				{
-				    						
-				    					$_id_tipo_persona =   $res->id_tipo_persona;
-				    				}
-				    					
-				    					
-				    				$parametros = " '$_id_tipo_identificacion' ,'$_identificacion_clientes' , '$_nombres_clientes' , '$_telefono_clientes' , '$_celular_clientes', '$_direccion_clientes', '$_id_ciudad' , '$_id_tipo_persona' ";
-				    				$clientes->setFuncion($funcion);
-				    				$clientes->setParametros($parametros);
-				    
-				    				try {
-				    
-				    					$resultado=$clientes->Insert();
-				    
-				    
-				    				} catch (Exception $e) {
-				    
-				    					$this->view("Error",array(
-				    							"resultado"=>$e
-				    					));
-				    
-				    				}
-				    			}
-				    
+				    							    
 				    		}
 				    
 				    	}
@@ -342,6 +340,8 @@ class ImportacionCuentasController extends ControladorBase{
 				die();
 					
 			}
+			
+			die();
 			
 			$this->redirect("ImportacionCuentas", "index");
 
