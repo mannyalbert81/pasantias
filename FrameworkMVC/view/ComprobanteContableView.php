@@ -19,9 +19,7 @@
           <script type="text/javascript" src="view/css/Comprobantes/js/VentanaCentrada.js"></script>
 	      <script type="text/javascript" src="view/css/Comprobantes/js/procesos-comprobantes.js"></script>
 	      <script type="text/javascript" src="view/css/Contable/js/procesos-contable.js"></script>
-	   
-    
-    
+
     <script >   
     function numeros(e){
     key = e.keyCode || e.which;
@@ -208,6 +206,8 @@
 							        <?php } ?>
 								   </select> 
                                   <span class="help-block"></span>	
+             
+             <input type="date"  name="fecha_ccomprobantes" id="fecha_ccomprobantes" value="" class="form-control " placeholder="Seleccione"/>
              </div>
 		                   
 			 </div>

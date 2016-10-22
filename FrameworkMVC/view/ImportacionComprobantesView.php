@@ -1,8 +1,22 @@
+
+<?php include("view/modulos/head.php"); ?>
+<?php $n_plan_cuentas=array("A"=>'Acreedora',"D"=>'Deudora');
+      $resultMenu = array("codigo"=>'Codigo',"nombre"=>'Nombre',"tipo"=>'Tipo',"naturaleza"=>'Naturaleza');?>
+
+<?php $sel_id_entidad_importar="";
+	  
+ 	if($_SERVER['REQUEST_METHOD']=='POST' )
+       {
+       	$sel_id_entidad_importar=$_POST['id_entidad_a_importar'];
+       
+      }
+?>
+
 <!DOCTYPE HTML>
 <html lang="es">
      <head>
          <meta charset="utf-8"/>
-        <title>Importacion Comprobantes Contabilidad 2016</title>
+        <title>Importacion Cuentas Contabilidad 2016</title>
         
           <link rel="stylesheet" href="view/css/bootstrap.css">
           <script src="view/js/jquery.js"></script>
@@ -122,9 +136,9 @@
        <?php $t_plan_cuentas=array("acreedora"=>'Acreedora',"deudora"=>'Deudora')?>
   
  	 <div class="container">
-  		<div class="row" style="background-color: #FAFAFA;">
-  	
-  	      <form id="form-plan_cuentas" action="<?php echo $helper->url("ImportacionCuentas","ImportarPlanCuentas"); ?>" method="post" enctype="multipart/form-data" class="col-lg-6">
+  		        
+        
+          <form id="form-plan_cuentas" action="<?php echo $helper->url("ImportacionComprobantes","ImportarComprobantes"); ?>" method="post" enctype="multipart/form-data" class="col-lg-6">
             <br>
             
             <?php if ($resultEdit !="" ) { foreach($resultEdit as $resEdit) {?>
@@ -132,7 +146,7 @@
 	        <?php } } else {?>
 		    
 		    <div class="well">
-		    <h4 style="color:#ec971f;">Importacion  Plan de Cuentas</h4>
+		    <h4 style="color:#ec971f;">Importacion  De Comprobantes</h4>
             <hr/>
             
             <div class="row">
@@ -163,11 +177,7 @@
 		   
 			</div>
 			</div>
-		    <div id="mensaje_saldos" class="errores"></div> 
-		    </div>
-		     
-		    </div>
-            
+		    
 		  
 		   
 		    </div>

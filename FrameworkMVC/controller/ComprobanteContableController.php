@@ -251,13 +251,21 @@ class ComprobanteContableController extends ControladorBase{
    			
    
    
-   
+   			$_fecha_ccomprobantes = getdate();
+   			$_fecha_año=$_fecha_mayor['year'];
+   			$_fecha_mes=$_fecha_mayor['mon'];
+   			$_fecha_dia=$_fecha_mayor['mday'];
+   			
+   			$_fecha_ccomprobantes=$_fecha_año.'-'.$_fecha_mes.'-'.$_fecha_dia;
+   			
+   			
+   			
    			///PRIMERO INSERTAMOS LA CABEZA DEL COMPROBANTE
    			try
    			{
    					
    				$funcion = "ins_ccomprobantes";
-   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras'";
+   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras' , '$_fecha_ccomprobantes' ";
    				$ccomprobantes->setFuncion($funcion);
    				$ccomprobantes->setParametros($parametros);
    				$resultado=$ccomprobantes->Insert();

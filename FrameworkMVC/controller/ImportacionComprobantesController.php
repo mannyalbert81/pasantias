@@ -124,8 +124,194 @@ class ImportacionComprobantesController extends ControladorBase{
 	
 	}
 	
-	public function ImportarPlanCuentas(){
+	public function ImportarComprobantes(){
 			
+		
+		if (isset ($_POST["Importar"]))
+		{
+			$_id_entidad_a_importar="";
+			if(isset($_POST["id_entidad"])){$_id_entidad_a_importar = $_POST["id_entidad"];}else{$_id_entidad_a_importar="";};
+			$_id_entidad_importada = $_POST["id_entidad_importada"];
+		
+			$_archivo_cuenta='';
+		
+				
+		
+			$_archivo_cuenta=(isset($_FILES['archivo_cuentas']))? $_FILES['archivo_cuentas']['name']:'';
+		
+				
+			if(isset($_POST["saldos"])&&$_id_entidad_a_importar!=""&&$_archivo_cuenta=='')
+			{
+				echo 'entro';
+				die();
+				$_saldos = (int)$_POST["saldos"];
+		
+				if($_saldos==1)
+				{
+		
+					$funcion = "importacion_plan_cuentas";
+					 
+					$parametros = "'$_id_entidad_a_importar', '$_id_entidad_importada'";
+		
+					$plan_cuentas->setFuncion($funcion);
+					 
+					$plan_cuentas->setParametros($parametros);
+					 
+					$resultado=$plan_cuentas->Insert();
+					 
+					 
+					 
+					$traza=new TrazasModel();
+					$_nombre_controlador = "Plan_cuentas";
+					$_accion_trazas  = "Importar";
+					$_parametros_trazas = "De ". $_id_entidad_a_importar." a la entidad -> ".$_id_entidad_importada;
+					$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+		
+				}else if($_saldos==2)
+				{
+					$funcion = "importacion_plan_cuentas_sin_saldos";
+		
+					$parametros = "'$_id_entidad_a_importar', '$_id_entidad_importada'";
+					 
+					$plan_cuentas->setFuncion($funcion);
+		
+					$plan_cuentas->setParametros($parametros);
+		
+					$resultado=$plan_cuentas->Insert();
+		
+					$traza=new TrazasModel();
+					$_nombre_controlador = "Plan_cuentas";
+					$_accion_trazas  = "Importar";
+					$_parametros_trazas = "De ". $_id_entidad_a_importar." a la entidad -> ".$_id_entidad_importada;
+					$resultado = $traza->AuditoriaControladores($_accion_trazas, $_parametros_trazas, $_nombre_controlador);
+					 
+				}
+			}
+		
+			if (isset ($_POST["Importar"])  &&   isset ($_FILES["archivo_comprobantes"])   )
+			{
+				 
+				 
+				 
+				$directorio = $_SERVER['DOCUMENT_ROOT'].'/importar/';
+		
+				$nombre = $_FILES['archivo_comprobantes']['name'];
+				$tipo = $_FILES['archivo_comprobantes']['type'];
+				$tamano = $_FILES['archivo_comprobantes']['size'];
+				move_uploaded_file($_FILES['archivo_comprobantes']['tmp_name'],$directorio.$nombre);
+		
+		
+				$contador = 0;
+				$contador_linea = 0;
+				//$encabezado_linea = "";
+				$contenido_linea = "";
+		
+				$lectura_linea = "";
+				 
+				$error_linea="";
+		
+				$file = fopen($directorio.$nombre, "r") or exit("Unable to open file!");
+		
+				$nuevo_comprobante = true;
+				
+				while(!feof($file))
+				{
+					$contador = $contador + 1;
+		
+					if ($contador > 1) ///salto EL ENCABEZADO
+					{
+						$lectura_linea =  fgets($file) ;
+						//$encabezado_linea = fgets($file) ;
+						 
+						$tipo_doc='';
+						$numero_doc='';
+						$fecha_doc='';
+						$codigo_cuenta='';
+						$numero_cuenta='';
+						$nombre_cuenta='';
+						$debe_cuenta='';
+						$haber_cuenta='';
+						$descripcion_cuenta='';
+						
+						
+						if((string)$lectura_linea!="")
+						{
+							$array_linea=explode(";", $lectura_linea);
+		
+							$tipo_doc=                trim($array_linea[0]);
+							$numero_doc=              trim($array_linea[1]);  
+							$fecha_doc=               trim($array_linea[4]);
+							$codigo_cuenta=           trim($array_linea[5]);
+							$numero_cuenta=           trim($array_linea[6]);
+							$nombre_cuenta=           $array_linea[7];
+							$debe_cuenta=             trim($array_linea[8]);
+							$haber_cuenta=            trim($array_linea[9]);
+							$descripcion_cuenta=       $array_linea[10];
+							
+							
+							
+							
+						}
+					    
+					    
+					    if ($numero_cuenta == 1)   ///cambia de comprobante
+					    {
+					    	$nuevo_comprobante = true;
+					    }
+					    else
+					    {
+					    	$nuevo_comprobante = false;
+					    }
+					    
+					    
+					    if ($nuevo_comprobante)
+					    {
+					     ///cambio consecutivo de comprobante	
+					    	
+					    }
+					    else
+					    {
+					    	///sigo con el mismo
+					    	
+					    }
+					    
+					    
+						if ($numero_cuenta == 1)
+						{
+							//nuevo consecutivo
+							$actual_doc = $numero_doc; 
+						}
+							
+						
+						///primero inserto el temporal 
+						
+						
+					}
+		
+				}
+		
+				fclose ($file);
+			}
+		
+		
+				
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/////termino
+		
 		session_start();
 		$plan_cuentas = new PlanCuentasModel();
 		

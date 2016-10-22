@@ -89,6 +89,10 @@ $controladores=$_SESSION['controladores'];
 			<li style="<?php echo getcontrolador("ComprobanteContable",$controladores) ?>">
 			<a href="index.php?controller=ComprobanteContable&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Comprobante Contable</span> </a>
 			</li>
+		
+		    <li style="<?php echo getcontrolador("ImportacionComprobantes",$controladores) ?>">
+			<a href="index.php?controller=ImportacionComprobantes&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Importacion Comprobantes</span> </a>
+			</li>
 			
 </ul>
 </li>
