@@ -124,12 +124,14 @@
        
        $array_get=urlencode(serialize($arrayGet));
        $sel_concepto_ccomprobantes="";
+       $sel_fecha_ccomprobantes="";
        
       
        
        if($_SERVER['REQUEST_METHOD']=='POST' )
        {
         $sel_concepto_ccomprobantes=$_POST['concepto_ccomprobantes'];
+        $sel_fecha_ccomprobantes=$_POST['fecha_ccomprobantes'];
        }
       	
       if($_SERVER['REQUEST_METHOD']=='GET')
@@ -207,14 +209,21 @@
 								   </select> 
                                   <span class="help-block"></span>	
              
-             <input type="date"  name="fecha_ccomprobantes" id="fecha_ccomprobantes" value="" class="form-control " placeholder="Seleccione"/>
              </div>
+             
+		     <div class="col-md-3 col-lg-3 col-xs-4" style="margin-top: 5px">
+					              <input type="text" class="form-control" id="fecha_ccomprobantes" name="fecha_ccomprobantes" data-date-format="YYYY-MM-DD" value="<?php echo $sel_fecha_ccomprobantes;?>" placeholder="Ingrese Fecha">
+                                  <span class="help-block"></span>
+		     </div>
+             
+             </div>
+		    
 		                   
 			 </div>
 	         </div>
 	         </div>
 	         </div>
-	         </div>
+	         
 	         <div class="col-lg-1">
 	         </div>
 	         </div>

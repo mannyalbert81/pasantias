@@ -45,7 +45,10 @@ class ComprobanteContableController extends ControladorBase{
 				if (isset($_POST['concepto_ccomprobantes'])){
 						
 					$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
+					$_fecha_ccomprobantes =$_POST['fecha_ccomprobantes'];
 					$arrayGet['array_concepto_ccomprobantes']=$_concepto_ccomprobantes;
+					$arrayGet['array_fecha_ccomprobantes']=$_fecha_ccomprobantes;
+					
 				}
 				
 				
