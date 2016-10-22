@@ -251,10 +251,7 @@ class ComprobanteContableController extends ControladorBase{
    			
    
    
-   			$_fecha_ccomprobantes = getdate();
-   			$_fecha_año=$_fecha_mayor['year'];
-   			$_fecha_mes=$_fecha_mayor['mon'];
-   			$_fecha_dia=$_fecha_mayor['mday'];
+   			$_fecha_ccomprobantes = $_POST['fecha_ccomprobantes']; 
    			
    			$_fecha_ccomprobantes=$_fecha_año.'-'.$_fecha_mes.'-'.$_fecha_dia;
    			
