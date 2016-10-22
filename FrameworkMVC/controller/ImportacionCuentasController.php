@@ -250,7 +250,7 @@ class ImportacionCuentasController extends ControladorBase{
 					    			$array_linea=explode(";", $lectura_linea);
 					    			
 					    			$codigo_cuenta=trim($array_linea[0]);
-					    			$nombre_cuenta=trim($array_linea[1]);
+					    			$nombre_cuenta= utf8_decode( trim($array_linea[1]));
 					    			
 					    			$num_cuenta=substr($codigo_cuenta,0,1);
 					    			
