@@ -212,7 +212,7 @@
              </div>
              
 		     <div class="col-md-3 col-lg-3 col-xs-4" style="margin-top: 5px">
-					              <input type="date" class="form-control" id="fecha_ccomprobantes" name="fecha_ccomprobantes" data-date-format="YYYY-MM-DD" value="<?php echo $sel_fecha_ccomprobantes;?>" placeholder="Ingrese Fecha">
+					              <input type="text" class="form-control" id="fecha_ccomprobantes" name="fecha_ccomprobantes" data-date-format="YYYY-MM-DD" value="<?php echo $sel_fecha_ccomprobantes;?>" placeholder="Ingrese Fecha">
                                   <span class="help-block"></span>
 		     </div>
              
