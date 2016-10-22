@@ -48,6 +48,7 @@ class ComprobantesController extends ControladorBase{
 				$_retencion_ccomprobantes =$_POST['retencion_ccomprobantes'];
 				$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
 				$resultTipoComprobantes = $tipo_comprobante->getBy("id_tipo_comprobantes='$_id_tipo_comprobantes'");
+				$_fecha_ccomprobantes =$_POST['fecha_ccomprobantes'];
 					
 				$arrayGet['array_ruc_ccomprobantes']=$_ruc_ccomprobantes;
 				$arrayGet['array_nombres_ccomprobantes']=$_nombres_ccomprobantes;
@@ -55,6 +56,8 @@ class ComprobantesController extends ControladorBase{
 				$arrayGet['array_id_tipo_comprobantes']=$resultTipoComprobantes[0]->id_tipo_comprobantes;
 				$arrayGet['array_retencion_ccomprobantes']=$_retencion_ccomprobantes;
 				$arrayGet['array_concepto_ccomprobantes']=$_concepto_ccomprobantes;
+				$arrayGet['array_fecha_ccomprobantes']=$_fecha_ccomprobantes;
+					
 				}
 				
 					
@@ -274,7 +277,8 @@ class ComprobantesController extends ControladorBase{
    			$_id_usuario_creador=$_SESSION['id_usuarios'];
    			$_valor_letras =$_POST['valor_letras'];
    			
-   
+   			$_fecha_ccomprobantes = $_POST['fecha_ccomprobantes'];
+   			
    
    
    			///PRIMERO INSERTAMOS LA CABEZA DEL COMPROBANTE
@@ -282,7 +286,7 @@ class ComprobantesController extends ControladorBase{
    			{
    					
    				$funcion = "ins_ccomprobantes";
-   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras'";
+   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras', '$_fecha_ccomprobantes'";
    				$ccomprobantes->setFuncion($funcion);
    				$ccomprobantes->setParametros($parametros);
    				$resultado=$ccomprobantes->Insert();
@@ -387,6 +391,7 @@ class ComprobantesController extends ControladorBase{
    			$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
    			$_id_usuario_creador=$_SESSION['id_usuarios'];
    			$_valor_letras =$_POST['valor_letras'];
+   			$_fecha_ccomprobantes = $_POST['fecha_ccomprobantes'];
    			
    			 
    			 
@@ -396,7 +401,7 @@ class ComprobantesController extends ControladorBase{
    			{
    			
    				$funcion = "ins_ccomprobantes";
-   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras'";
+   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras', '$_fecha_ccomprobantes'";
    				$ccomprobantes->setFuncion($funcion);
    				$ccomprobantes->setParametros($parametros);
    				$resultado=$ccomprobantes->Insert();

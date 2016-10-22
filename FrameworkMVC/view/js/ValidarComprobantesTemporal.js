@@ -1,6 +1,15 @@
 $(document).ready(function() {
 		//Validacion con BootstrapValidator
-		fl = $('#form-comprobantes');
+	$(function () {
+		 
+		$('#fecha_ccomprobantes').datetimepicker({
+		 
+						 pickTime: false
+		 
+					 });
+		 
+		});		
+	fl = $('#form-comprobantes');
 	    fl.bootstrapValidator({ 
 	        message: 'El valor no es valido.',
 	        //fields: name de los inputs del formulario, la regla que debe cumplir y el mensaje que mostrara si no cumple la regla
@@ -69,7 +78,28 @@ $(document).ready(function() {
 			                                }
 			                             
 			                        }
-			                }
+			                },
+			                fecha_ccomprobantes: {
+			                	 
+				       			 validators: {
+				        
+				       				 notEmpty: {
+				        
+				       					 message: 'La fecha es requerida y no puede ser vacia'
+				        
+				       				 },
+				        
+				       				 date: {
+				        
+				       					 format: 'YYYY-MM-DD',
+				        
+				       					 message: 'La fecha no es valida'
+				        
+				       				 }
+				        
+				       			 }
+				        
+				       		 }
 	        }
 	    });
 	});

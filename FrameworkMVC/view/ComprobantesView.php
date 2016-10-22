@@ -132,6 +132,7 @@
        $sel_retencion_ccomprobantes="";
        $sel_concepto_ccomprobantes="";
      //  $sel_valor_ccomprobantes="";
+       $sel_fecha_ccomprobantes="";
        
       
        
@@ -146,6 +147,8 @@
        	$sel_retencion_ccomprobantes=$_POST['retencion_ccomprobantes'];
         $sel_concepto_ccomprobantes=$_POST['concepto_ccomprobantes'];
        //	$sel_valor_ccomprobantes=$_POST['valor_ccomprobantes'];
+        $sel_fecha_ccomprobantes=$_POST['fecha_ccomprobantes'];
+        
       }
       //if(empty($array_get))
       	
@@ -165,6 +168,8 @@
       		$sel_ruc_ccomprobantes=$_dato['array_ruc_ccomprobantes'];
       		$sel_retencion_ccomprobantes=$_dato['array_retencion_ccomprobantes'];
       		$sel_concepto_ccomprobantes=$_dato['array_concepto_ccomprobantes'];
+      		$sel_fecha_ccomprobantes=$_dato['array_fecha_ccomprobantes'];
+      		
       		
       	}
       
@@ -229,7 +234,11 @@
 								   </select> 
                                   <span class="help-block"></span>	
 		     </div>
-		     
+		     <div class="col-md-3 col-lg-3 col-xs-4" style="margin-top: 5px">
+					              <input type="date" class="form-control" id="fecha_ccomprobantes" name="fecha_ccomprobantes" data-date-format="YYYY-MM-DD" value="<?php echo $sel_fecha_ccomprobantes;?>" placeholder="Ingrese Fecha">
+                                  <span class="help-block"></span>
+		     </div>
+            
 		     
 			 </div>
 	         </div>
