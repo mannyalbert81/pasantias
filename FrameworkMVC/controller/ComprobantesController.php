@@ -115,12 +115,7 @@ class ComprobantesController extends ControladorBase{
 					}
 				}	
 				
-				
-			
-				
-			
-				
-				$columnas_res = " temp_comprobantes.id_temp_comprobantes,
+					$columnas_res = " temp_comprobantes.id_temp_comprobantes,
 				          plan_cuentas.id_plan_cuentas,
 		    		      plan_cuentas.codigo_plan_cuentas,
 						  plan_cuentas.nombre_plan_cuentas,
@@ -286,7 +281,7 @@ class ComprobantesController extends ControladorBase{
    			{
    					
    				$funcion = "ins_ccomprobantes";
-   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras', '$_fecha_ccomprobantes'";
+   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras', '$_fecha_ccomprobantes' ";
    				$ccomprobantes->setFuncion($funcion);
    				$ccomprobantes->setParametros($parametros);
    				$resultado=$ccomprobantes->Insert();

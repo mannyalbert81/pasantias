@@ -450,7 +450,7 @@
 		   <div class="row">
 		   <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center; margin-top:20px" > 
            <div class="form-group">
-            					  <button type="submit" id="Guardar" name="Guardar" onclick="this.form.action='<?php echo $helper->url("Comprobantes","InsertaComprobantes"); ?>'" class="btn btn-success" >Guardar</button>
+            <button type="submit" id="Guardar" name="Guardar" onclick="this.form.action='<?php echo $helper->url("Comprobantes","InsertaComprobantes"); ?>'" class="btn btn-success" >Guardar</button>
            </div>
            </div>
            </div>          
