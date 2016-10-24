@@ -8,8 +8,7 @@
  	if($_SERVER['REQUEST_METHOD']=='POST' )
        {
        	$sel_id_entidad_importar=$_POST['id_entidad_a_importar'];
-       
-      }
+       }
 ?>
 
 <!DOCTYPE HTML>
