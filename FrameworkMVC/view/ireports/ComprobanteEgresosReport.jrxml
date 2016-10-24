@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-10-24T11:15:45 -->
+<!-- 2016-10-24T11:50:39 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="612" pageHeight="792" columnWidth="574" leftMargin="19" rightMargin="19" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
@@ -89,8 +89,8 @@ WHERE
 				<textFieldExpression><![CDATA[$F{nombre_entidades}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="15" y="2" width="135" height="47" uuid="0af34674-2907-46f3-8204-c316f36832c5"/>
-				<imageExpression><![CDATA["C:/Users/Maycol/git/contabilidad/FrameworkMVC/view/ireports/PhpJasperLibrary/class/tcpdf/images/logo_mundo_digital_2016.jpg"]]></imageExpression>
+				<reportElement x="15" y="2" width="121" height="47" uuid="0af34674-2907-46f3-8204-c316f36832c5"/>
+				<imageExpression><![CDATA["C:/xampp/htdocs/contabilidad/FrameworkMVC/view/ireports/PhpJasperLibrary/class/tcpdf/images/logo_mundo_digital_2016.jpg"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="181" y="36" width="240" height="14" forecolor="#000000" uuid="d1ebe344-c9e5-4b45-878c-50c235f137fd"/>
@@ -123,7 +123,7 @@ WHERE
 		</band>
 	</title>
 	<pageHeader>
-		<band height="99" splitType="Stretch">
+		<band height="107" splitType="Stretch">
 			<rectangle radius="7">
 				<reportElement x="11" y="6" width="555" height="44" forecolor="#000000" backcolor="#FFFFFF" uuid="e2521e34-8167-4e4a-b74e-f78d927c8ff1"/>
 				<graphicElement>
@@ -138,7 +138,7 @@ WHERE
 				<textFieldExpression><![CDATA["NOMBRE: "+$F{nombres_ccomprobantes}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
-				<reportElement x="21" y="28" width="300" height="15" uuid="d97a0874-f071-473b-8066-8cb6079f4def"/>
+				<reportElement x="21" y="28" width="540" height="15" uuid="d97a0874-f071-473b-8066-8cb6079f4def"/>
 				<textElement textAlignment="Left">
 					<font fontName="Arial" size="7" isBold="false"/>
 				</textElement>
@@ -227,7 +227,7 @@ WHERE
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="10" splitType="Stretch">
+		<band height="97" splitType="Stretch">
 			<textField>
 				<reportElement x="9" y="1" width="100" height="9" uuid="d95d49ba-437f-4f3e-850b-d193ee971d9a"/>
 				<textElement>
@@ -289,30 +289,6 @@ WHERE
 			</rectangle>
 		</band>
 	</detail>
-	<pageFooter>
-		<band height="22">
-			<rectangle>
-				<reportElement x="9" y="2" width="557" height="20" forecolor="#000000" backcolor="#000000" uuid="fdf0e2aa-60b0-4902-91c3-93728db0da8f"/>
-				<graphicElement>
-					<pen lineStyle="Dotted"/>
-				</graphicElement>
-			</rectangle>
-			<textField>
-				<reportElement x="544" y="6" width="20" height="16" forecolor="#FFFFFF" uuid="4597b109-4421-4365-984a-8ef22f05dff5"/>
-				<textElement>
-					<font fontName="Arial" size="10" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="124" y="6" width="320" height="12" forecolor="#FFFFFF" uuid="8cc70a2c-661a-4a3e-9bdb-404c99b47578"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tw Cen MT Condensed Extra Bold" size="10" isBold="true" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[ Contabilidad  - AllAccounts 2016 -www.masoft.net - Copyright]]></text>
-			</staticText>
-		</band>
-	</pageFooter>
 	<summary>
 		<band height="57">
 			<textField>

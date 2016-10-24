@@ -97,7 +97,7 @@
 							<td><?php echo $row['concepto_ccomprobantes'];?></td>
 							<td><?php echo $row['valor_letras'];?></td>
 							<td>
-							<span class="pull-right">
+							<span class="pull-left">
 							<a href="/contabilidad/FrameworkMVC/view/ireports/ContComprobanteContableReport.php?id_ccomprobantes=<?php echo $id_ccomprobantes; ?>"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false"><i class="glyphicon glyphicon-print"></i></a>
 							</span>
 							</td>

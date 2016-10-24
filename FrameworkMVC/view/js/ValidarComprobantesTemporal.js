@@ -55,7 +55,7 @@ $(document).ready(function() {
 				            					 min: 10,
 				            					 max: 13,
 				                                
-				            					 message: 'Ingrese 10 números'
+				            					 message: 'Ingrese min 10 max 13 números'
 				            					
 				            				 }
 			                             
