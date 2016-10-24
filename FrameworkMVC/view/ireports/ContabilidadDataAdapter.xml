@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl"><name>contabilidad</name><driver>org.postgresql.Driver</driver><username>postgres</username><password>.Romina.2012</password><savePassword>true</savePassword><url>jdbc:postgresql://186.4.241.148:5432/contabilidad</url><database></database><serverAddress></serverAddress></jdbcDataAdapter>
+<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl"><name>contabilidad</name><driver>org.postgresql.Driver</driver><username>postgres</username><password>.Romina.2012</password><savePassword>true</savePassword><url>jdbc:postgresql://186.4.241.148:5432/contabilidad_des</url><database></database><serverAddress></serverAddress></jdbcDataAdapter>

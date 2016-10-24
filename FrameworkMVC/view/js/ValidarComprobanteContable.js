@@ -8,11 +8,10 @@ $(document).ready(function() {
 		 
 					 });
 		 
-		});	
-	
+		});    
 	
 	fl = $('#form-comprobante-contable');
-	    fl.bootstrapValidator({ 
+	fl.bootstrapValidator({ 
 	        message: 'El valor no es valido.',
 	        //fields: name de los inputs del formulario, la regla que debe cumplir y el mensaje que mostrara si no cumple la regla
 	        feedbackIcons: {
@@ -87,7 +86,7 @@ $(document).ready(function() {
 			        
 			       				 notEmpty: {
 			        
-			       					 message: 'La fecha es requerida y no puede ser vacia'
+			       					 message: 'La fecha es requerida'
 			        
 			       				 },
 			        

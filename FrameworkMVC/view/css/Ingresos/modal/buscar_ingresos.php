@@ -11,7 +11,7 @@
 					<form class="form-horizontal">
 					  <div class="form-group">
 						<div class="col-sm-6">
-						  <input type="text" class="form-control" id="i" placeholder="Buscar Ingresos" onkeyup="load_ingresos(1)">
+						  <input type="text" class="form-control" id="i" placeholder="Ingrese Ruc, #Comprobantes o Nombres" onkeyup="load_ingresos(1)">
 						</div>
 						<button type="button" class="btn btn-default" onclick="load_ingresos(1)"><span class='glyphicon glyphicon-search'></span> Buscar</button>
 					  </div>

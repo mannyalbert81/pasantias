@@ -11,7 +11,7 @@
 					<form class="form-horizontal">
 					  <div class="form-group">
 						<div class="col-sm-6">
-						  <input type="text" class="form-control" id="c" placeholder="Buscar Contable" onkeyup="load_contable(1)">
+						  <input type="text" class="form-control" id="c" placeholder="Ingrese #Comprobante o Concepto" onkeyup="load_contable(1)">
 						</div>
 						<button type="button" class="btn btn-default" onclick="load_contable(1)"><span class='glyphicon glyphicon-search'></span> Buscar</button>
 					  </div>

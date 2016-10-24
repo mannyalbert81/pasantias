@@ -2,7 +2,7 @@
   session_start();
   $_id_usuarios= $_SESSION['id_usuarios'];
   
-    	$conn  = pg_connect("user=postgres port=5432 password=.Romina.2012 dbname=contabilidad host=186.4.241.148");
+    	$conn  = pg_connect("user=postgres port=5432 password=.Romina.2012 dbname=contabilidad_des host=186.4.241.148");
 		
 		if(!$conn)
 		{
@@ -97,7 +97,7 @@
 							<td><?php echo $row['concepto_ccomprobantes'];?></td>
 							<td><?php echo $row['valor_letras'];?></td>
 							<td>
-							<span class="pull-left">
+							<span class="pull-right">
 							<a href="/contabilidad/FrameworkMVC/view/ireports/ContComprobanteContableReport.php?id_ccomprobantes=<?php echo $id_ccomprobantes; ?>"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false"><i class="glyphicon glyphicon-print"></i></a>
 							</span>
 							</td>
