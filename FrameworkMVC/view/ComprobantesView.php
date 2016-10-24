@@ -12,6 +12,10 @@
          <title>Comprobantes - Contabilidad 2016</title>
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	      <link rel="stylesheet" href="view/css/bootstrap.css">
+	       <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.7.2.custom.css" />
+          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>  
+         
           <script src="view/js/jquery.js"></script>
 		  <script src="view/js/bootstrapValidator.min.js"></script>
 		  <script src="view/js/ValidarComprobantesTemporal.js"></script>
@@ -21,6 +25,34 @@
 	      <script type="text/javascript" src="view/css/Egresos/js/procesos-egresos.js"></script>
 	      <script type="text/javascript" src="view/css/Ingresos/js/procesos-ingresos.js"></script>
 	      
+	      
+	       <script type="text/javascript">
+		jQuery(function($){
+			$.datepicker.regional['es'] = {
+				closeText: 'Cerrar',
+				prevText: '&#x3c;Ant',
+				nextText: 'Sig&#x3e;',
+				currentText: 'Hoy',
+				monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+				'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+				monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+				'Jul','Ago','Sep','Oct','Nov','Dic'],
+				dayNames: ['Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado'],
+				dayNamesShort: ['Dom','Lun','Mar','Mi&eacute;','Juv','Vie','S&aacute;b'],
+				dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&aacute;'],
+				weekHeader: 'Sm',
+				dateFormat: 'yy-mm-dd',
+				firstDay: 1,
+				isRTL: false,
+				showMonthAfterYear: false,
+				yearSuffix: ''};
+			$.datepicker.setDefaults($.datepicker.regional['es']);
+		});    
+		 
+		$(document).ready(function() {
+		   $("#fecha_ccomprobantes").datepicker();
+		 });
+		</script>
     
     <script >   
     function numeros(e){
@@ -235,8 +267,13 @@
                                   <span class="help-block"></span>	
 		     </div>
 		     <div class="col-md-3 col-lg-3 col-xs-4" style="margin-top: 5px">
-					              <input type="text" class="form-control" id="fecha_ccomprobantes" name="fecha_ccomprobantes" data-date-format="YYYY-MM-DD" value="<?php echo $sel_fecha_ccomprobantes;?>" placeholder="Ingrese Fecha">
-                                  <span class="help-block"></span>
+		                          <div class="input-group date" id="datetimePicker">
+					              <input type="text" class="form-control" id="fecha_ccomprobantes" name="fecha_ccomprobantes" data-date-format="YYYY-MM-DD" value="<?php echo $sel_fecha_ccomprobantes;?>">
+                                  <span class="input-group-addon">
+                                  <span class="glyphicon glyphicon-calendar"></span>
+                                  </span>
+                                  </div>
+                                  
 		     </div>
             
 		     

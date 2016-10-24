@@ -23,30 +23,6 @@
 		  	}
 		  	
 		  
-		  	
-		  	/*
-		  	$q =  pg_escape_string($conn,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
-		  	$aColumns = array('codigo_plan_cuentas', 'nombre_plan_cuentas');//Columnas de busqueda
-		  	$sTable = "plan_cuentas";
-		  	$sWhere = "";
-		  	
-		  	if ( $_GET['q'] != "" )
-		  	{
-		  		
-		  		
-		  		$sWhere= "WHERE(";
-		  		
-		  		$sWhere = " WHERE (";
-		  		for ( $i=0 ; $i<count($aColumns) ; $i++ )
-		  		{
-		  			$sWhere .= $aColumns[$i]." LIKE '%".$q."%' OR ";
-		  		}
-		  		$sWhere = substr_replace( $sWhere, "", -3 );
-		  		$sWhere .= ')';
-		  		
-		  	}
-		  	
-		  	*/
 			include 'pagination.php'; 
 			//las variables de paginación
 			
@@ -76,8 +52,6 @@
                   <table class="table table-hover">
 					  <thead>
 						<tr class="info">
-						  <th>Ruc</th>
-						  <th>Nombre</th>
 						  <th># Comprobante</th>
 						  <th>Concepto</th>
 						  <th>Valor</th>
@@ -91,15 +65,12 @@
 						$id_ccomprobantes=$row['id_ccomprobantes'];
 						?>
 						<tr>
-							<td><?php echo $row['ruc_ccomprobantes'];?></td>
-							<td><?php echo $row['nombres_ccomprobantes'];?></td>
 							<td><?php echo $row['numero_ccomprobantes'];?></td>
 							<td><?php echo $row['concepto_ccomprobantes'];?></td>
 							<td><?php echo $row['valor_letras'];?></td>
 							<td>
-							<span class="pull-right">
-							<a href="/contabilidad/FrameworkMVC/view/ireports/ContComprobanteContableReport.php?id_ccomprobantes=<?php echo $id_ccomprobantes; ?>"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false"><i class="glyphicon glyphicon-print"></i></a>
-							</span>
+							<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editar" data-id="<?php echo $row['id_ccomprobantes']?>" data-ruc="<?php echo $row['ruc_ccomprobantes']?>" data-nombres="<?php echo $row['nombres_ccomprobantes']?>" data-retencion="<?php echo $row['retencion_ccomprobantes']?>" data-concepto="<?php echo $row['concepto_ccomprobantes']?>" data-fecha="<?php echo $row['fecha_ccomprobantes']?>"><i class='glyphicon glyphicon-edit'>Editar</i></button>
+					        <a href="/contabilidad/FrameworkMVC/view/ireports/ContComprobanteContableReport.php?id_ccomprobantes=<?php echo $id_ccomprobantes; ?>"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false" ><i class="glyphicon glyphicon-print"></i></a>
 							</td>
 					
 						</tr>

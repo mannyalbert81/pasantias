@@ -85,7 +85,7 @@ $(document).ready(function() {
 				        
 				       				 notEmpty: {
 				        
-				       					 message: 'La fecha es requerida y no puede ser vacia'
+				       					 message: 'La fecha es requerida'
 				        
 				       				 },
 				        

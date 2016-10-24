@@ -1,15 +1,6 @@
+
 $(document).ready(function() {
 		//Validacion con BootstrapValidator
-	$(function () {
-		 
-		$('#fecha_ccomprobantes').datetimepicker({
-		 
-						 pickTime: false
-		 
-					 });
-		 
-		});    
-	
 	fl = $('#form-comprobante-contable');
 	fl.bootstrapValidator({ 
 	        message: 'El valor no es valido.',
@@ -80,27 +71,31 @@ $(document).ready(function() {
 			                             
 			                        }
 			                },
+			                
 			                fecha_ccomprobantes: {
 			                	 
-			       			 validators: {
-			        
-			       				 notEmpty: {
-			        
-			       					 message: 'La fecha es requerida'
-			        
-			       				 },
-			        
-			       				 date: {
-			        
-			       					 format: 'YYYY-MM-DD',
-			        
-			       					 message: 'La fecha no es valida'
-			        
-			       				 }
-			        
-			       			 }
-			        
-			       		 }
+				       			 validators: {
+				        
+				       				 notEmpty: {
+				        
+				       					 message: 'La fecha es requerida'
+				        
+				       				 },
+				        
+				       				 date: {
+				        
+				       					 format: 'YYYY-MM-DD',
+				        
+				       					 message: 'La fecha no es valida'
+				        
+				       				 }
+				        
+				       			 }
+				        
+				       		 }
+			               
 	        }
 	    });
+	
+	
 	});
