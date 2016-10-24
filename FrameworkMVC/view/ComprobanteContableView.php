@@ -3,7 +3,8 @@
     <?php include("view/modulos/modal.php");?>
     <?php include("view/css/Comprobantes/modal/buscar_plan_cuentas.php");?>
     <?php include("view/css/Contable/modal/buscar_contable.php");?>
-    <?php include("view/css/Contable/modal/modal_modificar.php");?>
+     <?php include("view/css/Contable/modal/modal_modificar.php");?>  
+   
     
     
 <!DOCTYPE HTML>
@@ -16,10 +17,6 @@
           <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.7.2.custom.css" />
           <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
           <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>  
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-     	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	
           <script src="view/js/jquery.js"></script>
 		  <script src="view/js/bootstrapValidator.min.js"></script>
 		  <script src="view/js/ValidarComprobanteContable.js"></script>
@@ -28,11 +25,7 @@
 	      <script type="text/javascript" src="view/css/Comprobantes/js/procesos-comprobantes.js"></script>
 	      <script type="text/javascript" src="view/css/Contable/js/procesos-contable.js"></script>
          
-         <script>
-		$(document).ready(function(){
-			load_contable(2);
-		});
-	</script>
+    
       
        <script type="text/javascript">
 		jQuery(function($){
@@ -158,7 +151,7 @@
      </head>
       <body class="cuerpo">
        
-                   
+                 
                    
                    
                    

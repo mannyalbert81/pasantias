@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-10-24T11:50:39 -->
+<!-- 2016-10-24T16:59:30 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="612" pageHeight="792" columnWidth="574" leftMargin="19" rightMargin="19" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
@@ -218,7 +218,7 @@ WHERE
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="240" y="83" width="127" height="15" uuid="1fe293a8-d70e-43e7-99a4-8aa1b9ce0bf2"/>
+				<reportElement x="276" y="83" width="91" height="15" uuid="1fe293a8-d70e-43e7-99a4-8aa1b9ce0bf2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -236,18 +236,18 @@ WHERE
 				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="110" y="1" width="130" height="9" uuid="ef151efa-7848-413f-80ef-db94ebd1b2d9"/>
+				<reportElement x="110" y="1" width="178" height="9" uuid="ef151efa-7848-413f-80ef-db94ebd1b2d9"/>
 				<textElement>
 					<font fontName="Arial" size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre_plan_cuentas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="265" y="1" width="99" height="9" uuid="97ba6f8c-be84-4379-903a-0a4a659c33bc"/>
+				<reportElement x="289" y="1" width="75" height="9" uuid="97ba6f8c-be84-4379-903a-0a4a659c33bc"/>
 				<textElement>
 					<font fontName="Arial" size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nombre_plan_cuentas}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{descripcion_dcomprobantes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="368" y="1" width="98" height="9" uuid="d0a402ce-79f9-4d5f-abe9-5d36fc1da064"/>

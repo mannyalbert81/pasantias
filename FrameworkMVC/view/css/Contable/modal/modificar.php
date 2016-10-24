@@ -9,36 +9,24 @@
         
         if (empty($_POST['id'])) {
            $errors[] = "ID vacío";
-        } else if (empty($_POST['ruc'])){
-			$errors[] = "Ruc vacío";
-		} else if (empty($_POST['nombres'])){
-			$errors[] = "Nombre vacío";
-		} else if (empty($_POST['retencion'])){
-			$errors[] = "# Retención vacío";
-		} else if (empty($_POST['concepto'])){
+        } 
+		else if (empty($_POST['concepto'])){
 			$errors[] = "Concepto vacío";
 		} else if (empty($_POST['fecha'])){
 			$errors[] = "Fecha vacío";
 		}   else if (
 			!empty($_POST['id']) &&
-			!empty($_POST['ruc']) && 
-			!empty($_POST['nombres']) &&
-			!empty($_POST['retencion']) &&
 			!empty($_POST['concepto']) &&
 			!empty($_POST['fecha'])
 			
 		){
 
 		// escaping, additionally removing everything that could be (html/javascript-) code
-		$ruc=pg_escape_string($conn,(strip_tags($_POST["ruc"],ENT_QUOTES)));
-		$nombres=pg_escape_string($conn,(strip_tags($_POST["nombres"],ENT_QUOTES)));
-		$retencion=pg_escape_string($conn,(strip_tags($_POST["retencion"],ENT_QUOTES)));
 		$concepto=pg_escape_string($conn,(strip_tags($_POST["concepto"],ENT_QUOTES)));
 		$fecha=pg_escape_string($conn,(strip_tags($_POST["fecha"],ENT_QUOTES)));
 		
 		$id=intval($_POST['id']);
-		$sql="UPDATE ccomprobantes SET  ruc_ccomprobantes='".$ruc."', nombres_ccomprobantes='".$nombres."',
-		retencion_ccomprobantes='".$retencion."', concepto_ccomprobantes='".$concepto."', fecha_ccomprobantes='".$fecha."'	WHERE id_ccomprobantes='".$id."'";
+		$sql="UPDATE ccomprobantes SET  concepto_ccomprobantes='".$concepto."', fecha_ccomprobantes='".$fecha."'	WHERE id_ccomprobantes='".$id."'";
 		
 		$query_update = pg_query($conn,$sql);
 			if ($query_update){
