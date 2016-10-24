@@ -52,10 +52,10 @@ $(document).ready(function() {
 				               				 },
 				            				 stringLength: {
 				            					 
-				            					 min: 13,
+				            					 min: 10,
 				            					 max: 13,
 				                                
-				            					 message: 'Ingrese 13 números'
+				            					 message: 'Ingrese 10 números'
 				            					
 				            				 }
 			                             

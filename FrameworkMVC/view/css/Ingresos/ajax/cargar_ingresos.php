@@ -99,8 +99,7 @@
 							<td><?php echo $row['valor_letras'];?></td>
 							<td>
 							<span class="pull-right">
-							<a href="/FrameworkMVC/view/ireports/ContComprobanteIngresosReport.php?id_ccomprobantes=<?php echo $id_ccomprobantes; ?>"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false"><i class="glyphicon glyphicon-edit"></i></a>
-							<a href="#" class='btn btn-default' title='Eliminar Comprobante' onclick="eliminar('<?php echo $id_ccomprobantes; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>
+							<a href="/contabilidad/FrameworkMVC/view/ireports/ContComprobanteIngresosReport.php?id_ccomprobantes=<?php echo $id_ccomprobantes; ?>"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false"><i class="glyphicon glyphicon-print"></i></a>
 							</span>
 							</td>
 					 

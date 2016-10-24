@@ -62,10 +62,6 @@
 			$count_query   = pg_query($conn,"SELECT count(*) AS numrows FROM public.ccomprobantes, public.usuarios, public.tipo_comprobantes, public.entidades WHERE ccomprobantes.id_usuarios = usuarios.id_usuarios AND
             ccomprobantes.id_entidades = entidades.id_entidades AND tipo_comprobantes.id_tipo_comprobantes = ccomprobantes.id_tipo_comprobantes AND entidades.id_entidades = usuarios.id_entidades AND nombre_tipo_comprobantes='CONTABLE' AND usuarios.id_usuarios='$_id_usuarios'  ");
 			
-			
-			$vari = " SELECT count(*) AS numrows FROM public.ccomprobantes, public.usuarios, public.tipo_comprobantes, public.entidades WHERE ccomprobantes.id_usuarios = usuarios.id_usuarios AND
-            ccomprobantes.id_entidades = entidades.id_entidades AND tipo_comprobantes.id_tipo_comprobantes = ccomprobantes.id_tipo_comprobantes AND entidades.id_entidades = usuarios.id_entidades AND nombre_tipo_comprobantes='CONTABLE' AND usuarios.id_usuarios='$_id_usuarios' ";
-
 			if ($row= pg_fetch_array($count_query)){$numrows = $row['numrows'];}
 			$total_pages = ceil($numrows/$per_page);
 			$reload = 'index.php';
@@ -86,7 +82,6 @@
 						  <th>Concepto</th>
 						  <th>Valor</th>
 						  <th>Acciones</th>
-						
 						</tr>
 					</thead>
 					<tbody>
@@ -103,10 +98,10 @@
 							<td><?php echo $row['valor_letras'];?></td>
 							<td>
 							<span class="pull-right">
-							<a href="/FrameworkMVC/view/ireports/ContComprobanteIngresosReport.php?id_ccomprobantes=<?php echo $id_ccomprobantes; ?>"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false"><i class="glyphicon glyphicon-edit"></i></a>
+							<a href="/contabilidad/FrameworkMVC/view/ireports/ContComprobanteContableReport.php?id_ccomprobantes=<?php echo $id_ccomprobantes; ?>"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false"><i class="glyphicon glyphicon-print"></i></a>
 							</span>
 							</td>
-					 
+					
 						</tr>
 						<?php
 					}
@@ -130,7 +125,7 @@
 					<div class="alert alert-warning alert-dismissable">
 		              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		              <h4>Aviso!!!</h4> No hay datos para mostrar
-		              <?php echo  $vari;?>
+		              
 		            </div>
 					<?php
 				}
