@@ -69,8 +69,7 @@
 							<td><?php echo $row['concepto_ccomprobantes'];?></td>
 							<td><?php echo $row['valor_letras'];?></td>
 							<td>
-							<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editar" data-id="<?php echo $row['id_ccomprobantes'];?>" data-concepto="<?php echo $row['concepto_ccomprobantes'];?>" data-fecha="<?php echo $row['fecha_ccomprobantes'];?>"><i class='glyphicon glyphicon-edit'>Editar</i></button>
-					        <a href="/contabilidad/FrameworkMVC/view/ireports/ContComprobanteContableReport.php?id_ccomprobantes=<?php echo $id_ccomprobantes; ?>"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false" ><i class="glyphicon glyphicon-print"></i></a>
+						    <a href="/contabilidad/FrameworkMVC/view/ireports/ContComprobanteContableReport.php?id_ccomprobantes=<?php echo $id_ccomprobantes; ?>"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false" ><i class="glyphicon glyphicon-print"></i></a>
 							</td>
 					
 						</tr>
