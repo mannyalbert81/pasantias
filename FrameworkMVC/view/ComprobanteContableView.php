@@ -3,7 +3,8 @@
     <?php include("view/modulos/modal.php");?>
     <?php include("view/css/Comprobantes/modal/buscar_plan_cuentas.php");?>
     <?php include("view/css/Contable/modal/buscar_contable.php");?>
-     <?php include("view/css/Contable/modal/modal_modificar.php");?>  
+       
+  
    
     
     
