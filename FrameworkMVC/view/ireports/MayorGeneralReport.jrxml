@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
+<!-- 2016-10-25T08:43:33 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="612" pageHeight="792" columnWidth="574" leftMargin="19" rightMargin="19" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<style name="Crosstab_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab_CG" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab_CT" mode="Opaque" backcolor="#005FB3">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<queryString>
+		<![CDATA[SELECT 
+  plan_cuentas.codigo_plan_cuentas, 
+  ccomprobantes.numero_ccomprobantes, 
+  plan_cuentas.nombre_plan_cuentas, 
+  plan_cuentas.saldo_fin_plan_cuentas, 
+  ccomprobantes.concepto_ccomprobantes, 
+  mayor.debe_mayor, 
+  mayor.haber_mayor, 
+  mayor.saldo_mayor, 
+  ccomprobantes.fecha_ccomprobantes
+FROM 
+  public.mayor, 
+  public.plan_cuentas, 
+  public.ccomprobantes
+WHERE 
+  plan_cuentas.id_plan_cuentas = mayor.id_plan_cuentas AND
+  ccomprobantes.id_ccomprobantes = mayor.id_ccomprobantes
+  ORDER BY plan_cuentas.id_plan_cuentas
+]]>
+	</queryString>
+	<field name="codigo_plan_cuentas" class="java.lang.String"/>
+	<field name="numero_ccomprobantes" class="java.lang.String"/>
+	<field name="nombre_plan_cuentas" class="java.lang.String"/>
+	<field name="saldo_fin_plan_cuentas" class="java.math.BigDecimal"/>
+	<field name="concepto_ccomprobantes" class="java.lang.String"/>
+	<field name="debe_mayor" class="java.math.BigDecimal"/>
+	<field name="haber_mayor" class="java.math.BigDecimal"/>
+	<field name="saldo_mayor" class="java.math.BigDecimal"/>
+	<field name="fecha_ccomprobantes" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<rectangle radius="7">
+				<reportElement x="11" y="0" width="555" height="60" forecolor="#000000" backcolor="#FFFFFF" uuid="d33056da-a91a-42ec-b4d4-1f05300e3205"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="67" splitType="Stretch">
+			<rectangle radius="7">
+				<reportElement x="11" y="6" width="555" height="24" forecolor="#000000" backcolor="#FFFFFF" uuid="e2521e34-8167-4e4a-b74e-f78d927c8ff1"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="426" y="-14" width="80" height="10" uuid="6b5a8046-e7e8-466e-b6fd-645419a7a626"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fecha: "+$F{fecha_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="9" y="40" width="554" height="20" uuid="4030f35e-f78c-4bd6-9fa0-503dbeeca4e7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="13" y="40" width="66" height="20" uuid="592efc16-6c1f-4277-a022-d0777dc189a1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuenta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="40" width="66" height="20" uuid="f12dedee-c095-46e6-9008-a421d0ae8cec"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="40" width="204" height="20" uuid="733679f1-7878-4730-b582-7bd474b80a1f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Concepto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="40" width="66" height="20" uuid="fde82530-314a-402f-b352-936d15d93153"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Debito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="40" width="66" height="20" uuid="4240c23a-461a-4e30-9073-7eb451fee0e3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Credito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="40" width="66" height="20" uuid="3b0a5b86-ab6d-4c68-b365-d4e771ce407c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="243" splitType="Stretch">
+			<crosstab>
+				<reportElement x="0" y="0" width="580" height="200" uuid="9e911409-dc89-42ce-ba2b-9cce72dd010f">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				</reportElement>
+				<rowGroup name="numero_ccomprobantes" width="60" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{numero_ccomprobantes}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents mode="Opaque" style="Crosstab_CH">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="120" uuid="dce6e0cf-8bf1-4c47-8657-3f1e12ae565a"/>
+								<textFieldExpression><![CDATA[$V{numero_ccomprobantes}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents mode="Opaque" style="Crosstab_CT">
+							<staticText>
+								<reportElement x="0" y="0" width="360" height="20" forecolor="#FFFFFF" uuid="18cf9107-51c8-4044-bdb6-35b2d146a41f"/>
+								<text><![CDATA[Total numero_ccomprobantes]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="fecha_ccomprobantes" width="60" totalPosition="End">
+					<bucket class="java.sql.Date">
+						<bucketExpression><![CDATA[$F{fecha_ccomprobantes}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents mode="Opaque" style="Crosstab_CH">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="100" uuid="a86634e8-4331-4b5a-b7f1-4ce16b3568d1"/>
+								<textFieldExpression><![CDATA[$V{fecha_ccomprobantes}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents mode="Opaque" style="Crosstab_CG">
+							<staticText>
+								<reportElement x="0" y="0" width="300" height="20" uuid="e35b1723-b17c-4bbf-901a-6ce90cdf0964"/>
+								<text><![CDATA[Total fecha_ccomprobantes]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="concepto_ccomprobantes" width="60" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{concepto_ccomprobantes}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents mode="Opaque" style="Crosstab_CH">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="80" uuid="61f69837-46a7-4ff8-b0ea-7d5f6677a608"/>
+								<textFieldExpression><![CDATA[$V{concepto_ccomprobantes}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents mode="Opaque" style="Crosstab_CG">
+							<staticText>
+								<reportElement x="0" y="0" width="240" height="20" uuid="66aaede4-0bcb-4a1c-bb81-0a0d56f6f93e"/>
+								<text><![CDATA[Total concepto_ccomprobantes]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="debe_mayor" width="60" totalPosition="End">
+					<bucket class="java.math.BigDecimal">
+						<bucketExpression><![CDATA[$F{debe_mayor}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents mode="Opaque" style="Crosstab_CH">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="60" uuid="0e5d4a8a-a74a-4e8b-945b-8d47ed9b0084"/>
+								<textFieldExpression><![CDATA[$V{debe_mayor}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents mode="Opaque" style="Crosstab_CG">
+							<staticText>
+								<reportElement x="0" y="0" width="180" height="20" uuid="f7e2ac78-326d-4d26-98d3-6a267b7b62dc"/>
+								<text><![CDATA[Total debe_mayor]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="haber_mayor" width="60" totalPosition="End">
+					<bucket class="java.math.BigDecimal">
+						<bucketExpression><![CDATA[$F{haber_mayor}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents mode="Opaque" style="Crosstab_CH">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="40" uuid="cc938014-fc5f-4cba-8b2d-6ca0f77f9179"/>
+								<textFieldExpression><![CDATA[$V{haber_mayor}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents mode="Opaque" style="Crosstab_CG">
+							<staticText>
+								<reportElement x="0" y="0" width="120" height="20" uuid="7278c68d-8679-4b6d-b2ca-f89c1888292d"/>
+								<text><![CDATA[Total haber_mayor]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="saldo_mayor" width="60" totalPosition="End">
+					<bucket class="java.math.BigDecimal">
+						<bucketExpression><![CDATA[$F{saldo_mayor}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents mode="Opaque" style="Crosstab_CH">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="20" uuid="7a400cab-3dd4-43d8-b8ff-b685fdbfe46a"/>
+								<textFieldExpression><![CDATA[$V{saldo_mayor}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents mode="Opaque" style="Crosstab_CG">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="20" uuid="02789089-902f-4c37-934e-37f4385b5901"/>
+								<text><![CDATA[Total saldo_mayor]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="codigo_plan_cuentas" height="20" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{codigo_plan_cuentas}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents mode="Opaque" style="Crosstab_CH">
+							<textField>
+								<reportElement x="0" y="0" width="120" height="20" uuid="7782cf9b-c4a8-4884-b377-d1de427868b6"/>
+								<textFieldExpression><![CDATA[$V{codigo_plan_cuentas}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents mode="Opaque" style="Crosstab_CT">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="40" forecolor="#FFFFFF" uuid="62582baf-3b88-4723-a5d1-9d4104bcef6a"/>
+								<text><![CDATA[Total codigo_plan_cuentas]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<columnGroup name="nombre_plan_cuentas" height="20" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{nombre_plan_cuentas}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents mode="Opaque" style="Crosstab_CH">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="20" uuid="bf94b593-1e25-4de0-9c24-0f4306e21836"/>
+								<textFieldExpression><![CDATA[$V{nombre_plan_cuentas}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents mode="Opaque" style="Crosstab_CG">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="20" uuid="ecaed79a-4230-4344-82c6-d1f0b75958f0"/>
+								<text><![CDATA[Total nombre_plan_cuentas]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="saldo_fin_plan_cuentas_MEASURE" class="java.lang.Integer" calculation="Count">
+					<measureExpression><![CDATA[$F{saldo_fin_plan_cuentas}]]></measureExpression>
+				</measure>
+				<crosstabCell width="60" height="20">
+					<cellContents mode="Opaque" style="Crosstab_CD">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="8efcf14b-d69e-4f4c-89f6-7b1b7f38e75d"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" columnTotalGroup="codigo_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CT">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="444e1176-5583-477e-9104-b00542506802"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" columnTotalGroup="nombre_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CG">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="8d65affc-0e06-4443-b375-11b3b2c04974"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="numero_ccomprobantes">
+					<cellContents mode="Opaque" style="Crosstab_CT">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="6bba5432-f1d6-4ece-9e61-67dc20bf2e62"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="numero_ccomprobantes" columnTotalGroup="codigo_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CT">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="5ac70444-a824-4042-b583-224552428120"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="numero_ccomprobantes" columnTotalGroup="nombre_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CT">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="701bf046-146d-4698-bb42-3caf8bfd6b3d"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="fecha_ccomprobantes">
+					<cellContents mode="Opaque" style="Crosstab_CG">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="5c58b11b-4447-494d-8e01-0d92957d2c6c"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="fecha_ccomprobantes" columnTotalGroup="codigo_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CT">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="cdd32108-bd79-4655-bdc8-848c91c95e51"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="fecha_ccomprobantes" columnTotalGroup="nombre_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CG">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="58992118-89af-4197-bd05-fb346c0a7f66"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="concepto_ccomprobantes">
+					<cellContents mode="Opaque" style="Crosstab_CG">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="72882cc3-7b34-4a57-b2c7-7bf06c5a01f6"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="concepto_ccomprobantes" columnTotalGroup="codigo_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CT">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="c5ce4721-fa0d-45c4-8ad5-d9682f859c27"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="concepto_ccomprobantes" columnTotalGroup="nombre_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CG">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="0631e78c-171a-4f1f-aa3a-c899442839f4"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="debe_mayor">
+					<cellContents mode="Opaque" style="Crosstab_CG">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="b644f73d-22d7-4d80-bb3f-56d346b18d35"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="debe_mayor" columnTotalGroup="codigo_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CT">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="cbc906f4-1724-40d1-9168-e1249b040b2a"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="debe_mayor" columnTotalGroup="nombre_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CG">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="43578c71-1453-4b46-b820-160a6788454f"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="haber_mayor">
+					<cellContents mode="Opaque" style="Crosstab_CG">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="5bb96029-9ab9-448f-987d-93a053ab4042"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="haber_mayor" columnTotalGroup="codigo_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CT">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="f28115bb-759b-43fa-8249-4a755123221b"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="haber_mayor" columnTotalGroup="nombre_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CG">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="a10119a1-3c6d-4d5e-a4fb-5d2ffb7d23be"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="saldo_mayor">
+					<cellContents mode="Opaque" style="Crosstab_CG">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="6d8321c7-24f1-4dca-813a-e12b574a52b7"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="saldo_mayor" columnTotalGroup="codigo_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CT">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="5e83ec54-799c-44fa-b11d-e06fdc0e88e6"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="saldo_mayor" columnTotalGroup="nombre_plan_cuentas">
+					<cellContents mode="Opaque" style="Crosstab_CG">
+						<textField>
+							<reportElement x="0" y="0" width="60" height="20" uuid="4498c651-57d3-479c-9c49-6d8711a9dafb"/>
+							<textFieldExpression><![CDATA[$V{saldo_fin_plan_cuentas_MEASURE}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</detail>
+	<summary>
+		<band height="57">
+			<textField>
+				<reportElement x="331" y="1" width="30" height="9" uuid="f225eea5-ed85-4b85-b00f-ee5a3bbc4082"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL:"]]></textFieldExpression>
+			</textField>
+			<rectangle radius="7">
+				<reportElement x="10" y="12" width="555" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="f9811ff6-d349-4af9-a798-a649094cf2c8"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="289" y="12" width="151" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="564f98b3-894a-4cef-9bbc-cf1aeb3e02a2"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="138" y="12" width="151" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="33d11d4d-7546-4014-b86a-fec5f3201a97"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="11" y="15" width="126" height="15" uuid="990490b7-824c-4b6e-8578-d5232820136e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Elaborado por:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="138" y="15" width="150" height="15" uuid="e1bb4e46-acd8-40d9-a6be-f5693870a392"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Es Conforme"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="289" y="15" width="150" height="15" uuid="ab025592-3f6f-4bac-b935-ad7fa0798b75"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Visto Bueno"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="26" width="126" height="15" uuid="b9816eab-0d64-476b-b2ae-0d6390aec446"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Firma: ____________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="40" width="126" height="15" uuid="0b97b0ed-950e-4cb2-8eba-bb2b36e6106c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["C.I.: _______________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="304" y="40" width="126" height="15" uuid="fa80cf44-8b19-4d6b-8601-fd9a0ade0bdb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["GERENTE"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
