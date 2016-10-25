@@ -22,6 +22,8 @@ class ComprobantesController extends ControladorBase{
 			$tipo_comprobante=new TipoComprobantesModel();
 			$resultTipCom = $tipo_comprobante->getBy("nombre_tipo_comprobantes='INGRESOS' OR nombre_tipo_comprobantes='EGRESOS'");
 			
+			$forma_pago = new FormaPagoModel();
+			$resultForm = $forma_pago->getAll("nombre_forma_pago");
 			
 		    $columnas_enc = "entidades.id_entidades, 
   							entidades.nombre_entidades";
@@ -49,6 +51,12 @@ class ComprobantesController extends ControladorBase{
 				$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
 				$resultTipoComprobantes = $tipo_comprobante->getBy("id_tipo_comprobantes='$_id_tipo_comprobantes'");
 				$_fecha_ccomprobantes =$_POST['fecha_ccomprobantes'];
+				$_referencia_doc_ccomprobantes =$_POST['referencia_doc_ccomprobantes'];
+				$_id_forma_pago =$_POST['id_forma_pago'];
+				$_numero_cuenta_banco_ccomprobantes=$_POST['numero_cuenta_banco_ccomprobantes'];
+				$_numero_cheque_ccomprobantes=$_POST['numero_cheque_ccomprobantes'];
+				$_observaciones_ccomprobantes=$_POST['observaciones_ccomprobantes'];
+				
 					
 				$arrayGet['array_ruc_ccomprobantes']=$_ruc_ccomprobantes;
 				$arrayGet['array_nombres_ccomprobantes']=$_nombres_ccomprobantes;
@@ -57,6 +65,11 @@ class ComprobantesController extends ControladorBase{
 				$arrayGet['array_retencion_ccomprobantes']=$_retencion_ccomprobantes;
 				$arrayGet['array_concepto_ccomprobantes']=$_concepto_ccomprobantes;
 				$arrayGet['array_fecha_ccomprobantes']=$_fecha_ccomprobantes;
+				$arrayGet['array_referencia_doc_ccomprobantes']=$_referencia_doc_ccomprobantes;
+				$arrayGet['array_id_forma_pago']=$_id_forma_pago;
+				$arrayGet['array_numero_cuenta_banco_ccomprobantes']=$_numero_cuenta_banco_ccomprobantes;
+				$arrayGet['array_numero_cheque_ccomprobantes']=$_numero_cheque_ccomprobantes;
+				$arrayGet['array_observaciones_ccomprobantes']=$_observaciones_ccomprobantes;
 					
 				}
 				
@@ -139,7 +152,7 @@ class ComprobantesController extends ControladorBase{
 					
 					$this->view("Comprobantes",array(
 							
-							"resultSet"=>$resultSet, "resultRes"=>$resultRes, "resultTipCom"=>$resultTipCom, "arrayGet"=>$arrayGet
+							"resultSet"=>$resultSet, "resultRes"=>$resultRes, "resultTipCom"=>$resultTipCom, "arrayGet"=>$arrayGet, "resultForm"=>$resultForm
 					));
 			
 			
@@ -271,9 +284,12 @@ class ComprobantesController extends ControladorBase{
    			$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
    			$_id_usuario_creador=$_SESSION['id_usuarios'];
    			$_valor_letras =$_POST['valor_letras'];
-   			
    			$_fecha_ccomprobantes = $_POST['fecha_ccomprobantes'];
-   			
+   			$_referencia_doc_ccomprobantes =$_POST['referencia_doc_ccomprobantes'];
+   			$_id_forma_pago =$_POST['id_forma_pago'];
+   			$_numero_cuenta_banco_ccomprobantes=$_POST['numero_cuenta_banco_ccomprobantes'];
+   			$_numero_cheque_ccomprobantes=$_POST['numero_cheque_ccomprobantes'];
+   			$_observaciones_ccomprobantes=$_POST['observaciones_ccomprobantes'];
    
    
    			///PRIMERO INSERTAMOS LA CABEZA DEL COMPROBANTE
@@ -281,11 +297,10 @@ class ComprobantesController extends ControladorBase{
    			{
    					
    				$funcion = "ins_ccomprobantes";
-   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras', '$_fecha_ccomprobantes' ";
+   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras', '$_fecha_ccomprobantes', '$_id_forma_pago', '$_referencia_doc_ccomprobantes', '$_numero_cuenta_banco_ccomprobantes', '$_numero_cheque_ccomprobantes', '$_observaciones_ccomprobantes'";
    				$ccomprobantes->setFuncion($funcion);
    				$ccomprobantes->setParametros($parametros);
    				$resultado=$ccomprobantes->Insert();
-   				
    				
    				$resultConsecutivo=$consecutivos->UpdateBy("numero_consecutivos='$_update_numero_consecutivo'", "consecutivos", "id_consecutivos='$_id_consecutivos'");
    				
@@ -387,7 +402,11 @@ class ComprobantesController extends ControladorBase{
    			$_id_usuario_creador=$_SESSION['id_usuarios'];
    			$_valor_letras =$_POST['valor_letras'];
    			$_fecha_ccomprobantes = $_POST['fecha_ccomprobantes'];
-   			
+   			$_referencia_doc_ccomprobantes =$_POST['referencia_doc_ccomprobantes'];
+   			$_id_forma_pago =$_POST['id_forma_pago'];
+   			$_numero_cuenta_banco_ccomprobantes=$_POST['numero_cuenta_banco_ccomprobantes'];
+   			$_numero_cheque_ccomprobantes=$_POST['numero_cheque_ccomprobantes'];
+   			$_observaciones_ccomprobantes=$_POST['observaciones_ccomprobantes'];
    			 
    			 
    			 
@@ -396,7 +415,7 @@ class ComprobantesController extends ControladorBase{
    			{
    			
    				$funcion = "ins_ccomprobantes";
-   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras', '$_fecha_ccomprobantes'";
+   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras', '$_fecha_ccomprobantes', '$_id_forma_pago', '$_referencia_doc_ccomprobantes', '$_numero_cuenta_banco_ccomprobantes', '$_numero_cheque_ccomprobantes', '$_observaciones_ccomprobantes'";
    				$ccomprobantes->setFuncion($funcion);
    				$ccomprobantes->setParametros($parametros);
    				$resultado=$ccomprobantes->Insert();
@@ -701,6 +720,250 @@ class ComprobantesController extends ControladorBase{
 			$respuesta->id_plan_cuentas = $resultSet[0]->id_plan_cuentas;
 	
 			echo json_encode($respuesta);
+		}
+	
+	}
+	
+	
+	
+	public function ReporteComprobantes(){
+	
+		session_start();
+		$_id_usuarios= $_SESSION['id_usuarios'];
+		//Creamos el objeto usuario
+		$resultSet="";
+		$registrosTotales = 0;
+		$arraySel = "";
+		
+		$ccomprobantes = new CComprobantesModel();
+		$dcomprobantes = new DComprobantesModel();
+		$tipo_comprobantes = new TipoComprobantesModel();
+		$entidades = new EntidadesModel();
+		
+		
+		$tipo_comprobante=new TipoComprobantesModel();
+		$resultTipCom = $tipo_comprobante->getAll("nombre_tipo_comprobantes");
+		
+		
+		$columnas_enc = "entidades.id_entidades,
+  							entidades.nombre_entidades";
+		$tablas_enc ="public.usuarios,
+						  public.entidades";
+		$where_enc ="entidades.id_entidades = usuarios.id_entidades AND usuarios.id_usuarios='$_id_usuarios'";
+		$id_enc="entidades.nombre_entidades";
+		$resultEnt=$entidades->getCondiciones($columnas_enc ,$tablas_enc ,$where_enc, $id_enc);
+		
+		
+	
+		if (isset(  $_SESSION['usuario_usuarios']) )
+		{
+			$permisos_rol = new PermisosRolesModel();
+			$nombre_controladores = "Comprobantes";
+			$id_rol= $_SESSION['id_rol'];
+			$resultPer = $ccomprobantes->getPermisosVer("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
+	
+			if (!empty($resultPer))
+			{
+					
+				if(isset($_POST["id_entidades"])){
+	
+	
+					$id_entidades=$_POST['id_entidades'];
+					$id_tipo_comprobantes=$_POST['id_tipo_comprobantes'];
+					$numero_ccomprobantes=$_POST['numero_ccomprobantes'];
+					$referencia_doc_ccomprobantes=$_POST['referencia_doc_ccomprobantes'];
+					$fechadesde=$_POST['fecha_desde'];
+					$fechahasta=$_POST['fecha_hasta'];
+						
+					
+	
+						
+					$columnas = " ccomprobantes.id_ccomprobantes, 
+								  tipo_comprobantes.nombre_tipo_comprobantes, 
+								  ccomprobantes.concepto_ccomprobantes, 
+								  usuarios.nombre_usuarios, 
+								  entidades.nombre_entidades, 
+								  ccomprobantes.valor_letras, 
+								  ccomprobantes.fecha_ccomprobantes, 
+								  ccomprobantes.numero_ccomprobantes, 
+								  ccomprobantes.ruc_ccomprobantes, 
+								  ccomprobantes.nombres_ccomprobantes, 
+								  ccomprobantes.retencion_ccomprobantes, 
+								  ccomprobantes.valor_ccomprobantes, 
+								  ccomprobantes.referencia_doc_ccomprobantes, 
+								  ccomprobantes.numero_cuenta_banco_ccomprobantes, 
+								  ccomprobantes.numero_cheque_ccomprobantes, 
+								  ccomprobantes.observaciones_ccomprobantes, 
+								  forma_pago.nombre_forma_pago";
+	
+	
+	
+					$tablas=" public.ccomprobantes, 
+							  public.entidades, 
+							  public.usuarios, 
+							  public.tipo_comprobantes, 
+							  public.forma_pago";
+	
+					$where="ccomprobantes.id_forma_pago = forma_pago.id_forma_pago AND
+							  entidades.id_entidades = usuarios.id_entidades AND
+							  usuarios.id_usuarios = ccomprobantes.id_usuarios AND
+							  tipo_comprobantes.id_tipo_comprobantes = ccomprobantes.id_tipo_comprobantes AND usuarios.id_usuarios='$_id_usuarios'";
+	
+					$id="ccomprobantes.numero_ccomprobantes";
+	
+	
+					$where_0 = "";
+					$where_1 = "";
+					$where_2 = "";
+					$where_3 = "";
+					$where_4 = "";
+						
+					
+					
+	
+					if($id_entidades!=0){$where_0=" AND entidades.id_entidades='$id_entidades'";}
+	
+					if($id_tipo_comprobantes!=0){$where_1=" AND tipo_comprobantes.id_tipo_comprobantes='$id_tipo_comprobantes'";}
+	
+					if($numero_ccomprobantes!=""){$where_2=" AND ccomprobantes.numero_ccomprobantes='$numero_ccomprobantes'";}
+						
+					if($referencia_doc_ccomprobantes!=""){$where_3=" AND ccomprobantes.referencia_doc_ccomprobantes ='$referencia_doc_ccomprobantes'";}
+	
+					if($fechadesde!="" && $fechahasta!=""){$where_4=" AND  ccomprobantes.fecha_ccomprobantes BETWEEN '$fechadesde' AND '$fechahasta'";}
+	
+	
+					$where_to  = $where . $where_0 . $where_1 . $where_2. $where_3. $where_4;
+	
+	
+					$resultSet=$ccomprobantes->getCondiciones($columnas ,$tablas , $where_to, $id);
+	
+	
+					
+					/*
+					foreach($resultSet as $res)
+					{
+						$registrosTotales = $registrosTotales + 1 ;
+					}
+	
+	
+				}
+				else{
+						
+						
+					$registrosTotales = 0;
+					$hojasTotales = 0;
+	
+	
+					$arraySel = "";
+					$resultSet = "";
+						
+				}
+				///aqui va la paginacion  ///
+				$articulosTotales = 0;
+				$paginasTotales = 0;
+				$paginaActual = 0;
+				$ultima_pagina = 1;
+					
+				if(isset($_POST["pagina"])){
+	
+					// en caso que haya datos, los casteamos a int
+					$paginaActual = (int)$_POST["pagina"];
+					$ultima_pagina = (int)$_POST["ultima_pagina"] - 5;
+				}
+	
+				if(isset($_POST["siguiente_pagina"])){
+	
+					// en caso que haya datos, los casteamos a int
+					$ultima_pagina = (int)$_POST["ultima_pagina"];
+				}
+	
+					
+				if(isset($_POST["anterior_pagina"])){
+	
+	
+					$ultima_pagina = (int)$_POST["ultima_pagina"] - 10;
+	
+	
+				}
+	
+	
+				if ($resultSet != "")
+				{
+	
+					foreach($resultSet as $res)
+					{
+						$articulosTotales = $articulosTotales + 1;
+					}
+	
+	
+					$articulosPorPagina = 50;
+	
+					$paginasTotales = ceil($articulosTotales / $articulosPorPagina);
+	
+	
+					// el número de la página actual no puede ser menor a 0
+					if($paginaActual < 1){
+						$paginaActual = 1;
+					}
+					else if($paginaActual > $paginasTotales){ // tampoco mayor la cantidad de páginas totales
+						$paginaActual = $paginasTotales;
+					}
+	
+					// obtenemos cuál es el artículo inicial para la consulta
+					$articuloInicial = ($paginaActual - 1) * $articulosPorPagina;
+	
+					//agregamos el limit
+					$limit = " LIMIT   '$articulosPorPagina' OFFSET '$articuloInicial'";
+	
+					//volvemos a pedir el resultset con la pginacion
+	
+					$resultSet=$ccomprobantes->getCondicionesPag($columnas ,$tablas ,$where_to,  $id, $limit );
+	
+	*/
+	
+				}
+	
+	
+	
+	/*		$this->view("ReporteComprobantes",array(
+						"resultSet"=>$resultSet, "resultTipCom"=> $resultTipCom,
+						"resultEnt"=>$resultEnt,
+						"arraySel"=>$arraySel, "paginasTotales"=>$paginasTotales,
+						"registrosTotales"=> $registrosTotales,"pagina_actual"=>$paginaActual, "ultima_pagina"=>$ultima_pagina
+							
+							
+				));
+	
+				*/
+				
+				$this->view("ReporteComprobantes",array(
+						"resultSet"=>$resultSet, "resultTipCom"=> $resultTipCom,
+						"resultEnt"=>$resultEnt
+						
+							
+							
+				));
+	
+	
+			}
+			else
+			{
+				$this->view("Error",array(
+						"resultado"=>"No tiene Permisos de Acceso a Reporte Comprobantes"
+	
+				));
+	
+				exit();
+			}
+	
+		}
+		else
+		{
+			$this->view("ErrorSesion",array(
+					"resultSet"=>""
+	
+			));
+	
 		}
 	
 	}

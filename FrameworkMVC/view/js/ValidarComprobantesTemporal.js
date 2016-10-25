@@ -99,7 +99,17 @@ $(document).ready(function() {
 				        
 				       			 }
 				        
-				       		 }
+				       		 },
+				       		id_forma_pago: {
+				        		message: 'No es valido',
+				                        validators: {
+				                                notEmpty: {
+				                                        message: 'La Forma de pago es requerida.'
+				                                }
+				                             
+				                        }
+				                }
+				       		 
 	        }
 	    });
 	});

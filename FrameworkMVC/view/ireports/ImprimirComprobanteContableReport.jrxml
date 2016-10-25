@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-10-25T17:14:25 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="612" pageHeight="792" columnWidth="574" leftMargin="19" rightMargin="19" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<parameter name="sql" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[ $P{sql} ]]>
+	</queryString>
+	<field name="ruc_entidades" class="java.lang.String"/>
+	<field name="nombre_entidades" class="java.lang.String"/>
+	<field name="telefono_entidades" class="java.lang.String"/>
+	<field name="direccion_entidades" class="java.lang.String"/>
+	<field name="ciudad_entidades" class="java.lang.String"/>
+	<field name="id_ccomprobantes" class="java.lang.String"/>
+	<field name="nombre_tipo_comprobantes" class="java.lang.String"/>
+	<field name="numero_ccomprobantes" class="java.lang.String"/>
+	<field name="ruc_ccomprobantes" class="java.lang.String"/>
+	<field name="nombres_ccomprobantes" class="java.lang.String"/>
+	<field name="retencion_ccomprobantes" class="java.lang.String"/>
+	<field name="valor_ccomprobantes" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="concepto_ccomprobantes" class="java.lang.String"/>
+	<field name="nombre_usuarios" class="java.lang.String"/>
+	<field name="valor_letras" class="java.lang.String"/>
+	<field name="fecha_ccomprobantes" class="java.lang.String"/>
+	<field name="codigo_plan_cuentas" class="java.lang.String"/>
+	<field name="nombre_plan_cuentas" class="java.lang.String"/>
+	<field name="descripcion_dcomprobantes" class="java.lang.String"/>
+	<field name="debe_dcomprobantes" class="java.lang.Double"/>
+	<field name="haber_dcomprobantes" class="java.lang.Double"/>
+	<field name="nombre_rol" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<rectangle radius="7">
+				<reportElement x="11" y="0" width="555" height="60" forecolor="#000000" backcolor="#FFFFFF" uuid="d33056da-a91a-42ec-b4d4-1f05300e3205"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="11" y="2" width="555" height="18" forecolor="#000000" uuid="2e1395c1-7f5c-4c28-b4ce-5927e46bd9af"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_entidades}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="15" y="2" width="121" height="47" uuid="0af34674-2907-46f3-8204-c316f36832c5"/>
+				<imageExpression><![CDATA["C:/xampp/htdocs/contabilidad/FrameworkMVC/view/ireports/PhpJasperLibrary/class/tcpdf/images/logo_mundo_digital_2016.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="181" y="36" width="240" height="14" forecolor="#000000" uuid="d1ebe344-c9e5-4b45-878c-50c235f137fd"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["COMPROBANTE CONTABLE N°:  "+$F{numero_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="102" y="50" width="86" height="8" uuid="fcfb2748-6331-4fcf-b0fa-0db48f8b9d3b"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ruc:  "+$F{ruc_entidades}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="265" y="50" width="80" height="10" uuid="3795489f-d29d-4a61-9266-f134b5479718"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tlf:  "+$F{telefono_entidades}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="22" width="548" height="8" forecolor="#000000" uuid="bf1b87b5-9840-49b0-8e77-26af840120e3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dirección:  "+$F{direccion_entidades}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="86" splitType="Stretch">
+			<rectangle radius="7">
+				<reportElement x="11" y="6" width="555" height="24" forecolor="#000000" backcolor="#FFFFFF" uuid="e2521e34-8167-4e4a-b74e-f78d927c8ff1"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement x="21" y="12" width="532" height="15" uuid="d97a0874-f071-473b-8066-8cb6079f4def"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["LA CANTIDAD DE: "+$F{valor_letras}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="426" y="-14" width="80" height="10" uuid="6b5a8046-e7e8-466e-b6fd-645419a7a626"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fecha: "+$F{fecha_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="7">
+				<reportElement x="10" y="39" width="555" height="41" forecolor="#000000" backcolor="#FFFFFF" uuid="35496199-ae09-4e67-bff0-9792b2ed340a"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="21" y="45" width="532" height="15" uuid="c673cd7e-8fbc-488e-9a02-9cad8581fae0"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CONCEPTO: "+$F{concepto_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="0">
+				<reportElement x="10" y="65" width="555" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="44716221-139c-437c-86fb-407606fc201d"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="367" y="65" width="99" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="c556fd54-e10f-4f67-81c9-09f3a1867511"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="10" y="66" width="98" height="15" uuid="df512ffc-5f8a-4b9b-99fd-ed2b738faf22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Código"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="65" width="131" height="15" uuid="d68928fd-15f2-43ae-a25d-4c203efc34b3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nombre de la Cuenta"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="65" width="98" height="15" uuid="ba1367cf-edde-40cb-9143-318aaa073cc9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Haber"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="466" y="66" width="98" height="15" uuid="ee2cb159-219a-4a49-8310-2ec39a57619d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Haber"]]></textFieldExpression>
+			</textField>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="110" y="65" width="257" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="db5f4aca-9a03-49c4-8c22-60612a20e23a"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="265" y="65" width="102" height="15" uuid="1fe293a8-d70e-43e7-99a4-8aa1b9ce0bf2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Descripción"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="97" splitType="Stretch">
+			<textField>
+				<reportElement x="9" y="1" width="100" height="9" uuid="d95d49ba-437f-4f3e-850b-d193ee971d9a"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="1" width="177" height="9" uuid="ef151efa-7848-413f-80ef-db94ebd1b2d9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="289" y="1" width="75" height="9" uuid="97ba6f8c-be84-4379-903a-0a4a659c33bc"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion_dcomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="368" y="1" width="98" height="9" uuid="d0a402ce-79f9-4d5f-abe9-5d36fc1da064"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{debe_dcomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="467" y="1" width="98" height="9" uuid="7c8c3325-cb2e-4048-b80d-503693d0b55c"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{haber_dcomprobantes}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="367" y="1" width="99" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="f0d7825e-b418-4eaf-a615-467df75d2460"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="466" y="1" width="99" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="83d755f1-29f2-4262-91db-43307018770b"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="110" y="1" width="257" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="694eff81-ef72-4fec-b78e-625579133145"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="10" y="1" width="100" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="45538b77-677c-43cd-b11c-1565af865612"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</detail>
+	<summary>
+		<band height="57">
+			<textField>
+				<reportElement x="331" y="1" width="30" height="9" uuid="f225eea5-ed85-4b85-b00f-ee5a3bbc4082"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL:"]]></textFieldExpression>
+			</textField>
+			<rectangle radius="7">
+				<reportElement x="10" y="12" width="555" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="f9811ff6-d349-4af9-a798-a649094cf2c8"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="289" y="12" width="151" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="564f98b3-894a-4cef-9bbc-cf1aeb3e02a2"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="138" y="12" width="151" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="33d11d4d-7546-4014-b86a-fec5f3201a97"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="11" y="15" width="126" height="15" uuid="990490b7-824c-4b6e-8578-d5232820136e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Elaborado por:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="138" y="15" width="150" height="15" uuid="e1bb4e46-acd8-40d9-a6be-f5693870a392"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Es Conforme"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="289" y="15" width="150" height="15" uuid="ab025592-3f6f-4bac-b935-ad7fa0798b75"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Visto Bueno"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="26" width="126" height="15" uuid="b9816eab-0d64-476b-b2ae-0d6390aec446"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Firma: ____________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="40" width="126" height="15" uuid="0b97b0ed-950e-4cb2-8eba-bb2b36e6106c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["C.I.: _______________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="304" y="40" width="126" height="15" uuid="fa80cf44-8b19-4d6b-8601-fd9a0ade0bdb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["GERENTE"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="371" y="0" width="96" height="10" uuid="8a093d91-24d6-4cf0-8fcb-cfc9bd878766"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="466" y="0" width="100" height="10" uuid="60126a60-24e3-4c7f-b8ab-010f0d6336ff"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="40" width="125" height="13" uuid="978ff29d-d5d7-4aa1-ad8d-07e92a423a02"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_usuarios}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="151" y="40" width="125" height="13" uuid="99081fbb-4b32-46f3-8550-073802150257"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_rol}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
