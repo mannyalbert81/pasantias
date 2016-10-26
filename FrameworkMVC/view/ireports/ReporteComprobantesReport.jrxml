@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-10-25T16:36:20 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="UsuariosReport" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="536544f0-7708-44b6-b9b7-fcff2889a866">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
+	<parameter name="sql" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[ $P{sql} ]]>
+	</queryString>
+	<field name="id_ccomprobantes" class="java.lang.String"/>
+	<field name="nombre_tipo_comprobantes" class="java.lang.String"/>
+	<field name="concepto_ccomprobantes" class="java.lang.String"/>
+	<field name="nombre_usuarios" class="java.lang.String"/>
+	<field name="nombre_entidades" class="java.lang.String"/>
+	<field name="valor_letras" class="java.lang.String"/>
+	<field name="fecha_ccomprobantes" class="java.lang.String"/>
+	<field name="numero_ccomprobantes" class="java.lang.String"/>
+	<field name="ruc_ccomprobantes" class="java.lang.String"/>
+	<field name="retencion_ccomprobantes" class="java.lang.String"/>
+	<field name="valor_ccomprobantes" class="java.lang.String"/>
+	<field name="referencia_doc_ccomprobantes" class="java.lang.String"/>
+	<field name="numero_cuenta_banco_ccomprobantes" class="java.lang.String"/>
+	<field name="numero_cheque_ccomprobantes" class="java.lang.String"/>
+	<field name="observaciones_ccomprobantes" class="java.lang.String"/>
+	<field name="nombre_forma_pago" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="-1" y="7" width="800" height="63" forecolor="#000000" backcolor="#FFFFFF" uuid="396f4032-c602-4b2d-b380-64fdaad90e8e"/>
+				<graphicElement>
+					<pen lineWidth="15.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="27" width="800" height="20" forecolor="#000000" backcolor="#000000" uuid="8f293454-e993-45b7-b77a-5d7f90aa6b88"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Arial" size="16" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE COMPROBANTES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="633" y="49" width="50" height="20" forecolor="#000000" uuid="91a024e1-3bd7-4ba8-9374-5936f7902e53"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="685" y="49" width="115" height="20" forecolor="#000000" uuid="cb769fb8-0651-4bc3-b424-1ad9f3226d6a"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="9" y="15" width="126" height="45" uuid="f47892ec-289a-49e8-afc0-f6d8f0a17016"/>
+				<imageExpression><![CDATA["C:/Users/Maycol/git/contabilidad/FrameworkMVC/view/ireports/PhpJasperLibrary/class/tcpdf/images/logo_mundo_digital_2016.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="18" splitType="Stretch">
+			<rectangle>
+				<reportElement x="9" y="6" width="782" height="12" forecolor="#999999" backcolor="#999999" uuid="315890a9-2ddd-4a73-9a66-543a6e06826c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="589" y="6" width="50" height="10" forecolor="#FFFFFF" uuid="094cf221-b2b7-4cc5-8017-f8673eb3ad9c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Rockwell Extra Bold" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="6" width="65" height="10" forecolor="#FFFFFF" uuid="71d7bcbb-e8a7-4f13-bea8-af9f356c0afd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Rockwell Extra Bold" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Concepto de Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="6" width="120" height="10" forecolor="#FFFFFF" uuid="f6a509eb-8679-4bf1-94ba-45b56f6f5a5e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Rockwell Extra Bold" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Comprobante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="507" y="6" width="60" height="10" forecolor="#FFFFFF" uuid="298967ea-3c37-4152-befa-5e01f9f1485d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Rockwell Extra Bold" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Forma de Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="697" y="6" width="50" height="10" forecolor="#FFFFFF" uuid="a32d0926-18f8-45d8-838b-c294ed6ae26d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Rockwell Extra Bold" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="6" width="111" height="10" forecolor="#FFFFFF" uuid="fb3bf942-6bc8-40ef-a8c7-77484949ecfb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Rockwell Extra Bold" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° de Comprobante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="6" width="50" height="12" forecolor="#FFFFFF" uuid="e64898d4-6fb4-4896-ac3a-8be2ff17390f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Rockwell Extra Bold" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="6" width="41" height="12" forecolor="#FFFFFF" uuid="ab1d8998-7bd1-4710-9815-e56709e6086e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Rockwell Extra Bold" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField>
+				<reportElement x="280" y="0" width="111" height="10" uuid="c57bb7a9-10ef-4a5f-a808-c74b5776ab7e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Raavi" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="704" y="0" width="93" height="10" uuid="30eeb45b-a07f-4f3c-9104-f6883de54243"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Raavi" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="605" y="0" width="90" height="10" uuid="cc331f3c-9f14-4188-beb6-9dc3b08bcbdf"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Raavi" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="517" y="0" width="67" height="10" uuid="a191bb6a-a8db-48b2-a745-f6546f647f52"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Raavi" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_forma_pago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="119" height="10" uuid="114dd61f-db45-4b0a-81a3-607f45c639e8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Raavi" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concepto_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="153" y="0" width="120" height="10" uuid="867d6afa-8b26-4095-ada4-4f764095d8f5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Raavi" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_tipo_comprobantes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="0" width="69" height="10" uuid="20fa71a0-9999-4786-9de9-5b3c90cb2e9f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Raavi" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_entidades}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="0" width="31" height="10" uuid="5f3f1588-8a93-4de0-bd56-0304f44aec0b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Raavi" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="462" y="0" width="41" height="10" uuid="cff0af5e-90fb-4bb3-b67b-c879cfc6588b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Raavi" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="371" y="0" width="130" height="10" uuid="efc7275e-71ea-4a16-9ca3-d33e5b0a08bf"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUMERO DE REGISTROS:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement x="9" y="2" width="781" height="20" forecolor="#000000" backcolor="#000000" uuid="714d6caa-7d00-4e79-a356-f5cbad9e819e"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="690" y="6" width="20" height="20" forecolor="#FFFFFF" uuid="598c00e3-433f-4106-a327-83d0773d48c6"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="730" y="6" width="40" height="20" forecolor="#FFFFFF" uuid="38fd5dc7-2916-44fc-8a71-cf7be86c4c65"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="710" y="6" width="20" height="20" forecolor="#FFFFFF" uuid="c85cda01-6b36-4e1d-b7d2-018608b54017"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="6" width="320" height="12" forecolor="#FFFFFF" uuid="6b7aa0be-3375-4b73-a77b-d9539453ee52"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tw Cen MT Condensed Extra Bold" size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ Contabilidad - AllAccounts 2016 -www.masoft.net - Copyright]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

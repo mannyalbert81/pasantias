@@ -165,6 +165,11 @@
        $sel_concepto_ccomprobantes="";
      //  $sel_valor_ccomprobantes="";
        $sel_fecha_ccomprobantes="";
+       $sel_referencia_doc_ccomprobantes="";
+       $sel_id_forma_pago="";
+       $sel_numero_cuenta_banco_ccomprobantes="";
+       $sel_numero_cheque_ccomprobantes="";
+       $sel_observaciones_ccomprobantes="";
        
       
        
@@ -180,6 +185,11 @@
         $sel_concepto_ccomprobantes=$_POST['concepto_ccomprobantes'];
        //	$sel_valor_ccomprobantes=$_POST['valor_ccomprobantes'];
         $sel_fecha_ccomprobantes=$_POST['fecha_ccomprobantes'];
+        $sel_referencia_doc_ccomprobantes=$_POST['referencia_doc_ccomprobantes'];
+        $sel_id_forma_pago=$_POST['id_forma_pago'];
+        $sel_numero_cuenta_banco_ccomprobantes=$_POST['numero_cuenta_banco_ccomprobantes'];
+        $sel_numero_cheque_ccomprobantes=$_POST['numero_cheque_ccomprobantes'];
+        $sel_observaciones_ccomprobantes=$_POST['observaciones_ccomprobantes'];
         
       }
       //if(empty($array_get))
@@ -201,7 +211,11 @@
       		$sel_retencion_ccomprobantes=$_dato['array_retencion_ccomprobantes'];
       		$sel_concepto_ccomprobantes=$_dato['array_concepto_ccomprobantes'];
       		$sel_fecha_ccomprobantes=$_dato['array_fecha_ccomprobantes'];
-      		
+      		$sel_referencia_doc_ccomprobantes=$_dato['array_referencia_doc_ccomprobantes'];
+      		$sel_id_forma_pago=$_dato['array_id_forma_pago'];
+      		$sel_numero_cuenta_banco_ccomprobantes=$_dato['array_numero_cuenta_banco_ccomprobantes'];
+      		$sel_numero_cheque_ccomprobantes=$_dato['array_numero_cheque_ccomprobantes'];
+      		$sel_observaciones_ccomprobantes=$_dato['array_observaciones_ccomprobantes'];
       		
       	}
       
@@ -257,7 +271,7 @@
 				               <label for="nuevo_comprobante" class="control-label"><h4><i class='glyphicon glyphicon-edit'></i> Nuevo Comprobante de </h4></label>
 				               <input type="hidden" class="form-control" id="id_entidades" name="id_entidades" value="<?php echo $res->id_entidades; ?>">
                                  
-             <div class="col-md-3 col-lg-3 col-xs-4" style="margin-top: 5px">
+             <div class="col-md-3 col-lg-3 col-xs-3" style="margin-top: 5px">
 					           <select name="id_tipo_comprobantes" id="id_tipo_comprobantes"  class="form-control" >
                                   <option value="" selected="selected">--Seleccione--</option>
 									<?php foreach($resultTipCom as $res) {?>
@@ -266,9 +280,9 @@
 								   </select> 
                                   <span class="help-block"></span>	
 		     </div>
-		     <div class="col-md-3 col-lg-3 col-xs-4" style="margin-top: 5px">
+		     <div class="col-md-3 col-lg-3 col-xs-3" style="margin-top: 5px">
 		                          <div class="input-group date" id="datetimePicker">
-					              <input type="text" class="form-control" id="fecha_ccomprobantes" name="fecha_ccomprobantes" data-date-format="YYYY-MM-DD" value="<?php echo $sel_fecha_ccomprobantes;?>">
+					              <input type="text" class="form-control" id="fecha_ccomprobantes" name="fecha_ccomprobantes" data-date-format="YYYY-MM-DD" value="<?php echo $sel_fecha_ccomprobantes;?>" placeholder="Ingrese Fecha">
                                   <span class="input-group-addon">
                                   <span class="glyphicon glyphicon-calendar"></span>
                                   </span>
@@ -295,16 +309,16 @@
 	         <div class="panel panel-info">
 	         <div class="panel-body">
 	         <div class="row">
-  		     <div class="col-xs-5 col-md-5">
+  		     <div class="col-xs-6 col-md-6">
 		     <div class="form-group">
-                                  <label for="nombres_ccomprobantes" class="control-label">Nombre: </label>
+                                  <label for="nombres_ccomprobantes" class="control-label">Nombre Proveedor: </label>
                                   <input type="text" class="form-control" id="nombres_ccomprobantes" name="nombres_ccomprobantes" value="<?php echo $sel_nombres_ccomprobantes;?>"  placeholder="Nombre">
                                   <span class="help-block"></span>
              </div>
 		     </div>
 		     <div class="col-xs-3 col-md-3">
 		     <div class="form-group">
-                                  <label for="ruc_ccomprobantes" class="control-label">Ruc: </label>
+                                  <label for="ruc_ccomprobantes" class="control-label">Ruc Proveedor: </label>
                                   <input type="text" class="form-control" id="ruc_ccomprobantes" name="ruc_ccomprobantes" value="<?php echo $sel_ruc_ccomprobantes;?>"  placeholder="Ruc">
                                   <span class="help-block"></span>
              </div>
@@ -316,25 +330,65 @@
                                   <span class="help-block"></span>
              </div>
 		     </div>
-  		     </div>
+		     </div>
   		     
+  		    
   		     <div class="row">
-  		     <div class="col-xs-5 col-md-5">
+  		     <div class="col-xs-12 col-md-12">
 		     <div class="form-group">
-                                  <label for="concepto_ccomprobantes" class="control-label">Concepto de: </label>
+                                  <label for="concepto_ccomprobantes" class="control-label">Concepto de Pago: </label>
                                   <input type="text" class="form-control" id="concepto_ccomprobantes" name="concepto_ccomprobantes" value="<?php echo $sel_concepto_ccomprobantes;?>"  placeholder="Concepto">
                                   <span class="help-block"></span>
              </div>
 		     </div>
-		     <div class="col-xs-6 col-md-6">
+		     </div>
+		     
+		     <div class="row">
+		     <div class="col-xs-3 col-md-3">
 		     <div class="form-group">
-                                  <label for="valor_letras" class="control-label">Valor de: </label>
-                                  <input type="hidden" class="form-control" id="valor_ccomprobantes" name="valor_ccomprobantes" value="<?php echo $subtotal_debe?>">
-                                  <input type="text" class="form-control" id="valor_letras" name="valor_letras" value="<?php echo $subtotal_debe ? numtoletras ($subtotal_debe) : ''; ?>" readonly>
+                                  <label for="referencia_doc_ccomprobantes" class="control-label">Referencia Doc: </label>
+                                  <input type="text" class="form-control" id="referencia_doc_ccomprobantes" name="referencia_doc_ccomprobantes" value="<?php echo $sel_referencia_doc_ccomprobantes;?>"  placeholder="# Factura / Recibo">
+                                  <span class="help-block"></span>
+             </div>
+		     </div>
+		     <div class="col-xs-3 col-md-3">
+             <div class="form-group">
+                                  <label for="id_forma_pago" class="control-label">Forma Pago:</label>
+                                  <select name="id_forma_pago" id="id_forma_pago"  class="form-control" >
+                                  <option value="" selected="selected">--Seleccione--</option>
+									<?php foreach($resultForm as $res) {?>
+										<option value="<?php echo $res->id_forma_pago; ?>" <?php if($sel_id_forma_pago==$res->id_forma_pago){echo "selected";}?>    ><?php echo $res->nombre_forma_pago; ?> </option>
+							        <?php } ?>
+								   </select> 
+                                  <span class="help-block"></span>
+             </div>
+		     </div>
+		     <div class="col-xs-3 col-md-3">
+		     <div class="form-group">
+                                  <label for="numero_cuenta_banco_ccomprobantes" class="control-label">Número Cuenta: </label>
+                                  <input type="text" class="form-control" id="numero_cuenta_banco_ccomprobantes" name="numero_cuenta_banco_ccomprobantes" value="<?php echo $sel_numero_cuenta_banco_ccomprobantes;?>"  placeholder="Número Cuenta">
+                                  <span class="help-block"></span>
+             </div>
+		     </div>
+  		     <div class="col-xs-3 col-md-3">
+		     <div class="form-group">
+                                  <label for="numero_cheque_ccomprobantes" class="control-label">Número Cheque: </label>
+                                  <input type="text" class="form-control" id="numero_cheque_ccomprobantes" name="numero_cheque_ccomprobantes" value="<?php echo $sel_numero_cheque_ccomprobantes;?>"  placeholder="Número Cheque">
+                                  <span class="help-block"></span>
+             </div>
+		     </div>
+  		     </div>
+  		     
+  		     <div class="row">
+  		     <div class="col-xs-12 col-md-12">
+		     <div class="form-group">
+                                  <label for="observaciones_ccomprobantes" class="control-label">Observación: </label>
+                                  <input type="text" class="form-control" id="observaciones_ccomprobantes" name="observaciones_ccomprobantes" value="<?php echo $sel_observaciones_ccomprobantes;?>"  placeholder="Observaciones">
                                   <span class="help-block"></span>
              </div>
 		     </div>
 		     </div>
+  		     
   		     <div class="col-md-12">
 					<div class="pull-right">
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
@@ -465,15 +519,19 @@
 		    ?>
              <tr>
 				
-				<td class='text-center' colspan=3>TOTAL $</td>
+				<td class='text-right' colspan=1>TOTAL $</td>
+				<td colspan=2>
+				<input type="hidden" class="form-control" id="valor_ccomprobantes" name="valor_ccomprobantes" value="<?php echo $subtotal_debe?>">
+                <input type="text" class="form-control" id="valor_letras" name="valor_letras" value="<?php echo $subtotal_debe ? numtoletras ($subtotal_debe) : ''; ?>" readonly>
+                                
+				</td>
 				<td class='text-left'><?php echo number_format($subtotal_debe,2);?></td>
 				<td class='text-left'><?php echo number_format($subtotal_haber,2);?></td>
 				
 			</tr>
-             
-         	 </table>     
+			 </table>     
+		    </div>
 		     </div>
-	         </div>
 	         </div>
 	         
 	         

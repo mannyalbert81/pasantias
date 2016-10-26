@@ -22,7 +22,6 @@ class ComprobanteContableController extends ControladorBase{
 			$tipo_comprobante=new TipoComprobantesModel();
 			$resultTipCom = $tipo_comprobante->getBy("nombre_tipo_comprobantes='CONTABLE'");
 			
-			
 		    $columnas_enc = "entidades.id_entidades, 
   							entidades.nombre_entidades,
 		    		        consecutivos.numero_consecutivos";
@@ -210,7 +209,7 @@ class ComprobanteContableController extends ControladorBase{
    	$resultado = null;
    	$permisos_rol=new PermisosRolesModel();
    
-   	
+   	$forma_pago = new FormaPagoModel();
    	$consecutivos = new ConsecutivosModel();
     $ccomprobantes = new CComprobantesModel();
    	$dcomprobantes = new DComprobantesModel();
@@ -251,13 +250,13 @@ class ComprobanteContableController extends ControladorBase{
    			$_concepto_ccomprobantes =$_POST['concepto_ccomprobantes'];
    			$_id_usuario_creador=$_SESSION['id_usuarios'];
    			$_valor_letras =$_POST['valor_letras'];
-   			
-   
-   
-   			$_fecha_ccomprobantes = $_POST['fecha_ccomprobantes']; 
-   			
-   			//$_fecha_ccomprobantes=$_fecha_año.'-'.$_fecha_mes.'-'.$_fecha_dia;
-   			
+            $_fecha_ccomprobantes = $_POST['fecha_ccomprobantes']; 
+            $_referencia_doc_ccomprobantes ="";
+            $resultFormaPago = $forma_pago->getBy("nombre_forma_pago LIKE '%NINGUNA%'");
+            $_id_forma_pago=$resultFormaPago[0]->id_forma_pago;
+            $_numero_cuenta_banco_ccomprobantes="";
+            $_numero_cheque_ccomprobantes="";
+            $_observaciones_ccomprobantes="";
    			
    			
    			///PRIMERO INSERTAMOS LA CABEZA DEL COMPROBANTE
@@ -265,7 +264,7 @@ class ComprobanteContableController extends ControladorBase{
    			{
    					
    				$funcion = "ins_ccomprobantes";
-   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras' , '$_fecha_ccomprobantes' ";
+   				$parametros = "'$_id_entidades','$_id_tipo_comprobantes', '$_numero_consecutivos','$_ruc_ccomprobantes','$_nombres_ccomprobantes' ,'$_retencion_ccomprobantes' ,'$_valor_ccomprobantes' ,'$_concepto_ccomprobantes', '$_id_usuario_creador', '$_valor_letras' , '$_fecha_ccomprobantes', '$_id_forma_pago', '$_referencia_doc_ccomprobantes', '$_numero_cuenta_banco_ccomprobantes', '$_numero_cheque_ccomprobantes', '$_observaciones_ccomprobantes' ";
    				$ccomprobantes->setFuncion($funcion);
    				$ccomprobantes->setParametros($parametros);
    				$resultado=$ccomprobantes->Insert();
@@ -302,6 +301,9 @@ class ComprobanteContableController extends ControladorBase{
    						$dcomprobantes->setParametros($parametros);
    						$resultado=$dcomprobantes->Insert();
    						
+   						$resultSaldoIni = $plan_cuentas->getBy("id_plan_cuentas ='$_id_plan_cuentas' AND id_entidades ='$_id_entidades'");
+   						$_saldo_ini=$resultSaldoIni[0]->saldo_fin_plan_cuentas;
+   						
    						$_fecha_mayor = getdate();
    						$_fecha_año=$_fecha_mayor['year'];
    						$_fecha_mes=$_fecha_mayor['mon'];
@@ -310,8 +312,8 @@ class ComprobanteContableController extends ControladorBase{
    						$_fecha_actual=$_fecha_año.'-'.$_fecha_mes.'-'.$_fecha_dia;
    							
    						////llamas a la funcion mayoriza();
-   						$resul = $dcomprobantes->Mayoriza($_id_plan_cuentas, $_id_ccomprobantes, $_fecha_actual, $_debe_dcomprobantes, $_haber_dcomprobantes);
-   						$_cadena = $_id_plan_cuentas .'-'. $_id_ccomprobantes .'-'. $_fecha_actual .'-'. $_debe_dcomprobantes .'-'. $_haber_dcomprobantes ;
+   						$resul = $dcomprobantes->Mayoriza($_id_plan_cuentas, $_id_ccomprobantes, $_fecha_actual, $_debe_dcomprobantes, $_haber_dcomprobantes, $_saldo_ini);
+   						$_cadena = $_id_plan_cuentas .'-'. $_id_ccomprobantes .'-'. $_fecha_actual .'-'. $_debe_dcomprobantes .'-'. $_haber_dcomprobantes .'-'. $_saldo_ini;
    							
    							
    						///LAS TRAZAS

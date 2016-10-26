@@ -249,7 +249,7 @@
              
 		     <div class="col-md-3 col-lg-3 col-xs-4" style="margin-top: 5px">
 		                          <div class="input-group date" id="datetimePicker">
-					              <input type="text" class="form-control" id="fecha_ccomprobantes" name="fecha_ccomprobantes" data-date-format="YYYY-MM-DD" value="<?php echo $sel_fecha_ccomprobantes;?>">
+					              <input type="text" class="form-control" id="fecha_ccomprobantes" name="fecha_ccomprobantes" data-date-format="YYYY-MM-DD" value="<?php echo $sel_fecha_ccomprobantes;?>" placeholder="Inserte Fecha">
                                   <span class="input-group-addon">
                                   <span class="glyphicon glyphicon-calendar"></span>
                                   </span>
@@ -275,18 +275,10 @@
 	         <div class="panel panel-info">
 	         <div class="panel-body">
 	         <div class="row">
-  		     <div class="col-xs-5 col-md-5">
+  		     <div class="col-xs-12 col-md-12">
 		     <div class="form-group">
-                                  <label for="concepto_ccomprobantes" class="control-label">Concepto de: </label>
-                                  <input type="text" class="form-control" id="concepto_ccomprobantes" name="concepto_ccomprobantes" value="<?php echo $sel_concepto_ccomprobantes;?>"  placeholder="Concepto">
-                                  <span class="help-block"></span>
-             </div>
-		     </div>
-		     <div class="col-xs-6 col-md-6">
-		     <div class="form-group">
-                                  <label for="valor_letras" class="control-label">Valor de: </label>
-                                  <input type="hidden" class="form-control" id="valor_ccomprobantes" name="valor_ccomprobantes" value="<?php echo $subtotal_debe?>">
-                                  <input type="text" class="form-control" id="valor_letras" name="valor_letras" value="<?php echo $subtotal_debe ? numtoletras ($subtotal_debe) : ''; ?>" readonly>
+                                  <label for="concepto_ccomprobantes" class="control-label">Concepto de Pago: </label>
+                                  <input type="text" class="form-control" id="concepto_ccomprobantes" name="concepto_ccomprobantes" value="<?php echo $sel_concepto_ccomprobantes;?>"  placeholder="Concepto de Pago">
                                   <span class="help-block"></span>
              </div>
 		     </div>
@@ -417,9 +409,14 @@
 		    }
 		    
 		    ?>
-             <tr>
+              <tr>
 				
-				<td class='text-center' colspan=3>TOTAL $</td>
+				<td class='text-right' colspan=1>TOTAL $</td>
+				<td colspan=2>
+				<input type="hidden" class="form-control" id="valor_ccomprobantes" name="valor_ccomprobantes" value="<?php echo $subtotal_debe?>">
+                <input type="text" class="form-control" id="valor_letras" name="valor_letras" value="<?php echo $subtotal_debe ? numtoletras ($subtotal_debe) : ''; ?>" readonly>
+                                
+				</td>
 				<td class='text-left'><?php echo number_format($subtotal_debe,2);?></td>
 				<td class='text-left'><?php echo number_format($subtotal_haber,2);?></td>
 				
