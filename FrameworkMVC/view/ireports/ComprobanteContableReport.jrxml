@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-10-24T16:58:41 -->
+<!-- 2016-10-26T11:53:46 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="612" pageHeight="792" columnWidth="574" leftMargin="19" rightMargin="19" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
@@ -29,7 +29,12 @@
   dcomprobantes.descripcion_dcomprobantes, 
   dcomprobantes.debe_dcomprobantes, 
   dcomprobantes.haber_dcomprobantes, 
-  rol.nombre_rol
+  rol.nombre_rol,
+   forma_pago.nombre_forma_pago, 
+  ccomprobantes.numero_cuenta_banco_ccomprobantes, 
+  ccomprobantes.numero_cheque_ccomprobantes, 
+  ccomprobantes.observaciones_ccomprobantes, 
+  ccomprobantes.referencia_doc_ccomprobantes
 FROM 
   public.ccomprobantes, 
   public.dcomprobantes, 
@@ -37,14 +42,16 @@ FROM
   public.usuarios, 
   public.tipo_comprobantes, 
   public.plan_cuentas, 
-  public.rol
+  public.rol,
+  public.forma_pago
 WHERE 
   ccomprobantes.id_usuarios = usuarios.id_usuarios AND
   dcomprobantes.id_ccomprobantes = ccomprobantes.id_ccomprobantes AND
   entidades.id_entidades = ccomprobantes.id_entidades AND
   usuarios.id_rol = rol.id_rol AND
   tipo_comprobantes.id_tipo_comprobantes = ccomprobantes.id_tipo_comprobantes AND
-  plan_cuentas.id_plan_cuentas = dcomprobantes.id_plan_cuentas AND  ccomprobantes.id_ccomprobantes= $P{_id_ccomprobantes}]]>
+  plan_cuentas.id_plan_cuentas = dcomprobantes.id_plan_cuentas AND
+  forma_pago.id_forma_pago = ccomprobantes.id_forma_pago AND  ccomprobantes.id_ccomprobantes= $P{_id_ccomprobantes}]]>
 	</queryString>
 	<field name="ruc_entidades" class="java.lang.String"/>
 	<field name="nombre_entidades" class="java.lang.String"/>

@@ -8,6 +8,7 @@ class RecalcularMayorController extends ControladorBase{
 	
 	public function index(){
 					
+		session_start();
 					$this->view("RecalcularMayor",array(
 							
 							"resultSet"=>"", "resultTipCom"=>""
@@ -23,21 +24,15 @@ class RecalcularMayorController extends ControladorBase{
    
    	session_start();
    
-   	$resultado = null;
-   	$permisos_rol=new PermisosRolesModel();
-   
    	$mayor = new MayorModel();
    	$plan_cuentas = new PlanCuentasModel();
     
    
    	$nombre_controladores = "RecalcularMayor";
-   	$id_rol= $_SESSION['id_rol'];
-   	$resultPer = $ccomprobantes->getPermisosEditar("   nombre_controladores = '$nombre_controladores' AND id_rol = '$id_rol' " );
    
-   	if (!empty($resultPer))
-   	{
-   		
-   		if (isset ($_POST["id_entidades"]))
+   	
+   	
+   		if (isset ($_POST["Guardar"]))
    		{
    			$_id_plan_cuentas = 0;
    			$_n_plan_cuentas = '';
@@ -57,7 +52,7 @@ class RecalcularMayorController extends ControladorBase{
    				$_saldo_mayor = $res->saldo_mayor;
    				
    				///busco naturaleza
-   				$resulPlan = $plan_cuentas->getCondiciones(" n_plan_cuentas", "plan_cuentas", " id_plan_cuentas = '$_id_plan_cuentas'  ", "id_plan_cuentas");	
+   				$resultPlan = $plan_cuentas->getCondiciones(" n_plan_cuentas", "plan_cuentas", " id_plan_cuentas = '$_id_plan_cuentas'  ", "id_plan_cuentas");	
    				foreach($resultPlan as $res)
    				{
    					$_n_plan_cuentas = $res->n_plan_cuentas;
@@ -82,19 +77,21 @@ class RecalcularMayorController extends ControladorBase{
    			
    			
    			
-   			
+   			$this->redirect("RecalcularMayor","index")	;
    			
    					
-   		$this->redirect("RecalcularMayor","index")	;
+   		
+   	}else{
+   		
    	}
    
-   
+  
    
    
    }
    
   	
-   }
+   
 }
 	
 
