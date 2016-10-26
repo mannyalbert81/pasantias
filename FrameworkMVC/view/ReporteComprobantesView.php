@@ -75,8 +75,6 @@
         
        if($_SERVER['REQUEST_METHOD']=='POST' )
        {
-       	
-       	
        	$sel_id_entidades = $_POST['id_entidades'];
         $sel_id_tipo_comprobantes=$_POST['id_tipo_comprobantes'];
        	$sel_numero_ccomprobantes=$_POST['numero_ccomprobantes'];
@@ -152,24 +150,14 @@
   			</div>
   		
   		<div class="col-lg-12" style="text-align: center; margin-bottom: 20px">
-  		
-		 <input type="submit" id="buscar" name="buscar" value="Buscar"   class="btn btn-warning " style="margin-top: 10px;"/> 
-	    
+  		    
+		 <button type="submit" id="buscar" name="buscar" value="Buscar"   class="btn btn-info" style="margin-top: 10px;"/><i class="glyphicon glyphicon-search"></i></button>     
+	  
 	  <?php if(!empty($resultSet))  {?>
-		 <a href="/contabilidad/FrameworkMVC/view/ireports/ContReporteComprobantesReport.php?id_entidades=<?php  echo $sel_id_entidades ?>&id_tipo_comprobantes=<?php  echo $sel_id_tipo_comprobantes?>&numero_ccomprobantes=<?php  echo $sel_numero_ccomprobantes?>&referencia_doc_ccomprobantes=<?php  echo $sel_referencia_doc_ccomprobantes?>&fecha_desde=<?php  echo $sel_fecha_desde?>&fecha_hasta=<?php  echo $sel_fecha_hasta?>&id_usuarios=<?php echo $_SESSION['id_usuarios'];?>" onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false" style="margin-top: 10px;" class="btn btn-success">Reporte</a>
-		   
-	
-                
-		  <?php } else {?>
+		 <a href="/contabilidad/FrameworkMVC/view/ireports/ContReporteComprobantesReport.php?id_entidades=<?php  echo $sel_id_entidades ?>&id_tipo_comprobantes=<?php  echo $sel_id_tipo_comprobantes?>&numero_ccomprobantes=<?php  echo $sel_numero_ccomprobantes?>&referencia_doc_ccomprobantes=<?php  echo $sel_referencia_doc_ccomprobantes?>&fecha_desde=<?php  echo $sel_fecha_desde?>&fecha_hasta=<?php  echo $sel_fecha_hasta?>&id_usuarios=<?php echo $_SESSION['id_usuarios'];?>" onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false" style="margin-top: 10px;" class="btn btn-success"><i class="glyphicon glyphicon-download-alt"></i></a>
+	  <?php } else {?>
 		  <?php } ?>
-	 <?php if(!empty($resultSet))  {?>
-		 <a href="/contabilidad/FrameworkMVC/view/ireports/ContImprimirComprobantesReport.php?id_entidades=<?php  echo $sel_id_entidades ?>&id_tipo_comprobantes=<?php  echo $sel_id_tipo_comprobantes?>&numero_ccomprobantes=<?php  echo $sel_numero_ccomprobantes?>&referencia_doc_ccomprobantes=<?php  echo $sel_referencia_doc_ccomprobantes?>&fecha_desde=<?php  echo $sel_fecha_desde?>&fecha_hasta=<?php  echo $sel_fecha_hasta?>&id_usuarios=<?php echo $_SESSION['id_usuarios'];?>" onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false" style="margin-top: 10px;" class="btn btn-info">Imprimir</a>
-		   
 	
-                
-		  <?php } else {?>
-		  
-		  <?php } ?>
 		  </div>
 		 
 		</div>

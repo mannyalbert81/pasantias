@@ -301,6 +301,9 @@ class ComprobanteContableController extends ControladorBase{
    						$dcomprobantes->setParametros($parametros);
    						$resultado=$dcomprobantes->Insert();
    						
+   						$resultSaldoIni = $plan_cuentas->getBy("id_plan_cuentas ='$_id_plan_cuentas' AND id_entidades ='$_id_entidades'");
+   						$_saldo_ini=$resultSaldoIni[0]->saldo_fin_plan_cuentas;
+   						
    						$_fecha_mayor = getdate();
    						$_fecha_año=$_fecha_mayor['year'];
    						$_fecha_mes=$_fecha_mayor['mon'];
@@ -309,8 +312,8 @@ class ComprobanteContableController extends ControladorBase{
    						$_fecha_actual=$_fecha_año.'-'.$_fecha_mes.'-'.$_fecha_dia;
    							
    						////llamas a la funcion mayoriza();
-   						$resul = $dcomprobantes->Mayoriza($_id_plan_cuentas, $_id_ccomprobantes, $_fecha_actual, $_debe_dcomprobantes, $_haber_dcomprobantes);
-   						$_cadena = $_id_plan_cuentas .'-'. $_id_ccomprobantes .'-'. $_fecha_actual .'-'. $_debe_dcomprobantes .'-'. $_haber_dcomprobantes ;
+   						$resul = $dcomprobantes->Mayoriza($_id_plan_cuentas, $_id_ccomprobantes, $_fecha_actual, $_debe_dcomprobantes, $_haber_dcomprobantes, $_saldo_ini);
+   						$_cadena = $_id_plan_cuentas .'-'. $_id_ccomprobantes .'-'. $_fecha_actual .'-'. $_debe_dcomprobantes .'-'. $_haber_dcomprobantes .'-'. $_saldo_ini;
    							
    							
    						///LAS TRAZAS
