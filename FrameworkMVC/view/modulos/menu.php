@@ -98,6 +98,10 @@ $controladores=$_SESSION['controladores'];
 			<a href="index.php?controller=Comprobantes&action=ReporteComprobantes"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Reporte Comprobantes</span> </a>
 			</li>
 			
+			<li style="<?php echo getcontrolador("RecalcularMayor",$controladores) ?>">
+			<a href="index.php?controller=RecalcularMayor&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Recalcular Mayor</span> </a>
+			</li>
+			
 </ul>
 </li>
         
