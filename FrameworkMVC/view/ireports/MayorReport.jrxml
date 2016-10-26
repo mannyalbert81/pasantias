@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-10-26T11:08:57 -->
+<!-- 2016-10-26T12:47:25 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="612" pageHeight="792" columnWidth="574" leftMargin="19" rightMargin="19" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
@@ -14,7 +14,8 @@
   ccomprobantes.concepto_ccomprobantes, 
   mayor.debe_mayor, 
   mayor.haber_mayor, 
-  mayor.saldo_mayor, 
+  mayor.saldo_mayor,
+    mayor.saldo_ini_mayor, 
   ccomprobantes.fecha_ccomprobantes
 FROM 
   public.mayor, 
@@ -34,6 +35,7 @@ WHERE
 	<field name="haber_mayor" class="java.math.BigDecimal"/>
 	<field name="saldo_mayor" class="java.math.BigDecimal"/>
 	<field name="fecha_ccomprobantes" class="java.sql.Date"/>
+	<field name="saldo_ini_mayor" class="java.math.BigDecimal"/>
 	<variable name="debe_mayor1" class="java.math.BigDecimal" resetType="Group" resetGroup="Cuentas" calculation="Sum">
 		<variableExpression><![CDATA[$F{debe_mayor}]]></variableExpression>
 	</variable>
@@ -46,53 +48,127 @@ WHERE
 	<variable name="saldo_mayor2" class="java.math.BigDecimal" resetType="Group" resetGroup="Cuentas" calculation="First">
 		<variableExpression><![CDATA[$F{saldo_mayor}]]></variableExpression>
 	</variable>
+	<variable name="saldo_ini_mayor1" class="java.math.BigDecimal" resetType="Group" resetGroup="Cuentas" calculation="First">
+		<variableExpression><![CDATA[$F{saldo_ini_mayor}]]></variableExpression>
+	</variable>
+	<variable name="saldo_ini_mayor2" class="java.math.BigDecimal" resetType="Group" resetGroup="Cuentas" calculation="First">
+		<variableExpression><![CDATA[$F{saldo_ini_mayor}]]></variableExpression>
+	</variable>
+	<variable name="saldo_mayor5" class="java.math.BigDecimal" resetType="Group" resetGroup="Cuentas" calculation="First">
+		<variableExpression><![CDATA[$F{saldo_mayor}]]></variableExpression>
+	</variable>
 	<group name="Cuentas">
 		<groupExpression><![CDATA[$F{codigo_plan_cuentas}]]></groupExpression>
 		<groupHeader>
 			<band height="50">
+				<rectangle>
+					<reportElement x="9" y="2" width="556" height="19" backcolor="#D9D4D4" uuid="c6ff4f71-5dfd-4e08-bdc5-b10fb77eb606"/>
+				</rectangle>
 				<textField>
-					<reportElement x="9" y="0" width="80" height="19" uuid="8948a578-877a-4be8-8bfb-cf796dc55cc1"/>
+					<reportElement x="9" y="27" width="80" height="19" uuid="8948a578-877a-4be8-8bfb-cf796dc55cc1"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="90" y="0" width="240" height="18" uuid="a89b55b2-3b83-4c00-a91b-06892f7a4ad7"/>
+					<reportElement x="90" y="27" width="240" height="18" uuid="a89b55b2-3b83-4c00-a91b-06892f7a4ad7"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{nombre_plan_cuentas}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="410" y="2" width="58" height="14" uuid="18e9715c-e07d-4ac4-8507-e754e3eb6c11"/>
-					<text><![CDATA[Saldo Inicial:]]></text>
+					<reportElement x="9" y="6" width="80" height="18" uuid="4f96c0ff-6ef9-4f7a-a8f5-54ca2096eaa8"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[No.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="80" y="6" width="70" height="16" uuid="0be69a59-a418-4fc9-b1d2-0bc2ad874a9a"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="148" y="5" width="204" height="19" uuid="ec438698-9c6e-4c0d-92ff-1186fb5c060e"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Concepto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="355" y="5" width="70" height="18" uuid="78f61fd1-a39e-4d2f-af5b-d8da4bd4cf43"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Debe]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="425" y="5" width="70" height="19" uuid="361fc50d-276a-4969-879a-87d0410728f6"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Haber]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="490" y="5" width="76" height="18" uuid="6c279a1a-de56-4df3-b059-6231bd56d583"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Saldo]]></text>
 				</staticText>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="51">
-				<staticText>
-					<reportElement x="170" y="0" width="100" height="19" uuid="9f84f6ae-ed47-441c-842a-7d66349ff815"/>
-					<textElement>
-						<font isBold="true"/>
-					</textElement>
-					<text><![CDATA[TOTALES]]></text>
-				</staticText>
+			<band height="48">
 				<textField pattern="#,##0.00#;(#,##0.00#-)">
 					<reportElement x="352" y="0" width="71" height="18" uuid="5ae29601-d357-4515-8722-6c99531e83c1"/>
-					<textElement>
+					<textElement textAlignment="Right">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{debe_mayor1}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00#;(#,##0.00#-)">
 					<reportElement x="423" y="0" width="67" height="18" uuid="e9f6c72f-b096-4fd9-9d33-9e0ff2d31fe0"/>
-					<textElement>
+					<textElement textAlignment="Right">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{haber_mayor1}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00#;(#,##0.00#-)">
-					<reportElement x="490" y="-1" width="72" height="19" uuid="c8bc8261-1e9d-4757-88a4-8c551483bbfe"/>
-					<textElement>
+					<reportElement x="490" y="-1" width="76" height="19" uuid="c8bc8261-1e9d-4757-88a4-8c551483bbfe"/>
+					<textElement textAlignment="Right">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{saldo_mayor1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="-1" y="0" width="80" height="18" uuid="917de9f7-67f0-4b8a-a0bc-932b6c98bc9e"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[SALDO INICIAL:]]></text>
+				</staticText>
+				<textField pattern="#,##0.00#">
+					<reportElement x="84" y="0" width="70" height="18" uuid="b33d9c51-2800-4034-924c-c49d0ab1670f"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{saldo_ini_mayor2}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="165" y="0" width="80" height="18" uuid="7195db44-328f-467f-8f5f-3a8b64e54424"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[SALDO FINAL]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="255" y="-1" width="100" height="18" uuid="ed9f1f10-c92f-4c80-844d-145b9747d275"/>
+					<textFieldExpression><![CDATA[$V{saldo_mayor5}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -111,120 +187,8 @@ WHERE
 		</band>
 	</title>
 	<pageHeader>
-		<band height="107" splitType="Stretch">
-			<rectangle radius="7">
-				<reportElement x="11" y="6" width="555" height="44" forecolor="#000000" backcolor="#FFFFFF" uuid="e2521e34-8167-4e4a-b74e-f78d927c8ff1"/>
-				<graphicElement>
-					<pen lineWidth="3.0" lineStyle="Solid"/>
-				</graphicElement>
-			</rectangle>
-			<rectangle radius="7">
-				<reportElement x="10" y="57" width="555" height="41" forecolor="#000000" backcolor="#FFFFFF" uuid="35496199-ae09-4e67-bff0-9792b2ed340a"/>
-				<graphicElement>
-					<pen lineWidth="3.0" lineStyle="Solid"/>
-				</graphicElement>
-			</rectangle>
-			<rectangle radius="0">
-				<reportElement x="10" y="83" width="555" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="44716221-139c-437c-86fb-407606fc201d"/>
-				<graphicElement>
-					<pen lineWidth="3.0" lineStyle="Solid"/>
-				</graphicElement>
-			</rectangle>
-			<rectangle radius="0">
-				<reportElement mode="Transparent" x="367" y="83" width="99" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="c556fd54-e10f-4f67-81c9-09f3a1867511"/>
-				<graphicElement>
-					<pen lineWidth="3.0" lineStyle="Solid"/>
-				</graphicElement>
-			</rectangle>
-			<textField>
-				<reportElement x="10" y="84" width="98" height="15" uuid="df512ffc-5f8a-4b9b-99fd-ed2b738faf22"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Código"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="109" y="83" width="131" height="15" uuid="d68928fd-15f2-43ae-a25d-4c203efc34b3"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Nombre de la Cuenta"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="368" y="83" width="98" height="15" uuid="ba1367cf-edde-40cb-9143-318aaa073cc9"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Haber"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="466" y="84" width="98" height="15" uuid="ee2cb159-219a-4a49-8310-2ec39a57619d"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Haber"]]></textFieldExpression>
-			</textField>
-			<rectangle radius="0">
-				<reportElement mode="Transparent" x="110" y="83" width="257" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="db5f4aca-9a03-49c4-8c22-60612a20e23a"/>
-				<graphicElement>
-					<pen lineWidth="3.0" lineStyle="Solid"/>
-				</graphicElement>
-			</rectangle>
-			<textField>
-				<reportElement x="285" y="83" width="79" height="15" uuid="1fe293a8-d70e-43e7-99a4-8aa1b9ce0bf2"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Descripción"]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="8" splitType="Stretch"/>
 	</pageHeader>
-	<columnHeader>
-		<band height="29">
-			<staticText>
-				<reportElement x="9" y="-1" width="80" height="20" uuid="87193844-e724-4bed-bc81-78d9c105710b"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Comprobante]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="75" y="0" width="70" height="19" uuid="ea6b9cf4-1291-4019-b0f1-533cece40858"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fecha]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="148" y="-1" width="204" height="19" uuid="c8bfa49f-5819-4338-a292-fcacdcfc46cf"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Concepto]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="355" y="-1" width="70" height="18" uuid="7dff63b0-748b-4d74-8db2-f34e39047af4"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Debe]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="425" y="-1" width="70" height="19" uuid="66f8391c-5ab0-40bd-98a6-ce6708e4e5e4"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Haber]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="490" y="-1" width="76" height="18" uuid="b9da1ef1-829a-4935-8eb7-49587153966a"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Saldo]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
 	<detail>
 		<band height="19" splitType="Stretch">
 			<textField>
@@ -236,19 +200,22 @@ WHERE
 				<textFieldExpression><![CDATA[$F{fecha_ccomprobantes}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="148" y="0" width="204" height="14" uuid="43ff7308-ef09-4a51-97bb-c5299ca26eb2"/>
+				<reportElement x="148" y="0" width="182" height="14" uuid="43ff7308-ef09-4a51-97bb-c5299ca26eb2"/>
 				<textFieldExpression><![CDATA[$F{concepto_ccomprobantes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00#;(#,##0.00#-)">
-				<reportElement x="355" y="0" width="70" height="14" uuid="9d21c154-1f24-47d7-9194-7a69649a3bbb"/>
+				<reportElement x="355" y="0" width="70" height="18" uuid="9d21c154-1f24-47d7-9194-7a69649a3bbb"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{debe_mayor}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00#;(#,##0.00#-)">
 				<reportElement x="424" y="0" width="71" height="18" uuid="57e1114b-1de8-4a6f-9dcd-a988bf315db6"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{haber_mayor}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00#;(#,##0.00#-)">
 				<reportElement x="493" y="0" width="71" height="14" uuid="10e2bcdd-b062-4a10-8172-49620fa57990"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{saldo_mayor}]]></textFieldExpression>
 			</textField>
 		</band>
