@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-10-27T09:05:43 -->
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-10-28T11:47:06 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="612" pageHeight="792" columnWidth="574" leftMargin="19" rightMargin="19" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
 	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
 	<queryString>
 		<![CDATA[SELECT 
   plan_cuentas.codigo_plan_cuentas, 
@@ -24,7 +32,7 @@ FROM
 WHERE 
   plan_cuentas.id_plan_cuentas = mayor.id_plan_cuentas AND
   ccomprobantes.id_ccomprobantes = mayor.id_ccomprobantes
-  ORDER BY plan_cuentas.id_plan_cuentas, ccomprobantes.creado]]>
+  ORDER BY plan_cuentas.codigo_plan_cuentas, ccomprobantes.creado]]>
 	</queryString>
 	<field name="codigo_plan_cuentas" class="java.lang.String"/>
 	<field name="numero_ccomprobantes" class="java.lang.String"/>
@@ -62,7 +70,7 @@ WHERE
 		<groupHeader>
 			<band height="50">
 				<rectangle>
-					<reportElement x="9" y="2" width="556" height="19" backcolor="#D9D4D4" uuid="c6ff4f71-5dfd-4e08-bdc5-b10fb77eb606"/>
+					<reportElement x="9" y="1" width="556" height="19" backcolor="#D9D4D4" uuid="c6ff4f71-5dfd-4e08-bdc5-b10fb77eb606"/>
 				</rectangle>
 				<textField>
 					<reportElement x="9" y="27" width="80" height="19" uuid="8948a578-877a-4be8-8bfb-cf796dc55cc1"/>

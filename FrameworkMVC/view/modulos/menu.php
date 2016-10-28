@@ -101,11 +101,12 @@ $controladores=$_SESSION['controladores'];
 			<li style="<?php echo getcontrolador("RecalcularMayor",$controladores) ?>">
 			<a href="index.php?controller=RecalcularMayor&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Recalcular Mayor</span> </a>
 			</li>
-			
+			<li style="<?php echo getcontrolador("MayorGeneral",$controladores) ?>">
+			<a href="index.php?controller=MayorGeneral&action=MayorGeneral"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Mayor General</span> </a>
+			</li>
 </ul>
 </li>
         
-
           <li class="dropdown" style="<?php echo getcontrolador("MenuPlanCuentas",$controladores) ?>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-refresh" ><?php echo " Plan de Cuentas" ;?> </span> <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -121,7 +122,6 @@ $controladores=$_SESSION['controladores'];
           <li style="<?php echo getcontrolador("ImportacionCuentas",$controladores) ?>">
 		  <a href="index.php?controller=ImportacionCuentas&action=index"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"> Importación Cuentas</span> </a>
 		  </li>
-          
          
 </ul>
 </li>
@@ -158,7 +158,6 @@ $controladores=$_SESSION['controladores'];
           <li style="<?php echo getcontrolador("Oficios",$controladores) ?>">
           <a href="index.php?controller=Oficios&action=index"><span class="glyphicon glyphicon-leaf" aria-hidden="true"> Generar Oficios</span> </a>
           </li>
-          
 
 </ul>
 </li>
@@ -185,8 +184,6 @@ $controladores=$_SESSION['controladores'];
           <li style="<?php echo getcontrolador("Avoco",$controladores) ?>">
           <a href="index.php?controller=AvocoConocimiento&action=index"><span class=" glyphicon glyphicon-console" aria-hidden="true"> Avoco Conocimiento</span> </a>           
           </li>
-          
-         
          
 </ul>
 </li>
@@ -220,8 +217,8 @@ $controladores=$_SESSION['controladores'];
 
 
 </ul>
-    </div>
-  </div>
+</div>
+</div>
 </nav>
 </div>
 </div>

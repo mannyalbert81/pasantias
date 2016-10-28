@@ -80,8 +80,9 @@
 						  <th>Nombre</th>
 						  <th># Comprobante</th>
 						  <th>Concepto</th>
-						  <th>Valor</th>
-						  <th>Acciones</th>
+						  <th class='text-center' colspan=2>Monto</th>
+						  <th>Fecha</th>
+						  <th></th>
 						
 						</tr>
 					</thead>
@@ -96,7 +97,9 @@
 							<td><?php echo $row['nombres_ccomprobantes'];?></td>
 							<td><?php echo $row['numero_ccomprobantes'];?></td>
 							<td><?php echo $row['concepto_ccomprobantes'];?></td>
+							<td><?php echo $row['valor_ccomprobantes'];?></td>
 							<td><?php echo $row['valor_letras'];?></td>
+							<td><?php echo $row['fecha_ccomprobantes'];?></td>
 							<td>
 							<span class="pull-right">
 							<a href="/contabilidad/FrameworkMVC/view/ireports/ContComprobanteIngresosReport.php?id_ccomprobantes=<?php echo $id_ccomprobantes; ?>"onclick="window.open(this.href, this.target, ' width=1000, height=800, menubar=no');return false"><i class="glyphicon glyphicon-print"></i></a>

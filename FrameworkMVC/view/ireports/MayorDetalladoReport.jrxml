@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-10-28T12:21:28 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="612" pageHeight="792" columnWidth="574" leftMargin="19" rightMargin="19" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
+	<parameter name="sql" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P{sql}]]>
+	</queryString>
+	<field name="ruc_entidades" class="java.lang.String"/>
+	<field name="nombre_entidades" class="java.lang.String"/>
+	<field name="telefono_entidades" class="java.lang.String"/>
+	<field name="direccion_entidades" class="java.lang.String"/>
+	<field name="ciudad_entidades" class="java.lang.String"/>
+	<field name="id_ccomprobantes" class="java.lang.String"/>
+	<field name="numero_ccomprobantes" class="java.lang.String"/>
+	<field name="concepto_ccomprobantes" class="java.lang.String"/>
+	<field name="codigo_plan_cuentas" class="java.lang.String"/>
+	<field name="nombre_plan_cuentas" class="java.lang.String"/>
+	<field name="saldo_fin_plan_cuentas" class="java.lang.String"/>
+	<field name="debe_mayor" class="java.lang.String"/>
+	<field name="haber_mayor" class="java.lang.String"/>
+	<field name="saldo_mayor" class="java.lang.String"/>
+	<field name="saldo_ini_mayor" class="java.lang.String"/>
+	<field name="fecha_ccomprobantes" class="java.lang.String"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{codigo_plan_cuentas}]]></groupExpression>
+		<groupHeader>
+			<band height="57">
+				<textField>
+					<reportElement x="10" y="37" width="110" height="11" uuid="51a42701-3051-4008-9546-74e241195565"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{codigo_plan_cuentas}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="136" y="37" width="130" height="11" uuid="5d1479a9-3f09-409b-a294-054c2fe5b49f"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre_plan_cuentas}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="15" y="7" width="548" height="15" backcolor="#D4CDCD" uuid="c910c8a1-ea86-47cb-8e51-2edf137323dd"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="14" y="7" width="55" height="14" uuid="ffa45ff5-8f95-45da-a3d5-2e681715ccac"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[h]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="75" y="7" width="70" height="14" uuid="9eba159c-d116-45b7-a917-58f9c9287dd4"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[h]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="151" y="7" width="179" height="14" uuid="a10b9a0b-9f26-4e94-8a0b-e8ac8640d5d1"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[h]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="355" y="7" width="68" height="14" uuid="25c40911-3d51-4731-a9e3-1021f7690d8e"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[h]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="425" y="7" width="68" height="14" uuid="bb29e037-cc82-46bb-9ec9-c4b4b445fe8b"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[h]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="494" y="7" width="68" height="14" uuid="afc97162-f0c5-4ace-8644-b97f15070570"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[h]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="25"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<rectangle radius="7">
+				<reportElement x="11" y="0" width="555" height="60" forecolor="#000000" backcolor="#FFFFFF" uuid="d33056da-a91a-42ec-b4d4-1f05300e3205"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="11" y="2" width="555" height="18" forecolor="#000000" uuid="2e1395c1-7f5c-4c28-b4ce-5927e46bd9af"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_entidades}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="15" y="2" width="121" height="47" uuid="0af34674-2907-46f3-8204-c316f36832c5"/>
+				<imageExpression><![CDATA["C:/xampp/htdocs/contabilidad/FrameworkMVC/view/ireports/PhpJasperLibrary/class/tcpdf/images/logo_mundo_digital_2016.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="10" y="36" width="549" height="14" forecolor="#000000" uuid="d1ebe344-c9e5-4b45-878c-50c235f137fd"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["MAYOR GENERAL DETALLADO"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="99" y="50" width="86" height="8" uuid="fcfb2748-6331-4fcf-b0fa-0db48f8b9d3b"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ruc_entidades}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="256" y="50" width="80" height="8" uuid="3795489f-d29d-4a61-9266-f134b5479718"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefono_entidades}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="22" width="548" height="8" forecolor="#000000" uuid="bf1b87b5-9840-49b0-8e77-26af840120e3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dirección:  "+$F{direccion_entidades}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="80" y="50" width="22" height="8" uuid="a88957e3-4b47-42e3-b910-45818e7c8753"/>
+				<textElement>
+					<font fontName="SansSerif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ruc:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="50" width="26" height="8" uuid="1bdc4eae-cfdd-493e-95e7-fe8e47a240ce"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tlf:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="50" width="26" height="8" uuid="409f1de1-8b53-4aab-bea4-8f7da2f117b8"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="424" y="51" width="80" height="8" uuid="b86238a7-5532-4423-bac5-dd781a658764"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="2" width="60" height="15" uuid="ff9ac084-e153-43c0-b243-3fb5b3ef0985"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="M/d/yy">
+				<reportElement x="75" y="2" width="70" height="15" uuid="4c0895c8-335c-414b-bdf0-6ea59d50da9f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="148" y="2" width="182" height="15" uuid="a422d196-1805-4cb6-9ab1-eed26c8c9ef0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concepto_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#;(#,##0.00#-)">
+				<reportElement x="355" y="2" width="70" height="15" uuid="42145b10-d0eb-44d2-90d8-b499baeb1614"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{debe_mayor}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#;(#,##0.00#-)">
+				<reportElement x="424" y="2" width="71" height="15" uuid="b5b059bd-7e71-485e-89e7-2ad18ef45775"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{haber_mayor}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#;(#,##0.00#-)">
+				<reportElement x="493" y="2" width="71" height="15" uuid="19b49465-111f-4232-8b1e-b534e7997a38"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{saldo_mayor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
