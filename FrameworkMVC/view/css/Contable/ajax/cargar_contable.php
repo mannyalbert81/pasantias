@@ -36,7 +36,7 @@
 			
 			
 			$count_query   = pg_query($conn,"SELECT count(*) AS numrows FROM public.ccomprobantes, public.usuarios, public.tipo_comprobantes, public.entidades WHERE ccomprobantes.id_usuarios = usuarios.id_usuarios AND
-            ccomprobantes.id_entidades = entidades.id_entidades AND tipo_comprobantes.id_tipo_comprobantes = ccomprobantes.id_tipo_comprobantes AND entidades.id_entidades = usuarios.id_entidades AND nombre_tipo_comprobantes='CONTABLE' AND usuarios.id_usuarios='$_id_usuarios'  ");
+            ccomprobantes.id_entidades = entidades.id_entidades AND tipo_comprobantes.id_tipo_comprobantes = ccomprobantes.id_tipo_comprobantes AND entidades.id_entidades = usuarios.id_entidades AND nombre_tipo_comprobantes='CONTABLE' AND usuarios.id_usuarios='$_id_usuarios' AND (ccomprobantes.concepto_ccomprobantes LIKE '%".$c."%' OR ccomprobantes.numero_ccomprobantes LIKE '%".$c."%') ");
 			
 			if ($row= pg_fetch_array($count_query)){$numrows = $row['numrows'];}
 			$total_pages = ceil($numrows/$per_page);
