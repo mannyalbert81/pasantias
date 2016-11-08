@@ -117,8 +117,6 @@ if ($_GET['id_usuarios']!=0)
  
  
 $sql=$cabeceraSql.$detallesql;
-echo $sql;
-die();
 
 $PHPJasperXML = new PHPJasperXML("en","TCPDF");
 $PHPJasperXML->debugsql=false;
