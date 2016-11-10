@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-11-08T12:46:46 -->
+<!-- 2016-11-09T15:35:12 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="612" pageHeight="792" columnWidth="574" leftMargin="19" rightMargin="19" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
@@ -15,7 +15,7 @@
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
 	<parameter name="sql" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[ $P{sql} ]]>
+		<![CDATA[$P{sql}]]>
 	</queryString>
 	<field name="ruc_entidades" class="java.lang.String"/>
 	<field name="nombre_entidades" class="java.lang.String"/>
@@ -37,7 +37,7 @@
 	<variable name="saldo_ini_mayor1" class="java.lang.Double" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group1" calculation="First">
 		<variableExpression><![CDATA[$F{saldo_mayor}]]></variableExpression>
 	</variable>
-	<variable name="saldo_ini_mayor2" class="java.math.BigDecimal" resetType="Group" resetGroup="Group1" calculation="First">
+	<variable name="saldo_ini_mayor2" class="java.math.BigDecimal" resetType="Group" resetGroup="Group1" incrementType="Column" calculation="Average">
 		<variableExpression><![CDATA[$F{saldo_ini_mayor}]]></variableExpression>
 	</variable>
 	<group name="Group1">

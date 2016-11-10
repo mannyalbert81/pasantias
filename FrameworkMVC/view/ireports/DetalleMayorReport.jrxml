@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DetalleMayorReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e1dfa618-2c57-44c3-ad92-93c60385f8b4">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
+	<queryString>
+		<![CDATA[SELECT 
+  plan_cuentas.codigo_plan_cuentas, 
+  ccomprobantes.numero_ccomprobantes, 
+  plan_cuentas.nombre_plan_cuentas, 
+  plan_cuentas.saldo_fin_plan_cuentas, 
+  ccomprobantes.concepto_ccomprobantes, 
+  mayor.debe_mayor, 
+  mayor.haber_mayor, 
+  mayor.saldo_mayor, 
+  ccomprobantes.fecha_ccomprobantes
+FROM 
+  public.mayor, 
+  public.plan_cuentas, 
+  public.ccomprobantes
+WHERE 
+  plan_cuentas.id_plan_cuentas = mayor.id_plan_cuentas AND
+  ccomprobantes.id_ccomprobantes = mayor.id_ccomprobantes
+  ORDER BY plan_cuentas.id_plan_cuentas]]>
+	</queryString>
+	<field name="numero_ccomprobantes" class="java.lang.String"/>
+	<field name="concepto_ccomprobantes" class="java.lang.String"/>
+	<field name="debe_mayor" class="java.math.BigDecimal"/>
+	<field name="haber_mayor" class="java.math.BigDecimal"/>
+	<field name="saldo_mayor" class="java.math.BigDecimal"/>
+	<field name="fecha_ccomprobantes" class="java.sql.Date"/>
+	<field name="codigo_plan_cuentas" class="java.lang.String"/>
+	<group name="codigo_plan_cuentas">
+		<groupExpression><![CDATA[$F{codigo_plan_cuentas}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="16" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="-10" y="10" width="100" height="24" uuid="cc7352b3-90ae-4cca-939b-e7ee232d0dfa"/>
+				<textFieldExpression><![CDATA[$F{numero_ccomprobantes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="10" width="180" height="24" uuid="0f7fc56c-df09-480c-a62f-17a2e9d7f980"/>
+				<textFieldExpression><![CDATA[$F{fecha_ccomprobantes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
