@@ -40,7 +40,7 @@
 	<variable name="suma_debe" class="java.lang.String" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$F{debe_mayor}]]></variableExpression>
 	</variable>
-<<<<<<< HEAD
+
 	<variable name="suma_haber" class="java.lang.String" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$F{haber_mayor}]]></variableExpression>
 	</variable>
