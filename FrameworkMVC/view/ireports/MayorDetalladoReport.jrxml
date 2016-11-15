@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<<<<<<< HEAD
+
 <!-- 2016-11-10T14:34:36 -->
-=======
+
 <!-- 2016-11-09T15:35:12 -->
->>>>>>> branch 'master' of https://github.com/mannyalbert81/contabilidad.git
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="612" pageHeight="792" columnWidth="574" leftMargin="19" rightMargin="19" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
@@ -47,10 +46,9 @@
 	</variable>
 	<variable name="suma_saldo" class="java.lang.Double" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$F{saldo_mayor}]]></variableExpression>
-=======
+
 	<variable name="saldo_ini_mayor2" class="java.math.BigDecimal" resetType="Group" resetGroup="Group1" incrementType="Column" calculation="Average">
 		<variableExpression><![CDATA[$F{saldo_ini_mayor}]]></variableExpression>
->>>>>>> branch 'master' of https://github.com/mannyalbert81/contabilidad.git
 	</variable>
 	<group name="Group1">
 		<groupExpression><![CDATA[$F{codigo_plan_cuentas}]]></groupExpression>
