@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte_php_java" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1bf4738d-260e-4a5b-91f7-773e07ab9479">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     plan_cuentas."id_plan_cuentas" AS plan_cuentas_id_plan_cuentas,
+     plan_cuentas."codigo_plan_cuentas" AS plan_cuentas_codigo_plan_cuentas,
+     plan_cuentas."nombre_plan_cuentas" AS plan_cuentas_nombre_plan_cuentas,
+     plan_cuentas."n_plan_cuentas" AS plan_cuentas_n_plan_cuentas,
+     plan_cuentas."t_plan_cuentas" AS plan_cuentas_t_plan_cuentas,
+     plan_cuentas."id_centro_costos" AS plan_cuentas_id_centro_costos,
+     plan_cuentas."nivel_plan_cuentas" AS plan_cuentas_nivel_plan_cuentas,
+     entidades."nombre_entidades" AS entidades_nombre_entidades,
+     entidades."ciudad_entidades" AS entidades_ciudad_entidades
+FROM
+     "public"."entidades" entidades INNER JOIN "public"."plan_cuentas" plan_cuentas ON entidades."id_entidades" = plan_cuentas."id_entidades"
+WHERE
+     plan_cuentas."id_entidades" = 3]]>
+	</queryString>
+	<field name="plan_cuentas_id_plan_cuentas" class="java.lang.Integer"/>
+	<field name="plan_cuentas_codigo_plan_cuentas" class="java.lang.String"/>
+	<field name="plan_cuentas_nombre_plan_cuentas" class="java.lang.String"/>
+	<field name="plan_cuentas_n_plan_cuentas" class="java.lang.String"/>
+	<field name="plan_cuentas_t_plan_cuentas" class="java.lang.String"/>
+	<field name="plan_cuentas_id_centro_costos" class="java.lang.Integer"/>
+	<field name="plan_cuentas_nivel_plan_cuentas" class="java.lang.Integer"/>
+	<field name="entidades_nombre_entidades" class="java.lang.String"/>
+	<field name="entidades_ciudad_entidades" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="27" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="31" y="0" width="100" height="20" uuid="07f91fc1-a27f-45bb-bfd1-c1a01467e15e"/>
+				<text><![CDATA[plan_cuentas_id_plan_cuentas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="177" y="0" width="100" height="20" uuid="fade3cf3-6e5e-40da-996b-d3c6d58c6198"/>
+				<text><![CDATA[plan_cuentas_codigo_plan_cuentas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="0" width="100" height="20" uuid="3dfd19c2-5ec1-438e-8c2a-ade1f4224b92"/>
+				<text><![CDATA[plan_cuentas_nombre_plan_cuentas]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="31" y="4" width="100" height="20" uuid="85f95361-9254-4f85-88c8-b0e9e978cf0a"/>
+				<textFieldExpression><![CDATA[$F{plan_cuentas_id_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="177" y="4" width="100" height="20" uuid="d8ca022f-8614-45df-9521-396b3059429b"/>
+				<textFieldExpression><![CDATA[$F{plan_cuentas_codigo_plan_cuentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="317" y="4" width="100" height="20" uuid="54bc4d47-6533-4bb1-98d8-5e876ac4a5ff"/>
+				<textFieldExpression><![CDATA[$F{plan_cuentas_nombre_plan_cuentas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
