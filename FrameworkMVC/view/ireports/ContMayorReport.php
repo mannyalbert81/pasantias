@@ -92,6 +92,7 @@ if ($_GET['id_usuarios']!=0)
 								  plan_cuentas.codigo_plan_cuentas, 
 								  plan_cuentas.nombre_plan_cuentas, 
 								  plan_cuentas.saldo_fin_plan_cuentas, 
+ 		                          plan_cuentas.n_plan_cuentas,
 								  mayor.fecha_mayor, 
 								  mayor.debe_mayor, 
 								  mayor.haber_mayor, 

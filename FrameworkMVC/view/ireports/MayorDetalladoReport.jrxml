@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-11-08T12:46:46 -->
+<!-- 2016-11-10T14:34:36 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanCuentasReport1" pageWidth="612" pageHeight="792" columnWidth="574" leftMargin="19" rightMargin="19" topMargin="20" bottomMargin="20" uuid="4f25a6e3-46bc-4f25-9dcf-c96bea25f92e">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FrameworkMVC\view\ireports\ContabilidadDataAdapter.xml"/>
@@ -15,7 +15,7 @@
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
 	<parameter name="sql" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[ $P{sql} ]]>
+		<![CDATA[$P{sql}]]>
 	</queryString>
 	<field name="ruc_entidades" class="java.lang.String"/>
 	<field name="nombre_entidades" class="java.lang.String"/>
@@ -27,18 +27,21 @@
 	<field name="concepto_ccomprobantes" class="java.lang.String"/>
 	<field name="codigo_plan_cuentas" class="java.lang.String"/>
 	<field name="nombre_plan_cuentas" class="java.lang.String"/>
-	<field name="saldo_fin_plan_cuentas" class="java.lang.Float"/>
-	<field name="debe_mayor" class="java.lang.Double"/>
-	<field name="haber_mayor" class="java.lang.Double"/>
-	<field name="saldo_mayor" class="java.lang.Double"/>
-	<field name="saldo_ini_mayor" class="java.math.BigDecimal"/>
+	<field name="saldo_fin_plan_cuentas" class="java.lang.String"/>
+	<field name="debe_mayor" class="java.lang.String"/>
+	<field name="haber_mayor" class="java.lang.String"/>
+	<field name="saldo_mayor" class="java.lang.String"/>
+	<field name="saldo_ini_mayor" class="java.lang.String"/>
 	<field name="fecha_ccomprobantes" class="java.sql.Date"/>
-	<variable name="Variable_1" class="java.lang.String"/>
-	<variable name="saldo_ini_mayor1" class="java.lang.Double" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group1" calculation="First">
-		<variableExpression><![CDATA[$F{saldo_mayor}]]></variableExpression>
+	<field name="n_plan_cuentas" class="java.lang.String"/>
+	<variable name="suma_debe" class="java.lang.String" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$F{debe_mayor}]]></variableExpression>
 	</variable>
-	<variable name="saldo_ini_mayor2" class="java.math.BigDecimal" resetType="Group" resetGroup="Group1" calculation="First">
-		<variableExpression><![CDATA[$F{saldo_ini_mayor}]]></variableExpression>
+	<variable name="suma_haber" class="java.lang.String" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$F{haber_mayor}]]></variableExpression>
+	</variable>
+	<variable name="suma_saldo" class="java.lang.Double" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$F{saldo_mayor}]]></variableExpression>
 	</variable>
 	<group name="Group1">
 		<groupExpression><![CDATA[$F{codigo_plan_cuentas}]]></groupExpression>
@@ -69,7 +72,7 @@
 					<text><![CDATA[Cuenta]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="69" y="9" width="54" height="14" uuid="9eba159c-d116-45b7-a917-58f9c9287dd4"/>
+					<reportElement x="56" y="9" width="54" height="14" uuid="9eba159c-d116-45b7-a917-58f9c9287dd4"/>
 					<textElement textAlignment="Center">
 						<font size="8" isBold="true"/>
 					</textElement>
@@ -106,20 +109,41 @@
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="22">
-				<textField pattern="#,##0.00%">
-					<reportElement x="469" y="5" width="100" height="12" uuid="e86bacdd-ad75-4fb1-a0bf-6220b4ff680f"/>
+			<band height="21">
+				<textField pattern="#,##0.00">
+					<reportElement x="250" y="3" width="78" height="12" uuid="e86bacdd-ad75-4fb1-a0bf-6220b4ff680f"/>
 					<textElement>
-						<font size="8" isBold="true"/>
+						<font size="7" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Saldo Final: " + $F{saldo_fin_plan_cuentas}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{saldo_fin_plan_cuentas}]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00#">
-					<reportElement x="350" y="5" width="100" height="12" isPrintInFirstWholeBand="true" printWhenGroupChanges="Group1" uuid="7e8373c4-3986-4e66-b086-fab667505303"/>
-					<textElement>
-						<font size="8" isBold="true"/>
+				<textField pattern="">
+					<reportElement x="355" y="3" width="54" height="12" isPrintInFirstWholeBand="true" printWhenGroupChanges="Group1" uuid="e7f51080-a46a-4c89-8128-c3434aefca19"/>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{saldo_ini_mayor2}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{suma_debe}]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement x="424" y="3" width="56" height="12" isPrintInFirstWholeBand="true" printWhenGroupChanges="Group1" uuid="3c359f03-72a9-4e45-aa91-b037ec9d4cd2"/>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{suma_haber}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="493" y="3" width="47" height="12" isPrintInFirstWholeBand="true" printWhenGroupChanges="Group1" uuid="72a24e5f-66b7-4d37-b854-868e7d3b5869"/>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{suma_saldo}]]></textFieldExpression>
+				</textField>
+				<textField evaluationGroup="Group1" pattern="">
+					<reportElement x="167" y="3" width="78" height="12" uuid="d94a97af-3b62-4fab-97ff-26f2b16f0562"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($F{n_plan_cuentas}==D ? $F{saldo_fin_plan_cuentas}-$V{suma_debe}+$V{suma_haber}:"Error")]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -136,7 +160,7 @@
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="11" y="2" width="555" height="18" forecolor="#000000" uuid="2e1395c1-7f5c-4c28-b4ce-5927e46bd9af"/>
+				<reportElement x="4" y="2" width="555" height="18" forecolor="#000000" uuid="2e1395c1-7f5c-4c28-b4ce-5927e46bd9af"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="16" isBold="true"/>
 				</textElement>
@@ -205,53 +229,53 @@
 		</band>
 	</title>
 	<detail>
-		<band height="37" splitType="Stretch">
+		<band height="17" splitType="Stretch">
 			<textField>
-				<reportElement x="15" y="2" width="54" height="15" uuid="ff9ac084-e153-43c0-b243-3fb5b3ef0985"/>
+				<reportElement x="15" y="2" width="38" height="15" uuid="ff9ac084-e153-43c0-b243-3fb5b3ef0985"/>
 				<textElement>
-					<font size="8"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{numero_ccomprobantes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="M/d/yy">
-				<reportElement x="75" y="2" width="54" height="15" uuid="4c0895c8-335c-414b-bdf0-6ea59d50da9f"/>
+				<reportElement x="59" y="2" width="48" height="15" uuid="4c0895c8-335c-414b-bdf0-6ea59d50da9f"/>
 				<textElement>
-					<font size="8"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_ccomprobantes}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="136" y="2" width="154" height="15" uuid="a422d196-1805-4cb6-9ab1-eed26c8c9ef0"/>
+				<reportElement x="110" y="2" width="226" height="15" uuid="a422d196-1805-4cb6-9ab1-eed26c8c9ef0"/>
 				<textElement>
-					<font size="8"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{concepto_ccomprobantes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="355" y="2" width="54" height="15" uuid="42145b10-d0eb-44d2-90d8-b499baeb1614"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{debe_mayor}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="424" y="2" width="56" height="15" uuid="b5b059bd-7e71-485e-89e7-2ad18ef45775"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{haber_mayor}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="">
 				<reportElement x="493" y="2" width="47" height="15" uuid="19b49465-111f-4232-8b1e-b534e7997a38"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{saldo_mayor}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="300" y="3" width="54" height="12" uuid="5f270bd3-9fa2-4123-bf51-8ae439f8dae7"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{saldo_ini_mayor}]]></textFieldExpression>
 			</textField>
