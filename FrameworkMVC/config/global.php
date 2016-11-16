@@ -1,6 +1,6 @@
 <?php
 define("CONTROLADOR_DEFECTO", "Usuarios");
-define("ACCION_DEFECTO", "Loguear");
+define("ACCION_DEFECTO", "Home");
 define("CLIENTE", "BANCO");
 
 

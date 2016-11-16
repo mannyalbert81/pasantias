@@ -279,7 +279,7 @@ public function index(){
 		    
 		    	//para la foto
 		    	 
-		    	$directorio = $_SERVER['DOCUMENT_ROOT'].'/contabilidad/fotos/';
+		    	$directorio = $_SERVER['DOCUMENT_ROOT'].'/pasantias/fotos/';
 		    	 
 		    	$nombre = $_FILES['imagen_usuarios']['name'];
 		    	$tipo = $_FILES['imagen_usuarios']['type'];
@@ -403,7 +403,6 @@ public function index(){
     				$id_usuario  = $res->id_usuarios;
     				$usuario_usuario  = $res->usuario_usuarios;
 	    			$id_rol           = $res->id_rol;
-	    			$nombre_usuario   = $res->nombre_usuarios;
 	    			$correo_usuario   = $res->correo_usuarios;
 	    			
     			}	
@@ -412,7 +411,7 @@ public function index(){
     			
     			
     			///registro sesion
-    			$usuarios->registrarSesion($id_usuario, $usuario_usuario, $id_rol, $nombre_usuario, $correo_usuario, $ip_usuario);
+    			$usuarios->registrarSesion($id_usuario, $usuario_usuario, $id_rol, $correo_usuario, $ip_usuario);
     			
     			//inserto en la tabla
     			$_id_usuario = $_SESSION['id_usuarios'];
@@ -505,7 +504,7 @@ public function index(){
 					
 						//para la foto
 					
-						$directorio = $_SERVER['DOCUMENT_ROOT'].'/contabilidad/fotos/';
+						$directorio = $_SERVER['DOCUMENT_ROOT'].'/pasantias/fotos/';
 					
 						$nombre = $_FILES['imagen_usuarios']['name'];
 						$tipo = $_FILES['imagen_usuarios']['type'];
@@ -572,7 +571,18 @@ public function index(){
 	}
 	
 	
+	public function Home()
+	{
+		session_start();
+		$resultado = "";
 	
+		$this->view("Index",array(
+				"resultado"=>$resultado
+	
+		));
+	
+	
+	}
 		
 	
 }
