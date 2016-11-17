@@ -8,10 +8,10 @@
         </head>
     <body>
      
-       <?php include("view/modulos/modal.php"); ?>
+      
        <?php include("view/modulos/head.php"); ?>
        <?php include("view/modulos/menu.php"); ?>
-       <?php include("view/modulos/slide.php"); ?>
+        <?php include("view/modulos/servicios.php"); ?>
    		 
    		 
    		      
