@@ -451,15 +451,15 @@
 			<div class="row">
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group ">
-		                          <label for="cedula_estudiantes" class="control-label">Cedula</label>
-                                  <input type="text" class="form-control" id="cedula_estudiantes" name="cedula_estudiantes" value=""  placeholder="Cedula">
+		                          <label for="cedula_docente" class="control-label">Cedula</label>
+                                  <input type="text" class="form-control" id="cedula_docente" name="cedula_docente" value=""  placeholder="Cedula">
                                   <span class="help-block"></span>
             </div>
 		    </div>
 		    <div class="col-xs-6 col-md-6">
-		                          <label for="cedula_estudiantes" class="control-label">Fecha Nacimiento</label><br>
+		                          <label for="fecha_nacimiento_docente" class="control-label">Fecha Nacimiento</label><br>
 		                          <div class="input-group date" id="datetimePicker">
-		                          <input type="text" class="form-control" id="fecha_nacimiento_estudiantes" name="fecha_nacimiento_estudiantes" data-date-format="DD-MM-YYYY" value="" placeholder="Fecha Nacimiento">
+		                          <input type="text" class="form-control" id="fecha_nacimiento_docente" name="fecha_nacimiento_docente" data-date-format="DD-MM-YYYY" value="" placeholder="Fecha Nacimiento">
                                   <span class="input-group-addon">
                                   <span class="glyphicon glyphicon-calendar"></span>
                                   </span>
@@ -471,16 +471,16 @@
 			<div class="row">
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group ">
-		                          <label for="nombre_estudiantes" class="control-label">Nombres</label>
-                                  <input type="text" class="form-control" id="nombre_estudiantes" name="nombre_estudiantes" value=""  placeholder="Nombres">
+		                          <label for="nombre_docente" class="control-label">Nombres</label>
+                                  <input type="text" class="form-control" id="nombre_docente" name="nombre_docente" value=""  placeholder="Nombres">
                                   <span class="help-block"></span>
             </div>
 		    </div>
 		    
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group">
-                                  <label for="apellido_estudiantes" class="control-label">Apellidos</label>
-                                  <input type="text" class="form-control" id="apellido_estudiantes" name="apellido_estudiantes" value=""  placeholder="Apellidos">
+                                  <label for="apellido_docente" class="control-label">Apellidos</label>
+                                  <input type="text" class="form-control" id="apellido_docente" name="apellido_docente" value=""  placeholder="Apellidos">
                                   <span class="help-block"></span>
             </div>
             </div>
@@ -529,8 +529,8 @@
 			<div class="row">
 		    <div class="col-xs-6 col-md-12">
 		    <div class="form-group ">
-		                          <label for="domicilio_estudiantes" class="control-label">Dirección Domicilio</label>
-                                  <input type="text" class="form-control" id="domicilio_estudiantes" name="domicilio_estudiantes" value=""  placeholder="Domicilio">
+		                          <label for="domicilio_docente" class="control-label">Dirección Domicilio</label>
+                                  <input type="text" class="form-control" id="domicilio_docente" name="domicilio_docente" value=""  placeholder="Domicilio">
                                   <span class="help-block"></span>
             </div>
 		    </div>
@@ -539,19 +539,36 @@
             <div class="row">
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group ">
-		                          <label for="telefono_estudiantes" class="control-label">Teléfono</label>
-                                  <input type="text" class="form-control" id="telefono_estudiantes" name="telefono_estudiantes" value=""  placeholder="Teléfono">
+		                          <label for="telefono_docente" class="control-label">Teléfono</label>
+                                  <input type="text" class="form-control" id="telefono_docente" name="telefono_docente" value=""  placeholder="Teléfono">
                                   <span class="help-block"></span>
             </div>
 		    </div>
 		    <div class="col-xs-6 col-md-6">
 		    <div class="form-group ">
-		                          <label for="celular_estudiantes" class="control-label">Celular</label>
-                                  <input type="text" class="form-control" id="celular_estudiantes" name="celular_estudiantes" value=""  placeholder="Celular">
+		                          <label for="celular_docente" class="control-label">Celular</label>
+                                  <input type="text" class="form-control" id="celular_docente" name="celular_docente" value=""  placeholder="Celular">
                                   <span class="help-block"></span>
             </div>
 		    </div>
 		    </div> 
+		    <h4>Formación Academica Docente</h4>
+            <hr/>
+			
+			<div class="row">
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group ">
+		                           <label for="id_carrera" class="control-label">Carrera</label>
+                                  <select name="id_carrera" id="id_carrera"  class="form-control" >
+                                  <option value="" selected="selected">--Seleccione--</option>
+									<?php foreach($resultCar as $res) {?>
+										<option value="<?php echo $res->id_carrera; ?>"  ><?php echo $res->nombre_carrera; ?> </option>
+							        <?php } ?>
+								   </select> 
+                                  <span class="help-block"></span>
+            </div>
+		    </div>
+		    </div>
 			</div>
 			
 			
