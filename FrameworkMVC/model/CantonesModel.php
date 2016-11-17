@@ -1,5 +1,5 @@
 <?php
-class CComprobantesModel extends ModeloBase{
+class CantonesModel extends ModeloBase{
 	
 	private $table;
 	private $where;
@@ -18,7 +18,7 @@ class CComprobantesModel extends ModeloBase{
 		return $this->funcion;
 	}
 	
-	
+	//maycol
 	public function setFuncion($funcion) {
 		$this->funcion = $funcion;
 	}
@@ -38,7 +38,7 @@ class CComprobantesModel extends ModeloBase{
 	
 	
 	public function __construct(){
-		$this->table="ccomprobantes";
+		$this->table="cantones";
 		
 		parent::__construct($this->table);
 	}

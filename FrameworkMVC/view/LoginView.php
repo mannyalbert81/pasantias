@@ -90,7 +90,7 @@
 	        
      
                  
-        <div class="row" style="padding-top: 50px">
+        <div class="row" style="padding-top: 30px">
     
                <div class="col-lg-6 col-md-3" >
                       <div class="well">
@@ -105,10 +105,11 @@
                                   <span class="help-block"></span>
                               </div>
                              
+                              
                               <button type="submit" class="btn btn-success btn-block" onclick="verificar()" >Login</button>
                                
                       </div>
-                       <p><a href="<?php echo $helper->url("Usuarios","Reset"); ?>" >Olvidaste tu Cuenta</a> </p>
+                       
                              
                   </div>
                   
@@ -119,7 +120,7 @@
 		                          <li><span class="fa fa-check text-success"></span> No enseñes a nadie tu clave.</li>
 		                          <li><span class="fa fa-check text-success"></span> La clave es personal.</li>
 		                          <li><span class="fa fa-check text-success"></span> Cuidala.</li>
-		                     
+		                          <p><a href="<?php echo $helper->url("Usuarios","Reset"); ?>" >Olvidaste tu Cuenta</a> </p>
 		                      </ul>
 		                  </div>
               </div>

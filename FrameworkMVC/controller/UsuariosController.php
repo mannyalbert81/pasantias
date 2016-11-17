@@ -583,7 +583,136 @@ public function index(){
 	
 	
 	}
+	
+	
+	public function Reset()
+	{
+		session_start();
+		$_usuario_usuario = "";
+		$_clave_usuario = "";
+		$usuarios = new UsuariosModel();
+		$error = FALSE;
+	
+	
+		$mensaje = "";
+	
+		if (isset($_POST['reestablecer_usuario']))
+		{
+			$_usuario_usuario = $_POST['reestablecer_usuario'];
+	
+			$where = "usuario_usuarios = '$_usuario_usuario'   ";
+			$resultUsu = $usuarios->getBy($where);
+			foreach($resultUsu as $res)
+			{
+				$_clave_usuario =  mt_rand(1000, 9999);
+	
+			}
+			$_encryp_pass = $usuarios->encrypt($_clave_usuario);
+				
+			$usuarios->UpdateBy("clave_usuarios = '$_encryp_pass' ", "usuarios", "usuario_usuarios = '$_usuario_usuario'  ");
+				
+			if ($_clave_usuario == "")
+			{
+				$mensaje = "Este Usuario no existe en nuestro sistema";
+	
+				$error = TRUE;
+	
+	
+			}
+			else
+			{
+	
+				$cabeceras = "MIME-Version: 1.0 \r\n";
+				$cabeceras .= "Content-type: text/html; charset=utf-8 \r\n";
+				$cabeceras.= "From: info@masoft.net \r\n";
+				$destino="$_usuario_usuario";
+				$asunto="Claves de Acceso";
+				$fecha=date("d/m/y");
+				$hora=date("H:i:s");
+	
+				//
+				$resumen="
+				<table rules='all'>
+				<tr style='background:#7acb5a'><td WIDTH='1000' HEIGHT='50' align='center'><img src='https://jquery-file-upload.appspot.com/image%2Fpng/730648178/logo_vade.png'></td></tr>
+				</tabla>
+				<p><table rules='all'></p>
+				<tr style='background: #FFFFFF;'><td  WIDTH='1000' align='center'><b> BIENVENIDO A SISTEMA PASANTIAS </b></td></tr></p>
+				<tr style='background: #FFFFFF;'><td  WIDTH='1000' align='justify'>Bienvenido a Vademano veterinario el portal digital que reúne toda la información  de relevancia relacionada con los productos  farmacéuticos de uso veterinario que se comercializan, busca proveer a médicos veterinarios, técnicos, especialistas y público en general  el más completo vademécum digital.
+				El Vademano Veterinario está diseñado como una herramienta web moderna, versátil y fácil de utilizar, que se ajusta a la versatilidad de los dispositivos de comunicación actual para que la búsqueda de información se convierta en una tarea sencilla que puede ser realizada a través de múltiples combinaciones de criterios:
+				efecto terapéutico, forma farmacéutica, especies, etc.; asimismo dispondrá de la información de los productos en formato PDF, opción para imprimir, entre otras múltiples ventajas.</td></tr>
+				</tabla>
+				<p><table rules='all'></p>
+				<tr style='background: #FFFFFF'><td WIDTH='1000' align='center'><b> CLAVES DE ACCESO </b></td></tr>
+				<tr style='background: #FFFFFF;'><td WIDTH='1000' > <b>Correo:</b> $_usuario_usuario</td></tr>
+				<tr style='background: #FFFFFF;'><td WIDTH='1000' > <b>Clave Temporal:</b> $_clave_usuario </td></tr>
+				</tabla>
+				<p><table rules='all'></p>
+				<tr style='background:#1C1C1C'><td WIDTH='1000' HEIGHT='50' align='center'><font color='white'>Vademano. - Desarrollado por <a href='http://www.masoft.net'>www.masoft.net</a> - Copyright © 2016-</font></td></tr>
+				</table>
+	
+	
+				";
+	
+	
+				if(mail("$destino","Claves de Acceso","$resumen","$cabeceras"))
+				{
+					$mensaje = "Hemos enviado un correo electronico con sus datos de acceso";
+	
+					$this->view("Login",array(
+							"allusers"=>""
+					));
+					exit();
+	
+	
+				}else{
+					$mensaje = "No se pudo enviar el correo con la informacion. Intentelo nuevamente";
+					$error = TRUE;
+	
+				}
+					
+			}
+				
+		}
+	
+	
+	
+		$this->view("ResetUsuarios",array(
+				"resultSet"=>$mensaje , "error"=>$error
+		));
+	
+	
+	
+	}
+	
+	public function QuienesSomos()
+	{
+		session_start();
+		$resultado = "";
+	
 		
+	
+		$this->view("QuienesSomos",array(
+				"resultado"=>$resultado
+	
+		));
+	
+	
+	}
+	public function PreguntasFrecuentes()
+	{
+		session_start();
+		$resultado = "";
+	
+	
+		$this->view("PreguntasFrecuentes",array(
+				"resultado"=>$resultado
+	
+	
+	
+		));
+	
+	
+	}
 	
 }
 ?>

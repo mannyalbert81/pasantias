@@ -1,5 +1,5 @@
 <?php
-class DComprobantesModel extends ModeloBase{
+class SemestreModel extends ModeloBase{
 	
 	private $table;
 	private $where;
@@ -18,7 +18,7 @@ class DComprobantesModel extends ModeloBase{
 		return $this->funcion;
 	}
 	
-	
+	//maycol
 	public function setFuncion($funcion) {
 		$this->funcion = $funcion;
 	}
@@ -38,7 +38,7 @@ class DComprobantesModel extends ModeloBase{
 	
 	
 	public function __construct(){
-		$this->table="dcomprobantes";
+		$this->table="semestre";
 		
 		parent::__construct($this->table);
 	}

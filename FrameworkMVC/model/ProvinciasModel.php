@@ -1,5 +1,5 @@
 <?php
-class CentroCostosModel extends ModeloBase{
+class ProvinciasModel extends ModeloBase{
 	
 	private $table;
 	private $where;
@@ -18,7 +18,7 @@ class CentroCostosModel extends ModeloBase{
 		return $this->funcion;
 	}
 	
-	
+	//maycol
 	public function setFuncion($funcion) {
 		$this->funcion = $funcion;
 	}
@@ -38,7 +38,7 @@ class CentroCostosModel extends ModeloBase{
 	
 	
 	public function __construct(){
-		$this->table="centro_costos";
+		$this->table="provincias";
 		
 		parent::__construct($this->table);
 	}

@@ -42,7 +42,7 @@
 
        <footer  style="background:#000000; text-align: center; color: #FFFFFF;">   	 
        	 <div style="margin-top:20px;">	
-           Psantias. - Desarrollado por <a href="http://www.masoft.net">www.masoft.net</a> - Copyright &copy; <?php echo  date("Y"); ?>
+           Pasantias. - Desarrollado por <a href="http://www.masoft.net">www.masoft.net</a> - Copyright &copy; <?php echo  date("Y"); ?>
          </div>
         </footer>
 </div>    

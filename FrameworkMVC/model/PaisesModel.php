@@ -1,5 +1,5 @@
 <?php
-class PlanCuentasModel extends ModeloBase{
+class PaisesModel extends ModeloBase{
 	
 	private $table;
 	private $where;
@@ -18,7 +18,7 @@ class PlanCuentasModel extends ModeloBase{
 		return $this->funcion;
 	}
 	
-	
+	//maycol
 	public function setFuncion($funcion) {
 		$this->funcion = $funcion;
 	}
@@ -38,7 +38,7 @@ class PlanCuentasModel extends ModeloBase{
 	
 	
 	public function __construct(){
-		$this->table="plan_cuentas";
+		$this->table="paises";
 		
 		parent::__construct($this->table);
 	}

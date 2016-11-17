@@ -1,5 +1,5 @@
 <?php
-class MayorModel extends ModeloBase{
+class CarreraModel extends ModeloBase{
 	
 	private $table;
 	private $where;
@@ -18,7 +18,7 @@ class MayorModel extends ModeloBase{
 		return $this->funcion;
 	}
 	
-	
+	//maycol
 	public function setFuncion($funcion) {
 		$this->funcion = $funcion;
 	}
@@ -38,7 +38,7 @@ class MayorModel extends ModeloBase{
 	
 	
 	public function __construct(){
-		$this->table="mayor";
+		$this->table="carrera";
 		
 		parent::__construct($this->table);
 	}

@@ -1,5 +1,5 @@
 <?php
-class MonedasModel extends ModeloBase{
+class EstudiantesModel extends ModeloBase{
 	
 	private $table;
 	private $where;
@@ -38,7 +38,7 @@ class MonedasModel extends ModeloBase{
 	
 	
 	public function __construct(){
-		$this->table="monedas";
+		$this->table="estudiantes";
 		
 		parent::__construct($this->table);
 	}

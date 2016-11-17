@@ -1,5 +1,5 @@
 <?php
-class ComprobantesTemporalModel extends ModeloBase{
+class DocenteModel extends ModeloBase{
 	
 	private $table;
 	private $where;
@@ -38,7 +38,7 @@ class ComprobantesTemporalModel extends ModeloBase{
 	
 	
 	public function __construct(){
-		$this->table="temp_comprobantes";
+		$this->table="docente";
 		
 		parent::__construct($this->table);
 	}

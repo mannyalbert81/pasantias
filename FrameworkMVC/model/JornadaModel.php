@@ -1,8 +1,5 @@
 <?php
-
-
-
-class TipoComprobantesModel extends ModeloBase{
+class JornadaModel extends ModeloBase{
 	
 	private $table;
 	private $where;
@@ -21,7 +18,7 @@ class TipoComprobantesModel extends ModeloBase{
 		return $this->funcion;
 	}
 	
-	
+	//maycol
 	public function setFuncion($funcion) {
 		$this->funcion = $funcion;
 	}
@@ -41,8 +38,7 @@ class TipoComprobantesModel extends ModeloBase{
 	
 	
 	public function __construct(){
-		$this->table="tipo_comprobantes";
-
+		$this->table="jornada";
 		
 		parent::__construct($this->table);
 	}
@@ -57,6 +53,7 @@ class TipoComprobantesModel extends ModeloBase{
 			
 		return  $resultado;
 	}
+	
 	
 	
 }
