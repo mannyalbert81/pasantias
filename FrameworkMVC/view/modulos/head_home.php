@@ -74,7 +74,6 @@
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav" >
 		        <li  ><a href="index.php?controller=Usuarios&action=Home"><span class="glyphicon glyphicon-home" ><?php echo " Inicio" ;?></span> <span class="sr-only">(current)</span></a></li>
-		        <li  ><a href="index.php?controller=Buscador&action=index"><span class="glyphicon glyphicon-folder-open" ><?php echo " Vedemecun" ;?></span> <span class="sr-only">(current)</span></a></li>
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-briefcase" ><?php echo " Nosotros" ;?></span> <span class="caret"></span></a>
 		          <ul class="dropdown-menu">
@@ -86,31 +85,11 @@
 		        </li>
 		        <li  ><a href="index.php?controller=Afiliaciones&action=index"><span class="glyphicon glyphicon-folder-open" ><?php echo " Afiliarse" ;?></span> <span class="sr-only">(current)</span></a></li>  
 		       	
-		        <?php $status = session_status();  ?>
-		        <?php if  (isset( $_SESSION['nombres_usuario'] )){  ?> 
-			 		<li class="dropdown">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" ><?php echo " " . $_SESSION['nombres_usuario'] ;?></span> <span class="caret"></span></a>
-			          <ul class="dropdown-menu">
-			        	<li><a href="<?php echo $helper->url("Afiliaciones","VistaActualizarDatos"); ?>"><span class="glyphicon glyphicon-list-alt" ><?php echo " Actualizar Datos" ;?></span> </a>
-					  	</li>
-					  	<li><a href="<?php echo $helper->url("Usuarios","cerrar_sesion"); ?>"><span class="glyphicon glyphicon-lock" ><?php echo " Cerrar Sesion" ;?></span> </a>
-					  	</li>
-					  	
-					  	
-					  </ul>
-			        </li>
-			 	  
-			 		
-				 
-			 	 <?php } else { ?>	
-			 	
+		       
 			 		   	<li><a href="<?php echo $helper->url("Usuarios","Loguear"); ?>"><span class="glyphicon glyphicon-lock" ><?php echo " Login" ;?></span> </a>
 					  	</li>
 				 
-			 	 	
-			 	 <?php  }?>
-			 		
-		   
+			 	
 		      </ul>
 		 
 		 	

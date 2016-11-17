@@ -6,11 +6,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Login Maycol</title>
+	<title>Login Pasantias</title>
 	<link rel="stylesheet" href="view/css/bootstrap.css">
     
   <script src="view/js/jquery.js"></script>
-  <script src="view/js/bootstrap.min.js"></script>
   <script src="view/js/bootstrapValidator.min.js"></script>
   <script src="view/js/noty.js"></script>
   <script src="view/js/ValidarLogin.js"></script>
@@ -42,10 +41,9 @@
 
 <body>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-       
    
- <form id="form-login"  action="<?php echo $helper->url("usuarios","Loguear"); ?>" method="post" class="col-lg-12" style="padding-top:100px;">
-                                 
+<form id="form-login"  action="<?php echo $helper->url("Usuarios","Loguear"); ?>" method="post" class="col-lg-12" style="padding-top:100px;">
+                     
     <div id="login-overlay" class="modal-dialog" >
       <div class="modal-content">
           
@@ -54,18 +52,18 @@
               <div class="row" >
                <div class="col-lg-6 col-md-3" >
                       <div class="well">
-                              <div class="control-group">
+                              <div class="form-group">
                                   <label for="usuarios" class="control-label">Usuario</label>
                                   <input type="text" class="form-control" id="usuarios" name="usuarios" value=""  placeholder="Usuario">
                                   <span class="help-block"></span>
                               </div>
-                              <div class="control-group">
+                              <div class="form-group">
                                   <label for="clave" class="control-label">Password</label>
                                   <input type="password" class="form-control" id="clave" name="clave" value="" placeholder="Password">
                                   <span class="help-block"></span>
                               </div>
                              
-                              <button type="submit" class="btn btn-success btn-block" onclick="verificar()">Login</button>
+                              <button type="submit" class="btn btn-success btn-block" onclick="verificar()" >Login</button>
                                
                       </div>
                   </div>
@@ -85,8 +83,8 @@
           </div>
       </div>
  </div>
-
  </form>
+
  <br>
         
         <footer class="col-lg-12">
