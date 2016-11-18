@@ -109,7 +109,17 @@
             	   $("#div_docente").fadeOut("slow");
                }
                 //
-               
+               //para empresa
+                if(id_rol == 4)
+               {
+            	   $("#div_empresa").fadeIn("slow");
+               }
+            	
+               else
+               {
+            	   $("#div_empresa").fadeOut("slow");
+               }
+                //
 		    });
 
 		    $("#rol").change(function() {
@@ -140,6 +150,15 @@
 	            	   $("#div_docente").fadeOut("slow");
 	               }
 	               
+	               if(id_rol == 4)
+	               {
+	            	   $("#div_empresa").fadeIn("slow");
+	               }
+	            	
+	               else
+	               {
+	            	   $("#div_empresa").fadeOut("slow");
+	               }
 			    });
 				
 		   
@@ -201,6 +220,7 @@
 		 
 		$(document).ready(function() {
 		   $("#fecha_nacimiento_estudiantes").datepicker();
+		   $("#fecha_nacimiento_docente").datepicker();
 		 });
 		</script>
     </head>
@@ -569,10 +589,111 @@
             </div>
 		    </div>
 		    </div>
+		    </div>
+			
+			
+			<div  id="div_empresa" style="display: none;">
+			<h4>Datos Empresa</h4>
+            <hr/>
+				   
+			<div class="row">
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group ">
+		                          <label for="ruc_empresa" class="control-label">Ruc</label>
+                                  <input type="text" class="form-control" id="ruc_empresa" name="ruc_empresa" value=""  placeholder="Ruc">
+                                  <span class="help-block"></span>
+            </div>
+		    </div>
+		    </div>
+			
+			<div class="row">
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group ">
+		                          <label for="nombre_empresa" class="control-label">Nombre</label>
+                                  <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa" value=""  placeholder="Nombre Empresa">
+                                  <span class="help-block"></span>
+            </div>
+		    </div>
+		    
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group">
+                                  <label for="actividad_empresa" class="control-label">Actividad</label>
+                                  <input type="text" class="form-control" id="actividad_empresa" name="actividad_empresa" value=""  placeholder="Actividad">
+                                  <span class="help-block"></span>
+            </div>
+            </div>
 			</div>
 			
+			<div class="row">
+		    <div class="col-xs-4 col-md-4">
+		    <div class="form-group ">
+		                           <label for="id_paises" class="control-label">Pais</label>
+                                  <select name="id_paises" id="id_paises"  class="form-control" >
+                                  <option value="" selected="selected">--Seleccione--</option>
+									<?php foreach($resultPais as $res) {?>
+										<option value="<?php echo $res->id_paises; ?>"  ><?php echo $res->nombre_paises; ?> </option>
+							        <?php } ?>
+								   </select> 
+                                  <span class="help-block"></span>
+            </div>
+		    </div>
+		    
+		    <div class="col-xs-4 col-md-4">
+		    <div class="form-group">
+                                   <label for="id_provincias" class="control-label">Provincia</label>
+                                  <select name="id_provincias" id="id_provincias"  class="form-control" >
+                                  <option value="" selected="selected">--Seleccione--</option>
+									<?php foreach($resultProv as $res) {?>
+										<option value="<?php echo $res->id_provincias; ?>"  ><?php echo $res->nombre_provincias; ?> </option>
+							        <?php } ?>
+								   </select> 
+                                  <span class="help-block"></span>
+            </div>
+            </div>
+            <div class="col-xs-4 col-md-4">
+		    <div class="form-group">
+                                   <label for="id_cantones" class="control-label">Cantón</label>
+                                  <select name="id_cantones" id="id_cantones"  class="form-control" >
+                                  <option value="" selected="selected">--Seleccione--</option>
+									<?php foreach($resultCan as $res) {?>
+										<option value="<?php echo $res->id_cantones; ?>"  ><?php echo $res->nombre_cantones; ?> </option>
+							        <?php } ?>
+								   </select> 
+                                  <span class="help-block"></span>
+            </div>
+            </div>
+			</div>
 			
-          
+			<div class="row">
+		    <div class="col-xs-6 col-md-12">
+		    <div class="form-group ">
+		                          <label for="direccion_empresa" class="control-label">Dirección</label>
+                                  <input type="text" class="form-control" id="direccion_empresa" name="direccion_empresa" value=""  placeholder="Dirección">
+                                  <span class="help-block"></span>
+            </div>
+		    </div>
+		    </div>	
+
+            <div class="row">
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group ">
+		                          <label for="telefono_empresa" class="control-label">Teléfono</label>
+                                  <input type="text" class="form-control" id="telefono_empresa" name="telefono_empresa" value=""  placeholder="Teléfono">
+                                  <span class="help-block"></span>
+            </div>
+		    </div>
+		    <div class="col-xs-6 col-md-6">
+		    <div class="form-group ">
+		                          <label for="celular_empresa" class="control-label">Celular</label>
+                                  <input type="text" class="form-control" id="celular_empresa" name="celular_empresa" value=""  placeholder="Celular">
+                                  <span class="help-block"></span>
+            </div>
+		    </div>
+		    </div> 
+		   </div>
+			
+			
+			
 		
 		 <hr>
 		   <div class="row">

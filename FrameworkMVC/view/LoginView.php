@@ -89,11 +89,11 @@
 	        <?php } ?>
 	        
      
-                 
-        <div class="row" style="padding-top: 30px">
+          <div class="well">        
+        <div class="row" style="padding-top: 10px">
     
                <div class="col-lg-6 col-md-3" >
-                      <div class="well">
+                     
                               <div class="form-group">
                                   <label for="usuarios" class="control-label">Usuario</label>
                                   <input type="text" class="form-control" id="usuarios" name="usuarios" value=""  placeholder="Usuario">
@@ -108,7 +108,7 @@
                               
                               <button type="submit" class="btn btn-success btn-block" onclick="verificar()" >Login</button>
                                
-                      </div>
+                      
                        
                              
                   </div>
@@ -124,10 +124,11 @@
 		                      </ul>
 		                  </div>
               </div>
+              </div>
       </div>
       
       
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-md-3" >
             <h4>Informate</h4>
             <hr/>
            <img src="" id="imagen" width="540" height="420">
